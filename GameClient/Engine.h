@@ -13,6 +13,4 @@ private:
 public:
 	int Init(HINSTANCE _hInst, UINT _Width, UINT _Height);
 	void Progres();
-public:
-	~Engine();
 };
