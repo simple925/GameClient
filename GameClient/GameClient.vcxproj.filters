@@ -16,7 +16,27 @@
     <ClInclude Include="Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="single.h" />
+    <ClInclude Include="define.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="enum.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="single.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -31,6 +51,13 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Device.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="mainBackUp.cpp">
+      <Filter>backup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -38,6 +65,15 @@
     </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{85e88444-4f70-4e50-aa62-1a7d9b3a8cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{3ed14cbb-ab0e-4e6d-aed9-115da95d48cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{ca42f84a-cf26-4c4d-af0e-4a91d88636a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="backup">
+      <UniqueIdentifier>{93bf414f-a0be-4071-8ed7-5dce9e51040b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

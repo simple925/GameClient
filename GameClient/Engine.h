@@ -1,14 +1,18 @@
 #pragma once
-#include "single.h"
+
 // 외부에서 생성자를 호출하지 못하도록 함
-#define SINGLE(Type) private:\
-						Type() {}\
-						friend class singleton<Type>;
 class Engine
 	: public singleton<Engine>
 {
 private:
 	SINGLE(Engine)
+private:
+	HINSTANCE m_hInst;
+	HWND	m_hWnd;
+	POINT	m_Resolution;
 public:
+	int Init(HINSTANCE _hInst, UINT _Width, UINT _Height);
 	void Progres();
+public:
+	~Engine();
 };
