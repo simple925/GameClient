@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Engine.h"
+#include "Device.h"
 Engine::Engine()
     : m_hInst(nullptr)
     , m_hWnd(nullptr)
@@ -10,8 +11,8 @@ Engine::Engine()
 Engine::~Engine()
 {
 }
-
-void Engine::Progres()
+int TestFunc();
+int Engine::Progress()
 {
 	// 화면을 검은색으로 색칠한다.
 	// 화면에 랜더링
@@ -26,7 +27,12 @@ void Engine::Progres()
 
 	// Pixel 1개당 4byte RGBA  r256 * g256 * b256 = 16,777,216
 
+	if (FAILED(TestFunc())) {
+		return E_FAIL;
+	}
 
-	
+	// 랜더타겟에 그려진 그림을, 윈도우 비트맵으로 복사
+	Device::GetInst()->Present();
+		return S_OK;
 }
 

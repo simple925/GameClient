@@ -9,8 +9,8 @@ private:
 private:
 	HINSTANCE m_hInst;
 	HWND	m_hWnd;
-	POINT	m_Resolution;
+	Vec2	m_Resolution;
 public:
 	int Init(HINSTANCE _hInst, UINT _Width, UINT _Height);
-	void Progres();
+	int Progress();
 };

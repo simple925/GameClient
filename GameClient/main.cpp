@@ -1,54 +1,66 @@
-﻿// GameClient.cpp : 애플리케이션에 대한 진입점을 정의합니다.
-//
-#include "pch.h"
+﻿#include "pch.h"
 
-#define MY_MACRO(name) name##name
-#define MAX_LOADSTRING 100
-// 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다. 포인터 자료형
-
-// WCHAR == wchar_t
-WCHAR szTitle[100] = L"GameClient";
-WCHAR szWindowClass[100] = L"GAMECILENT";
-
-// 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
-//ATOM                MyRegisterClass(HINSTANCE hInstance);
-//BOOL                InitInstance(HINSTANCE, int);
+#include "Engine.h"
 
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+HINSTANCE hInst;
 
 
 
 
 
 
-
-
-// HINSTANCE hInstance 프로세스 아이디
+// SAL : 주석 언어
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetBreakAlloc(150);
+    //int* a = new int;
 
-    //hInst = hInstance; // 내가 만든 프로세스 아이디
+    hInst = hInstance;
 
-    // Engine 초기화
-    if (FAILED(Engine::GetInst()->Init(hInstance, 1600, 900))) return 0;
+    // Engine 초기화    
+    if (FAILED(Engine::GetInst()->Init(hInstance, 1600, 900)))
+    {
+        return 0;
+    }
 
+
+
+    // 메세지 루프
+    // 단축키 테이블 정보 핸들 받음
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_GAMECLIENT));
-  
+
+    // 윈도우에 발생한 사건(이벤트, 메세지) 를 받을 구조체
     MSG msg = {};
 
-    // Peek - 몰래보다.
+    // 윈도우에 발생한 이벤트, 사건, 메세지를 가져온다.
+    // 메세지 큐에서 메세지를 가져온다.
+    // 가져오는 메세지가 WM_QUIT 이면, false 를 반환한다.
+
+
+    // GetMessage VS PeekMessage 
+    // GetMessage 함수는 메세지 큐에 메세지가 없으면, 리턴하지 않는다
+    // 메세지가 있으면, 반환한다. 메세지가 WM_QUIT 이 아니면 true, 
+    // 메세지가 WM_QUIT 인 경우에만 리턴을 false 리턴한다.
+
+    // PeekMessage 함수는 메세지 큐에 메시지가 있어도 없어도 함수를 리턴 시킨다.
+    // 메세지가 있었으면 true, 없었으면 false 를 반환
+    // Peek - 몰래 보다
+    // 확인한 메세지를 GetMessage 함수처럼 제거하려면, PM_REMOVE 옵션을 추가인자로 넣어줘야 함
+
     while (true)
     {
         // 메세지 큐에서 메세지를 꺼낸게 있다.
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            if (msg.message == WM_QUIT) break;
-            // TranslateAccelerator 단축키 번역한다
+            if (msg.message == WM_QUIT)
+                break;
+
             // 단축키 관련된 내용이면 TranslateAccelerator 함수에서 처리
             if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
             {
@@ -57,92 +69,56 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 DispatchMessage(&msg);
             }
         }
+
         // 메세지 큐에 메세지가 없었다.
-        // message queue empty
         else
         {
-            // Game Start
-            //Engine::GetInst->Progres();
+            // Game 실행
+            if(FAILED(Engine::GetInst()->Progress())) break;
         }
     }
 
-    return (int) msg.wParam;
+    //Engine::Destroy();
+
+    return (int)msg.wParam;
 }
 
 
-
-//
-//  함수: MyRegisterClass()
-//
-//  용도: 창 클래스를 등록합니다.
-//
-//ATOM MyRegisterClass(HINSTANCE hInstance)
-//{
-   
-//}
-
-//
-//   함수: InitInstance(HINSTANCE, int)
-//
-//   용도: 인스턴스 핸들을 저장하고 주 창을 만듭니다.
-//
-//   주석:
-//
-//        이 함수를 통해 인스턴스 핸들을 전역 변수에 저장하고
-//        주 프로그램 창을 만든 다음 표시합니다.
-//
-//BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-//{
-  
-//}
-
-//
-//  함수: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  용도: 주 창의 메시지를 처리합니다.
-//
-//  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
-//  WM_PAINT    - 주 창을 그립니다.
-//  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
-//
-
 // 프로시저 함수
 // 윈도우에 발생한 사건(이벤트, 메세지)를 처리해주는 함수
-// DispatchMessage 내에 호출함
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
     case WM_LBUTTONDOWN:
-        PostQuitMessage(0); // 윈도우 종료함수
-                            // 메세지큐에 WN_QUIT 들어감
+        //PostQuitMessage(0); // 윈도우 종료함수
+                            // 메세지큐에 WM_QUIT 이 들어감
         break;
     case WM_COMMAND:
+    {
+        int wmId = LOWORD(wParam);
+        // 메뉴 선택을 구문 분석합니다:
+        switch (wmId)
         {
-            int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
+        case IDM_ABOUT:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+        case IDM_EXIT:
+            DestroyWindow(hWnd);
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
         }
-        break;
+    }
+    break;
     case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
-            EndPaint(hWnd, &ps);
-        }
-        break;
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+        EndPaint(hWnd, &ps);
+    }
+    break;
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

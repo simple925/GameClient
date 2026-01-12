@@ -14,7 +14,7 @@
       <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Engine</Filter>
+      <Filter>GameEngine\01. Engine</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>Header</Filter>
@@ -37,6 +37,12 @@
     <ClInclude Include="pch.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>GameEngine\02. Device</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>GameEngine\Module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -49,36 +55,47 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine.cpp">
-      <Filter>Engine</Filter>
+      <Filter>GameEngine\01. Engine</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Device.cpp">
-      <Filter>Device</Filter>
+      <Filter>GameEngine\02. Device</Filter>
     </ClCompile>
-    <ClCompile Include="mainBackUp.cpp">
-      <Filter>backup</Filter>
+    <ClCompile Include="Engine_init.cpp">
+      <Filter>GameEngine\01. Engine</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
       <UniqueIdentifier>{186365d9-b06f-4551-81d2-c7f05d7ccf48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{85e88444-4f70-4e50-aa62-1a7d9b3a8cd7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{3ed14cbb-ab0e-4e6d-aed9-115da95d48cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Device">
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{d2d411c5-5d09-41a2-b53a-42c2bd5f8c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\01. Engine">
+      <UniqueIdentifier>{85e88444-4f70-4e50-aa62-1a7d9b3a8cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\02. Device">
       <UniqueIdentifier>{ca42f84a-cf26-4c4d-af0e-4a91d88636a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="backup">
-      <UniqueIdentifier>{93bf414f-a0be-4071-8ed7-5dce9e51040b}</UniqueIdentifier>
+    <Filter Include="GameEngine\Module">
+      <UniqueIdentifier>{55ea4dec-f283-4aa4-a1a5-15e7a79d8cdf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
       <Filter>Default</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleMath.inl">
+      <Filter>GameEngine\Module</Filter>
+    </None>
   </ItemGroup>
 </Project>

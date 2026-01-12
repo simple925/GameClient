@@ -1,9 +1,12 @@
 #pragma once
+
+
 template<typename T>
 class singleton
 {
 private:
 	static T* m_This;
+
 public:
 	static T* GetInst()
 	{
@@ -14,9 +17,11 @@ public:
 
 		return m_This;
 	}
+
 	static void Destroy()
 	{
-		if (nullptr != m_This) {
+		if (nullptr != m_This)
+		{
 			delete m_This;
 			m_This = nullptr;
 		}
@@ -26,7 +31,7 @@ public:
 protected:
 	singleton()
 	{
-		atexit(Destroy); // cpp 표준함수
+		atexit(Destroy);
 	}
 };
 
