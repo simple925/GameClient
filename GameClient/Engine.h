@@ -10,6 +10,12 @@ private:
 	HINSTANCE m_hInst;
 	HWND	m_hWnd;
 	Vec2	m_Resolution;
+
+public:
+	// main 핸들 리턴
+	HWND GetMainWinHandle() {
+		return m_hWnd;
+	}
 public:
 	int Init(HINSTANCE _hInst, UINT _Width, UINT _Height);
 	int Progress();

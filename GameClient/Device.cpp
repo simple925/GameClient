@@ -84,10 +84,10 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	// 랜더타겟의 모든 픽셀을 특정 색상으로 칠한다.
 	// Dx 에서는 색상 데이터를 0 ~ 1 범위로 정규화(Normalize) 해서 사용한다.
 	// Normalize(0 ~ 255 -> 0.f ~ 1.f)(정규화)
-	float clearColor[4] = {0.3f, 0.5f ,0.7f ,1.f};
+	float clearColor[4] = { 0.3f, 0.5f ,0.7f ,1.f };
 	m_Context->ClearRenderTargetView(m_RTV.Get(), clearColor);
 
-	
+
 	// View - 리소스의 전달자, 매니징 역할. 연결된 리소스의 무결성을 보증, 실제 리소스가 필요한 곳에다가 연결된 
 	//        담당 View 를 전달해서 리소스을 연결해줌
 	// RenderTargetView
@@ -96,6 +96,15 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	// UnorderedAccessView	
 
 	return S_OK;
+}
+
+void Device::ClearTarget()
+{
+	Vec4 vColor = Vec4(0.f, 0.f, 0.f, 0.f);
+	CONTEXT->ClearRenderTargetView(m_RTV.Get(), vColor);
+	CONTEXT->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
+	// NDC 좌표계 찾아보기*****************************************************************************
+	//CONTEXT->ClearDepthStencilView(m_DSV, );
 }
 
 int Device::CreateSwapChain()
@@ -131,7 +140,7 @@ int Device::CreateSwapChain()
 	m_Desc.SampleDesc.Count = 1;
 	m_Desc.SampleDesc.Quality = 0;
 	m_Desc.Flags = 0;
-	
+
 	// SwapChain 생성
 	// IDXGIFactory
 	ComPtr<IDXGIDevice> pDXGIDevice = nullptr;
@@ -161,13 +170,13 @@ int Device::CreateBuffer()
 	D3D11_TEXTURE2D_DESC Desc = {};
 
 	// 텍스쳐 1장
-	Desc.ArraySize  = 1; 
+	Desc.ArraySize = 1;
 
 
 	// 해상도 - 깊이 타겟도 렌더타겟과 해상도가 동일해야한다.
-	Desc.Width		= (UINT)m_RenderResol.x;
-	Desc.Height		= (UINT)m_RenderResol.y;
-	Desc.Format		= DXGI_FORMAT_D24_UNORM_S8_UINT; // 스텐실 ? <<< 찾아보기
+	Desc.Width = (UINT)m_RenderResol.x;
+	Desc.Height = (UINT)m_RenderResol.y;
+	Desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT; // 스텐실 ? <<< 찾아보기
 
 	// cpu 메모리 접근 옵션 - cpu 접근 불가
 	Desc.CPUAccessFlags = 0;
@@ -176,8 +185,8 @@ int Device::CreateBuffer()
 	// 용도 - 깊이를 저장
 	Desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-	Desc.MipLevels	= 1; // 밉맵, 저화질 버전 텍스쳐 추가생성, 1 == 원본
-	Desc.MiscFlags  = 0;
+	Desc.MipLevels = 1; // 밉맵, 저화질 버전 텍스쳐 추가생성, 1 == 원본
+	Desc.MiscFlags = 0;
 	Desc.SampleDesc.Count = 1;
 	Desc.SampleDesc.Quality = 0;
 

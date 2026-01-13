@@ -87,6 +87,9 @@
     <Filter Include="GameEngine\Module">
       <UniqueIdentifier>{55ea4dec-f283-4aa4-a1a5-15e7a79d8cdf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HSL">
+      <UniqueIdentifier>{7f4c3f84-0c21-4e41-82f2-fed20607f91d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
@@ -97,5 +100,10 @@
     <None Include="SimpleMath.inl">
       <Filter>GameEngine\Module</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="test.fx">
+      <Filter>HSL</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

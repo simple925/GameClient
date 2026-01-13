@@ -30,8 +30,12 @@ public:
 	int Init(HWND _hwnd, Vec2 _Resolution);
 	void Present() { m_SwapChain->Present(0, 0); }
 	ComPtr<ID3D11Device> GetDevice() { return m_Device; };
+	ComPtr<ID3D11DeviceContext> GetContext() { return m_Context; };
+	void ClearTarget();
 private:
 	int CreateSwapChain();
 	int CreateBuffer();
 };
 
+#define DEVICE Device::GetInst()->GetDevice().Get()
+#define CONTEXT Device::GetInst()->GetContext().Get()

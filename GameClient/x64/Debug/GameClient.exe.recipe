@@ -5,7 +5,11 @@
       <FullPath>C:\Users\141245124\Documents\cpp\GameClient\x64\Debug\GameClient.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
-  <ContentFiles />
+  <ContentFiles>
+    <ContentFile>
+      <FullPath>C:\Users\141245124\Documents\cpp\GameClient\x64\Debug\test.cso</FullPath>
+    </ContentFile>
+  </ContentFiles>
   <SatelliteDlls />
   <NonRecipeFileRefs />
 </Project>
