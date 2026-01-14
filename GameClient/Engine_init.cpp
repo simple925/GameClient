@@ -2,8 +2,8 @@
 #include "Engine.h"
 
 #include "Device.h"
-
-
+#include "PathMgr.h"
+#include "TimeMgr.h"
 LRESULT CALLBACK  WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
@@ -71,5 +71,7 @@ int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
         return E_FAIL;
     }
 
+    PathMgr::GetInst();
+    TimeMgr::GetInst()->Init();
     return S_OK;
 }

@@ -75,22 +75,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			// Game 실행
 			if (FAILED(Engine::GetInst()->Progress())) break;
-
-			// 1초마다 지정된 문자열 구문으로 윈도우 타이틀 찿 이름 바꾸지
-			static int CallCount = 0;
-			++CallCount;
-			static UINT CurlCount = 0;
-			static UINT PrevCount = GetTickCount();
-			// GetTickCount() - 프로그램이 실행된 이후로, window 가 자체적으로 초당 1000씩 숫자를 세고있음,
-			//                  그 카운팅을 가져오는 함수
-			CurlCount = GetTickCount();
-			if (CurlCount - PrevCount > 1000) {
-				PrevCount = CurlCount;
-				wchar_t buff[255] = {};
-				swprintf_s(buff, 255, L"CallCout : %d", CallCount);
-				SetWindowText(Engine::GetInst()->GetMainWinHandle(), buff);
-				CallCount = 0;
-			}
 		}
 	}
 

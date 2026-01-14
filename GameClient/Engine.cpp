@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "Engine.h"
 #include "Device.h"
+#include "TimeMgr.h"
 Engine::Engine()
-    : m_hInst(nullptr)
-    , m_hWnd(nullptr)
-    , m_Resolution{}
+	: m_hInst(nullptr)
+	, m_hWnd(nullptr)
+	, m_Resolution{}
 {
 }
 
@@ -14,6 +15,7 @@ Engine::~Engine()
 int TestFunc();
 int Engine::Progress()
 {
+	TimeMgr::GetInst()->Tick();
 	// 화면을 검은색으로 색칠한다.
 	// 화면에 랜더링
 	// 1600*900=144만개 의 픽셀을 0,0,0,0
@@ -33,6 +35,6 @@ int Engine::Progress()
 
 	// 랜더타겟에 그려진 그림을, 윈도우 비트맵으로 복사
 	Device::GetInst()->Present();
-		return S_OK;
+	return S_OK;
 }
 

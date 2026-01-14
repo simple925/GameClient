@@ -43,6 +43,12 @@
     <ClInclude Include="SimpleMath.h">
       <Filter>GameEngine\Module</Filter>
     </ClInclude>
+    <ClInclude Include="PathMgr.h">
+      <Filter>GameEngine\03. Manager\01. PathMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeMgr.h">
+      <Filter>GameEngine\03. Manager\02. TimeMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -67,6 +73,12 @@
       <Filter>Default</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp" />
+    <ClCompile Include="PathMgr.cpp">
+      <Filter>GameEngine\03. Manager\01. PathMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeMgr.cpp">
+      <Filter>GameEngine\03. Manager\02. TimeMgr</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -89,6 +101,18 @@
     </Filter>
     <Filter Include="HSL">
       <UniqueIdentifier>{7f4c3f84-0c21-4e41-82f2-fed20607f91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager">
+      <UniqueIdentifier>{530c082b-3882-48e4-ae30-4c409ab466b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\01. PathMgr">
+      <UniqueIdentifier>{9a7250a6-73be-46bc-a8f0-0545a37249f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\02. TimeMgr">
+      <UniqueIdentifier>{5051366f-2716-45f0-923c-d381587e28f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\03. KeyMgr">
+      <UniqueIdentifier>{1df60f23-6e84-478b-8868-c531676168df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

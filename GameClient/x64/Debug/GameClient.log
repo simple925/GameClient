@@ -1,4 +1,2 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\141245124\Documents\cpp\GameClient\x64\Debug\test.cso
-  GameClient.vcxproj -> C:\Users\141245124\Documents\cpp\GameClient\x64\Debug\GameClient.exe
+﻿  Test.cpp
+  GameClient.vcxproj -> C:\Users\141245124\Documents\cpp\GameClient\Game\Bin\GameClient.exe

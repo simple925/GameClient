@@ -44,6 +44,7 @@ typedef SimpleMath::Matrix		Matrix;
 #include <vector>
 #include <list>
 #include <map>
+#include <string>
 using namespace std;
 
 // 상대경로
