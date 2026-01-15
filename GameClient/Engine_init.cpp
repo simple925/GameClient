@@ -4,6 +4,7 @@
 #include "Device.h"
 #include "PathMgr.h"
 #include "TimeMgr.h"
+#include "KeyMgr.h"
 LRESULT CALLBACK  WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
@@ -73,5 +74,6 @@ int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
 
     PathMgr::GetInst();
     TimeMgr::GetInst()->Init();
+    KeyMgr::GetInst()->Init();
     return S_OK;
 }

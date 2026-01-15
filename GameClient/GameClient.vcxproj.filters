@@ -49,6 +49,9 @@
     <ClInclude Include="TimeMgr.h">
       <Filter>GameEngine\03. Manager\02. TimeMgr</Filter>
     </ClInclude>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>GameEngine\03. Manager\03. KeyMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -78,6 +81,9 @@
     </ClCompile>
     <ClCompile Include="TimeMgr.cpp">
       <Filter>GameEngine\03. Manager\02. TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyMgr.cpp">
+      <Filter>GameEngine\03. Manager\03. KeyMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -126,7 +132,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="test.fx">
+    <FxCompile Include="..\Game\Content\Shader\test.fx">
       <Filter>HSL</Filter>
     </FxCompile>
   </ItemGroup>
