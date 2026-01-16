@@ -57,26 +57,6 @@ int TestInit()
 {
 
 	// NDC 좌표계, 중심이 0,0, 위 아래 좌 우 로 +- 1 범위	
-	// 0 -- 1
-	// |  \ |
-	// 3 -- 2
-	/*
-	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	arrVtx[0].vUV = Vec2(0.f, 0.f);
-	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
-
-	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
-	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 0.f);
-
-	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vUV = Vec2(0.f, 0.f);
-	arrVtx[2].vColor = Vec4(0.f, 1.f, 0.f, 0.f);
-
-	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[3].vUV = Vec2(0.f, 0.f);
-	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
-	*/
 	// 1. 원점(0,0) 기준으로 정점 딱 한 번만 만들기
 	float fRadius = 0.2f; // 원의 반지름
 
@@ -200,44 +180,27 @@ int TestInit()
 
 void TestTick()
 {
-	/*
-	// 사각형을 움직인다.
-	// SystemMemory(전역변수) 의 정점 좌표를 수정
-	for (int i = 0; i < 4; ++i) {
-		arrVtx[i].vPos.x += 0.1f * DT;
-	}
-
-	// 전역변수에 들어있는 정점 정보를 정점버퍼로 복사
-	// ID3D11Resource gpu 메모리에서 사용됨
-	D3D11_MAPPED_SUBRESOURCE tMapSub = {};
-	CONTEXT->Map(g_VB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tMapSub); // gpu 로 보내기위한 운송장 작성? 
-
-	memcpy(tMapSub.pData, arrVtx, sizeof(Vtx) * 4);
-
-	CONTEXT->Unmap(g_VB.Get(), 0); // gpu로 운송
-	*/
-
 	//if (GetAsyncKeyState('W') & 0x8000)
 	// key event manege (Pressed, TAP, Released, None)
 	// key event state manege
 	if (KEY_PRESSED(KEY::RIGHT))
 	{
-		g_vCenterPos.x += 0.1f * DT;
+		g_vCenterPos.x += 1.0f * DT;
 	}
 
 	if (KEY_PRESSED(KEY::LEFT))
 	{
-		g_vCenterPos.x -= 0.1f * DT;
+		g_vCenterPos.x -= 1.0f * DT;
 	}
 
 	if (KEY_PRESSED(KEY::UP))
 	{
-		g_vCenterPos.y += 0.1f * DT;
+		g_vCenterPos.y += 1.0f * DT;
 	}
 
 	if (KEY_PRESSED(KEY::DOWN))
 	{
-		g_vCenterPos.y -= 0.1f * DT;
+		g_vCenterPos.y -= 1.0f * DT;
 	}
 
 	if (KEY_PRESSED(KEY::W))
@@ -267,14 +230,6 @@ void TestTick()
 	float b = sinf(fAccTime * 0.7f) * 0.5f + 0.5f;
 
 	g_vTargetColor = Vec4(r, g, b, 1.f);
-	
-}
-
-void TestRender()
-{
-	// 이전에 그려진 그림을 지운다.
-	// 랜더타겟은
-	Device::GetInst()->ClearTarget();
 
 	// ★ 핵심: 상수 버퍼에 현재 좌표(g_vCenterPos)를 써서 GPU로 보냄
 	tTransform tr = {};
@@ -287,6 +242,13 @@ void TestRender()
 		memcpy(tMapSub.pData, &tr, sizeof(tTransform));
 		CONTEXT->Unmap(g_CB.Get(), 0);
 	}
+}
+
+void TestRender()
+{
+	// 이전에 그려진 그림을 지운다.
+	// 랜더타겟은
+	Device::GetInst()->ClearTarget();
 
 	// HLSL(High Level Shader Language) 5.0
 	// Graphic Pipeline

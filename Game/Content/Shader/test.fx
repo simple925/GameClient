@@ -4,6 +4,7 @@
 // layout 정보
 struct VS_IN
 {
+	// Semantic 은 꼭 맞을 필요 없음 필요한 것만 가져올 수 있음
 	// Semantic 이름에는 0이 생략 되어 있음 POSITION
 	float3 vPos		: POSITION; // Semantic Layout에서 설명한 이름
 	float2 vUV		: TEXCOORD;
@@ -12,6 +13,7 @@ struct VS_IN
 
 struct VS_OUT
 {
+	// SV_xxx 는 약속된 값
 	float4 vPosition	: SV_Position; // Rasterizer 로 보낼때, NDC 좌표
 	float2 vUV			: TEXCOORD;
 	float4 vColor		: COLOR;
@@ -22,6 +24,7 @@ cbuffer TRANSFORM : register(b1) // 바인딩 될 상수 레지스터 번호 (b0)
 	float4 g_ObjectPos;
 }
 */
+// 꼭 버퍼가 같아야함
 cbuffer TRANSFORM_DATA : register(b0) // 16byte의 배수로 구성 되어야함 꼭!!!
 {
 	float2 g_vOffset;
@@ -35,10 +38,7 @@ VS_OUT VS_Test(VS_IN _input)
 	VS_OUT output		= (VS_OUT) 0.f;
 	
 	// 원점 기준 정점 좌표(_input.vPos.xy)에 이동량(g_vOffset)을 더합니다.
-	float2 vFinalPos1 = _input.vPos.xy * g_vZoom;
-	float2 vFinalPos = vFinalPos1 + g_vOffset;
-    
-	output.vPosition = float4(vFinalPos, _input.vPos.z, 1.0f);
+	output.vPosition = float4(_input.vPos.xy * g_vZoom + g_vOffset, _input.vPos.z, 1.0f);
 	output.vUV			= _input.vUV;
 	output.vColor		= g_vColor;
 	
