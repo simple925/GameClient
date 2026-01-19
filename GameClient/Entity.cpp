@@ -13,6 +13,7 @@ Entity::Entity()
 Entity::Entity(const Entity& _Other)
 	: m_InstID(g_NextID++)
 	, m_Name(_Other.m_Name)
+	, m_RefCount(0)
 {
 }
 

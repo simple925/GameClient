@@ -25,7 +25,7 @@ cbuffer TRANSFORM : register(b1) // 바인딩 될 상수 레지스터 번호 (b0)
 }
 */
 // 꼭 버퍼가 같아야함
-cbuffer TRANSFORM_DATA : register(b0) // 16byte의 배수로 구성 되어야함 꼭!!!
+cbuffer TRANSFORM_DATA : register(b1) // 16byte의 배수로 구성 되어야함 꼭!!!
 {
 	float2 g_vOffset;
 	float2 g_vPadding;
@@ -33,6 +33,12 @@ cbuffer TRANSFORM_DATA : register(b0) // 16byte의 배수로 구성 되어야함 꼭!!!
 	float g_vZoom; // 4
 	float3 g_vDummy2; // 12 (C++의 vDummy[3]와 대응)
 };
+cbuffer TRANSFORM : register(b0)
+{
+	float4 g_ObjectPos;
+	float4 g_ObjectScale;
+	float4 g_ObjectRot;
+}
 VS_OUT VS_Test(VS_IN _input)
 {
 	VS_OUT output		= (VS_OUT) 0.f;
@@ -44,18 +50,47 @@ VS_OUT VS_Test(VS_IN _input)
 	
 	return output;
 }
-
+VS_OUT VS_Test2(VS_IN _input)
+{
+	VS_OUT output = (VS_OUT) 0.f;
+       
+	float3x3 rotMat =
+	{
+		cos(g_ObjectRot.z), sin(g_ObjectRot.z), 0.f,
+        -sin(g_ObjectRot.z), cos(g_ObjectRot.z), 0.f,
+        0.f, 0.f, 1.f,
+	};
+    
+    // 변환 적용 순서
+    // 크(크기, 배율) -> 자(회전, 자전) -> 이(이동) -> 공(회전, 공전)
+    
+    // 크기 배율 설정
+	float3 vPos = _input.vPos * g_ObjectScale.xyz;
+    
+    // 회전 진행
+	vPos = mul(vPos, rotMat);
+    
+    // 위치 이동
+	vPos += g_ObjectPos.xyz;
+    
+	output.vPosition = float4(vPos, 1.f);
+	output.vUV = _input.vUV;
+	output.vColor = _input.vColor;
+    
+	return output;
+}
 // 정점에서 반환한 값이 보간(Interpolation) 되어 픽셀이 쉐이더의 입력으로 돌아온다.
 float4 PS_Test(VS_OUT _input) : SV_Target
 {
-	return _input.vColor;
-	//return float4(1.f, 0.f, 0.f, 1.f);
+	//return _input.vColor;
+	return float4(1.f, 0.f, 0.f, 1.f);
 }
 
 // 정점에서 반환한 값이 보간(Interpolation) 되어 픽셀이 쉐이더의 입력으로 돌아온다.
 float4 PS_Test2(VS_OUT _input) : SV_Target
 {
-	return float4(1.f, 0.f, 0.f, 1.f);
+	//return float4(1.f, 0.f, 0.f, 1.f);
+	return _input.vColor;
 }
 
 #endif

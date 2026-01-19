@@ -5,56 +5,81 @@
 #include "KeyMgr.h"
 #include "AMesh.h"
 #include "AGraphicShader.h"
-AMesh* g_RectMesh;
 
+#include "GameObject.h"
+#include "CTransform.h"
+#include "CMeshRender.h"
+#include "ConstBuffer.h"
+Ptr<AMesh>		g_RectMesh;
+Ptr<AMesh>		g_TriMesh;
+Ptr<AMesh>		g_QuadMesh;
 // 그래픽 파이프라인 문서
 //https://learn.microsoft.com/ko-kr/windows/uwp/graphics-concepts/graphics-pipeline
 
 
+// 상수 버퍼
+Ptr<ConstBuffer>		g_CB;
+
 // 파이프라인
-AGraphicShader* g_Shader;
+Ptr<AGraphicShader> g_Shader;
+Ptr<AGraphicShader> g_Shader2;
 
 // Contant Buffer(상수버퍼)
 ComPtr<ID3D11Buffer>		g_CB;
+Ptr<GameObject>				g_Object;
+// 오브젝트 위치
+Vec4 g_ObjectPos = Vec4(0.f, 0.f, 0.f, 0.f); 
+// 오브젝트 크기
+Vec4 g_ObjectScale = Vec4(1.f, 1.f, 1.f, 0.f);
+// 오브젝트 회전값
+Vec4 g_ObjectRot = Vec4(0.f, 0.f, 0.f, 0.f);
 
 
 
 
+/*원
 struct tTransform {
 	Vec2 vOffset;   // 8byte 원의 중심 위치 (x, y)
 	Vec2 vPadding;  // 8byte 16바이트 정렬을 위한 패딩
 	Vec4 vColor;	// 16byte 추가
 	float vZoom;
 	float vDummy[3];// 12 (여기까지 48) -> 16의 배수 OK!
+	Vec4 Rot;
 };
-
 //Vtx arrVtx[6] = {};
 const int TRICOUNT = 100;
 const int VTXCOUNT = TRICOUNT + 1; // 중심점 1개 + 외곽 점들
 const int IDXCOUNT = TRICOUNT * 3;
-
-//Vtx arrVtx[VTXCOUNT] = {};
-//UINT arrIdx[IDXCOUNT] = {};
-//Vec4 g_vTargetColor = Vec4(1.f, 1.f, 1.f, 1.f);
-// 원의 중심 위치와 이동 속도 (NDC 좌표계 기준)
-//Vec3 g_vCenterPos = Vec3(0.f, 0.f, 0.f);
-//Vec2 g_vVelocity = Vec2(0.5f, 0.3f); // X축, Y축 이동 속도
-//float g_vZoom = 1.f;
-//float g_fRadius = 0.5f;             // 원의 반지름
 
 struct Circle
 {
 	Vec2 vCenter;   // 중심 (NDC)
 	float fRadius;
 	Vec4 vColor;
-	float fZoom;
+	Vec4 fZoom;
 	bool bSelected;
 };
 vector<Circle> g_vecCircle;
 int g_iSelectedCircle = -1;
+*/
 
 int TestInit()
 {
+	/*
+	AMesh* p = new AMesh;
+	Ptr<AMesh> pMesh = p;
+	p = pMesh.Get();
+	p = new AMesh;
+	//p->AddRef();
+	Ptr<AMesh> pMesh2 = nullptr;
+	*pMesh2.GetAdressOf() = p;
+
+	pMesh == pMesh2;
+	pMesh == p;
+	p == pMesh;
+	*/
+
+	/*원
 	const int TRICOUNT = 100;
 	const int VTXCOUNT = TRICOUNT + 1;
 	const int IDXCOUNT = TRICOUNT * 3;
@@ -95,31 +120,66 @@ int TestInit()
 
 	g_RectMesh = new AMesh;
 	g_RectMesh->Create(arrVtx, sizeof(Vtx) * VTXCOUNT, arrIdx, sizeof(UINT) * IDXCOUNT);
+	*/
+
+	Vtx arrVtx[4] = {};
+
+	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
+	arrVtx[0].vUV = Vec2(0.f, 0.f);
+	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
+
+	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
+	arrVtx[1].vUV = Vec2(0.f, 0.f);
+	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 0.f);
+
+	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
+	arrVtx[2].vUV = Vec2(0.f, 0.f);
+	arrVtx[2].vColor = Vec4(0.f, 1.f, 0.f, 0.f);
+
+	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
+	arrVtx[3].vUV = Vec2(0.f, 0.f);
+	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
+
+	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
+
+	// 사각형 메쉬 생성
+	g_QuadMesh = new AMesh;
+	g_QuadMesh->Create(arrVtx, 4, arrIdx, 6);
 
 
-	D3D11_BUFFER_DESC CBDesc = {};
-	CBDesc.ByteWidth = sizeof(tTransform);
+	// 삼각형 메쉬
+	Vtx arr[3] = {};
+	arr[0].vPos = Vec3(0.f, 1.f, 0.f);
+	arr[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 
-	// cpu를 통해서 버퍼의 내용을 쓰거나, 읽을 수 있는지
-	// D3D11_USAGE_DEFAULT + 0
-	// 버퍼를 생성한 이후에 수정할 수 없다.
-	CBDesc.Usage = D3D11_USAGE_DYNAMIC;
-	CBDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	// 버퍼용도
-	CBDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	arr[1].vPos = Vec3(1.f, -1.f, 0.f);
+	arr[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 
-	// 처음 버퍼 생성할때 전달시킬 데이터의 시작주소를 Sub 구조체에 담아서 CreateBuffer 함수에 넣어준다.
-	//tSub.pSysMem = arrIdx;
-	if (FAILED(DEVICE->CreateBuffer(&CBDesc, nullptr, g_CB.GetAddressOf()))) {
-		return E_FAIL;
-	}
+	arr[2].vPos = Vec3(-1.f, -1.f, 0.f);
+	arr[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+
+	UINT idx[3] = { 0 , 1 , 2 };
+
+	g_TriMesh = new AMesh;
+	g_TriMesh->Create(arr, 3, idx, 3);
+
+
+	
 
 	// VertexShader
 	// 컴파일할 VertexShader 함수가 작성 되어있는 파일의 절대 경로
 
+	// 파이프라인 생성
 	g_Shader = new AGraphicShader;
 	g_Shader->CreateVertexShader(L"Shader\\test.fx", "VS_Test");
 	g_Shader->CreatePixelShader(L"Shader\\test.fx", "PS_Test");
+
+	g_Shader2 = new AGraphicShader;
+	g_Shader2->CreateVertexShader(L"Shader\\test.fx", "VS_Test2");
+	g_Shader2->CreatePixelShader(L"Shader\\test.fx", "PS_Test2");
+
+
+	/*원
 
 	g_vecCircle.clear();
 
@@ -129,17 +189,21 @@ int TestInit()
 		c.vCenter = Vec2(-0.5f + i * 0.5f, 0.f);
 		c.fRadius = 0.2f;
 		c.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
-		c.fZoom = 1.f;
+		c.fZoom = Vec4(1.f, 1.f, 1.f, 0.f);
 		c.bSelected = false;
 
 		g_vecCircle.push_back(c);
 	}
+	*/
 
+	g_Object = new GameObject;
+	g_Object->AddComponent(new CTransform);
+	g_Object->AddComponent(new CMeshRender);
 	return S_OK;
 
 
 }
-
+/*원
 int PickCircle(const Vec2& mouseNDC)
 {
 	for (int i = 0; i < g_vecCircle.size(); ++i)
@@ -168,73 +232,11 @@ Vec2 GetMouseNDC()
 
 	return Vec2(x, y);
 }
+*/
 
 void TestTick()
 {
-	/*
-	//if (GetAsyncKeyState('W') & 0x8000)
-	// key event manege (Pressed, TAP, Released, None)
-	// key event state manege
-	if (KEY_PRESSED(KEY::RIGHT))
-	{
-		g_vCenterPos.x += 1.0f * DT;
-	}
-
-	if (KEY_PRESSED(KEY::LEFT))
-	{
-		g_vCenterPos.x -= 1.0f * DT;
-	}
-
-	if (KEY_PRESSED(KEY::UP))
-	{
-		g_vCenterPos.y += 1.0f * DT;
-	}
-
-	if (KEY_PRESSED(KEY::DOWN))
-	{
-		g_vCenterPos.y -= 1.0f * DT;
-	}
-
-	if (KEY_PRESSED(KEY::W))
-	{
-		g_vZoom += 0.1f * DT;
-	}
-	if (KEY_PRESSED(KEY::S))
-	{
-		g_vZoom -= 0.1f * DT;
-	}
-	// 1. 위치 업데이트 (기존 로직)
-	//g_vCenterPos.x += g_vVelocity.x * DT;
-	//g_vCenterPos.y += g_vVelocity.y * DT;
-
-	// 2. 벽 체크 및 속도 반전 (기존 로직)
-	if (abs(g_vCenterPos.x) + 0.2f > 1.f) g_vVelocity.x *= -1.f;
-	if (abs(g_vCenterPos.y) + 0.2f > 1.f) g_vVelocity.y *= -1.f;
-
-	// 2. 시간에 따른 부드러운 색상 계산
-	static float fAccTime = 0.f;
-	fAccTime += DT;
-
-	// sin 함수 결과값(-1 ~ 1)을 0 ~ 1 범위로 변환하는 공식: (sin(x) * 0.5f) + 0.5f
-	// 채널마다 속도를 다르게 주면 더 다채로운 색상이 나옵니다.
-	float r = sinf(fAccTime * 1.5f) * 0.5f + 0.5f;
-	float g = sinf(fAccTime * 2.1f) * 0.5f + 0.5f;
-	float b = sinf(fAccTime * 0.7f) * 0.5f + 0.5f;
-
-	g_vTargetColor = Vec4(r, g, b, 1.f);
-
-	// ★ 핵심: 상수 버퍼에 현재 좌표(g_vCenterPos)를 써서 GPU로 보냄
-	tTransform tr = {};
-	tr.vOffset = Vec2(g_vCenterPos.x, g_vCenterPos.y);
-	tr.vColor = g_vTargetColor;
-	tr.vZoom = g_vZoom;
-	D3D11_MAPPED_SUBRESOURCE tMapSub = {};
-	// g_VB가 아니라 g_CB를 Map 합니다!
-	if (SUCCEEDED(CONTEXT->Map(g_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tMapSub))) {
-		memcpy(tMapSub.pData, &tr, sizeof(tTransform));
-		CONTEXT->Unmap(g_CB.Get(), 0);
-	}
-	*/
+	/*원
 	static float fAccTime = 0.f;
 	fAccTime += DT;
 	float r = sinf(fAccTime * 1.5f) * 0.5f + 0.5f;
@@ -262,7 +264,58 @@ void TestTick()
 
 		if (KEY_PRESSED(KEY::W)) c.fZoom += 0.5f * DT;
 		if (KEY_PRESSED(KEY::S)) c.fZoom -= 0.5f * DT;
+		if (KEY_PRESSED(KEY::Z)) g_ObjectRot.z += DT * XM_PI;
 	}
+	*/
+	if (KEY_PRESSED(KEY::RIGHT))
+		g_ObjectPos.x += 0.5f * DT;
+	if (KEY_PRESSED(KEY::LEFT))
+		g_ObjectPos.x -= 0.5f * DT;
+	if (KEY_PRESSED(KEY::UP))
+		g_ObjectPos.y += 0.5f * DT;
+	if (KEY_PRESSED(KEY::DOWN))
+		g_ObjectPos.y -= 0.5f * DT;
+
+	if (KEY_PRESSED(KEY::W))
+	{
+		g_ObjectScale.x += 0.5f * DT;
+		g_ObjectScale.y += 0.5f * DT;
+	}
+
+	if (KEY_PRESSED(KEY::S))
+	{
+		g_ObjectScale.x -= 0.5f * DT;
+		g_ObjectScale.y -= 0.5f * DT;
+
+		if (g_ObjectScale.x < 0.f)
+			g_ObjectScale.x = 0.f;
+
+		if (g_ObjectScale.y < 0.f)
+			g_ObjectScale.y = 0.f;
+	}
+
+	if (KEY_PRESSED(KEY::Z))
+	{
+		g_ObjectRot.z += DT * XM_PI;
+	}
+	// 회전
+	// 삼각형 합,차 공식
+	// 삼각함수(Sin, Cos, Tangent)
+	// 방향벡터, 스칼라
+	// 오브젝트 회전
+
+	g_CB->SetData(&Trans);
+
+	Transform Trans = {};
+	Trans.Pos = g_ObjectPos;
+	Trans.Scale = g_ObjectScale;
+	Trans.Rot = g_ObjectRot;
+	DEVICE::GetInst()->GetTransformBuffer()->;
+	// 전역변수에 들어있는 오브젝트 위치 정보를 상수버퍼로 복사
+	D3D11_MAPPED_SUBRESOURCE tMapSub = {};
+	CONTEXT->Map(g_CB.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &tMapSub);
+	memcpy(tMapSub.pData, &Trans, sizeof(Transform));
+	CONTEXT->Unmap(g_CB.Get(), 0);
 }
 
 
@@ -281,19 +334,20 @@ void TestRender()
 	// 정점을 프로그래머가 설계하기 때문에, 전달 한 버텍스 버퍼안에서, 하나의 정점의 단위크기를 알려줘야 한다.
 	
 
-	// 상수버퍼설정
-	CONTEXT->VSSetConstantBuffers(0/*상수버퍼를 바인딩할 레지스터 번호*/, 1, g_CB.GetAddressOf());
+	g_CB->Binding();
+	//CONTEXT->VSSetConstantBuffers(1/*상수버퍼를 바인딩할 레지스터 번호*/, 1, g_CB.GetAddressOf());
 
-	g_Shader->Binding();
+	g_Shader2->Binding();
 
+	/*원
 	for (Circle& c : g_vecCircle)
 	{
 		// 외곽선
 		if (c.bSelected)
 		{
-			tTransform outline = {};
-			outline.vOffset = c.vCenter;
-			outline.vZoom = c.fZoom * 1.08f;   // 살짝 크게
+			Transform outline = {};
+			outline.Pos = c.vCenter;
+			outline.Scale = c.fZoom * 1.08f;   // 살짝 크게
 			outline.vColor = Vec4(1, 0, 0, 1);  // 빨간 테두리
 
 			D3D11_MAPPED_SUBRESOURCE sub;
@@ -317,13 +371,11 @@ void TestRender()
 
 		g_RectMesh->Render();
 	}
+	*/
 	//g_RectMesh->Render();
-}
 
-void TestRelease()
-{
-	if (nullptr != g_RectMesh) delete g_RectMesh;
-	if (nullptr != g_Shader) delete g_Shader;
+	g_TriMesh->Render();
+	g_QuadMesh->Render();
 }
 
 int TestFunc()

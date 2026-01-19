@@ -1,5 +1,5 @@
 #pragma once
-
+#include "ConstBuffer.h"
 
 // Directx11 라이브러리 함수를 이용해서 
 // GPU 를 제어할 수 있는 클래스
@@ -25,12 +25,13 @@ private:
 
 	HWND							m_hWnd;			// 출력윈도우
 	Vec2							m_RenderResol;
-
+	Ptr<ConstBuffer>				m_CB;
 public:
 	int Init(HWND _hwnd, Vec2 _Resolution);
 	void Present() { m_SwapChain->Present(0, 0); }
 	ComPtr<ID3D11Device> GetDevice() { return m_Device; };
 	ComPtr<ID3D11DeviceContext> GetContext() { return m_Context; };
+	Ptr<ConstBuffer> GetConstBuffer() { return m_CB; }
 	HWND GetHwnd() { return m_hWnd; }
 	Vec2 GetRenderResol() { return m_RenderResol; }
 	void ClearTarget();

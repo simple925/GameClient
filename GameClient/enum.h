@@ -1,4 +1,9 @@
 #pragma once
+enum class CB_TYPE
+{
+	TRANSFORM,
+};
+
 enum class ASSET_TYPE
 {
 	MESH,
@@ -6,5 +11,17 @@ enum class ASSET_TYPE
 	SOUND,
 	GRAPHICSHADER,
 
+	END,
+};
+
+enum class COMPONENT_TYPE
+{
+	TRANSFORM,
+	MESHRENDER,
+	COLLIDER,
+	FLIPBOOK_RENDER,
+	PARTICLE_RENDER,
+	LIGHT,
+	TILE_RENDER,
 	END,
 };

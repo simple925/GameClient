@@ -5,7 +5,6 @@
 #include "KeyMgr.h"
 
 int TestFunc();
-void TestRelease();
 
 Engine::Engine()
 	: m_hInst(nullptr)
@@ -15,9 +14,7 @@ Engine::Engine()
 }
 
 Engine::~Engine()
-{
-	TestRelease();
-}
+{}
 
 int Engine::Progress()
 {

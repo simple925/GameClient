@@ -13,15 +13,16 @@ AMesh::~AMesh()
 
 int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCount)
 {
-	m_VBDesc.ByteWidth = _VtxCount; // 버퍼 크기
-	m_IBDesc.ByteWidth = _IdxCount;
+	// 버퍼크기
+	m_VtxCount = _VtxCount;
+	m_IdxCount = _IdxCount;
 
 	// cpu를 통해서 버퍼의 내용을 쓰거나, 읽을 수 있는지
 	// D3D11_USAGE_DYNAMIC + D3D11_CPU_ACCESS_WRITE ==> 버퍼를 생성한 이후에도, cpu를 통해서 버퍼의 내용을 수정할 수 있다.
+	m_VBDesc.ByteWidth = sizeof(Vtx) * m_VtxCount;	// 버퍼의 크기	
 	m_VBDesc.Usage = D3D11_USAGE_DEFAULT;
 	m_VBDesc.CPUAccessFlags = 0;
-	// 버퍼용도
-	m_VBDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	m_VBDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;	// 버퍼용도
 
 
 	// 처음 버퍼 생성할때 전달시킬 데이터의 시작주소를 Sub 구조체에 담아서 CreateBuffer 함수에 넣어준다.
@@ -34,6 +35,7 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 	// cpu를 통해서 버퍼의 내용을 쓰거나, 읽을 수 있는지
 	// D3D11_USAGE_DEFAULT + 0
 	// 버퍼를 생성한 이후에 수정할 수 없다.
+	m_IBDesc.ByteWidth = sizeof(UINT) * m_IdxCount;
 	m_IBDesc.Usage = D3D11_USAGE_DEFAULT;
 	m_IBDesc.CPUAccessFlags = 0;
 	// 버퍼용도
@@ -68,8 +70,8 @@ void AMesh::Render()
 	//CONTEXT->Draw(6, 0); // vertex buffer 의 정점을 그려줌
 
 	//CONTEXT->DrawIndexed(IDXCOUNT, 0, 0);
-	CONTEXT->DrawIndexed(1500, 0, 0);
+	//CONTEXT->DrawIndexed(1500, 0, 0);
 	//m_IdxCount = m_IdxCount / sizeof(UINT);
-	//CONTEXT->DrawIndexed(m_IdxCount, 0, 0);
+	CONTEXT->DrawIndexed(m_IdxCount, 0, 0);
 }
 

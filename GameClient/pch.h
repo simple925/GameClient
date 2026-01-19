@@ -50,3 +50,4 @@ using namespace std;
 // 상대경로
 #include "resource.h"
 #include "global.h"
+#include "Ptr.h"
