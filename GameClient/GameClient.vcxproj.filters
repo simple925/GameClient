@@ -83,9 +83,6 @@
       <Filter>GameEngine\06. Component\02. MeshRender</Filter>
     </ClInclude>
     <ClInclude Include="ConstBuffer.h" />
-    <ClInclude Include="TempMesh.h">
-      <Filter>GameEngine\04. Asset\01. Mesh\TempMesh</Filter>
-    </ClInclude>
     <ClInclude Include="CScript.h">
       <Filter>GameEngine\06. Component\03. Script</Filter>
     </ClInclude>
@@ -156,9 +153,6 @@
       <Filter>GameEngine\06. Component\02. MeshRender</Filter>
     </ClCompile>
     <ClCompile Include="ConstBuffer.cpp" />
-    <ClCompile Include="TempMesh.cpp">
-      <Filter>GameEngine\04. Asset\01. Mesh\TempMesh</Filter>
-    </ClCompile>
     <ClCompile Include="CScript.cpp">
       <Filter>GameEngine\06. Component\03. Script</Filter>
     </ClCompile>
@@ -226,9 +220,6 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\02. MeshRender">
       <UniqueIdentifier>{d79c2502-1ec2-4a78-ac11-ff7969ae962d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\04. Asset\01. Mesh\TempMesh">
-      <UniqueIdentifier>{c195b317-07ba-41a0-9970-7222bcb0865b}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\06. Component\03. Script">
       <UniqueIdentifier>{4f2fcd7d-abca-4834-a364-5c4d59acdb90}</UniqueIdentifier>

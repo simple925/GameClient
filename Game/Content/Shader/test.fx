@@ -93,4 +93,17 @@ float4 PS_Test2(VS_OUT _input) : SV_Target
 	return _input.vColor;
 }
 
+Texture2D g_tex_0 : register(t0);
+SamplerState g_sam_0 : register(s0); // texture 추출 도구
+// 입력된 텍스쳐를 사용해서 픽셀쉐이더의 출력 색상으로 지정한다.
+// 텍스쳐 코디네이션, UV 좌표계
+float4 PS_Test3(VS_OUT _input) : SV_Target
+{
+	// 알파블렌딩의 핵심 기본 배경을 출력함!!!!!! 블렌드 쉐이프
+	// 깊이 텍스쳐에 흔적이 남는다
+	
+	// texture 추출 도구 필요
+	float4 vColor = g_tex_0.Sample(g_sam_0, _input.vUV);
+	return vColor;
+}
 #endif

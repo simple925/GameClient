@@ -81,13 +81,6 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	// 렌더링 파이프라인 과정에서 마지막에 그림을 출력시킬 목적지 설정
 	m_Context->OMSetRenderTargets(1, m_RTV.GetAddressOf(), m_DSV.Get());
 
-	// 랜더타겟의 모든 픽셀을 특정 색상으로 칠한다.
-	// Dx 에서는 색상 데이터를 0 ~ 1 범위로 정규화(Normalize) 해서 사용한다.
-	// Normalize(0 ~ 255 -> 0.f ~ 1.f)(정규화)
-	float clearColor[4] = { 0.3f, 0.5f ,0.7f ,1.f };
-	m_Context->ClearRenderTargetView(m_RTV.Get(), clearColor);
-
-
 	// View - 리소스의 전달자, 매니징 역할. 연결된 리소스의 무결성을 보증, 실제 리소스가 필요한 곳에다가 연결된 
 	//        담당 View 를 전달해서 리소스을 연결해줌
 	// RenderTargetView
@@ -98,6 +91,11 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	// 앞으로 사용할 상수버퍼 미리 생성	
 	m_TransformCB = new ConstBuffer;
 	m_TransformCB->Create(CB_TYPE::TRANSFORM, sizeof(Transform));
+
+	// 앞으로 사용할 BlendState
+	if (FAILED(CreateBlendState())) {
+		return E_FAIL;
+	}
 	return S_OK;
 }
 
@@ -207,6 +205,47 @@ int Device::CreateBuffer()
 	}
 
 
+	return S_OK;
+}
+
+int Device::CreateBlendState()
+{
+	// 1. Default		-	// (SrcRGB * 1) + (DestRGB * 0)
+	// Context 에 nullptr 를 전달하면, 기본 blendState를 사용한다는 뜻
+	m_BSState[(UINT)BS_TYPE::DEFAULT] = nullptr;
+
+	// 2. AlphaBlend	-	// (SrcRGB * SrcA) + (DestRGB * (1 - SrcA))
+	D3D11_BLEND_DESC Desc = {};
+	Desc.AlphaToCoverageEnable = false;  // 깊이 텍스쳐 관련 설정
+	Desc.IndependentBlendEnable = false; // 렌더타겟이 여러개인 경우
+	Desc.RenderTarget[0].BlendEnable = true;
+
+	Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL; // blending 결과를 target 에 출력
+	Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	Desc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+
+	Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+
+	DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ALPHABLEND].GetAddressOf());
+
+	// 3. One_One		-	//(SrcRGB * 1) + (DestRGB * 1 *)
+	Desc = {};
+	Desc.AlphaToCoverageEnable = false;  // 깊이 텍스쳐 관련 설정
+	Desc.IndependentBlendEnable = false; // 렌더타겟이 여러개인 경우
+	Desc.RenderTarget[0].BlendEnable = true;
+
+	Desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL; // blending 결과를 target 에 출력
+	Desc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	Desc.RenderTarget[0].SrcBlend = D3D11_BLEND_ONE;
+	Desc.RenderTarget[0].DestBlend = D3D11_BLEND_ONE;
+
+	Desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	Desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+	Desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+	DEVICE->CreateBlendState(&Desc, m_BSState[(UINT)BS_TYPE::ONE_ONE].GetAddressOf());
 	return S_OK;
 }
 

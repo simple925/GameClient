@@ -18,10 +18,11 @@ private:
 	ComPtr<ID3D11RenderTargetView>	m_RTV;
 	ComPtr<ID3D11DepthStencilView>	m_DSV;
 
+	ComPtr<ID3D11BlendState>			m_BSState[(UINT)BS_TYPE::END];
+
 	//ComPtr<ID3D11SamplerState>		m_arrSampler[2];
-	//ComPtr<ID3D11RasterizerState>	m_RSState;
+	//ComPtr<ID3D11RasterizerState>		m_RSState;
 	//ComPtr<ID3D11DepthStencilState>	m_DSState;
-	//ComPtr<ID3D11BlendState>		m_BSState;
 
 	HWND							m_hWnd;			// 출력윈도우
 	Vec2							m_RenderResol;
@@ -35,9 +36,11 @@ public:
 	HWND GetHwnd() { return m_hWnd; }
 	Vec2 GetRenderResol() { return m_RenderResol; }
 	void ClearTarget();
+	ComPtr<ID3D11BlendState> GetBSState(BS_TYPE _Type) { return m_BSState[(UINT)_Type]; }
 private:
 	int CreateSwapChain();
 	int CreateBuffer();
+	int CreateBlendState();
 };
 
 #define DEVICE Device::GetInst()->GetDevice().Get()

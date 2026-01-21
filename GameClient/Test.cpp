@@ -72,14 +72,15 @@ int TestInit()
 
 	g_Object->Transform()->SetScale(Vec3(0.3f, 0.3f, 1.f));
 
-	g_Object->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
-	g_Object->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
+	g_Object->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
+	g_Object->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
+	g_Object->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
 
 	// 오브젝트 생성
 	g_Object2 = new GameObject;
 	g_Object2->AddComponent(new CTransform);
 	g_Object2->AddComponent(new CMeshRender);
-	g_Object2->AddComponent(new CPlayerScript);
+	//g_Object2->AddComponent(new CPlayerScript);
 
 	g_Object2->Transform()->SetPos(Vec3(0.5f, 0.f, 0.f));
 	g_Object2->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
@@ -91,7 +92,7 @@ int TestInit()
 	g_Object3 = new GameObject;
 	g_Object3->AddComponent(new CTransform);
 	g_Object3->AddComponent(new CMeshRender);
-	g_Object3->AddComponent(new CPlayerScript);
+	//g_Object3->AddComponent(new CPlayerScript);
 
 	g_Object3->Transform()->SetPos(Vec3(-0.5f, 0.f, 0.f));
 	g_Object3->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f)); // 반지름 역할
@@ -120,9 +121,9 @@ void TestRender()
 {
 	Device::GetInst()->ClearTarget();
 
+	g_Object->Render();
 	g_Object3->Render();
 	g_Object2->Render();
-	g_Object->Render();
 }
 
 int TestFunc()

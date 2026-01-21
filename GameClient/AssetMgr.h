@@ -3,6 +3,8 @@
 #include "Asset.h"
 #include "AMesh.h"
 #include "AGraphicShader.h"
+#include "ATexture.h"
+
 class AssetMgr
     : public singleton<AssetMgr>
 {
@@ -31,6 +33,9 @@ inline Ptr<T> AssetMgr::FindAsset(const wstring& _Key)
     }
     else if (info.hash_code() == typeid(AGraphicShader).hash_code()) {
         Type = ASSET_TYPE::GRAPHICSHADER;
+    }
+    else if (info.hash_code() == typeid(ATexture).hash_code()) {
+        Type = ASSET_TYPE::TEXTURE;
     }
     map<wstring, Ptr<Asset>>::iterator iter = m_mapAsset[(UINT)Type].find(_Key);
     if (iter == m_mapAsset[(UINT)Type].end()) {

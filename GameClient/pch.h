@@ -39,6 +39,13 @@ typedef SimpleMath::Matrix		Matrix;
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
 
+// DirectTex Library
+#include <DirectxTex\\DirectXTex.h>
+#ifdef _DEBUG
+#pragma comment(lib, "DirectxTex\\DirectXTex_debug.lib")
+#else
+#pragma comment(lib, "DirectxTex\\DirectXTex.lib")
+#endif
 // C++ 타입 정보기능
 #include <typeinfo>
 

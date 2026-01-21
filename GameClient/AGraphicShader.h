@@ -14,6 +14,8 @@ private:
     // PixelShader
     ComPtr<ID3D11PixelShader>	m_PS;
 
+    BS_TYPE                     m_BSType;
+
     // InputLayout - 정점 쉐이더에 입력으로 들어오는 정점 하나의 구성정보
     ComPtr<ID3D11InputLayout>	m_Layout;
 
@@ -22,6 +24,7 @@ public:
     int CreateVertexShader(const wstring& _RelativeFilePath, const string& _FuncName);
     int CreatePixelShader(const wstring& _RelativeFilePath, const string& _FuncName);
     void SetTopology(D3D11_PRIMITIVE_TOPOLOGY _Topology) { m_Topology = _Topology; }
+    void SetBSType(BS_TYPE _Type) { m_BSType = _Type; }
 
     void Binding();
 public:

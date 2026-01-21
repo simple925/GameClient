@@ -5,6 +5,14 @@ enum class CB_TYPE
 	END,
 };
 
+enum class BS_TYPE
+{
+	DEFAULT,		// (SrcRGB * 1) + (DestRGB * 0)
+	ALPHABLEND,		// (SrcRGB * SrcA) + (DestRGB * (1 - SrcA))
+	ONE_ONE,		// (SrcRGB * 1) + (DestRGB * 1 *)
+	END,
+};
+
 enum class ASSET_TYPE
 {
 	MESH,

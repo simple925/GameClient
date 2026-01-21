@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "AssetMgr.h"
+#include "PathMgr.h"
 
 AssetMgr::AssetMgr()
 {
@@ -35,14 +36,17 @@ void AssetMgr::Init()
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	arrVtx[0].vUV = Vec2(0.f, 0.f);
 	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
+
 	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
+	arrVtx[1].vUV = Vec2(1.f, 0.f);
 	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 0.f);
+
 	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vUV = Vec2(0.f, 0.f);
+	arrVtx[2].vUV = Vec2(1.f, 1.f);
 	arrVtx[2].vColor = Vec4(0.f, 1.f, 0.f, 0.f);
+
 	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[3].vUV = Vec2(0.f, 0.f);
+	arrVtx[3].vUV = Vec2(0.f, 1.f);
 	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
 	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
 	// 사각형 메쉬 생성
@@ -111,4 +115,20 @@ void AssetMgr::Init()
 	pShader->CreatePixelShader(L"Shader\\test.fx", "PS_Test2");
 	//m_mapAsset.insert(make_pair(L"shader2", pShader.Get()));
 	AddAsset(L"shader2", pShader.Get());
+
+	pShader = new AGraphicShader;
+	pShader->CreateVertexShader(L"Shader\\test.fx", "VS_Test2");
+	pShader->CreatePixelShader(L"Shader\\test.fx", "PS_Test3");
+	//m_mapAsset.insert(make_pair(L"shader2", pShader.Get()));
+	pShader->SetBSType(BS_TYPE::ALPHABLEND);
+	AddAsset(L"shader3", pShader.Get());
+
+	Ptr<ATexture> pTex = nullptr;
+	pTex = new ATexture;
+	wstring FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\Character.png";
+
+	pTex->Load(FilePath);
+
+	AddAsset(L"PlayerImage", pTex.Get());
 }
