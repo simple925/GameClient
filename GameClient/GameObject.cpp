@@ -36,6 +36,7 @@ void GameObject::Tick()
 	for (size_t i = 0; i < m_vecScript.size(); ++i) {
 		m_vecScript[i]->Tick();
 	}
+	Transform()->FinalTick();
 }
 
 void GameObject::Render()

@@ -7,8 +7,9 @@ private:
     Vec3    m_Pos;
     Vec3    m_Scale;
     Vec3    m_Rotation;
+    Matrix  m_matWorld;
 public:
-    // 할 일 수행
+    // 세팅된 묶어주는 역할
     void FinalTick();
     // 데이터를 GPU 메모리로 전송
     void Binding();

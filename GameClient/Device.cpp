@@ -257,8 +257,7 @@ int Device::CreateSampler()
 {
 	// 이방성 필터링 + 랩 모드
 	D3D11_SAMPLER_DESC Desc = {};
-
-	Desc.Filter			= D3D11_FILTER_ANISOTROPIC; // 3D에서 자주 사용됨
+	Desc.Filter			= D3D11_FILTER_ANISOTROPIC; // 3D에서 자주 사용됨 보간이 들어감
 	// Adress Mode 입력된 소수짐으로 랩핑됨
 	Desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP; // MIRROR, 
 	Desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -273,7 +272,7 @@ int Device::CreateSampler()
 	CONTEXT->PSSetSamplers(0, 1, m_arrSam[0].GetAddressOf());
 
 
-	// POINT 필터링 + 랩 모드
+	// POINT 필터링 + 랩 모드 보간이 안들어감
 	Desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT; // 2D에서 자주 사용됨
 	// Adress Mode 입력된 소수짐으로 랩핑됨
 	Desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP; // MIRROR, 

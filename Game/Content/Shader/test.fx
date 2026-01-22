@@ -35,9 +35,13 @@ cbuffer TRANSFORM_DATA : register(b1) // 16byte의 배수로 구성 되어야함 꼭!!!
 };
 cbuffer TRANSFORM : register(b0)
 {
-	float4 g_ObjectPos;
-	float4 g_ObjectScale;
-	float4 g_ObjectRot;
+	//float4 g_ObjectPos;
+	//float4 g_ObjectScale;
+	//float4 g_ObjectRot;
+	
+	// row_major 행열 읽는 방식이 cpu gpu 달라서 맞춰줌
+	// matrix == float4x4 같은 자료형
+	row_major matrix g_matWorld;		// Local(Model) -> World Space
 }
 VS_OUT VS_Test(VS_IN _input)
 {
@@ -53,27 +57,8 @@ VS_OUT VS_Test(VS_IN _input)
 VS_OUT VS_Test2(VS_IN _input)
 {
 	VS_OUT output = (VS_OUT) 0.f;
-       
-	float3x3 rotMat =
-	{
-		cos(g_ObjectRot.z), sin(g_ObjectRot.z), 0.f,
-        -sin(g_ObjectRot.z), cos(g_ObjectRot.z), 0.f,
-        0.f, 0.f, 1.f,
-	};
-    
-    // 변환 적용 순서
-    // 크(크기, 배율) -> 자(회전, 자전) -> 이(이동) -> 공(회전, 공전)
-    
-    // 크기 배율 설정
-	float3 vPos = _input.vPos * g_ObjectScale.xyz;
-    
-    // 회전 진행
-	vPos = mul(vPos, rotMat);
-    
-    // 위치 이동
-	vPos += g_ObjectPos.xyz;
-    
-	output.vPosition = float4(vPos, 1.f);
+	
+	output.vPosition = mul(float4(_input.vPos, 1.f), g_matWorld);
 	output.vUV = _input.vUV;
 	output.vColor = _input.vColor;
     

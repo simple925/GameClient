@@ -9,7 +9,5 @@ struct Vertex
 
 struct Transform
 {
-	Vec4 Pos;
-	Vec4 Scale;
-	Vec4 Rot;
+	Matrix matWorld;
 };

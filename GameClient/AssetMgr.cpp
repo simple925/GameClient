@@ -133,7 +133,7 @@ void AssetMgr::Init()
 	pTex = nullptr;
 	pTex = new ATexture;
 	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\Fighter.png";
+	FilePath += L"Texture\\Fighter.bmp";
 	pTex->Load(FilePath);
 	AddAsset(L"Fighter", pTex.Get());
 }
