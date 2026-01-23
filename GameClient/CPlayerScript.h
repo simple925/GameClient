@@ -5,6 +5,9 @@ class CPlayerScript :
 {
 private:
     bool m_bSelected;
+private:
+    void Move();
+    void Shoot();
 public:
     void Tick() override;
     bool IsMouseOver();

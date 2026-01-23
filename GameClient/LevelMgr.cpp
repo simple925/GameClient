@@ -13,30 +13,49 @@ void LevelMgr::Init()
 	m_CurLevel->setName(L"Current Level");
 
 	Ptr<GameObject> pObject = nullptr;
-	pObject = new GameObject;
-	pObject->AddComponent(new CTransform);
-	pObject->AddComponent(new CMeshRender);
-	pObject->AddComponent(new CPlayerScript);
-
-	pObject->Transform()->SetScale(Vec3(0.3f, 0.3f, 1.f));
-
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
-	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
-	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
-
-	m_CurLevel->AddObject(0, pObject);
 
 	// 오브젝트 생성
 	pObject = new GameObject;
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
-	//pObject->AddComponent(new CPlayerScript);
+	pObject->AddComponent(new CPlayerScript);
 
-	pObject->Transform()->SetPos(Vec3(0.5f, 0.f, 0.f));
+	pObject->Transform()->SetPos(Vec3(0.f, -0.8f, 0.f));
 	pObject->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
 
-	pObject->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->FindAsset<AMesh>(L"t").Get());
-	pObject->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
+	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"p").Get());
+	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
+	m_CurLevel->AddObject(0, pObject);
+
+	pObject = new GameObject;
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CMeshRender);
+
+	pObject->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
+
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
+	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"m").Get());
+	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
+	m_CurLevel->AddObject(1, pObject);
+
+	
+
+	pObject = new GameObject;
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CMeshRender);
+	//pObject->AddComponent(new CPlayerScript);
+
+	pObject->Transform()->SetScale(Vec3(2.0f, 2.f, 1.f));
+
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
+	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"back_1").Get());
+
+	m_CurLevel->AddObject(5, pObject);
+	
 	/*
 	// 3. GameObject 생성 (3개)
 	g_Object3 = new GameObject;
@@ -49,8 +68,9 @@ void LevelMgr::Init()
 
 	g_Object3->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->FindAsset<AMesh>(L"c").Get());
 	g_Object3->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
-	*/
 	m_CurLevel->AddObject(0, pObject);
+	*/
+	m_CurLevel->Init();
 }
 
 void LevelMgr::Progress()

@@ -92,11 +92,17 @@ SamplerState g_sam_1 : register(s1); // texture 추출 도구
 // 텍스쳐 코디네이션, UV 좌표계
 float4 PS_Test3(VS_OUT _input) : SV_Target
 {
+	
+	float4 vColor = g_tex_0.Sample(g_sam_1, _input.vUV);
+	if (vColor.a == 0.f ||vColor.r > 0.70f && vColor.b > 0.70f && vColor.g < 0.3f) // 마젠타 색인 경우
+	{
+		discard; // 픽셀쉐이더는 키워드를 만나면 픽셀쉐이더가 종료됨
+	}
 	// 알파블렌딩의 핵심 기본 배경을 출력함!!!!!! 블렌드 쉐이프
 	// 깊이 텍스쳐에 흔적이 남는다
 	
 	// texture 추출 도구 필요
 	// 입력 UV는 정점에서 반환한 값을 보간 받아서 픽셀쉐이더에 입력됨
-	return g_tex_0.Sample(g_sam_0, _input.vUV);
+	return vColor;
 }
 #endif

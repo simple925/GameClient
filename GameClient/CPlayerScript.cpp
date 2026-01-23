@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CPlayerScript.h"
+#include "CPlayerProjectile.h"
 #include "TimeMgr.h"
 #include "KeyMgr.h"
 
@@ -7,6 +8,9 @@
 #include "CTransform.h"
 #include "GameObject.h"
 
+#include "ALevel.h"
+#include "AssetMgr.h"
+#include "LevelMgr.h"
 bool CPlayerScript::IsMouseOver()
 {
 	// 1. 마우스 NDC 좌표 가져오기
@@ -45,8 +49,9 @@ CPlayerScript::~CPlayerScript()
 {
 }
 
-void CPlayerScript::Tick()
+void CPlayerScript::Move()
 {
+	/*
 	// 1. 클릭 시 선택 여부 판단 (Self-Picking)
 	if (KEY_TAP(KEY::LBUTTON))
 	{
@@ -68,6 +73,7 @@ void CPlayerScript::Tick()
 			m_bSelected = bMouseOver;
 		}
 	}
+	*/
 	// down casting
 	//Ptr<CTransform> pTrans;
 	//if (COMPONENT_TYPE::TRANSFORM == m_Com[(UINT)COMPONENT_TYPE::TRANSFORM]->GetType()) {
@@ -85,27 +91,56 @@ void CPlayerScript::Tick()
 	Vec3 vScale = trans->GetScale();
 	Vec3 vRotation = trans->GetRotation();
 
-	if (m_bSelected)
-	{
-		if (KEY_PRESSED(KEY::RIGHT)) vPos.x += 0.5f * DT;
-		if (KEY_PRESSED(KEY::LEFT))  vPos.x -= 0.5f * DT;
-		if (KEY_PRESSED(KEY::UP))    vPos.y += 0.5f * DT;
-		if (KEY_PRESSED(KEY::DOWN))  vPos.y -= 0.5f * DT;
+	//if (m_bSelected)
+	//{
+	if (KEY_PRESSED(KEY::RIGHT)) vPos.x += 0.5f * DT;
+	if (KEY_PRESSED(KEY::LEFT))  vPos.x -= 0.5f * DT;
+	if (KEY_PRESSED(KEY::UP))    vPos.y += 0.5f * DT;
+	if (KEY_PRESSED(KEY::DOWN))  vPos.y -= 0.5f * DT;
 
-		if (KEY_PRESSED(KEY::W)) {
-			vScale.x += 0.5f * DT; vScale.y += 0.5f * DT;
-		}
-		if (KEY_PRESSED(KEY::S)) {
-			vScale.x -= 0.5f * DT; vScale.y -= 0.5f * DT;
-			vScale.x = max(0.f, vScale.x);
-			vScale.y = max(0.f, vScale.y);
-		}
-		if (KEY_PRESSED(KEY::Z)) {
-			vRotation.z += DT * XM_PI;
-		}
-
-		trans->SetPos(vPos);
-		trans->SetScale(vScale);
-		trans->SetRotation(vRotation);
+	/*
+	if (KEY_PRESSED(KEY::W)) {
+		vScale.x += 0.5f * DT; vScale.y += 0.5f * DT;
 	}
+	if (KEY_PRESSED(KEY::S)) {
+		vScale.x -= 0.5f * DT; vScale.y -= 0.5f * DT;
+		vScale.x = max(0.f, vScale.x);
+		vScale.y = max(0.f, vScale.y);
+	}
+	if (KEY_PRESSED(KEY::Z)) {
+		vRotation.z += DT * XM_PI;
+	}
+	*/
+	// Z 키 입력시
+	if (KEY_PRESSED(KEY::Z)) {
+		vRotation.z += DT * XM_PI;
+	}
+
+	trans->SetPos(vPos);
+	trans->SetScale(vScale);
+	trans->SetRotation(vRotation);
+	//}
+}
+
+void CPlayerScript::Shoot()
+{
+	if (KEY_TAP(KEY::SPACE)) {
+		const vector<Ptr<GameObject>>& vecObj = LevelMgr::GetInst()->GetLevel()->GetLayer(1).GetVecObject();
+
+		for (const auto& pObj : vecObj) {
+			if (pObj.Get()->IsHidden()) {
+				pObj.Get()->Transform()->SetPos(GetOwner()->Transform()->GetPos()); // 발사 위치 설정
+				pObj.Get()->Show();                  // 이제부터 Tick과 Render가 돌아감
+				break;                         // 하나만 발사하고 루프 탈출
+			}
+		}
+
+	}
+}
+
+void CPlayerScript::Tick()
+{
+	Move();
+
+	Shoot();
 }

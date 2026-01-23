@@ -11,6 +11,7 @@ public:
 	void Tick();
 	void FinalTick();
 	void Render();
+	vector<Ptr<GameObject>> GetVecObject() { return m_vecObject; }
 public:
 	Layer();
 	~Layer();

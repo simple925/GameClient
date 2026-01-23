@@ -9,6 +9,7 @@
 
 GameObject::GameObject()
 	: m_Com{}
+	, m_bIsHidden(false)
 {
 }
 

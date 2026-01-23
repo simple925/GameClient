@@ -86,9 +86,6 @@
     <ClInclude Include="CScript.h">
       <Filter>GameEngine\06. Component\03. Script</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayerScript.h">
-      <Filter>GameEngine\06. Component\03. Script</Filter>
-    </ClInclude>
     <ClInclude Include="AssetMgr.h">
       <Filter>GameEngine\03. Manager\04. AssetMgr</Filter>
     </ClInclude>
@@ -100,6 +97,12 @@
     </ClInclude>
     <ClInclude Include="Layer.h">
       <Filter>GameEngine\04. Asset\04. Level\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerScript.h">
+      <Filter>GameEngine\06. Component\03. Script\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerProjectile.h">
+      <Filter>GameEngine\06. Component\03. Script\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +168,6 @@
     <ClCompile Include="CScript.cpp">
       <Filter>GameEngine\06. Component\03. Script</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayerScript.cpp">
-      <Filter>GameEngine\06. Component\03. Script</Filter>
-    </ClCompile>
     <ClCompile Include="AssetMgr.cpp">
       <Filter>GameEngine\03. Manager\04. AssetMgr</Filter>
     </ClCompile>
@@ -179,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="Layer.cpp">
       <Filter>GameEngine\04. Asset\04. Level\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerScript.cpp">
+      <Filter>GameEngine\06. Component\03. Script\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerProjectile.cpp">
+      <Filter>GameEngine\06. Component\03. Script\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +265,12 @@
     </Filter>
     <Filter Include="GameEngine\04. Asset\04. Level\Layer">
       <UniqueIdentifier>{91e24c47-5f2b-4a63-87a6-114234284012}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\03. Script\Player">
+      <UniqueIdentifier>{330e6d24-eaac-4659-b43d-3b2b052717e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\03. Script\Projectile">
+      <UniqueIdentifier>{d2625bd6-e72f-4fae-b055-b9e930024022}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

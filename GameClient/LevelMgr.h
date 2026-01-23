@@ -9,6 +9,7 @@ class LevelMgr
 private:
     Ptr<ALevel>     m_CurLevel;
 public:
+    Ptr<ALevel>& GetLevel() { return m_CurLevel; }
     void Init();
     void Progress();
 

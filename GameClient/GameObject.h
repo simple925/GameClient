@@ -10,11 +10,16 @@ class GameObject :
 private:
     Ptr<Component> m_Com[(UINT)COMPONENT_TYPE::END];
     vector<Ptr<CScript>>        m_vecScript;
+    bool                        m_bIsHidden;
 public:
     // 매 프레임마다 할 일
     void Tick();
     void FinalTick();
     void Render();
+
+    bool IsHidden() const { return m_bIsHidden; }
+    void Hide() { m_bIsHidden = true; }
+    void Show() { m_bIsHidden = false; }
 public:
     void AddComponent(Ptr<Component> _Com);
     Ptr<Component> GetComponent(COMPONENT_TYPE _Type) { return m_Com[(UINT)_Type]; }

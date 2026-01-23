@@ -38,15 +38,15 @@ void AssetMgr::Init()
 	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
 
 	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vUV = Vec2(2.f, 0.f);
+	arrVtx[1].vUV = Vec2(1.f, 0.f);
 	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 0.f);
 
 	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vUV = Vec2(2.f, 2.f);
+	arrVtx[2].vUV = Vec2(1.f, 1.f);
 	arrVtx[2].vColor = Vec4(0.f, 1.f, 0.f, 0.f);
 
 	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[3].vUV = Vec2(0.f, 2.f);
+	arrVtx[3].vUV = Vec2(0.f, 1.f);
 	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
 	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
 	// 사각형 메쉬 생성
@@ -90,12 +90,15 @@ void AssetMgr::Init()
 	Vtx arr[3] = {};
 	arr[0].vPos = Vec3(0.f, 1.f, 0.f);
 	arr[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arr[0].vUV = Vec2(0.5f, 0.0f);
 
 	arr[1].vPos = Vec3(1.f, -1.f, 0.f);
 	arr[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	arr[1].vUV = Vec2(1.0f, 1.0f);
 
 	arr[2].vPos = Vec3(-1.f, -1.f, 0.f);
 	arr[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	arr[2].vUV = Vec2(0.0f, 1.0f);
 
 	UINT idx[3] = { 0 , 1 , 2 };
 
@@ -136,4 +139,38 @@ void AssetMgr::Init()
 	FilePath += L"Texture\\Fighter.bmp";
 	pTex->Load(FilePath);
 	AddAsset(L"Fighter", pTex.Get());
+
+	pTex = nullptr;
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\1945\\back1.png";
+	pTex->Load(FilePath);
+	AddAsset(L"back_1", pTex.Get());
+
+	pTex = nullptr;
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\1945\\back2.png";
+	pTex->Load(FilePath);
+	AddAsset(L"back_2", pTex.Get());
+
+	pTex = nullptr;
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\1945\\back3.png";
+	pTex->Load(FilePath);
+	AddAsset(L"back_3", pTex.Get());
+
+	pTex = nullptr;
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\1945\\p.png";
+	pTex->Load(FilePath);
+	AddAsset(L"p", pTex.Get());
+	pTex = nullptr;
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\1945\\m.bmp";
+	pTex->Load(FilePath);
+	AddAsset(L"m", pTex.Get());
 }

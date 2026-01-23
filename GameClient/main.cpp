@@ -2,16 +2,15 @@
 
 #include "Engine.h"
 
-class CThis
-{
-private:
-	int m_i;
-public:
-	void setInt(int i) { m_i = i; }
-public:
-	CThis() {}
-	~CThis() {}
-};
+
+
+/*
+	1. 260123 금요일 과제
+	  - Player 캐릭터가 Space 키를 누르면, 미사일 발사하기
+	  - 미사일 오브젝트는 이미지가 있어야 한다.
+	2. 배경 이미지가 있을 것
+*/
+
 
 // 회전
 // 삼각형 합, 차 공식
@@ -23,22 +22,6 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 HINSTANCE hInst;
 
-class cTest {
-
-private:
-	const int m_i;
-public:
-	//cTest& operator = (const cTest& _test) {
-		//m_i = _test.m_i;
-		//return *this;
-	//}
-	cTest()
-		: m_i(0)
-	{
-
-	}
-	cTest(const int& a) = delete; // 해당 생성자를 자동으로 구현하지 않게 만듬
-};
 
 
 
@@ -58,7 +41,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Engine 초기화
 	// 최상위 관리자
-	if (FAILED(Engine::GetInst()->Init(hInstance, 1600, 900)))
+	//if (FAILED(Engine::GetInst()->Init(hInstance, 1600, 900)))
+	if (FAILED(Engine::GetInst()->Init(hInstance, 900, 1000)))
 	{
 		return 0;
 	}
