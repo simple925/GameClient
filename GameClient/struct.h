@@ -7,7 +7,10 @@ struct Vertex
 	Vec4	vColor;	// 정점 자체의 색상
 }; typedef Vertex Vtx;
 
-struct Transform
+struct TransformMatrix
 {
 	Matrix matWorld;
+	Matrix matView;
 };
+// extern, 전방선언, 유일한 전역변수, 모든파일(cpp) 에서 접근 가능
+extern TransformMatrix g_Trans;

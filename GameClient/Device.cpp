@@ -90,7 +90,7 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 
 	// 앞으로 사용할 상수버퍼 미리 생성	
 	m_TransformCB = new ConstBuffer;
-	m_TransformCB->Create(CB_TYPE::TRANSFORM, sizeof(Transform));
+	m_TransformCB->Create(CB_TYPE::TRANSFORM, sizeof(TransformMatrix));
 
 	// 기본 샘플러 생성
 	if (FAILED(CreateSampler())) {

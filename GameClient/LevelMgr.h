@@ -1,5 +1,5 @@
 #pragma once
-#include "single.h"
+
 #include "ALevel.h"
 
 class LevelMgr
@@ -8,11 +8,12 @@ class LevelMgr
     SINGLE(LevelMgr)
 private:
     Ptr<ALevel>     m_CurLevel;
+
 public:
-    Ptr<ALevel>& GetLevel() { return m_CurLevel; }
+    Ptr<ALevel> GetLevel() { return m_CurLevel; }
+
+public: // 시점 함수 목록
     void Init();
     void Progress();
-
-
 };
 

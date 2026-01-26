@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#define GET_OTHER_COMPONENT(COM_NAME) class C##COM_NAME* COM_NAME(); // 전방 선언을함
 
 class GameObject; // 헤더가 서로를 참조하는 문제를 피하기 위해 링킹으로 해결 GameObject 보다 먼저 만들어짐
 
@@ -13,7 +14,13 @@ public:
 	COMPONENT_TYPE GetType() { return m_Type; }
 	GameObject* GetOwner() { return m_Owner; }
 
-	virtual void FinalTick() = 0;
+	//class CTransform* Transform(); // 전방 선언을함
+	GET_OTHER_COMPONENT(Transform);
+	GET_OTHER_COMPONENT(Camera);
+	GET_OTHER_COMPONENT(MeshRender);
+
+	virtual void Begin() {}		  // 구현 해도 되고 안해도 그만~
+	virtual void FinalTick() = 0; // 각자 하위 클래스에서 구현되어야함 무조건
 public:
 	Component(COMPONENT_TYPE _Type);
 	virtual ~Component();

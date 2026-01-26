@@ -84,7 +84,7 @@
     </ClInclude>
     <ClInclude Include="ConstBuffer.h" />
     <ClInclude Include="CScript.h">
-      <Filter>GameEngine\06. Component\03. Script</Filter>
+      <Filter>GameEngine\06. Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="AssetMgr.h">
       <Filter>GameEngine\03. Manager\04. AssetMgr</Filter>
@@ -99,10 +99,25 @@
       <Filter>GameEngine\04. Asset\04. Level\Layer</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerScript.h">
-      <Filter>GameEngine\06. Component\03. Script\Player</Filter>
+      <Filter>GameEngine\06. Component\Script\Player</Filter>
     </ClInclude>
     <ClInclude Include="CPlayerProjectile.h">
-      <Filter>GameEngine\06. Component\03. Script\Projectile</Filter>
+      <Filter>GameEngine\06. Component\Script\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="asserts.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCamera.h">
+      <Filter>GameEngine\06. Component\03. Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraMoveScript.h">
+      <Filter>GameEngine\06. Component\Script\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderMgr.h">
+      <Filter>GameEngine\03. Manager\06. RenderMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +181,7 @@
     </ClCompile>
     <ClCompile Include="ConstBuffer.cpp" />
     <ClCompile Include="CScript.cpp">
-      <Filter>GameEngine\06. Component\03. Script</Filter>
+      <Filter>GameEngine\06. Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="AssetMgr.cpp">
       <Filter>GameEngine\03. Manager\04. AssetMgr</Filter>
@@ -181,10 +196,22 @@
       <Filter>GameEngine\04. Asset\04. Level\Layer</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerScript.cpp">
-      <Filter>GameEngine\06. Component\03. Script\Player</Filter>
+      <Filter>GameEngine\06. Component\Script\Player</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerProjectile.cpp">
-      <Filter>GameEngine\06. Component\03. Script\Projectile</Filter>
+      <Filter>GameEngine\06. Component\Script\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="CCamera.cpp">
+      <Filter>GameEngine\06. Component\03. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraMoveScript.cpp">
+      <Filter>GameEngine\06. Component\Script\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderMgr.cpp">
+      <Filter>GameEngine\03. Manager\06. RenderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="extern.cpp">
+      <Filter>Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +272,6 @@
     <Filter Include="GameEngine\06. Component\02. MeshRender">
       <UniqueIdentifier>{d79c2502-1ec2-4a78-ac11-ff7969ae962d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\03. Script">
-      <UniqueIdentifier>{4f2fcd7d-abca-4834-a364-5c4d59acdb90}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\06. Component\04. Anymation">
       <UniqueIdentifier>{6a26beeb-140e-4931-b8a2-6c4d86571b5c}</UniqueIdentifier>
     </Filter>
@@ -266,11 +290,23 @@
     <Filter Include="GameEngine\04. Asset\04. Level\Layer">
       <UniqueIdentifier>{91e24c47-5f2b-4a63-87a6-114234284012}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\03. Script\Player">
+    <Filter Include="GameEngine\06. Component\Script">
+      <UniqueIdentifier>{4f2fcd7d-abca-4834-a364-5c4d59acdb90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\Player">
       <UniqueIdentifier>{330e6d24-eaac-4659-b43d-3b2b052717e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\03. Script\Projectile">
+    <Filter Include="GameEngine\06. Component\Script\Projectile">
       <UniqueIdentifier>{d2625bd6-e72f-4fae-b055-b9e930024022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\03. Camera">
+      <UniqueIdentifier>{7451b0cd-3da8-4865-8a12-2c5633e36498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\Camera">
+      <UniqueIdentifier>{6b01e339-0090-4de5-95de-28384fd23a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\06. RenderMgr">
+      <UniqueIdentifier>{b0c9cee2-dde9-456a-9f28-256caf16167c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

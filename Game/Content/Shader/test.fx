@@ -42,6 +42,7 @@ cbuffer TRANSFORM : register(b0)
 	// row_major 행열 읽는 방식이 cpu gpu 달라서 맞춰줌
 	// matrix == float4x4 같은 자료형
 	row_major matrix g_matWorld;		// Local(Model) -> World Space
+	row_major matrix g_matView;			// World -> Camera Space
 }
 VS_OUT VS_Test(VS_IN _input)
 {
@@ -56,16 +57,44 @@ VS_OUT VS_Test(VS_IN _input)
 }
 VS_OUT VS_Test2(VS_IN _input)
 {
-	VS_OUT output = (VS_OUT) 0.f;
-	
+		/*
+	// z 회전
+	float3x3 rotMat =
+	{
+		cos(g_ObjectRot.z), sin(g_ObjectRot.z), 0.f,
+		-sin(g_ObjectRot.z), cos(g_ObjectRot.z), 0.f,
+		0.f, 0.f, 1.f,
+	};
+	// y 회전
+	float3x3 rotMat =
+	{
+		cos(g_ObjectRot.z), 0.f, sin(g_ObjectRot.z),
+		0.f, 1.f, 0.f,
+		-sin(g_ObjectRot.z), 0.f, cos(g_ObjectRot.z),
+	};
+	// x 회전
+	float3x3 rotMat =
+	{
+		1.f, 0.f, 0.f,
+		0.f, cos(g_ObjectRot.z), sin(g_ObjectRot.z),
+		0.f, -sin(g_ObjectRot.z), cos(g_ObjectRot.z),
+	};
+	*/
+
 	/* 
 		(x, y, z, 동차좌표)  X   ( scale.x		0		 0		 0	 )
 								(	0		  scale.y	 0		 0	 )
 								(	0			0	   scale.z	 0	 )
 								(  pos.x	   pos.y    pos.z	 0	 )
 	*/
+	VS_OUT output = (VS_OUT) 0.f;
+	
+	// Local -> World
+	float4 vWorld = mul(float4(_input.vPos, 1.f /*동차좌표*/), g_matWorld);
+	// World -> View
+	float4 vView = mul(vWorld, g_matView);
 	// 동차좌표 0으로 설정하면 이동 정보를 무시함
-	output.vPosition = mul(float4(_input.vPos, 1.f/*동차좌표*/), g_matWorld);
+	output.vPosition = vView; // 월드행렬을 방향벡터에 곱할땐 이동정보를 무시해야되기 때문에 동차좌표가 0.f 들어가야함
 	output.vUV = _input.vUV;
 	output.vColor = _input.vColor;
     

@@ -146,11 +146,15 @@
     <ClInclude Include="AGraphicShader.h" />
     <ClInclude Include="ALevel.h" />
     <ClInclude Include="AMesh.h" />
+    <ClInclude Include="asserts.h" />
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetMgr.h" />
     <ClInclude Include="ATexture.h" />
+    <ClInclude Include="CCamera.h" />
+    <ClInclude Include="CCameraMoveScript.h" />
     <ClInclude Include="CMeshRender.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="components.h" />
     <ClInclude Include="ConstBuffer.h" />
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CScript.h" />
@@ -171,6 +175,7 @@
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="CPlayerProjectile.h" />
+    <ClInclude Include="RenderMgr.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="struct.h" />
@@ -186,6 +191,8 @@
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetMgr.cpp" />
     <ClCompile Include="ATexture.cpp" />
+    <ClCompile Include="CCamera.cpp" />
+    <ClCompile Include="CCameraMoveScript.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstBuffer.cpp" />
@@ -196,6 +203,7 @@
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Engine_init.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="extern.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Layer.cpp" />
@@ -206,6 +214,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="CPlayerProjectile.cpp" />
+    <ClCompile Include="RenderMgr.cpp" />
     <ClCompile Include="Test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>

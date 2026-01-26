@@ -32,6 +32,15 @@ void GameObject::AddComponent(Ptr<Component> _Com)
 	_Com->m_Owner = this;
 }
 
+void GameObject::Begin()
+{
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i) {
+		if (nullptr != m_Com[i]) {
+			m_Com[i]->Begin();
+		}
+	}
+}
+
 void GameObject::Tick()
 {
 	for (size_t i = 0; i < m_vecScript.size(); ++i) {

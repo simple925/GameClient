@@ -12,7 +12,7 @@ private:
 	void Release() { --m_RefCount; if (m_RefCount <= 0) delete this; }
 public:
 	UINT getId() { return m_InstID; }
-	void setName(const wstring& _Name) { m_Name = _Name; }
+	void SetName(const wstring& _Name) { m_Name = _Name; }
 	const wstring& getName() { return m_Name; }
 
 public:

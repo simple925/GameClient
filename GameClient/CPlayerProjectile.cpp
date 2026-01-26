@@ -8,22 +8,20 @@
 
 void CPlayerProjectile::Tick()
 {
-	// 이동
-	Vec3 vPos = GetOwner()->Transform()->GetPos();
-	vPos.y += m_fSpeed * DT;
-	GetOwner()->Transform()->SetPos(vPos);
-
-
-	// 풀에 반납
-	if (vPos.y > 20.f) {
-		// 위치를 초기화하고 숨김
-		GetOwner()->Transform()->SetPos(Vec3(0.f, 0.f, 0.f));
-		GetOwner()->Hide();
+	// 이동 
+	Vec3 vPos = Transform()->GetPos();
+	vPos += Transform()->GetDir(DIR::UP) 
+		  * m_fSpeed 
+		  * DT;
+	Transform()->SetPos(vPos);
+	// 풀에 반납 (예: z축 기준)
+	if (vPos.y > 10.f || vPos.y < -10.f || vPos.x > 10.f || vPos.x < -10.f) {
+		GetOwner()->Hide(); // 위치는 발사 시점에 다시 세팅 
 	}
 }
 
 CPlayerProjectile::CPlayerProjectile()
-	: m_fSpeed(5.f)
+	: m_fSpeed(2.f)
 {
 }
 

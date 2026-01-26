@@ -7,11 +7,12 @@ class Layer
 private:
 	vector<Ptr<GameObject>> m_vecObject;
 public:
+	void Begin();
 	void addObject(Ptr<GameObject> _Object) { m_vecObject.push_back(_Object); }
 	void Tick();
 	void FinalTick();
-	void Render();
 	vector<Ptr<GameObject>> GetVecObject() { return m_vecObject; }
+	void Render();
 public:
 	Layer();
 	~Layer();

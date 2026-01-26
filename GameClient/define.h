@@ -1,4 +1,13 @@
 #pragma once
-#define SINGLE(Type) private: Type(); Type(const Type* _Other) = delete; ~Type(); friend class singleton<Type>;
+#define SINGLE(Type) private:\
+						Type();\
+						Type(const Type& _Other) = delete;\
+						~Type();\
+						friend class singleton<Type>;
 
 #define MAX_LAYER 32
+
+#define GET(Type, MemName) Type Get##MemName() {return m_##MemName;}
+#define SET(Type, MemName) void Set##MemName(Type _Data) {m_##MemName = _Data;}
+
+#define GET_SET(Type, MemName) GET(Type, MemName); SET(Type, MemName);

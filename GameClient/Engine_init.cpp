@@ -7,7 +7,7 @@
 #include "KeyMgr.h"
 #include "AssetMgr.h"
 #include "LevelMgr.h"
-
+#include "RenderMgr.h"
 LRESULT CALLBACK  WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
@@ -84,9 +84,14 @@ int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
 
     // 각각의 키의 상태를 계산
     KeyMgr::GetInst()->Init();
+
+    // 엔진 기본 에셋들 생성
     AssetMgr::GetInst()->Init();
 
     // 레벨 매니저 초기화
     LevelMgr::GetInst()->Init();
+
+    // RenderMgr 랜더링
+    RenderMgr::GetInst()->Init();
     return S_OK;
 }

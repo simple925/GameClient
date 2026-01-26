@@ -42,6 +42,7 @@ bool CPlayerScript::IsMouseOver()
 }
 
 CPlayerScript::CPlayerScript()
+	: m_bSelected(false)
 {
 }
 
@@ -86,50 +87,40 @@ void CPlayerScript::Move()
 	//pTrans = dynamic_cast<CTransform*>(m_Com[(UINT)COMPONENT_TYPE::TRANSFORM].Get());
 
 	//CTransform* trans = pTrans.Get();
-	Ptr<CTransform> trans = GetOwner()->Transform();
-	Vec3 vPos = trans->GetPos();
-	Vec3 vScale = trans->GetScale();
-	Vec3 vRotation = trans->GetRotation();
+	Vec3 vPos = Transform()->GetPos();
+	Vec3 vScale = Transform()->GetScale();
+	Vec3 vRotation = Transform()->GetRotation();
 
-	//if (m_bSelected)
-	//{
-	if (KEY_PRESSED(KEY::RIGHT)) vPos.x += 0.5f * DT;
-	if (KEY_PRESSED(KEY::LEFT))  vPos.x -= 0.5f * DT;
-	if (KEY_PRESSED(KEY::UP))    vPos.y += 0.5f * DT;
-	if (KEY_PRESSED(KEY::DOWN))  vPos.y -= 0.5f * DT;
+	Vec3 vUp = Transform()->GetDir(DIR::UP);
+	Vec3 vDown = -vUp;
 
-	/*
-	if (KEY_PRESSED(KEY::W)) {
-		vScale.x += 0.5f * DT; vScale.y += 0.5f * DT;
-	}
-	if (KEY_PRESSED(KEY::S)) {
-		vScale.x -= 0.5f * DT; vScale.y -= 0.5f * DT;
-		vScale.x = max(0.f, vScale.x);
-		vScale.y = max(0.f, vScale.y);
-	}
-	if (KEY_PRESSED(KEY::Z)) {
-		vRotation.z += DT * XM_PI;
-	}
-	*/
-	// Z 키 입력시
-	if (KEY_PRESSED(KEY::Z)) {
-		vRotation.z += DT * XM_PI;
-	}
+	if (KEY_PRESSED(KEY::UP))
+		vPos += vUp * 0.5f * DT;
+	if (KEY_PRESSED(KEY::DOWN))
+		vPos += vDown * 0.5f * DT;
 
-	trans->SetPos(vPos);
-	trans->SetScale(vScale);
-	trans->SetRotation(vRotation);
-	//}
+	if (KEY_PRESSED(KEY::RIGHT))
+		vRotation.z -= XM_PI * DT;
+	if (KEY_PRESSED(KEY::LEFT))
+		vRotation.z += XM_PI * DT;
+
+	Transform()->SetPos(vPos);
+	Transform()->SetScale(vScale);
+	Transform()->SetRotation(vRotation);
 }
 
 void CPlayerScript::Shoot()
 {
 	if (KEY_TAP(KEY::SPACE)) {
-		const vector<Ptr<GameObject>>& vecObj = LevelMgr::GetInst()->GetLevel()->GetLayer(1).GetVecObject();
+		 const vector<Ptr<GameObject>>& vecObj = LevelMgr::GetInst()->GetLevel()->GetLayer(1)->GetVecObject();
 
 		for (const auto& pObj : vecObj) {
 			if (pObj.Get()->IsHidden()) {
-				pObj.Get()->Transform()->SetPos(GetOwner()->Transform()->GetPos()); // 발사 위치 설정
+				pObj.Get()->Transform()->SetPos(Transform()->GetPos()
+											  + Transform()->GetScale()
+											  * 0.5f
+											  * Transform()->GetDir(DIR::UP)); // 발사 위치 설정 비행기 몸체 보다 살짝 앞으로 위치 값을 넘김
+				pObj.Get()->Transform()->SetRotation(Transform()->GetRotation());
 				pObj.Get()->Show();                  // 이제부터 Tick과 Render가 돌아감
 				break;                         // 하나만 발사하고 루프 탈출
 			}

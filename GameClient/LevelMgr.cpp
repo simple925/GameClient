@@ -1,21 +1,49 @@
 #include "pch.h"
 #include "LevelMgr.h"
 #include "GameObject.h"
-#include "CPlayerScript.h"
 #include "AssetMgr.h"
 #include "Device.h"
-LevelMgr::LevelMgr() {}
-LevelMgr::~LevelMgr() {}
+
+LevelMgr::LevelMgr() {
+}
+LevelMgr::~LevelMgr() {
+}
 void LevelMgr::Init()
 {
 	// Level Create
 	m_CurLevel = new ALevel;
-	m_CurLevel->setName(L"Current Level");
+	//m_CurLevel->SetName(L"Current Level");
+	m_CurLevel->SetName(L"aaaaaaaaaaaaaaaaa");
 
 	Ptr<GameObject> pObject = nullptr;
 
+	// 카메라 역할 Ojbect
+	pObject = new GameObject;
+	//pObject->SetName(L"Main Camera");
+	pObject->SetName(L"메인카메라");
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CCamera);
+	pObject->AddComponent(new CCamraMoveScript);
+
+
+	//pObject->Camera()->LayerCheck(0); // 0번을 그려라
+	pObject->Camera()->LayerCheckAll(); 
+	//pObject->Camera()->LayerCheck(31); // 31 -> UI 레이어
+
+	pObject->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
+	pObject->Camera()->SetFar(1000.f);
+	pObject->Camera()->SetFOV(90.f);
+	pObject->Camera()->SetOrthoScale(1.f);
+
+	Vec2 vResolution = Device::GetInst()->GetRenderResol();
+	pObject->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // 종횡비(AspectRatio)
+
+	m_CurLevel->AddObject(0, pObject);
+
 	// 오브젝트 생성
 	pObject = new GameObject;
+	//pObject->SetName(L"Player");
+	pObject->SetName(L"플레이어");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	pObject->AddComponent(new CPlayerScript);
@@ -28,22 +56,27 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"p").Get());
 	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
 	m_CurLevel->AddObject(0, pObject);
-
+	/*
 	pObject = new GameObject;
+	//pObject->SetName(L"Monster");
+	pObject->SetName(L"몬스터");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 
+	pObject->Transform()->SetPos(Vec3(0.5f, 0.f, 0.f));
 	pObject->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"t").Get());
 	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
 	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"m").Get());
 	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
-	m_CurLevel->AddObject(1, pObject);
+	m_CurLevel->AddObject(0, pObject);
+	*/
 
 	
 
 	pObject = new GameObject;
+	pObject->SetName(L"배경");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	//pObject->AddComponent(new CPlayerScript);
@@ -54,7 +87,7 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
 	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"back_1").Get());
 
-	m_CurLevel->AddObject(5, pObject);
+	m_CurLevel->AddObject(2, pObject);
 	
 	/*
 	// 3. GameObject 생성 (3개)
@@ -70,7 +103,9 @@ void LevelMgr::Init()
 	g_Object3->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
 	m_CurLevel->AddObject(0, pObject);
 	*/
-	m_CurLevel->Init();
+	//m_CurLevel->Init();
+
+	m_CurLevel->Begin();
 }
 
 void LevelMgr::Progress()
@@ -79,7 +114,6 @@ void LevelMgr::Progress()
 	m_CurLevel->Tick();
 	// FinalTick 에서 행동 행위를 정산 하는 개념임
 	m_CurLevel->FinalTick();
-	Device::GetInst()->ClearTarget();
-	m_CurLevel->Render();
+	
 	
 }

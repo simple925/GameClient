@@ -1,9 +1,7 @@
 #pragma once
 #include "single.h"
 #include "Asset.h"
-#include "AMesh.h"
-#include "AGraphicShader.h"
-#include "ATexture.h"
+#include "asserts.h"
 
 class AssetMgr
     : public singleton<AssetMgr>

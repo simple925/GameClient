@@ -8,12 +8,12 @@ class ALevel :
 private:
     Layer       m_arrLayer[MAX_LAYER]; // 하나의 레벨에
 public:
-    void Init();
-    void AddObject(int _LayerIdx, Ptr<GameObject> _Object);
+    void Begin();
     void Tick();
     void FinalTick();
-    void Render();
-    Layer GetLayer(int _idx) { return m_arrLayer[_idx]; }
+public:
+    void AddObject(int _LayerIdx, Ptr<GameObject> _Object);
+    Layer* GetLayer(int _Idx) { assert(0 <= _Idx && _Idx < MAX_LAYER); return &m_arrLayer[_Idx]; }
 public:
     ALevel();
     virtual ~ALevel();
