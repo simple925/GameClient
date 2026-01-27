@@ -8,6 +8,7 @@
 #include "RenderMgr.h"
 
 #include "CTransform.h"
+#include "Device.h"
 CCamera::CCamera()
 	:Component(COMPONENT_TYPE::CAMERA)
 	, m_LayerCheck(0)
@@ -46,18 +47,14 @@ void CCamera::FinalTick()
 	// 회전
 
 
-
-
-
-
-
-
-	// 투영(Projection) 행렬 계산
+	// 투영(Projection) 행렬 계산  near: 카메라 렌즈길이 far
+	m_matProj = XMMatrixOrthographicLH(m_Width, m_Width / m_AspectRatio, 1.f, m_Far);
 }
 
 void CCamera::Render()
 {
 	g_Trans.matView = m_matView;
+	g_Trans.matProj = m_matProj;
 
 	// 카메라가 보는 장면을 화면에 렌더링
 	Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();

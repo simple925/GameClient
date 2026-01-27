@@ -10,14 +10,14 @@ ALevel::ALevel()
 ALevel::~ALevel() {}
 void ALevel::Begin()
 {
-	for (int i = 0; i < 30; ++i) {
+	for (int i = 0; i < 100; ++i) {
 		Ptr<GameObject> pBullet = new GameObject;
 		pBullet->SetName(L"¹Ì»çÀÏ");
 		pBullet->AddComponent(new CTransform);
 		pBullet->AddComponent(new CMeshRender);
 		pBullet->AddComponent(new CPlayerProjectile);
 		//pBullet->Transform()->SetPos(vPos);
-		pBullet->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
+		pBullet->Transform()->SetScale(Vec3(80.f, 80.f, 1.f));
 		pBullet->Hide();
 		pBullet->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
 		pBullet->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());

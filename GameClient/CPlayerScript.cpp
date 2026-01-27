@@ -95,9 +95,9 @@ void CPlayerScript::Move()
 	Vec3 vDown = -vUp;
 
 	if (KEY_PRESSED(KEY::UP))
-		vPos += vUp * 0.5f * DT;
+		vPos += vUp * 400.5f * DT;
 	if (KEY_PRESSED(KEY::DOWN))
-		vPos += vDown * 0.5f * DT;
+		vPos += vDown * 400.5f * DT;
 
 	if (KEY_PRESSED(KEY::RIGHT))
 		vRotation.z -= XM_PI * DT;

@@ -12,8 +12,7 @@ void LevelMgr::Init()
 {
 	// Level Create
 	m_CurLevel = new ALevel;
-	//m_CurLevel->SetName(L"Current Level");
-	m_CurLevel->SetName(L"aaaaaaaaaaaaaaaaa");
+	m_CurLevel->SetName(L"Current Level");
 
 	Ptr<GameObject> pObject = nullptr;
 
@@ -37,6 +36,7 @@ void LevelMgr::Init()
 
 	Vec2 vResolution = Device::GetInst()->GetRenderResol();
 	pObject->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // Á¾È¾ºñ(AspectRatio)
+	pObject->Camera()->SetWidth(vResolution.x);
 
 	m_CurLevel->AddObject(0, pObject);
 
@@ -48,8 +48,8 @@ void LevelMgr::Init()
 	pObject->AddComponent(new CMeshRender);
 	pObject->AddComponent(new CPlayerScript);
 
-	pObject->Transform()->SetPos(Vec3(0.f, -0.8f, 0.f));
-	pObject->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f));
+	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 20.f));
+	pObject->Transform()->SetScale(Vec3(100.f,100.f, 1.f));
 
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
 	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
@@ -80,8 +80,8 @@ void LevelMgr::Init()
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	//pObject->AddComponent(new CPlayerScript);
-
-	pObject->Transform()->SetScale(Vec3(2.0f, 2.f, 1.f));
+	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 20.f));
+	pObject->Transform()->SetScale(Vec3(1600.0f, 900.f, 1.f));
 
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
 	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());

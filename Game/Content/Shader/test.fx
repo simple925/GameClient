@@ -42,7 +42,8 @@ cbuffer TRANSFORM : register(b0)
 	// row_major 행열 읽는 방식이 cpu gpu 달라서 맞춰줌
 	// matrix == float4x4 같은 자료형
 	row_major matrix g_matWorld;		// Local(Model) -> World Space
-	row_major matrix g_matView;			// World -> Camera Space
+	row_major matrix g_matView;			// World -> Camera(View) Space
+	row_major matrix g_matProj;			// Camera(View) Space ->
 }
 VS_OUT VS_Test(VS_IN _input)
 {
@@ -93,8 +94,10 @@ VS_OUT VS_Test2(VS_IN _input)
 	float4 vWorld = mul(float4(_input.vPos, 1.f /*동차좌표*/), g_matWorld);
 	// World -> View
 	float4 vView = mul(vWorld, g_matView);
+	// View -> Proj
+	float4 vProj = mul(vView, g_matProj);
 	// 동차좌표 0으로 설정하면 이동 정보를 무시함
-	output.vPosition = vView; // 월드행렬을 방향벡터에 곱할땐 이동정보를 무시해야되기 때문에 동차좌표가 0.f 들어가야함
+	output.vPosition = vProj; // 월드행렬을 방향벡터에 곱할땐 이동정보를 무시해야되기 때문에 동차좌표가 0.f 들어가야함
 	output.vUV = _input.vUV;
 	output.vColor = _input.vColor;
     

@@ -9,8 +9,9 @@ struct Vertex
 
 struct TransformMatrix
 {
-	Matrix matWorld;
-	Matrix matView;
+	Matrix matWorld;		// 물체가 채움
+	Matrix matView;			// 뷰행렬
+	Matrix matProj;			// NDC 좌표계로 투영(압축)시킴
 };
 // extern, 전방선언, 유일한 전역변수, 모든파일(cpp) 에서 접근 가능
 extern TransformMatrix g_Trans;

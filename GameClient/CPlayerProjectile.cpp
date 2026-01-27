@@ -15,13 +15,13 @@ void CPlayerProjectile::Tick()
 		  * DT;
 	Transform()->SetPos(vPos);
 	// 풀에 반납 (예: z축 기준)
-	if (vPos.y > 10.f || vPos.y < -10.f || vPos.x > 10.f || vPos.x < -10.f) {
+	if (vPos.y > 800.f || vPos.y < -800.f || vPos.x > 800.f || vPos.x < -800.f) {
 		GetOwner()->Hide(); // 위치는 발사 시점에 다시 세팅 
 	}
 }
 
 CPlayerProjectile::CPlayerProjectile()
-	: m_fSpeed(2.f)
+	: m_fSpeed(800.f)
 {
 }
 
