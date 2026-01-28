@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "KeyMgr.h"
+#include "Engine.h"
 
 UINT g_KeyIndex[(UINT)KEY::KEY_END] =
 {
@@ -84,5 +85,27 @@ void KeyMgr::Tick()
 			}
 			m_vecKeys[i].Pressed = false;
 		}
+	}
+
+	// 마우스 좌표 계산
+	POINT pt = {};
+	GetCursorPos(&pt); // window 기준 마우스 좌표
+
+	ScreenToClient(Engine::GetInst()->GetMainWinHandle(), &pt); // 윈도우 기준으로 마우스좌표 변경
+
+	m_MousePrevPos = m_MousePos;	// 이전 프레임 정보를 저장
+	m_MousePos = Vec2((float)pt.x, (float)pt.y);	// 현재 프레임 정보를 저장
+
+	// 마우스 진행 방향
+	m_MouseDir = m_MousePos - m_MousePrevPos;
+
+	// 휠 이벤트 처리
+	if (m_WheelChanged)
+	{
+		m_WheelChanged = false;
+	}
+	else
+	{
+		m_Wheel = 0;
 	}
 }

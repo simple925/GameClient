@@ -75,8 +75,8 @@ void CCamera::FinalTick()
 	Matrix matRot = XMMatrixIdentity();
 
 	matRot._11 = vR.x;  matRot._21 = vU.x;  matRot._31 = vF.x;
-	matRot._21 = vR.y; 	matRot._22 = vU.y; 	matRot._32 = vF.y;
-	matRot._31 = vR.z; 	matRot._23 = vU.z; 	matRot._33 = vF.z;
+	matRot._12 = vR.y; 	matRot._22 = vU.y; 	matRot._32 = vF.y;
+	matRot._13 = vR.z; 	matRot._23 = vU.z; 	matRot._33 = vF.z;
 
 	// 카메라가 원점인 공감으로 이동, 카메라가 바라본든 방향을 z 축으로 회전하는 회전을 적용
 	// 이동 -> 회전

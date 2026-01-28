@@ -93,13 +93,17 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	m_TransformCB->Create(CB_TYPE::TRANSFORM, sizeof(TransformMatrix));
 
 	// 기본 샘플러 생성
-	if (FAILED(CreateSampler())) {
+	if (FAILED(CreateSampler()))
 		return E_FAIL;
-	}
-	// 앞으로 사용할 BlendState
-	if (FAILED(CreateBlendState())) {
+
+	// 앞으로 사용할 RasterizerState 제작
+	if (FAILED(CreateRasterizerState()))
 		return E_FAIL;
-	}
+
+	// 앞으로 사용할 BlendState 제작
+	if (FAILED(CreateBlendState()))
+		return E_FAIL;
+
 	return S_OK;
 }
 
@@ -286,6 +290,32 @@ int Device::CreateSampler()
 	CONTEXT->DSSetSamplers(1, 1, m_arrSam[1].GetAddressOf());
 	CONTEXT->GSSetSamplers(1, 1, m_arrSam[1].GetAddressOf());
 	CONTEXT->PSSetSamplers(1, 1, m_arrSam[1].GetAddressOf());
+	return S_OK;
+}
+
+int Device::CreateRasterizerState()
+{
+	// CULL_BACK
+	m_RSState[(UINT)RS_TYPE::CULL_BACK] = nullptr;
+
+	// CULL_FRONT
+	D3D11_RASTERIZER_DESC Desc = {};
+	Desc.CullMode = D3D11_CULL_FRONT;
+	Desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE -> CreateRasterizerState(&Desc, m_RSState[(UINT)RS_TYPE::CULL_FRONT].GetAddressOf());
+
+	// CULL_NONE
+	Desc = {};
+	Desc.CullMode = D3D11_CULL_NONE;
+	Desc.FillMode = D3D11_FILL_SOLID;
+	DEVICE -> CreateRasterizerState(&Desc, m_RSState[(UINT)RS_TYPE::CULL_NONE].GetAddressOf());
+
+	// WIRE_FRAME
+	Desc = {};
+	Desc.CullMode = D3D11_CULL_NONE;
+	Desc.FillMode = D3D11_FILL_WIREFRAME;
+	DEVICE -> CreateRasterizerState(&Desc, m_RSState[(UINT)RS_TYPE::WIRE_FRAME].GetAddressOf());
+
 	return S_OK;
 }
 

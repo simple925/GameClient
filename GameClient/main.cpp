@@ -101,13 +101,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	return (int)msg.wParam;
 }
 
-
+#include "KeyMgr.h"
 // 프로시저 함수
 // 윈도우에 발생한 사건(이벤트, 메세지)를 처리해주는 함수
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
+	case WM_MOUSEWHEEL:
+		// wParam -120 +120 휠 틱당
+		KeyMgr::GetInst()->SetWheel(GET_WHEEL_DELTA_WPARAM(wParam));
+
+		break;
 	case WM_LBUTTONDOWN:
 		//PostQuitMessage(0); // 윈도우 종료함수
 							// 메세지큐에 WM_QUIT 이 들어감

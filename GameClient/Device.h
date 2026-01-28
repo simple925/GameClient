@@ -19,29 +19,32 @@ private:
 	ComPtr<ID3D11DepthStencilView>	m_DSV;
 
 	ComPtr<ID3D11SamplerState>		m_arrSam[2];
-	ComPtr<ID3D11BlendState>			m_BSState[(UINT)BS_TYPE::END];
 
-	//ComPtr<ID3D11RasterizerState>		m_RSState;
+	ComPtr<ID3D11BlendState>		m_BSState[(UINT)BS_TYPE::END];
+	ComPtr<ID3D11RasterizerState>	m_RSState[(UINT)RS_TYPE::END];
 	//ComPtr<ID3D11DepthStencilState>	m_DSState;
 
-	HWND							m_hWnd;			// 출력윈도우
-	Vec2							m_RenderResol;
+	HWND							m_hWnd;		   // 출력 윈도우
+	Vec2							m_RenderResol; // 렌더타겟 해상도
 	Ptr<ConstBuffer>				m_TransformCB;
 public:
 	int Init(HWND _hwnd, Vec2 _Resolution);
+	void ClearTarget();
 	void Present() { m_SwapChain->Present(0, 0); }
+
+	Vec2 GetRenderResol() { return m_RenderResol; }
 	ComPtr<ID3D11Device> GetDevice() { return m_Device; };
 	ComPtr<ID3D11DeviceContext> GetContext() { return m_Context; };
 	Ptr<ConstBuffer> GetTransformBuffer() { return m_TransformCB; }
-	HWND GetHwnd() { return m_hWnd; }
-	Vec2 GetRenderResol() { return m_RenderResol; }
-	void ClearTarget();
+
+	ComPtr<ID3D11RasterizerState> GetRSState(RS_TYPE _Type) { return m_RSState[(UINT)_Type]; }
 	ComPtr<ID3D11BlendState> GetBSState(BS_TYPE _Type) { return m_BSState[(UINT)_Type]; }
 private:
 	int CreateSwapChain();
 	int CreateBuffer();
-	int CreateBlendState();
 	int CreateSampler();
+	int CreateRasterizerState();
+	int CreateBlendState();
 };
 
 #define DEVICE Device::GetInst()->GetDevice().Get()

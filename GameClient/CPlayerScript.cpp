@@ -16,7 +16,7 @@ bool CPlayerScript::IsMouseOver()
 	// 1. 마우스 NDC 좌표 가져오기
 	POINT pt;
 	GetCursorPos(&pt);
-	ScreenToClient(Device::GetInst()->GetHwnd(), &pt);
+	//ScreenToClient(, &pt);
 
 	float width = (float)Device::GetInst()->GetRenderResol().x;
 	float height = (float)Device::GetInst()->GetRenderResol().y;

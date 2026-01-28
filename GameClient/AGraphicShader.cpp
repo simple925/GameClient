@@ -7,6 +7,7 @@
 AGraphicShader::AGraphicShader()
 	: Asset(ASSET_TYPE::GRAPHICSHADER)
 	, m_Topology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	, m_RSType(RS_TYPE::CULL_BACK)
 	, m_BSType(BS_TYPE::DEFAULT)
 {
 }
@@ -104,22 +105,24 @@ void AGraphicShader::Binding()
 	CONTEXT->IASetInputLayout(m_Layout.Get());
 
 	// 랜더링에 필요한 리소스 입력
-	// 2. Vertex Shader(함수) - 정점 당 연산 수행 정점쉐이더
+	// Vertex Shader(함수) - 정점 당 연산 수행 정점쉐이더
 	// HLSL(High Level 
 	CONTEXT->VSSetShader(m_VS.Get(), nullptr, 0);
 
-	// 3. Rasterizer State - 정점 쉐이더에서 넘겨준 픽셀쉐이더를 호출할 함수를 연결
+	// Rasterizer State - 정점 쉐이더에서 넘겨준 픽셀쉐이더를 호출할 함수를 연결
 	// 정점쉬이더에서 반환한 정점의 취치를 NDC 좌표
 	// 기준으로 들어오는 픽셀을 계산해서 픽셀 쉐이더로 연계
 	// nullptr 입력: 기본 설정 옵션으로 설정
 	// CULL_MODE : CULL_BACK
 	// FILL_MODE : SOLID
-	CONTEXT->RSSetState(nullptr);
+	// Rasterizer State	
+	CONTEXT->RSSetState(Device::GetInst()->GetRSState(m_RSType).Get());
 
-	// 4. Pixel Shader
+	// Pixel Shader
 	// 레스터라이저를 거쳐서, 호출될 픽셀마다 실행되는 함수
 	// 픽셀 쉐이더에서 리턴한 값이, 렌더타겟 내에서의 해당 픽셀 위체에 색상이 출력된다.
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
+
 	// OM (Output Merge State)
 	// 픽셀 쉐이더에서 리턴한 값울, OM 단계에 연결되어있는 RenderTarget, DepthStencilTarget에 기록한다.
 	// DepthStencilState - 깊이 비교	

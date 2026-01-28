@@ -142,12 +142,14 @@ void AssetMgr::Init()
 	pShader = new AGraphicShader;
 	pShader->CreateVertexShader(L"Shader\\test.fx", "VS_Test");
 	pShader->CreatePixelShader(L"Shader\\test.fx", "PS_Test");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	//m_mapAsset.insert(make_pair(L"shader1", pShader.Get()));
 	AddAsset(L"shader1", pShader.Get());
 
 	pShader = new AGraphicShader;
 	pShader->CreateVertexShader(L"Shader\\test.fx", "VS_Test");
 	pShader->CreatePixelShader(L"Shader\\test.fx", "PS_Test2");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	//m_mapAsset.insert(make_pair(L"shader2", pShader.Get()));
 	AddAsset(L"shader2", pShader.Get());
 

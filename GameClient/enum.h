@@ -5,6 +5,15 @@ enum class CB_TYPE
 	END,
 };
 
+enum class RS_TYPE
+{
+	CULL_BACK,	// 뒷면(정점 반시계방향으로..)
+	CULL_FRONT,	// 앞면
+	CULL_NONE,	// Culling X
+	WIRE_FRAME,	// 정점과 정점 사이를 잇는 부분을 제외
+	END,
+};
+
 enum class BS_TYPE
 {
 	DEFAULT,		// (SrcRGB * 1) + (DestRGB * 0)

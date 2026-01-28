@@ -58,8 +58,32 @@ class KeyMgr
 	SINGLE(KeyMgr)
 private:
 	vector<KeyInfo>		m_vecKeys;
+
+	Vec2				m_MousePos;		// 이번 프레임 마우스 좌표
+	Vec2				m_MousePrevPos;		// 이전 프레임 마우스 좌표
+	Vec2				m_MouseDir;
+
+	bool				m_WheelChanged;
+	int					m_Wheel;	// 1, 0, -1
+
 public:
 	KEY_STATE GetKeyState(KEY _Key) { return m_vecKeys[(UINT)_Key].State; }
+	GET(Vec2, MousePos)
+	GET(Vec2, MousePrevPos)
+	GET(Vec2, MouseDir)
+	/*
+		마우스 이벤트 관리 윈도우 프로그램과
+	*/
+	GET(int, Wheel)
+	void SetWheel(int _Wheel) {
+		m_WheelChanged = true;
+		/*
+		* 1 인지 -1 인지 
+		*/
+		// abs 앱솔루트 절대값으로 변환
+		m_Wheel = _Wheel / abs(_Wheel);
+	}
+
 public:
 	void Init();
 	void Tick();
