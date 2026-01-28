@@ -52,9 +52,8 @@ void LevelMgr::Init()
 	// 2. 크기 조정: 2D 사각형(100, 100)과 비슷하게 보이려면 Z축도 값을 줍니다.
 	pObject->Transform()->SetScale(Vec3(100.f, 100.f, 80.f));
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"CubeMesh").Get());
-	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
-	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"m").Get());
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"CubeMesh").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 	m_CurLevel->AddObject(0, pObject);
 
 	// 오브젝트 생성
@@ -68,10 +67,8 @@ void LevelMgr::Init()
 	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 300.f));
 	pObject->Transform()->SetScale(Vec3(100.f,100.f, 100.f));
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
-	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader1").Get());
-	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"p").Get());
-	//pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 	m_CurLevel->AddObject(0, pObject);
 
 	pObject = new GameObject;
@@ -82,9 +79,8 @@ void LevelMgr::Init()
 	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 700.f));
 	pObject->Transform()->SetScale(Vec3(1600.0f, 900.f, 100.f));
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
-	pObject->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader1").Get());
-	pObject->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"back_1").Get());
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
 	m_CurLevel->AddObject(2, pObject);
 	/*
@@ -100,8 +96,8 @@ void LevelMgr::Init()
 	g_Object3->Transform()->SetPos(Vec3(-0.5f, 0.f, 0.f));
 	g_Object3->Transform()->SetScale(Vec3(0.2f, 0.2f, 1.f)); // 반지름 역할
 
-	g_Object3->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->FindAsset<AMesh>(L"c").Get());
-	g_Object3->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader2").Get());
+	g_Object3->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->Find<AMesh>(L"c").Get());
+	g_Object3->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->Find<AGraphicShader>(L"shader2").Get());
 	m_CurLevel->AddObject(0, pObject);
 	*/
 	//m_CurLevel->Init();

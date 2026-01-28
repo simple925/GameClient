@@ -29,6 +29,7 @@ enum class ASSET_TYPE
 	SOUND,
 	GRAPHICSHADER,
 	LEVEL,
+	MATERIAL,
 
 	END,
 };
@@ -56,4 +57,16 @@ enum class DIR
 	FRONT,
 
 	END,
+};
+
+enum TEX_PARAM
+{
+	TEX_0,
+	TEX_1,
+	TEX_2,
+	TEX_3,
+	TEX_4,
+	TEX_5,
+
+	TEX_END,
 };

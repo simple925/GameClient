@@ -21,7 +21,7 @@ void CPlayerProjectile::Tick()
 }
 
 CPlayerProjectile::CPlayerProjectile()
-	: m_fSpeed(800.f)
+	: m_fSpeed(500.f)
 {
 }
 

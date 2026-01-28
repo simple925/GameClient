@@ -119,6 +119,9 @@
     <ClInclude Include="RenderMgr.h">
       <Filter>GameEngine\03. Manager\06. RenderMgr</Filter>
     </ClInclude>
+    <ClInclude Include="AMaterial.h">
+      <Filter>GameEngine\04. Asset\05. Materlal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -212,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="extern.cpp">
       <Filter>Header</Filter>
+    </ClCompile>
+    <ClCompile Include="AMaterial.cpp">
+      <Filter>GameEngine\04. Asset\05. Materlal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,9 @@
     </Filter>
     <Filter Include="GameEngine\03. Manager\06. RenderMgr">
       <UniqueIdentifier>{b0c9cee2-dde9-456a-9f28-256caf16167c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\04. Asset\05. Materlal">
+      <UniqueIdentifier>{489e6735-3515-4cfc-83eb-7eddac936fe9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

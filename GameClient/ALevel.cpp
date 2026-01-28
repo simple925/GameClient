@@ -19,10 +19,8 @@ void ALevel::Begin()
 		//pBullet->Transform()->SetPos(vPos);
 		pBullet->Transform()->SetScale(Vec3(80.f, 80.f, 1.f));
 		pBullet->Hide();
-		pBullet->MeshRender()->SetMesh(AssetMgr::GetInst()->FindAsset<AMesh>(L"q").Get());
-		pBullet->MeshRender()->SetShader(AssetMgr::GetInst()->FindAsset<AGraphicShader>(L"shader3").Get());
-		pBullet->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"m").Get());
-		//pBullet->MeshRender()->SetTexture(AssetMgr::GetInst()->FindAsset<ATexture>(L"PlayerImage").Get());
+		pBullet->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+		pBullet->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 		this->AddObject(1, pBullet);
 	}
 	for (UINT i = 0; i < MAX_LAYER; ++i) {

@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "AssetMgr.h"
-#include "PathMgr.h"
 
 AssetMgr::AssetMgr()
 {
@@ -11,7 +10,7 @@ AssetMgr::~AssetMgr()
 
 }
 
-Ptr<Asset> AssetMgr::FindAsset(ASSET_TYPE _Type, const wstring& _Key)
+Ptr<Asset> AssetMgr::Find(ASSET_TYPE _Type, const wstring& _Key)
 {
 	map<wstring, Ptr<Asset>>::iterator iter = m_mapAsset[(UINT)_Type].find(_Key);
 	if (iter == m_mapAsset->end()) {
@@ -145,13 +144,14 @@ void AssetMgr::Init()
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	//m_mapAsset.insert(make_pair(L"shader1", pShader.Get()));
 	AddAsset(L"shader1", pShader.Get());
-
+	/*
 	pShader = new AGraphicShader;
 	pShader->CreateVertexShader(L"Shader\\test.fx", "VS_Test");
 	pShader->CreatePixelShader(L"Shader\\test.fx", "PS_Test2");
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	//m_mapAsset.insert(make_pair(L"shader2", pShader.Get()));
 	AddAsset(L"shader2", pShader.Get());
+	*/
 
 	Ptr<ATexture> pTex = nullptr;
 	pTex = new ATexture;
@@ -200,4 +200,13 @@ void AssetMgr::Init()
 	FilePath += L"Texture\\1945\\m.bmp";
 	pTex->Load(FilePath);
 	AddAsset(L"m", pTex.Get());
+
+	// 재질 만들기
+	Ptr<AMaterial> pMtrl = nullptr;
+
+	pMtrl = new AMaterial;
+	pMtrl->SetName(L"Std2DMtrl");
+	pMtrl->SetShader(pShader);
+	pMtrl->SetTexture(TEX_0, Find<ATexture>(L"Fighter"));
+	AddAsset(pMtrl->GetName(), pMtrl.Get());
 }
