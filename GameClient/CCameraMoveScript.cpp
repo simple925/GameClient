@@ -15,28 +15,14 @@ void CCamraMoveScript::Tick()
 {
 	Vec3 vPos = Transform()->GetPos();
 	Vec3 vRot = Transform()->GetRotation();
+	
+
 	Vec3 vFront = Transform()->GetDir(DIR::FRONT);
 	Vec3 vRight = Transform()->GetDir(DIR::RIGHT);
-	Vec3 vUp = Transform()->GetDir(DIR::UP);
-	Vec2 vMouseDir = KeyMgr::GetInst()->GetMouseDir();
+
+	
 
 	float moveSpeed = 800.f;
-	float rotSpeed = 10.f;
-	/*
-	if (KEY_PRESSED(KEY::W))
-		vPos.y += DT * 1000.f;
-	if (KEY_PRESSED(KEY::S))
-		vPos.y -= DT * 1000.f;
-	if (KEY_PRESSED(KEY::A))
-		vPos.x -= DT * 1000.f;
-	if (KEY_PRESSED(KEY::D))
-		vPos.x += DT * 1000.f;
-	if (KEY_PRESSED(KEY::Q))
-		vRot.y -= XM_PI * DT;
-	if (KEY_PRESSED(KEY::E))
-		vRot.y += XM_PI * DT;
-	*/
-
 	if (1 == KeyMgr::GetInst()->GetWheel())
 		vPos += vFront * 10.f;
 	if (-1 == KeyMgr::GetInst()->GetWheel())
@@ -51,21 +37,11 @@ void CCamraMoveScript::Tick()
 	if (KEY_PRESSED(KEY::D))
 		vPos += vRight * moveSpeed * DT;
 
-	if (KEY_PRESSED(KEY::Z))
-		vPos.z -= DT * 600.f;
-	if (KEY_PRESSED(KEY::X))
-		vPos.z += DT * 600.f;
 
-	if (KEY_PRESSED(KEY::R))
-		vRot.x -= XM_PI * DT;
-	if (KEY_PRESSED(KEY::F))
-		vRot.x += XM_PI * DT;
-	if (KEY_PRESSED(KEY::C))
-		vRot.y -= rotSpeed * DT;
-	if (KEY_PRESSED(KEY::V))
-		vRot.y += rotSpeed * DT;
+	
 	if (KEY_PRESSED(KEY::M_RBUTTON))
 	{
+		Vec2 vMouseDir = KeyMgr::GetInst()->GetMouseDir();
 		vRot.y += vMouseDir.x * DT * XM_2PI * 3.f;
 		vRot.x += vMouseDir.y * DT * XM_2PI * 3.f;
 	}
@@ -73,7 +49,6 @@ void CCamraMoveScript::Tick()
 	{
 
 	}
-	
 	
 	Transform()->SetPos(vPos);
 	Transform()->SetRotation(vRot);

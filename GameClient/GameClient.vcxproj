@@ -117,7 +117,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
@@ -126,6 +126,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)
+call CopyShader.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -156,6 +160,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="components.h" />
     <ClInclude Include="ConstBuffer.h" />
+    <ClInclude Include="CPlanetControllerScript.h" />
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CTransform.h" />
@@ -189,6 +194,7 @@
     <ClCompile Include="AGraphicShader.cpp" />
     <ClCompile Include="ALevel.cpp" />
     <ClCompile Include="AMesh.cpp" />
+    <ClCompile Include="AsserMgr_Init.cpp" />
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetMgr.cpp" />
     <ClCompile Include="ATexture.cpp" />
@@ -197,6 +203,7 @@
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstBuffer.cpp" />
+    <ClCompile Include="CPlanetControllerScript.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CTransform.cpp" />
@@ -230,11 +237,13 @@
     <None Include="SimpleMath.inl" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Game\Content\Shader\test.fx">
+    <FxCompile Include="std2d.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="value.fx">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

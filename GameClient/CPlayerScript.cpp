@@ -52,29 +52,7 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Move()
 {
-	/*
-	// 1. 클릭 시 선택 여부 판단 (Self-Picking)
-	if (KEY_TAP(KEY::LBUTTON))
-	{
-		bool bMouseOver = IsMouseOver(); // 마우스가 내 영역 안에 있는지 확인
-
-		if (KEY_PRESSED(KEY::CTRL))
-		{
-			// [컨트롤 클릭] : 나를 클릭했다면 상태를 반전(Toggle) 시킴
-			// 마우스가 없는 곳을 클릭했다면 기존 상태를 그대로 유지함
-			if (bMouseOver)
-			{
-				m_bSelected = !m_bSelected;
-			}
-		}
-		else
-		{
-			// [일반 클릭] : 컨트롤을 안 눌렀을 때
-			// 마우스가 내 위에 있으면 선택, 없으면 무조건 해제
-			m_bSelected = bMouseOver;
-		}
-	}
-	*/
+	
 	// down casting
 	//Ptr<CTransform> pTrans;
 	//if (COMPONENT_TYPE::TRANSFORM == m_Com[(UINT)COMPONENT_TYPE::TRANSFORM]->GetType()) {
@@ -134,15 +112,12 @@ void CPlayerScript::Tick()
 	Move();
 
 	Shoot();
-
 	if (KEY_PRESSED(KEY::X))
 	{
-		int i = 1;
-		MeshRender()->GetMaterial()->SetScalar(INT_0, &i);
+		MeshRender()->GetMaterial()->SetScalar(INT_0, 1);
 	}
 	else
 	{
-		int i = 0;
-		MeshRender()->GetMaterial()->SetScalar(INT_0, &i);
+		MeshRender()->GetMaterial()->SetScalar(INT_0, 0);
 	}
 }

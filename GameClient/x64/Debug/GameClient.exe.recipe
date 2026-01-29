@@ -7,7 +7,10 @@
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\141245124\Documents\cpp\GameClient\Game\Bin\test.cso</FullPath>
+      <FullPath>C:\Users\141245124\Documents\cpp\GameClient\Game\Bin\std2d.cso</FullPath>
+    </ContentFile>
+    <ContentFile>
+      <FullPath>C:\Users\141245124\Documents\cpp\GameClient\Game\Bin\value.cso</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

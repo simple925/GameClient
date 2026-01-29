@@ -7,3 +7,4 @@
 #include "CPlayerScript.h"
 #include "CPlayerProjectile.h"
 #include "CCameraMoveScript.h"
+#include "CPlanetControllerScript.h"

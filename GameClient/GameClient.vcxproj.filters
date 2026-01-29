@@ -122,6 +122,9 @@
     <ClInclude Include="AMaterial.h">
       <Filter>GameEngine\04. Asset\05. Materlal</Filter>
     </ClInclude>
+    <ClInclude Include="CPlanetControllerScript.h">
+      <Filter>GameEngine\06. Component\Script\PlanetController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -217,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="AMaterial.cpp">
       <Filter>GameEngine\04. Asset\05. Materlal</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlanetControllerScript.cpp">
+      <Filter>GameEngine\06. Component\Script\PlanetController</Filter>
+    </ClCompile>
+    <ClCompile Include="AsserMgr_Init.cpp">
+      <Filter>GameEngine\03. Manager\04. AssetMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,15 @@
     <Filter Include="GameEngine\04. Asset\05. Materlal">
       <UniqueIdentifier>{489e6735-3515-4cfc-83eb-7eddac936fe9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\06. Component\Script\PlanetController">
+      <UniqueIdentifier>{97be36e4-204d-409e-a0df-43064069f755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HSL\1. Header">
+      <UniqueIdentifier>{dbd52c81-88cd-4f4e-8c08-73419dd6499c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HSL\2. 2D">
+      <UniqueIdentifier>{cdbc0d95-5888-430d-9dd2-72792a33584d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
@@ -328,8 +346,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Game\Content\Shader\test.fx">
-      <Filter>HSL</Filter>
+    <FxCompile Include="value.fx">
+      <Filter>HSL\1. Header</Filter>
+    </FxCompile>
+    <FxCompile Include="std2d.fx">
+      <Filter>HSL\2. 2D</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

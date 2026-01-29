@@ -26,8 +26,6 @@ void CCamera::Begin()
 }
 void CCamera::FinalTick()
 {
-	g_Trans.matView = m_matView;
-
 	// 월드좌표 -> 뷰 행렬 좌표를 카메라가 계산해서 줌
 	// 뷰(View) 행렬 계산
 
@@ -74,9 +72,9 @@ void CCamera::FinalTick()
 	Vec3 vF = Transform()->GetDir(DIR::FRONT);
 	Matrix matRot = XMMatrixIdentity();
 
-	matRot._11 = vR.x;  matRot._21 = vU.x;  matRot._31 = vF.x;
-	matRot._12 = vR.y; 	matRot._22 = vU.y; 	matRot._32 = vF.y;
-	matRot._13 = vR.z; 	matRot._23 = vU.z; 	matRot._33 = vF.z;
+	matRot._11 = vR.x;  matRot._11 = vU.x;  matRot._13 = vF.x;
+	matRot._21 = vR.y; 	matRot._22 = vU.y; 	matRot._23 = vF.y;
+	matRot._31 = vR.z; 	matRot._32 = vU.z; 	matRot._33 = vF.z;
 
 	// 카메라가 원점인 공감으로 이동, 카메라가 바라본든 방향을 z 축으로 회전하는 회전을 적용
 	// 이동 -> 회전
@@ -107,15 +105,11 @@ void CCamera::Render()
 
 	for (UINT i = 0; i < MAX_LAYER; ++i)
 	{
-		//if (m_vecObject[i]->IsHidden()) {
-			//continue;
-		//}
 		if (false == (m_LayerCheck & (1 << i)))
 		{
 			continue;
 		}
 		Layer* pLayer = pCurLevel->GetLayer(i);
-		//Layer* pLayer = LevelMgr::GetInst()->GetLevel()->GetLayer(i);
 		pLayer->Render();
 	}
 }

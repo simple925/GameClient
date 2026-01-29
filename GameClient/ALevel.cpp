@@ -10,6 +10,7 @@ ALevel::ALevel()
 ALevel::~ALevel() {}
 void ALevel::Begin()
 {
+	/*
 	for (int i = 0; i < 100; ++i) {
 		Ptr<GameObject> pBullet = new GameObject;
 		pBullet->SetName(L"¹Ì»çÀÏ");
@@ -23,6 +24,7 @@ void ALevel::Begin()
 		pBullet->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 		this->AddObject(1, pBullet);
 	}
+	*/
 	for (UINT i = 0; i < MAX_LAYER; ++i) {
 		m_arrLayer[i].Begin();
 	}

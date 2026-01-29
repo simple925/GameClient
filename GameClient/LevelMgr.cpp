@@ -39,13 +39,13 @@ void LevelMgr::Init()
 	pObject->Camera()->SetWidth(vResolution.x);
 
 	m_CurLevel->AddObject(0, pObject);
-
+	/*
 	pObject = new GameObject;
 	//pObject->SetName(L"Monster");
 	pObject->SetName(L"몬스터");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
-	pObject->AddComponent(new CPlayerScript);
+	//pObject->AddComponent(new CPlayerScript);
 	// 1. 위치 조정: 카메라가 바라보는 방향(Z+)으로 충분히 밀어줍니다.
 	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 500.f));
 
@@ -55,36 +55,70 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"CubeMesh").Get());
 	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 	m_CurLevel->AddObject(0, pObject);
+	*/
 
 	// 오브젝트 생성
 	pObject = new GameObject;
 	//pObject->SetName(L"Player");
-	pObject->SetName(L"플레이어");
+	pObject->SetName(L"sola");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
-	//pObject->AddComponent(new CPlayerScript);
+	pObject->AddComponent(new CPlayerScript);
 
 	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 300.f));
-	pObject->Transform()->SetScale(Vec3(100.f,100.f, 100.f));
+	pObject->Transform()->SetScale(Vec3(10.f,500.f,500.f));
 
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
-	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"m_sola"));
 	m_CurLevel->AddObject(0, pObject);
+
+	pObject = new GameObject;
+	pObject->SetName(L"mercury");
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CPlanetControllerScript);
+	pObject->Transform()->SetPos(Vec3(100.f, 0.f, 300.f));
+	pObject->Transform()->SetScale(Vec3(100.f,100.f,100.f));
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"m_mercury"));
+	m_CurLevel->AddObject(0, pObject);
+
+	pObject = new GameObject;
+	pObject->SetName(L"earth");
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CPlanetControllerScript);
+	pObject->Transform()->SetPos(Vec3(200.f, 0.f, 300.f));
+	pObject->Transform()->SetScale(Vec3(100.f,100.f, 100.f));
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"m_earth"));
+	m_CurLevel->AddObject(0, pObject);
+
+	pObject = new GameObject;
+	pObject->SetName(L"venus");
+	pObject->AddComponent(new CTransform);
+	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CPlanetControllerScript);
+	pObject->Transform()->SetPos(Vec3(300.f, 0.f, 300.f));
+	pObject->Transform()->SetScale(Vec3(100.f,100.f,100.f));
+	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"m_venus"));
+	m_CurLevel->AddObject(0, pObject);
+
+
+
 
 	pObject = new GameObject;
 	pObject->SetName(L"배경");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
-	//pObject->AddComponent(new CPlayerScript);
-	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 700.f));
+	pObject->Transform()->SetPos(Vec3(0.f, 0.f, 1000.f));
 	pObject->Transform()->SetScale(Vec3(1600.0f, 900.f, 100.f));
 
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
-	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+	pObject->MeshRender()->SetMaterial(AssetMgr::GetInst()->Find<AMaterial>(L"m_univers"));
 
 	m_CurLevel->AddObject(2, pObject);
-	/*
-	*/
 	
 	/*
 	// 3. GameObject 생성 (3개)
