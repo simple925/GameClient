@@ -8,6 +8,6 @@
 
 #include "CScript.h"
 #include "CPlayerScript.h"
-#include "CPlayerProjectile.h"
+#include "CMissileScript.h"
 #include "CCameraMoveScript.h"
 #include "CPlanetControllerScript.h"

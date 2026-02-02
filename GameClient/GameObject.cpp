@@ -7,12 +7,10 @@
 #include "CTransform.h"
 
 
-
-
 GameObject::GameObject()
 	: m_Com{}
 	, m_Parent(nullptr)
-	, m_bIsHidden(false)
+	, m_Dead(false)
 {
 }
 
@@ -97,3 +95,5 @@ void GameObject::Render()
 		m_vecChild[i]->Render();
 	}
 }
+
+

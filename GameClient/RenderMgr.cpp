@@ -40,10 +40,10 @@ void RenderMgr::Render_Debug()
 		switch ((*iter).Shape)
 		{
 		case DBG_SHAPE::RECT:
-			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"q"));
+			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"q_debug"));
 			break;
 		case DBG_SHAPE::CIRCLE:
-			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"c"));
+			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"CircleMesh_LineStrip"));
 			break;
 		case DBG_SHAPE::CUBE:
 			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"cube"));
@@ -57,6 +57,9 @@ void RenderMgr::Render_Debug()
 		m_DbgObj->Transform()->SetRelativeScale((*iter).Scale);
 		m_DbgObj->Transform()->SetRelativeRot((*iter).Rotation);
 		m_DbgObj->FinalTick();
+
+		// Material 설정
+		m_DbgObj->MeshRender()->GetMtrl()->SetScalar(VEC4_0, (*iter).Color);
 
 		// Render 요청
 		m_DbgObj->Render();

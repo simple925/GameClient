@@ -15,7 +15,9 @@ private:
     // 종속관계에서는 스마트 포인터를 쓰면 삭제 되지 않는다!!!!! 영원히
     GameObject*                 m_Parent; // 이건 부모 객체를 가리키기 때문에 스마트 포인터 인씀
     vector<Ptr<GameObject>>     m_vecChild;
-    bool                        m_bIsHidden;
+
+    bool                        m_Dead;
+
 public:
     // 레벨이 처음 시작될때 호출되는 함수
     void Begin();
@@ -29,9 +31,6 @@ public:
     // 자신을 타겟에 그림
     void Render();
 
-    bool IsHidden() const { return m_bIsHidden; }
-    void Hide() { m_bIsHidden = true; }
-    void Show() { m_bIsHidden = false; }
 public:
     void AddComponent(Ptr<Component> _Com);
     Ptr<Component> GetComponent(COMPONENT_TYPE _Type) { return m_Com[(UINT)_Type]; }
@@ -40,6 +39,8 @@ public:
 
     Ptr<GameObject> GetParent() { return m_Parent; }
     Ptr<GameObject> GetChild(int _idx) { return m_vecChild[_idx]; }
+
+    bool IsDead() { return m_Dead; }
 public:
     GET_COMPONENT(Transform, TRANSFORM);
     GET_COMPONENT(MeshRender, MESHRENDER);
@@ -50,5 +51,8 @@ public:
 public:
     GameObject();
     virtual ~GameObject();
+
+    friend class TaskMgr;
 };
+bool IsValid(Ptr<GameObject>& _Object);
 

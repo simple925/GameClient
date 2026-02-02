@@ -80,41 +80,15 @@ VS_OUT VS_Std2D(VS_IN _input)
     
 	return output;
 }
-VS_OUT VS_Std2D2(VS_IN _input)
-{
-	
-	VS_OUT output = (VS_OUT) 0.f;
-	
-	// Local -> World
-	float4 vWorld = mul(float4(0.f, 0.f, 0.f, 1.f /*동차좌표*/), g_matWorld);
-	// World -> View
-	float4 vView = mul(vWorld, g_matView);
-	vView.xyz += _input.vPos * 50.f;
-	// View -> Proj
-	float4 vProj = mul(vView, g_matProj);
-	
-	output.vPosition = vProj; // 월드행렬을 방향벡터에 곱할땐 이동정보를 무시해야되기 때문에 동차좌표가 0.f 들어가야함
-	output.vUV = _input.vUV;
-	output.vColor = _input.vColor;
-    
-	return output;
-}
-
-// 정점에서 반환한 값이 보간(Interpolation) 되어 픽셀이 쉐이더의 입력으로 돌아온다.
-float4 PS_Std2D2(VS_OUT _input) : SV_Target
-{
-	//return float4(1.f, 0.f, 0.f, 1.f);
-	return _input.vColor;
-}
 
 
 // 입력된 텍스쳐를 사용해서 픽셀쉐이더의 출력 색상으로 지정한다.
 // 텍스쳐 코디네이션, UV 좌표계
 float4 PS_Std2D(VS_OUT _input) : SV_Target
 {
-	
+	// 입력 UV 는 정점에사 반환한 값을 보간받아서 픽셀쉐이더에 입력됨    
 	float4 vColor = g_tex_0.Sample(g_sam_1, _input.vUV);
-	if (vColor.a == 0.f ||vColor.r > 0.70f && vColor.b > 0.70f && vColor.g < 0.3f) // 마젠타 색인 경우
+	if (vColor.a == 0.f || (vColor.r > 0.99f && vColor.b > 0.99f && vColor.g == 0.f))
 	{
 		discard; // 픽셀쉐이더는 키워드를 만나면 픽셀쉐이더가 종료됨
 	}
@@ -128,6 +102,6 @@ float4 PS_Std2D(VS_OUT _input) : SV_Target
 	
 	// texture 추출 도구 필요
 	// 입력 UV는 정점에서 반환한 값을 보간 받아서 픽셀쉐이더에 입력됨
-		return vColor;
+	return vColor;
 }
 #endif

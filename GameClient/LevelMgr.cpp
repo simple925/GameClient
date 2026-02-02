@@ -57,13 +57,29 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(0, pObject);
 	*/
 
+
+	Ptr<GameObject> pMonster = new GameObject;
+	pMonster->SetName(L"Monster");
+
+	pMonster->AddComponent(new CTransform);
+	pMonster->AddComponent(new CBillboardRender);
+
+	pMonster->Transform()->SetRelativePos(Vec3(300.f, 0.f, 100.f));
+	pMonster->BillboardRender()->SetBillboardScale(Vec2(200.f, 50.f));
+
+	m_CurLevel->AddObject(1, pMonster);
+
 	pObject = new GameObject;
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
-	pObject->AddComponent(new CPlayerScript);
-	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 300.f));
-	pObject->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 1.f));
+
+	Ptr<CPlayerScript> playerScript = new CPlayerScript;
+	playerScript->SetTarget(pMonster);
+	pObject->AddComponent(playerScript.Get());
+
+	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
@@ -73,7 +89,7 @@ void LevelMgr::Init()
 	pChild->AddComponent(new CMeshRender);
 
 	pChild->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 0.f));
-	pChild->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	pChild->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));
 	pChild->Transform()->SetIndependentScale(true);
 
 	pChild->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
@@ -123,6 +139,7 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(0, pObject);
 	*/
 
+	
 
 
 
@@ -153,6 +170,7 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(0, pObject);
 	*/
 	//m_CurLevel->Init();
+
 
 	m_CurLevel->Begin();
 }

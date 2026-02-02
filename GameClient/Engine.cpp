@@ -5,6 +5,7 @@
 #include "KeyMgr.h"
 #include "LevelMgr.h"
 #include "RenderMgr.h"
+#include "TaskMgr.h"
 //int TestFunc();
 
 Engine::Engine()
@@ -30,6 +31,9 @@ int Engine::Progress()
 
 	// 랜더타겟에 그려진 그림을, 윈도우 비트맵으로 복사
 	Device::GetInst()->Present();
+
+	// 다음 프레임에 적용될 작업 처리
+	TaskMgr::GetInst()->Progress();
 	return S_OK;
 }
 

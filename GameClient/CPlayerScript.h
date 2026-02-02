@@ -4,13 +4,14 @@ class CPlayerScript :
     public CScript
 {
 private:
-    bool m_bSelected;
+    Ptr<GameObject>     m_Target;
 private:
     void Move();
     void Shoot();
 public:
     void Tick() override;
     bool IsMouseOver();
+    void SetTarget(Ptr<GameObject> _Target) { m_Target = _Target; }
 public:
     CPlayerScript();
     ~CPlayerScript();

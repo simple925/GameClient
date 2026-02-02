@@ -36,14 +36,24 @@ void AssetMgr::CreateEngineMesh()
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"q", pMesh.Get());
 
+
+	arrIdx[0] = 0;
+	arrIdx[1] = 1;
+	arrIdx[2] = 2;
+	arrIdx[3] = 3;
+	arrIdx[4] = 0;
+	pMesh = new AMesh;
+	pMesh->Create(arrVtx, 4, arrIdx, 5);
+	AddAsset(L"q_debug", pMesh.Get());
+
 	// 동구람위
-	const int TRICOUNT = 100;
+	const int TRICOUNT = 40;
 	const int VTXCOUNT = TRICOUNT + 1;
 	const int IDXCOUNT = TRICOUNT * 3;
 	Vtx oVtx[VTXCOUNT] = {};
 	UINT oIdx[IDXCOUNT] = {};
 
-	float fRadius = 1.0f; // Scale로 조절할 것이므로 기본 크기는 1로 설정
+	float fRadius = 0.5f; // Scale로 조절할 것이므로 기본 크기는 1로 설정
 	oVtx[0].vPos = Vec3(0.f, 0.f, 0.f);
 	oVtx[0].vColor = Vec4(1.f, 1.f, 1.f, 1.f);
 
@@ -116,6 +126,53 @@ void AssetMgr::CreateEngineMesh()
 	pMesh = new AMesh;
 	pMesh->Create(cubeVtx, 8, cubeIdx, 36);
 	AddAsset(L"CubeMesh", pMesh.Get());
+
+	// 원
+	vector<Vtx> vecVtx;
+	vector<UINT> vecIdx;
+
+	Vtx v;
+	v.vPos = Vec3(0.f, 0.f, 0.f);
+	v.vUV = Vec2(0.5f, 0.5f);
+	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+	vecVtx.push_back(v);
+
+	float Theta = 0.f;
+	float Radius = 0.5f;
+	float Slice = 40.f;
+
+	// 원의 테두리 정점 추가
+	for (int i = 0; i < (int)Slice + 1; ++i)
+	{
+		v.vPos = Vec3(Radius * cosf(Theta), Radius * sinf(Theta), 0.f);
+		//v.vUV = Vec2(0.5f, 0.5f);
+		v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
+		vecVtx.push_back(v);
+
+		// XM_2PI 360도
+		Theta += XM_2PI / Slice;
+	}
+
+	// 인덱스
+	for (int i = 0; i < (int)Slice; ++i)
+	{
+		vecIdx.push_back(0);
+		vecIdx.push_back(i + 2);
+		vecIdx.push_back(i + 1);
+	}
+
+	pMesh = new AMesh;
+	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), vecIdx.size());
+	AddAsset(L"CircleMesh", pMesh.Get());
+
+	vecIdx.clear();
+	for (int i = 0; i < (int)Slice + 1; ++i) {
+		vecIdx.push_back(i + 1);
+	}
+
+	pMesh = new AMesh;
+	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), vecIdx.size());
+	AddAsset(L"CircleMesh_LineStrip", pMesh.Get());
 }
 
 void AssetMgr::CreateEngineShader()
@@ -131,6 +188,7 @@ void AssetMgr::CreateEngineShader()
 	pShader = new AGraphicShader;
 	pShader->CreateVertexShader(L"Shader\\dbg.fx", "VS_Debug");
 	pShader->CreatePixelShader(L"Shader\\dbg.fx", "PS_Debug");
+	pShader->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	pShader->SetBSType(BS_TYPE::DEFAULT);
 	AddAsset(L"DbgShader", pShader.Get());
@@ -212,6 +270,14 @@ void AssetMgr::CreateEngineTexture()
 	FilePath += L"Texture\\univers.jpeg";
 	pTex->Load(FilePath);
 	AddAsset(L"univers", pTex.Get());
+
+	pTex = nullptr;
+	pTex = new ATexture;
+	pTex->SetName(L"슬라임");
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\slime_run.png";
+	pTex->Load(FilePath);
+	AddAsset(L"slime", pTex.Get());
 }
 
 void AssetMgr::CreateEngineMaterial()

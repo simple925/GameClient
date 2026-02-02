@@ -3,6 +3,8 @@
 
 #include "value.fx"
 
+#define COLOR g_vec4_0
+
 // layout Á¤º¸
 struct VS_IN
 {
@@ -82,7 +84,7 @@ float4 PS_Debug(VS_OUT _input) : SV_Target
 {
 	
 
-	return float4(0.f, 1.f, 0.f, 1.f);
+	return COLOR;
 }
 
 #endif

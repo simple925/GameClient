@@ -108,3 +108,8 @@ enum class DBG_SHAPE
 	CUBE,
 	SPHERE,
 };
+enum class	TASK_TYPE
+{
+	CREATE_OBJECT,
+	DESTROY_OBJECT,
+};

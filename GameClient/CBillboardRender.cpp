@@ -23,7 +23,7 @@ void CBillboardRender::Render()
 	}
 	GetMtrl()->SetScalar(VEC2_0, m_BillboardScale);
 	GetMtrl()->Binding();
-	GetMesh()->Binding();
+	GetMesh()->Render();
 	GetMtrl()->Clear();
 }
 

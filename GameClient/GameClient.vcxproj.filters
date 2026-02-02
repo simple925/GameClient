@@ -101,9 +101,6 @@
     <ClInclude Include="CPlayerScript.h">
       <Filter>GameEngine\06. Component\Script\Player</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayerProjectile.h">
-      <Filter>GameEngine\06. Component\Script\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="components.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -130,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="CBillboardRender.h">
       <Filter>GameEngine\06. Component\RenderComponent\02. BillboardComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="CMissileScript.h">
+      <Filter>GameEngine\06. Component\Script\MissileScript</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskMgr.h">
+      <Filter>GameEngine\03. Manager\07. TaskMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +212,6 @@
     <ClCompile Include="CPlayerScript.cpp">
       <Filter>GameEngine\06. Component\Script\Player</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayerProjectile.cpp">
-      <Filter>GameEngine\06. Component\Script\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="CCamera.cpp">
       <Filter>GameEngine\06. Component\03. Camera</Filter>
     </ClCompile>
@@ -238,6 +238,15 @@
     </ClCompile>
     <ClCompile Include="CBillboardRender.cpp">
       <Filter>GameEngine\06. Component\RenderComponent\02. BillboardComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="func.cpp">
+      <Filter>Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CMissileScript.cpp">
+      <Filter>GameEngine\06. Component\Script\MissileScript</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskMgr.cpp">
+      <Filter>GameEngine\03. Manager\07. TaskMgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -319,9 +328,6 @@
     <Filter Include="GameEngine\06. Component\Script\Player">
       <UniqueIdentifier>{330e6d24-eaac-4659-b43d-3b2b052717e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\Script\Projectile">
-      <UniqueIdentifier>{d2625bd6-e72f-4fae-b055-b9e930024022}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\06. Component\03. Camera">
       <UniqueIdentifier>{7451b0cd-3da8-4865-8a12-2c5633e36498}</UniqueIdentifier>
     </Filter>
@@ -357,6 +363,12 @@
     </Filter>
     <Filter Include="HSL\2. Render\3D">
       <UniqueIdentifier>{629e2c72-e035-4bc3-91dc-67650a2fb265}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\07. TaskMgr">
+      <UniqueIdentifier>{a3b623ec-36e0-46e8-a5cc-9297818cb79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\MissileScript">
+      <UniqueIdentifier>{5eea5752-6b8f-4dbd-8dbf-c051dfe3d4b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

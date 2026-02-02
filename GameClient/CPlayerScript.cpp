@@ -1,17 +1,18 @@
 #include "pch.h"
 #include "CPlayerScript.h"
-#include "CPlayerProjectile.h"
-#include "TimeMgr.h"
-#include "KeyMgr.h"
 
-#include "Device.h"
+#include "KeyMgr.h"
+#include "TimeMgr.h"
+#include "RenderMgr.h"
+
 #include "CTransform.h"
 #include "GameObject.h"
+#include "CMissileScript.h"
 
-#include "ALevel.h"
 #include "AssetMgr.h"
 #include "LevelMgr.h"
-#include "RenderMgr.h"
+#include "TaskMgr.h"
+
 bool CPlayerScript::IsMouseOver()
 {
 	// 1. 마우스 NDC 좌표 가져오기
@@ -43,7 +44,6 @@ bool CPlayerScript::IsMouseOver()
 }
 
 CPlayerScript::CPlayerScript()
-	: m_bSelected(false)
 {
 }
 
@@ -90,36 +90,45 @@ void CPlayerScript::Move()
 
 void CPlayerScript::Shoot()
 {
-	/*
-	if (KEY_TAP(KEY::SPACE)) {
-		 const vector<Ptr<GameObject>>& vecObj = LevelMgr::GetInst()->GetLevel()->GetLayer(1)->GetVecObject();
+	if (KEY_TAP(KEY::SPACE))
+	{
+		// 미사일 역할의 오브젝트 생성
+		GameObject* pObject = new GameObject;
+		pObject->SetName(L"Missile");
 
-		for (const auto& pObj : vecObj) {
-			if (pObj.Get()->IsHidden()) {
-				pObj.Get()->Transform()->SetRelativePos(Transform()->GetRelativePos()
-											  + Transform()->GetRelativeScale()
-											  * 0.5f
-											  * Transform()->GetDir(DIR::UP)); // 발사 위치 설정 비행기 몸체 보다 살짝 앞으로 위치 값을 넘김
-				pObj.Get()->Transform()->SetRelativeRot(Transform()->GetRelativeRot());
-				pObj.Get()->Show();                  // 이제부터 Tick과 Render가 돌아감
-				break;                         // 하나만 발사하고 루프 탈출
-			}
-		}
+		pObject->AddComponent(new CTransform);
+		pObject->AddComponent(new CMeshRender);
+		//pObject->AddComponent(new CMissileScript);
 
+		Ptr<CMissileScript> pMissileScript = new CMissileScript;
+		pMissileScript->SetTarget(m_Target.Get());
+		pObject->AddComponent(pMissileScript.Get());
+
+		Vec3 vMyPos = Transform()->GetRelativePos();
+		Vec3 vMyScale = Transform()->GetRelativeScale();
+		Vec3 vRotation = Transform()->GetRelativeRot();
+		Vec3 vUp = Transform()->GetDir(DIR::UP);
+
+		pObject->Transform()->SetRelativePos(vMyPos + vMyScale * 0.5f * vUp);
+		pObject->Transform()->SetRelativeScale(Vec3(10.f, 30.f, 1.f));
+		pObject->Transform()->SetRelativeRot(vRotation);
+
+		pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
+		pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+
+		CreateObject(pObject, 2);
 	}
-	*/
-
-	if (KEY_TAP(KEY::SPACE)) {
-		DbgInfo info = {};
-		info.Shape = DBG_SHAPE::RECT;
-		info.Pos = Transform()->GetRelativePos();
-		info.Scale = Transform()->GetRelativeScale() * Vec3(0.2f, 0.2f, 0.2f);
-		info.Rotation = Vec3(0.f, 0.f, 0.f);
-		info.Age = 0.f;
-		info.Life= 2.f;
-
-		RenderMgr::GetInst()->AddDebugInfo(info);
+	if (KEY_TAP(KEY::Z)) {
+		DrawDebugCircle(Transform()->GetRelativePos(), 100.f, Vec4(1.f, 0.f, 0.f, 1.f), 2.f);
 	}
+
+	if (KEY_TAP(KEY::X)) {
+		TaskInfo info = {};
+		info.Type = TASK_TYPE::DESTROY_OBJECT;
+		info.Param_0 = (DWORD_PTR)GetOwner();
+		TaskMgr::GetInst()->AddTask(info);
+	}
+	
 }
 
 void CPlayerScript::Tick()

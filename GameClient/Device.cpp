@@ -109,7 +109,7 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 
 void Device::ClearTarget()
 {
-	Vec4 vColor = Vec4(0.f, 0.f, 0.f, 0.f);
+	Vec4 vColor = Vec4(0.2f, 0.2f, 0.2f, 0.f);
 	CONTEXT->ClearRenderTargetView(m_RTV.Get(), vColor);
 	CONTEXT->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	// NDC 좌표계 찾아보기*****************************************************************************

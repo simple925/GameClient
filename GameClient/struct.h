@@ -20,6 +20,16 @@ struct DbgInfo
 	float		Life;		// 최대 수명 3
 };
 
+// TaskMgr 가 처리할 작업 단위
+struct TaskInfo
+{	
+	// DWORD_PTR 64 32 에따라 8 4 바이트 그덕에 주소값도 저장이 가능함 
+	TASK_TYPE	Type;
+	DWORD_PTR	Param_0;
+	DWORD_PTR	Param_1;
+	DWORD_PTR	Param_2;
+};
+
 struct TransformMatrix
 {
 	Matrix matWorld;		// 물체가 채움
