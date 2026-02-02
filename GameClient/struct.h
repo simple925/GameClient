@@ -7,6 +7,19 @@ struct Vertex
 	Vec4	vColor;	// 정점 자체의 색상
 }; typedef Vertex Vtx;
 
+// DebugInfo : 디버그 렌더링 요청사항 정보
+struct DbgInfo
+{
+	DBG_SHAPE	Shape;
+	Vec3		Pos;
+	Vec3		Scale;
+	Vec3		Rotation;
+	Vec4		Color;
+
+	float		Age;		// 현재 수명 0
+	float		Life;		// 최대 수명 3
+};
+
 struct TransformMatrix
 {
 	Matrix matWorld;		// 물체가 채움
@@ -15,7 +28,6 @@ struct TransformMatrix
 };
 // extern, 전방선언, 유일한 전역변수, 모든파일(cpp) 에서 접근 가능
 extern TransformMatrix g_Trans;
-
 
 struct MtrlConst
 {

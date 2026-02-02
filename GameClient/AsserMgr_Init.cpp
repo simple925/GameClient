@@ -127,6 +127,13 @@ void AssetMgr::CreateEngineShader()
 	pShader->CreatePixelShader(L"Shader\\std2d.fx", "PS_Std2D");
 	pShader->SetRSType(RS_TYPE::CULL_NONE);
 	AddAsset(L"Std2DShader", pShader.Get());
+
+	pShader = new AGraphicShader;
+	pShader->CreateVertexShader(L"Shader\\dbg.fx", "VS_Debug");
+	pShader->CreatePixelShader(L"Shader\\dbg.fx", "PS_Debug");
+	pShader->SetRSType(RS_TYPE::CULL_NONE);
+	pShader->SetBSType(BS_TYPE::DEFAULT);
+	AddAsset(L"DbgShader", pShader.Get());
 }
 
 void AssetMgr::CreateEngineTexture()
@@ -239,5 +246,10 @@ void AssetMgr::CreateEngineMaterial()
 	pMtrl->SetName(L"m_univers");
 	pMtrl->SetShader(Find<AGraphicShader>(L"Std2DShader"));
 	pMtrl->SetTexture(TEX_0, Find<ATexture>(L"univers"));
+	AddAsset(pMtrl->GetName(), pMtrl.Get());
+
+	pMtrl = new AMaterial;
+	pMtrl->SetName(L"DbgMtrl");
+	pMtrl->SetShader(Find<AGraphicShader>(L"DbgShader"));
 	AddAsset(pMtrl->GetName(), pMtrl.Get());
 }

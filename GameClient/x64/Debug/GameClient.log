@@ -1,7 +1,8 @@
 ﻿  .\GameClient\billboard.fx
+  .\GameClient\dbg.fx
   .\GameClient\std2d.fx
   .\GameClient\value.fx
-  3개 파일이 복사되었습니다.
+  4개 파일이 복사되었습니다.
   unity_ELR01LS8LL6JDOSY.cpp
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\PathMgr.cpp(23,10): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   (compiling source file '/x64/Debug/unity_ELR01LS8LL6JDOSY.cpp')

@@ -340,9 +340,6 @@
     <Filter Include="HSL\1. Header">
       <UniqueIdentifier>{dbd52c81-88cd-4f4e-8c08-73419dd6499c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="HSL\2. 2D">
-      <UniqueIdentifier>{cdbc0d95-5888-430d-9dd2-72792a33584d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\06. Component\RenderComponent">
       <UniqueIdentifier>{1b86c204-2cda-40ef-b6bc-0b1f72d46b03}</UniqueIdentifier>
     </Filter>
@@ -351,6 +348,15 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\RenderComponent\01. MeshRender">
       <UniqueIdentifier>{d79c2502-1ec2-4a78-ac11-ff7969ae962d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HSL\2. Render">
+      <UniqueIdentifier>{9c64ba94-c15e-4c45-aaf1-1f3d8a793ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HSL\2. Render\2D">
+      <UniqueIdentifier>{cdbc0d95-5888-430d-9dd2-72792a33584d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HSL\2. Render\3D">
+      <UniqueIdentifier>{629e2c72-e035-4bc3-91dc-67650a2fb265}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -368,10 +374,13 @@
       <Filter>HSL\1. Header</Filter>
     </FxCompile>
     <FxCompile Include="std2d.fx">
-      <Filter>HSL\2. 2D</Filter>
+      <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
     <FxCompile Include="billboard.fx">
-      <Filter>HSL\2. 2D</Filter>
+      <Filter>HSL\2. Render\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="dbg.fx">
+      <Filter>HSL\2. Render</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

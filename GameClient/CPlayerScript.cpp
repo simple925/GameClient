@@ -11,6 +11,7 @@
 #include "ALevel.h"
 #include "AssetMgr.h"
 #include "LevelMgr.h"
+#include "RenderMgr.h"
 bool CPlayerScript::IsMouseOver()
 {
 	// 1. 마우스 NDC 좌표 가져오기
@@ -89,6 +90,7 @@ void CPlayerScript::Move()
 
 void CPlayerScript::Shoot()
 {
+	/*
 	if (KEY_TAP(KEY::SPACE)) {
 		 const vector<Ptr<GameObject>>& vecObj = LevelMgr::GetInst()->GetLevel()->GetLayer(1)->GetVecObject();
 
@@ -104,6 +106,19 @@ void CPlayerScript::Shoot()
 			}
 		}
 
+	}
+	*/
+
+	if (KEY_TAP(KEY::SPACE)) {
+		DbgInfo info = {};
+		info.Shape = DBG_SHAPE::RECT;
+		info.Pos = Transform()->GetRelativePos();
+		info.Scale = Transform()->GetRelativeScale() * Vec3(0.2f, 0.2f, 0.2f);
+		info.Rotation = Vec3(0.f, 0.f, 0.f);
+		info.Age = 0.f;
+		info.Life= 2.f;
+
+		RenderMgr::GetInst()->AddDebugInfo(info);
 	}
 }
 

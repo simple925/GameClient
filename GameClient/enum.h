@@ -99,3 +99,12 @@ enum SCALR_PARAM
 	MAT_0,
 	MAT_1,
 };
+
+enum class DBG_SHAPE
+{
+	RECT,
+	CIRCLE,
+
+	CUBE,
+	SPHERE,
+};

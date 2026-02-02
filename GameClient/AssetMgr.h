@@ -52,3 +52,5 @@ inline Ptr<T> AssetMgr::Find(const wstring& _Key)
     }
     return (T*)iter->second.Get();
 }
+
+#define FIND(Type, Key) AssetMgr::GetInst()->Find<Type>(Key)
