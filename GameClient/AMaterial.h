@@ -15,7 +15,7 @@ public:
     void Binding();
 	void Clear();
     void SetShader(Ptr<AGraphicShader> _Shader) { m_Shader = _Shader; }
-
+	Ptr<AGraphicShader> GetShader() { return m_Shader; }
 
     template<typename T>
     void SetScalar(SCALR_PARAM _Param, const T& _Data);

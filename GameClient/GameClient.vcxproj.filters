@@ -108,9 +108,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="CCamera.h">
-      <Filter>GameEngine\06. Component\03. Camera</Filter>
+      <Filter>GameEngine\06. Component\02. Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CCameraMoveScript.h">
+    <ClInclude Include="CCamMoveScript.h">
       <Filter>GameEngine\06. Component\Script\Camera</Filter>
     </ClInclude>
     <ClInclude Include="RenderMgr.h">
@@ -133,6 +133,12 @@
     </ClInclude>
     <ClInclude Include="TaskMgr.h">
       <Filter>GameEngine\03. Manager\07. TaskMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollider2D.h">
+      <Filter>GameEngine\06. Component\03. Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteRender.h">
+      <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +219,9 @@
       <Filter>GameEngine\06. Component\Script\Player</Filter>
     </ClCompile>
     <ClCompile Include="CCamera.cpp">
-      <Filter>GameEngine\06. Component\03. Camera</Filter>
+      <Filter>GameEngine\06. Component\02. Camera</Filter>
     </ClCompile>
-    <ClCompile Include="CCameraMoveScript.cpp">
+    <ClCompile Include="CCamMoveScript.cpp">
       <Filter>GameEngine\06. Component\Script\Camera</Filter>
     </ClCompile>
     <ClCompile Include="RenderMgr.cpp">
@@ -247,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="TaskMgr.cpp">
       <Filter>GameEngine\03. Manager\07. TaskMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollider2D.cpp">
+      <Filter>GameEngine\06. Component\03. Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteRender.cpp">
+      <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,9 +316,6 @@
     <Filter Include="GameEngine\06. Component\01. Transform">
       <UniqueIdentifier>{8486a2f8-5243-4769-9928-9400c76796fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\04. Anymation">
-      <UniqueIdentifier>{6a26beeb-140e-4931-b8a2-6c4d86571b5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\06. Component\05. Collider">
       <UniqueIdentifier>{612b3bb4-69ce-4921-bae1-8be5f7c38076}</UniqueIdentifier>
     </Filter>
@@ -327,9 +336,6 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\Script\Player">
       <UniqueIdentifier>{330e6d24-eaac-4659-b43d-3b2b052717e7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\06. Component\03. Camera">
-      <UniqueIdentifier>{7451b0cd-3da8-4865-8a12-2c5633e36498}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\06. Component\Script\Camera">
       <UniqueIdentifier>{6b01e339-0090-4de5-95de-28384fd23a84}</UniqueIdentifier>
@@ -369,6 +375,15 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\Script\MissileScript">
       <UniqueIdentifier>{5eea5752-6b8f-4dbd-8dbf-c051dfe3d4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\02. Camera">
+      <UniqueIdentifier>{7451b0cd-3da8-4865-8a12-2c5633e36498}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\04. SpriteRender">
+      <UniqueIdentifier>{6a26beeb-140e-4931-b8a2-6c4d86571b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\03. Collider2D">
+      <UniqueIdentifier>{d7a76193-af22-43f3-92b0-bd95362e5fd7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

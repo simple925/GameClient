@@ -23,6 +23,7 @@ public:
 	GET_OTHER_COMPONENT(MeshRender);
 	GET_OTHER_COMPONENT(BillboardRender);
 	GET_OTHER_COMPONENT(Camera);
+	GET_OTHER_COMPONENT(Collider2D);
 
 	virtual void Begin() {}		  // 구현 해도 되고 안해도 그만~
 	virtual void FinalTick() = 0; // 각자 하위 클래스에서 구현되어야함 무조건

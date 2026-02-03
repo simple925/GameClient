@@ -13,6 +13,7 @@ private:
     ComPtr<ID3D11PixelShader>	m_PS;
 
     RS_TYPE                     m_RSType; // 레스터라이져 컬링모드
+    DS_TYPE                     m_DSType; // 
     BS_TYPE                     m_BSType; // 블랜딩 공식 설정
 
     // InputLayout - 정점 쉐이더에 입력으로 들어오는 정점 하나의 구성정보
@@ -22,9 +23,10 @@ public:
     int CreateVertexShader(const wstring& _RelativeFilePath, const string& _FuncName);
     int CreatePixelShader(const wstring& _RelativeFilePath, const string& _FuncName);
 
-    GET_SET(D3D11_PRIMITIVE_TOPOLOGY, Topology)
-    GET_SET(RS_TYPE, RSType)
-    GET_SET(BS_TYPE, BSType)
+    GET_SET(D3D11_PRIMITIVE_TOPOLOGY, Topology);
+    GET_SET(RS_TYPE, RSType);
+    GET_SET(DS_TYPE, DSType);
+    GET_SET(BS_TYPE, BSType);
 
     void Binding();
 

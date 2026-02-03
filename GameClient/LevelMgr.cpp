@@ -4,6 +4,11 @@
 #include "AssetMgr.h"
 #include "Device.h"
 
+
+#include "CPlayerScript.h"
+#include "CCamMoveScript.h"
+
+
 LevelMgr::LevelMgr() {
 }
 LevelMgr::~LevelMgr() {
@@ -22,7 +27,7 @@ void LevelMgr::Init()
 	pObject->SetName(L"메인카메라");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CCamera);
-	pObject->AddComponent(new CCamraMoveScript);
+	pObject->AddComponent(new CCamMoveScript);
 
 
 	//pObject->Camera()->LayerCheck(0); // 0번을 그려라
@@ -73,6 +78,7 @@ void LevelMgr::Init()
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CCollider2D);
 
 	Ptr<CPlayerScript> playerScript = new CPlayerScript;
 	playerScript->SetTarget(pMonster);
@@ -80,6 +86,10 @@ void LevelMgr::Init()
 
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+
+	pObject->Collider2D()->SetOffset(Vec2(0.f, 0.25f));
+	pObject->Collider2D()->SetScale(Vec2(0.2f, 0.2f));
+
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
@@ -87,6 +97,7 @@ void LevelMgr::Init()
 	pChild->SetName(L"Child");
 	pChild->AddComponent(new CTransform);
 	pChild->AddComponent(new CMeshRender);
+	pChild->AddComponent(new CCollider2D);
 
 	pChild->Transform()->SetRelativePos(Vec3(-200.f, 0.f, 0.f));
 	pChild->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 1.f));

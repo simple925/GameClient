@@ -31,6 +31,7 @@ public:
     // 자신을 타겟에 그림
     void Render();
 
+    void Destroy();
 public:
     void AddComponent(Ptr<Component> _Com);
     Ptr<Component> GetComponent(COMPONENT_TYPE _Type) { return m_Com[(UINT)_Type]; }
@@ -46,7 +47,7 @@ public:
     GET_COMPONENT(MeshRender, MESHRENDER);
     GET_COMPONENT(BillboardRender, BILLBOARD_RENDER);
     GET_COMPONENT(Camera, CAMERA);
-
+    GET_COMPONENT(Collider2D, COLLIDER2D);
     Ptr<CRenderComponent> GetRenderCom() { return m_RenderCom; }
 public:
     GameObject();

@@ -10,19 +10,33 @@ void CreateObject(GameObject* _Object, int LayerIdx)
 	info.Param_1 = LayerIdx;
 	TaskMgr::GetInst()->AddTask(info);
 }
-void DrawDebugRect(Vec3 _Pos, Vec3 _Scale, Vec3 _Rot, Vec4 _Color, float _Duration)
+void DrawDebugRect(Vec3 _Pos, Vec3 _Scale, Vec3 _Rot, Vec4 _Color, float _Duration, bool _DepthTest = false)
 {
 	DbgInfo info = {};
 	info.Shape = DBG_SHAPE::RECT;
 	info.Pos = _Pos;
 	info.Scale = _Scale;
 	info.Rotation = _Rot;
+	info.Color = _Color;
 	info.Age = 0.f;
 	info.Life = _Duration;
+	info.DepthTest = _DepthTest;
 	RenderMgr::GetInst()->AddDebugInfo(info);
 }
 
-void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration)
+void DrawDebugRect(const Matrix& _matWorld, Vec4 _Color, float _Duration, bool _DepthTest = false)
+{
+	DbgInfo info = {};
+	info.Shape = DBG_SHAPE::RECT;
+	info.matWorld = _matWorld;
+	info.Color = _Color;
+	info.Age = 0.f;
+	info.Life = _Duration;
+	info.DepthTest = _DepthTest;
+	RenderMgr::GetInst()->AddDebugInfo(info);
+}
+
+void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration, bool _DepthTest = false)
 {
 	DbgInfo info = {};
 	info.Shape = DBG_SHAPE::RECT;
@@ -32,6 +46,7 @@ void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration)
 	info.Color = _Color;
 	info.Age = 0.f;
 	info.Life = _Duration;
+	info.DepthTest = _DepthTest;
 	RenderMgr::GetInst()->AddDebugInfo(info);
 }
 

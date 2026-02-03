@@ -156,7 +156,8 @@ call CopyShader.bat</Command>
     <ClInclude Include="ATexture.h" />
     <ClInclude Include="CBillboardRender.h" />
     <ClInclude Include="CCamera.h" />
-    <ClInclude Include="CCameraMoveScript.h" />
+    <ClInclude Include="CCamMoveScript.h" />
+    <ClInclude Include="CCollider2D.h" />
     <ClInclude Include="CMeshRender.h" />
     <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="Component.h" />
@@ -166,6 +167,7 @@ call CopyShader.bat</Command>
     <ClInclude Include="CPlayerScript.h" />
     <ClInclude Include="CRenderComponent.h" />
     <ClInclude Include="CScript.h" />
+    <ClInclude Include="CSpriteRender.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Device.h" />
@@ -203,7 +205,8 @@ call CopyShader.bat</Command>
     <ClCompile Include="ATexture.cpp" />
     <ClCompile Include="CBillboardRender.cpp" />
     <ClCompile Include="CCamera.cpp" />
-    <ClCompile Include="CCameraMoveScript.cpp" />
+    <ClCompile Include="CCamMoveScript.cpp" />
+    <ClCompile Include="CCollider2D.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -212,6 +215,7 @@ call CopyShader.bat</Command>
     <ClCompile Include="CPlayerScript.cpp" />
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CScript.cpp" />
+    <ClCompile Include="CSpriteRender.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />

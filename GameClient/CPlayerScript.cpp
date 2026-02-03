@@ -123,10 +123,7 @@ void CPlayerScript::Shoot()
 	}
 
 	if (KEY_TAP(KEY::X)) {
-		TaskInfo info = {};
-		info.Type = TASK_TYPE::DESTROY_OBJECT;
-		info.Param_0 = (DWORD_PTR)GetOwner();
-		TaskMgr::GetInst()->AddTask(info);
+		Destroy();
 	}
 	
 }

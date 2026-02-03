@@ -14,10 +14,15 @@ struct DbgInfo
 	Vec3		Pos;
 	Vec3		Scale;
 	Vec3		Rotation;
+
+	Matrix		matWorld;
+
 	Vec4		Color;
 
 	float		Age;		// 현재 수명 0
 	float		Life;		// 최대 수명 3
+
+	bool		DepthTest;
 };
 
 // TaskMgr 가 처리할 작업 단위

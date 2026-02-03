@@ -52,11 +52,21 @@ void RenderMgr::Render_Debug()
 			m_DbgObj->MeshRender()->SetMesh(FIND(AMesh, L"sphere"));
 			break;
 		}
-		// Transform 설정
-		m_DbgObj->Transform()->SetRelativePos((*iter).Pos);
-		m_DbgObj->Transform()->SetRelativeScale((*iter).Scale);
-		m_DbgObj->Transform()->SetRelativeRot((*iter).Rotation);
-		m_DbgObj->FinalTick();
+
+		if ((*iter).matWorld == XMMatrixIdentity())
+		{
+			m_DbgObj->Transform()->SetRelativePos((*iter).Pos);
+			m_DbgObj->Transform()->SetRelativeScale((*iter).Scale);
+			m_DbgObj->Transform()->SetRelativeRot((*iter).Rotation);
+			m_DbgObj->Transform()->FinalTick();
+		}
+		else
+		{
+			m_DbgObj->Transform()->SetWorldMat((*iter).matWorld);
+		}
+
+		if ((*iter).DepthTest) m_DbgObj->MeshRender()->GetMtrl()->GetShader()->SetDSType(DS_TYPE::LESS);
+		else m_DbgObj->MeshRender()->GetMtrl()->GetShader()->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 
 		// Material 설정
 		m_DbgObj->MeshRender()->GetMtrl()->SetScalar(VEC4_0, (*iter).Color);

@@ -3,23 +3,38 @@
   .\GameClient\std2d.fx
   .\GameClient\value.fx
   4개 파일이 복사되었습니다.
-  unity_2HUYZU0JNSLO1WO2.cpp
+  pch.cpp
+  unity_JILMJKBK01XCJA61.cpp
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\AsserMgr_Init.cpp(165,72): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\AsserMgr_Init.cpp(165,42): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\AsserMgr_Init.cpp(174,72): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\AsserMgr_Init.cpp(174,42): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
+  
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(345,106): error C2561: 'Device::CreateDepthStencilState': 함수는 값을 반환해야 합니다.
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
+      C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(334,13):
+      'Device::CreateDepthStencilState' 선언을 참조하십시오.
+  
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(353,104): error C2561: 'Device::CreateDepthStencilState': 함수는 값을 반환해야 합니다.
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
+      C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(334,13):
+      'Device::CreateDepthStencilState' 선언을 참조하십시오.
+  
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(357,113): error C2561: 'Device::CreateDepthStencilState': 함수는 값을 반환해야 합니다.
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
+      C:\Users\141245124\Documents\cpp\GameClient\GameClient\Device.cpp(334,13):
+      'Device::CreateDepthStencilState' 선언을 참조하십시오.
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\PathMgr.cpp(23,10): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\TaskMgr.cpp(27,37): warning C4244: '인수': 'DWORD_PTR'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_2HUYZU0JNSLO1WO2.cpp')
+  (compiling source file '/x64/Debug/unity_JILMJKBK01XCJA61.cpp')
   
-  GameClient.vcxproj -> C:\Users\141245124\Documents\cpp\GameClient\Game\Bin\GameClient.exe

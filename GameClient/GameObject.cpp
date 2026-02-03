@@ -3,6 +3,7 @@
 
 #include "KeyMgr.h"
 #include "TimeMgr.h"
+#include "TaskMgr.h"
 
 #include "CTransform.h"
 
@@ -94,6 +95,15 @@ void GameObject::Render()
 	for (size_t i = 0; i < m_vecChild.size(); ++i) {
 		m_vecChild[i]->Render();
 	}
+}
+
+void GameObject::Destroy()
+{
+	if (m_Dead) return;
+	TaskInfo info = {};
+	info.Type = TASK_TYPE::DESTROY_OBJECT;
+	info.Param_0 = (DWORD_PTR)this;
+	TaskMgr::GetInst()->AddTask(info);
 }
 
 

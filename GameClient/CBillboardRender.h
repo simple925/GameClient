@@ -17,4 +17,3 @@ public:
     CBillboardRender();
     virtual ~CBillboardRender();
 };
-

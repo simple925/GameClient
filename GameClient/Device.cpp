@@ -97,6 +97,9 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	if (FAILED(CreateRasterizerState()))
 		return E_FAIL;
 
+	if (FAILED(CreateDepthStencilState()))
+		return E_FAIL;
+
 	// 앞으로 사용할 BlendState 제작
 	if (FAILED(CreateBlendState()))
 		return E_FAIL;
@@ -331,6 +334,34 @@ int Device::CreateRasterizerState()
 
 // 깊이 타겟
 // 
+int Device::CreateDepthStencilState()
+{
+	// Less
+	m_DSState[(UINT)DS_TYPE::LESS] = nullptr;
+
+	// LessEuqal
+	D3D11_DEPTH_STENCIL_DESC Desc = {};
+	Desc.DepthEnable = true;
+	Desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;		// 작거나 같으면 통과
+	Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	// 자신의 깊이로 덮어 씀
+	Desc.StencilEnable = false;
+	if (FAILED(DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::LESS_EQUL].GetAddressOf()))) return;
+
+	// NO_TEST
+	Desc = {};
+	Desc.DepthEnable = true;
+	Desc.DepthFunc = D3D11_COMPARISON_ALWAYS;			// 깊이판정은 항상 통과
+	Desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;	// 자신의 깊이로 덮어 씀
+	Desc.StencilEnable = false;
+	if (FAILED(DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::NO_TEST].GetAddressOf()))) return;
+
+	// NO_TEST_NO_WRITE
+	Desc.DepthEnable = false;
+	if (FAILED(DEVICE->CreateDepthStencilState(&Desc, m_DSState[(UINT)DS_TYPE::NO_TEST_NO_WRITE].GetAddressOf()))) return;
+
+	return S_OK;
+}
+
 
 
 // dx11 상속

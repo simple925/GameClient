@@ -20,9 +20,9 @@ private:
 
 	ComPtr<ID3D11SamplerState>		m_arrSam[2];
 
-	ComPtr<ID3D11BlendState>		m_BSState[(UINT)BS_TYPE::END];
 	ComPtr<ID3D11RasterizerState>	m_RSState[(UINT)RS_TYPE::END];
-	//ComPtr<ID3D11DepthStencilState>	m_DSState;
+	ComPtr<ID3D11DepthStencilState>	m_DSState[(UINT)DS_TYPE::END];
+	ComPtr<ID3D11BlendState>		m_BSState[(UINT)BS_TYPE::END];
 
 	HWND							m_hWnd;		   // 출력 윈도우
 	Vec2							m_RenderResol; // 렌더타겟 해상도
@@ -39,12 +39,14 @@ public:
 	Ptr<ConstBuffer> GetCB(CB_TYPE _Type) { return m_CB[(UINT)_Type]; }
 
 	ComPtr<ID3D11RasterizerState> GetRSState(RS_TYPE _Type) { return m_RSState[(UINT)_Type]; }
+	ComPtr<ID3D11DepthStencilState> GetDSState(DS_TYPE _Type) { return m_DSState[(UINT)_Type]; }
 	ComPtr<ID3D11BlendState> GetBSState(BS_TYPE _Type) { return m_BSState[(UINT)_Type]; }
 private:
 	int CreateSwapChain();
 	int CreateBuffer();
 	int CreateSampler();
 	int CreateRasterizerState();
+	int CreateDepthStencilState();
 	int CreateBlendState();
 	void CreateConstBuffer();
 };

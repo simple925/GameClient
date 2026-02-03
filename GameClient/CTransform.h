@@ -30,12 +30,12 @@ public:
 
     // Translation() ÀÌµ¿Á¤º¸¸¦ »Ì¾Æ¿È _41 _42 _43
     Vec3 GetWorldPos() { return m_matWorld.Translation(); }
-
     void SetIndependentScale(bool _On) { m_IndependentScale = !m_IndependentScale; }
 
     Vec3 GetDir(DIR _Type) { return m_Dir[(UINT)_Type]; }
 
     const Matrix& GetWorldMat() { return m_matWorld; }
+    void SetWorldMat(const Matrix& _matWorld) { m_matWorld = _matWorld; }
 
     Vec3 GetWorldScale();
 public:

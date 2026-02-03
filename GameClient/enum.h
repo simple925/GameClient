@@ -23,6 +23,15 @@ enum class BS_TYPE
 	END,
 };
 
+enum class DS_TYPE
+{
+	LESS,				// 기본옵션 깊이가 더 가까워야 통과됨, 성공 - 깊이쓰기 0
+	LESS_EQUL,			// 작거나 같으면 통과, 깊이판정 LESS_EQUAL
+	NO_TEST,			// 깊이판정 X(무조건 성공)			성공 - 깊이쓰기 O
+	NO_TEST_NO_WRITE,	// 깊이판정 X(무조건 성공)			성공 - 깊이쓰기 X
+	END,
+};
+
 enum class ASSET_TYPE
 {
 	MESH,
@@ -39,10 +48,12 @@ enum class COMPONENT_TYPE
 {
 	TRANSFORM,
 	CAMERA,
-	COLLIDER,
-	LIGHT,
-
+	COLLIDER2D,
+	COLLIDER3D,
+	LIGHT2D,
+	LIGHT3D,
 	MESHRENDER,
+	SPRITE_RENDER,
 	BILLBOARD_RENDER,
 	FLIPBOOK_RENDER,
 	PARTICLE_RENDER,

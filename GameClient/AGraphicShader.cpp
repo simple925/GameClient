@@ -8,6 +8,7 @@ AGraphicShader::AGraphicShader()
 	: Asset(ASSET_TYPE::GRAPHICSHADER)
 	, m_Topology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 	, m_RSType(RS_TYPE::CULL_BACK)
+	, m_DSType(DS_TYPE::LESS)
 	, m_BSType(BS_TYPE::DEFAULT)
 {
 }
@@ -131,11 +132,11 @@ void AGraphicShader::Binding()
 	// 픽셀 쉐이더에서 리턴한 값이, 렌더타겟 내에서의 해당 픽셀 위체에 색상이 출력된다.
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
 
+	// DepthStencilState - 깊이 비교	
+	CONTEXT->OMSetDepthStencilState(Device::GetInst()->GetDSState(m_DSType).Get(), 0);
+
 	// OM (Output Merge State)
 	// 픽셀 쉐이더에서 리턴한 값울, OM 단계에 연결되어있는 RenderTarget, DepthStencilTarget에 기록한다.
-	// DepthStencilState - 깊이 비교	
-
-
 	ComPtr<ID3D11BlendState> pBSState = Device::GetInst()->GetBSState(m_BSType);
 	CONTEXT->OMSetBlendState(pBSState.Get(), nullptr, 0xffffffff);
 }

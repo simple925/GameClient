@@ -30,8 +30,10 @@ void TaskMgr::Progress()
 		case TASK_TYPE::DESTROY_OBJECT:
 		{
 			Ptr<GameObject> pObj = (GameObject*)m_vecTask[i].Param_0;
-			pObj->m_Dead = true;
-			m_Garbage.push_back(pObj);
+			if (false == pObj->m_Dead) {
+				pObj->m_Dead = true;
+				m_Garbage.push_back(pObj);
+			}
 		}
 			break;
 		}
