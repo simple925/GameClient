@@ -1,9 +1,9 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "AGraphicShader.h"
 #include "Device.h"
 #include "PathMgr.h"
-// ¿¡¼¸ - °øÀ¯ÀÚ¿ø
-// ·£´õ¸µ ÆÄÀÌÇÁ¶óÀÎ ÀÚÃ¼¸¦ ÇÏ³ªÀÇ ¿¡¼ÂÀ¸·Î º»´Ù.
+// ì—ì„¯ - ê³µìœ ìì›
+// ëœë”ë§ íŒŒì´í”„ë¼ì¸ ìì²´ë¥¼ í•˜ë‚˜ì˜ ì—ì…‹ìœ¼ë¡œ ë³¸ë‹¤.
 AGraphicShader::AGraphicShader()
 	: Asset(ASSET_TYPE::GRAPHICSHADER)
 	, m_Topology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
@@ -21,10 +21,10 @@ int AGraphicShader::CreateVertexShader(const wstring& _RelativeFilePath, const s
 {
 	wstring Path = PathMgr::GetInst()->GetContentPath(_RelativeFilePath);
 	ComPtr<ID3DBlob> Err;
-	// ¿£Æ®¸®Æ÷ÀÎÆ®
+	// ì—”íŠ¸ë¦¬í¬ì¸íŠ¸
 	if (FAILED(D3DCompileFromFile(Path.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, _FuncName.c_str(), "vs_5_0", D3D10_SHADER_DEBUG, 0, m_VSBlob.GetAddressOf(), nullptr))) {
 		const char* pErrMsg = (const char*)Err->GetBufferPointer();
-		MessageBoxA(nullptr, pErrMsg, "½¦ÀÌ´õ »ı¼º ½ÇÆĞ", MB_OK);
+		MessageBoxA(nullptr, pErrMsg, "ì‰ì´ë” ìƒì„± ì‹¤íŒ¨", MB_OK);
 		return E_FAIL;
 	}
 
@@ -37,36 +37,36 @@ int AGraphicShader::CreateVertexShader(const wstring& _RelativeFilePath, const s
 	// ---12---  --8--  ---16----
 	// Position |  UV |   Color |
 	// --------  -----  ---------
-	// Input Layout »ı¼ºÇÏ±â
+	// Input Layout ìƒì„±í•˜ê¸°
 	D3D11_INPUT_ELEMENT_DESC InputDesc[3] = {};
 
 	InputDesc[0].SemanticName = "POSITION";
-	InputDesc[0].SemanticIndex = 0;							// Semantic ÀÌ¸§ÀÌ Áßº¹µÇ´Â °æ¿ì, ±¸º°ÇÏ±â À§ÇÑ ¼ıÀÚ
-	InputDesc[0].AlignedByteOffset = 0;							// ¸Ş¸ğ¸® ½ÃÀÛ À§Ä¡(offset)
-	InputDesc[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;	// offset À¸·ÎºÎÅÍ Å©±â
-	InputDesc[0].InputSlot = 0;							// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
-	InputDesc[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
+	InputDesc[0].SemanticIndex = 0;							// Semantic ì´ë¦„ì´ ì¤‘ë³µë˜ëŠ” ê²½ìš°, êµ¬ë³„í•˜ê¸° ìœ„í•œ ìˆ«ì
+	InputDesc[0].AlignedByteOffset = 0;							// ë©”ëª¨ë¦¬ ì‹œì‘ ìœ„ì¹˜(offset)
+	InputDesc[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;	// offset ìœ¼ë¡œë¶€í„° í¬ê¸°
+	InputDesc[0].InputSlot = 0;							// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
+	InputDesc[0].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
 	InputDesc[0].InstanceDataStepRate = 0;
 
 	InputDesc[1].SemanticName = "TEXCOORD";
-	InputDesc[1].SemanticIndex = 0;							// Semantic ÀÌ¸§ÀÌ Áßº¹µÇ´Â °æ¿ì, ±¸º°ÇÏ±â À§ÇÑ ¼ıÀÚ
-	InputDesc[1].AlignedByteOffset = 12;							// ¸Ş¸ğ¸® ½ÃÀÛ À§Ä¡(offset)
-	//InputDesc[1].Format = DXGI_FORMAT_R32G32B32_FLOAT;	// offset À¸·ÎºÎÅÍ Å©±â
-	InputDesc[1].Format = DXGI_FORMAT_R32G32_FLOAT;	// offset À¸·ÎºÎÅÍ Å©±â
-	InputDesc[1].InputSlot = 0;							// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
-	InputDesc[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
+	InputDesc[1].SemanticIndex = 0;							// Semantic ì´ë¦„ì´ ì¤‘ë³µë˜ëŠ” ê²½ìš°, êµ¬ë³„í•˜ê¸° ìœ„í•œ ìˆ«ì
+	InputDesc[1].AlignedByteOffset = 12;							// ë©”ëª¨ë¦¬ ì‹œì‘ ìœ„ì¹˜(offset)
+	//InputDesc[1].Format = DXGI_FORMAT_R32G32B32_FLOAT;	// offset ìœ¼ë¡œë¶€í„° í¬ê¸°
+	InputDesc[1].Format = DXGI_FORMAT_R32G32_FLOAT;	// offset ìœ¼ë¡œë¶€í„° í¬ê¸°
+	InputDesc[1].InputSlot = 0;							// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
+	InputDesc[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
 	InputDesc[1].InstanceDataStepRate = 0;
 
 	InputDesc[2].SemanticName = "COLOR";
-	InputDesc[2].SemanticIndex = 0;							// Semantic ÀÌ¸§ÀÌ Áßº¹µÇ´Â °æ¿ì, ±¸º°ÇÏ±â À§ÇÑ ¼ıÀÚ
-	InputDesc[2].AlignedByteOffset = 20;							// ¸Ş¸ğ¸® ½ÃÀÛ À§Ä¡(offset)
-	//InputDesc[2].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	// offset À¸·ÎºÎÅÍ Å©±â
-	InputDesc[2].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	// offset À¸·ÎºÎÅÍ Å©±â
-	InputDesc[2].InputSlot = 0;							// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
-	InputDesc[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ¼³¸íÇÏ´Â Á¤Á¡ÀÌ µé¾îÀÖ´Â bufferÀÇ À§Ä¡
+	InputDesc[2].SemanticIndex = 0;							// Semantic ì´ë¦„ì´ ì¤‘ë³µë˜ëŠ” ê²½ìš°, êµ¬ë³„í•˜ê¸° ìœ„í•œ ìˆ«ì
+	InputDesc[2].AlignedByteOffset = 20;							// ë©”ëª¨ë¦¬ ì‹œì‘ ìœ„ì¹˜(offset)
+	//InputDesc[2].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	// offset ìœ¼ë¡œë¶€í„° í¬ê¸°
+	InputDesc[2].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;	// offset ìœ¼ë¡œë¶€í„° í¬ê¸°
+	InputDesc[2].InputSlot = 0;							// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
+	InputDesc[2].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;	// ì„¤ëª…í•˜ëŠ” ì •ì ì´ ë“¤ì–´ìˆëŠ” bufferì˜ ìœ„ì¹˜
 	InputDesc[2].InstanceDataStepRate = 0;
 
-	// ·¹ÀÌ¾Æ¿ôÀ» »ç¿ëÇÒ VertexShader ÀÇ ÄÚµå Á¤º¸°¡ ÇÊ¿ä
+	// ë ˆì´ì•„ì›ƒì„ ì‚¬ìš©í•  VertexShader ì˜ ì½”ë“œ ì •ë³´ê°€ í•„ìš”
 	if (FAILED(DEVICE->CreateInputLayout(InputDesc, 3
 		, m_VSBlob->GetBufferPointer(), m_VSBlob->GetBufferSize()
 		, m_Layout.GetAddressOf())))
@@ -86,11 +86,11 @@ int AGraphicShader::CreatePixelShader(const wstring& _RelativeFilePath, const st
 	ComPtr<ID3DBlob> Err;
 	if (FAILED(D3DCompileFromFile(Path.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, _FuncName.c_str(), "ps_5_0", D3D10_SHADER_DEBUG, 0, m_PSBlob.GetAddressOf(), nullptr))) {
 		const char* pErrMsg = (const char*)Err->GetBufferPointer();
-		MessageBoxA(nullptr, pErrMsg, "½¦ÀÌ´õ »ı¼º ½ÇÆĞ", MB_OK);
+		MessageBoxA(nullptr, pErrMsg, "ì‰ì´ë” ìƒì„± ì‹¤íŒ¨", MB_OK);
 		return E_FAIL;
 	}
 
-	// ÄÄÆÄÀÏÇÑ Shader ÄÚµå·Î PixelShader ¸¸µé±â
+	// ì»´íŒŒì¼í•œ Shader ì½”ë“œë¡œ PixelShader ë§Œë“¤ê¸°
 	if (FAILED(DEVICE->CreatePixelShader(m_PSBlob->GetBufferPointer()
 		, m_PSBlob->GetBufferSize(), nullptr
 		, m_PS.GetAddressOf())))
@@ -104,39 +104,39 @@ void AGraphicShader::Binding()
 {
 	// Graphic Pipeline
 	// IA(Input Assembler)
-	// ·»´õ¸µ¿¡ ÇÊ¿äÇÑ ¸®¼Ò½º ÀÔ·Â
+	// ë Œë”ë§ì— í•„ìš”í•œ ë¦¬ì†ŒìŠ¤ ì…ë ¥
 
-	// Á¤Á¡À¸·Î ±¸¼ºÇÒ µµÇüÀÇ »óÅÂ, ¸ğ¾ç
-	// TriangList ´Â Á¡ 3°³¸¦ ÀÌ¾î¼­ ¸¸µç »ï°¢Çü(³»ºÎ±îÁö »öÀ» Ã¤¿ò)*****************************
+	// ì •ì ìœ¼ë¡œ êµ¬ì„±í•  ë„í˜•ì˜ ìƒíƒœ, ëª¨ì–‘
+	// TriangList ëŠ” ì  3ê°œë¥¼ ì´ì–´ì„œ ë§Œë“  ì‚¼ê°í˜•(ë‚´ë¶€ê¹Œì§€ ìƒ‰ì„ ì±„ì›€)*****************************
 	CONTEXT->IASetPrimitiveTopology(m_Topology);
 
-	// Á¤Á¡ ÇÏ³ª ¾È¿¡ µé¾îÀÖ´Â µ¥ÀÌÅÍ¸¦ ±¸ºĞÇØÁÖ´Â Á¤º¸
+	// ì •ì  í•˜ë‚˜ ì•ˆì— ë“¤ì–´ìˆëŠ” ë°ì´í„°ë¥¼ êµ¬ë¶„í•´ì£¼ëŠ” ì •ë³´
 	CONTEXT->IASetInputLayout(m_Layout.Get());
 
-	// ·£´õ¸µ¿¡ ÇÊ¿äÇÑ ¸®¼Ò½º ÀÔ·Â
-	// Vertex Shader(ÇÔ¼ö) - Á¤Á¡ ´ç ¿¬»ê ¼öÇà Á¤Á¡½¦ÀÌ´õ
+	// ëœë”ë§ì— í•„ìš”í•œ ë¦¬ì†ŒìŠ¤ ì…ë ¥
+	// Vertex Shader(í•¨ìˆ˜) - ì •ì  ë‹¹ ì—°ì‚° ìˆ˜í–‰ ì •ì ì‰ì´ë”
 	// HLSL(High Level 
 	CONTEXT->VSSetShader(m_VS.Get(), nullptr, 0);
 
-	// Rasterizer State - Á¤Á¡ ½¦ÀÌ´õ¿¡¼­ ³Ñ°ÜÁØ ÇÈ¼¿½¦ÀÌ´õ¸¦ È£ÃâÇÒ ÇÔ¼ö¸¦ ¿¬°á
-	// Á¤Á¡½¬ÀÌ´õ¿¡¼­ ¹İÈ¯ÇÑ Á¤Á¡ÀÇ ÃëÄ¡¸¦ NDC ÁÂÇ¥
-	// ±âÁØÀ¸·Î µé¾î¿À´Â ÇÈ¼¿À» °è»êÇØ¼­ ÇÈ¼¿ ½¦ÀÌ´õ·Î ¿¬°è
-	// nullptr ÀÔ·Â: ±âº» ¼³Á¤ ¿É¼ÇÀ¸·Î ¼³Á¤
+	// Rasterizer State - ì •ì  ì‰ì´ë”ì—ì„œ ë„˜ê²¨ì¤€ í”½ì…€ì‰ì´ë”ë¥¼ í˜¸ì¶œí•  í•¨ìˆ˜ë¥¼ ì—°ê²°
+	// ì •ì ì‰¬ì´ë”ì—ì„œ ë°˜í™˜í•œ ì •ì ì˜ ì·¨ì¹˜ë¥¼ NDC ì¢Œí‘œ
+	// ê¸°ì¤€ìœ¼ë¡œ ë“¤ì–´ì˜¤ëŠ” í”½ì…€ì„ ê³„ì‚°í•´ì„œ í”½ì…€ ì‰ì´ë”ë¡œ ì—°ê³„
+	// nullptr ì…ë ¥: ê¸°ë³¸ ì„¤ì • ì˜µì…˜ìœ¼ë¡œ ì„¤ì •
 	// CULL_MODE : CULL_BACK
 	// FILL_MODE : SOLID
 	// Rasterizer State	
 	CONTEXT->RSSetState(Device::GetInst()->GetRSState(m_RSType).Get());
 
 	// Pixel Shader
-	// ·¹½ºÅÍ¶óÀÌÀú¸¦ °ÅÃÄ¼­, È£ÃâµÉ ÇÈ¼¿¸¶´Ù ½ÇÇàµÇ´Â ÇÔ¼ö
-	// ÇÈ¼¿ ½¦ÀÌ´õ¿¡¼­ ¸®ÅÏÇÑ °ªÀÌ, ·»´õÅ¸°Ù ³»¿¡¼­ÀÇ ÇØ´ç ÇÈ¼¿ À§Ã¼¿¡ »ö»óÀÌ Ãâ·ÂµÈ´Ù.
+	// ë ˆìŠ¤í„°ë¼ì´ì €ë¥¼ ê±°ì³ì„œ, í˜¸ì¶œë  í”½ì…€ë§ˆë‹¤ ì‹¤í–‰ë˜ëŠ” í•¨ìˆ˜
+	// í”½ì…€ ì‰ì´ë”ì—ì„œ ë¦¬í„´í•œ ê°’ì´, ë Œë”íƒ€ê²Ÿ ë‚´ì—ì„œì˜ í•´ë‹¹ í”½ì…€ ìœ„ì²´ì— ìƒ‰ìƒì´ ì¶œë ¥ëœë‹¤.
 	CONTEXT->PSSetShader(m_PS.Get(), nullptr, 0);
 
-	// DepthStencilState - ±íÀÌ ºñ±³	
+	// DepthStencilState - ê¹Šì´ ë¹„êµ	
 	CONTEXT->OMSetDepthStencilState(Device::GetInst()->GetDSState(m_DSType).Get(), 0);
 
 	// OM (Output Merge State)
-	// ÇÈ¼¿ ½¦ÀÌ´õ¿¡¼­ ¸®ÅÏÇÑ °ª¿ï, OM ´Ü°è¿¡ ¿¬°áµÇ¾îÀÖ´Â RenderTarget, DepthStencilTarget¿¡ ±â·ÏÇÑ´Ù.
+	// í”½ì…€ ì‰ì´ë”ì—ì„œ ë¦¬í„´í•œ ê°’ìš¸, OM ë‹¨ê³„ì— ì—°ê²°ë˜ì–´ìˆëŠ” RenderTarget, DepthStencilTargetì— ê¸°ë¡í•œë‹¤.
 	ComPtr<ID3D11BlendState> pBSState = Device::GetInst()->GetBSState(m_BSType);
 	CONTEXT->OMSetBlendState(pBSState.Get(), nullptr, 0xffffffff);
 }

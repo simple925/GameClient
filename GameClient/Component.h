@@ -1,32 +1,33 @@
-#pragma once
+ï»¿#pragma once
 #include "pch.h"
 #include "CTransform.h"
 
 #include "Device.h"
 #include "GameObject.h"
-#define GET_OTHER_COMPONENT(COM_NAME) class C##COM_NAME* COM_NAME(); // Àü¹æ ¼±¾ğÀ»ÇÔ
+#define GET_OTHER_COMPONENT(COM_NAME) class C##COM_NAME* COM_NAME(); // ì „ë°© ì„ ì–¸ì„í•¨
 
-class GameObject; // Çì´õ°¡ ¼­·Î¸¦ ÂüÁ¶ÇÏ´Â ¹®Á¦¸¦ ÇÇÇÏ±â À§ÇØ ¸µÅ·À¸·Î ÇØ°á GameObject º¸´Ù ¸ÕÀú ¸¸µé¾îÁü
+class GameObject; // í—¤ë”ê°€ ì„œë¡œë¥¼ ì°¸ì¡°í•˜ëŠ” ë¬¸ì œë¥¼ í”¼í•˜ê¸° ìœ„í•´ ë§í‚¹ìœ¼ë¡œ í•´ê²° GameObject ë³´ë‹¤ ë¨¼ì € ë§Œë“¤ì–´ì§
 
 class Component :
 	public Entity
 {
 private:
-	const COMPONENT_TYPE		m_Type;  // ÄÄÆ÷³ÍÆ® Å¸ÀÔ
-	GameObject*					m_Owner; // ÄÄÆ÷³ÍÆ®¸¦ ¼ÒÀ¯ÇÑ °ÔÀÓ¿ÀºêÁ§Æ®
+	const COMPONENT_TYPE		m_Type;  // ì»´í¬ë„ŒíŠ¸ íƒ€ì…
+	GameObject*					m_Owner; // ì»´í¬ë„ŒíŠ¸ë¥¼ ì†Œìœ í•œ ê²Œì„ì˜¤ë¸Œì íŠ¸
 public:
 	COMPONENT_TYPE GetType() { return m_Type; }
 	GameObject* GetOwner() { return m_Owner; }
+    GET_OTHER_COMPONENT(SpriteRender);
 
-	//class CTransform* Transform(); // Àü¹æ ¼±¾ğÀ»ÇÔ
+	//class CTransform* Transform(); // ì „ë°© ì„ ì–¸ì„í•¨
 	GET_OTHER_COMPONENT(Transform);
 	GET_OTHER_COMPONENT(MeshRender);
 	GET_OTHER_COMPONENT(BillboardRender);
 	GET_OTHER_COMPONENT(Camera);
 	GET_OTHER_COMPONENT(Collider2D);
 
-	virtual void Begin() {}		  // ±¸Çö ÇØµµ µÇ°í ¾ÈÇØµµ ±×¸¸~
-	virtual void FinalTick() = 0; // °¢ÀÚ ÇÏÀ§ Å¬·¡½º¿¡¼­ ±¸ÇöµÇ¾î¾ßÇÔ ¹«Á¶°Ç
+	virtual void Begin() {}		  // êµ¬í˜„ í•´ë„ ë˜ê³  ì•ˆí•´ë„ ê·¸ë§Œ~
+	virtual void FinalTick() = 0; // ê°ì í•˜ìœ„ í´ë˜ìŠ¤ì—ì„œ êµ¬í˜„ë˜ì–´ì•¼í•¨ ë¬´ì¡°ê±´
 public:
 	Component(COMPONENT_TYPE _Type);
 	virtual ~Component();

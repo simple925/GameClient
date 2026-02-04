@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 #include "ConstBuffer.h"
 
-// Directx11 ¶óÀÌºê·¯¸® ÇÔ¼ö¸¦ ÀÌ¿ëÇØ¼­ 
-// GPU ¸¦ Á¦¾îÇÒ ¼ö ÀÖ´Â Å¬·¡½º
+// Directx11 ë¼ì´ë¸ŒëŸ¬ë¦¬ í•¨ìˆ˜ë¥¼ ì´ìš©í•´ì„œ 
+// GPU ë¥¼ ì œì–´í•  ìˆ˜ ìˆëŠ” í´ë˜ìŠ¤
 class Device
 	: public singleton<Device>
 {
 	SINGLE(Device);
 private:
-	ComPtr<ID3D11Device>			m_Device;			// GPU ¸Ş¸ğ¸® °ü¸®
-	ComPtr<ID3D11DeviceContext>		m_Context;			// GPU Á¦¾î ¹× ·»´õ¸µ, GPGPU(General Purpose) - ComputeShader ¸í·É
+	ComPtr<ID3D11Device>			m_Device;			// GPU ë©”ëª¨ë¦¬ ê´€ë¦¬
+	ComPtr<ID3D11DeviceContext>		m_Context;			// GPU ì œì–´ ë° ë Œë”ë§, GPGPU(General Purpose) - ComputeShader ëª…ë ¹
 
 	ComPtr<IDXGISwapChain>			m_SwapChain;
 	ComPtr<ID3D11Texture2D>			m_RenderTarget;
@@ -24,10 +24,10 @@ private:
 	ComPtr<ID3D11DepthStencilState>	m_DSState[(UINT)DS_TYPE::END];
 	ComPtr<ID3D11BlendState>		m_BSState[(UINT)BS_TYPE::END];
 
-	HWND							m_hWnd;		   // Ãâ·Â À©µµ¿ì
-	Vec2							m_RenderResol; // ·»´õÅ¸°Ù ÇØ»óµµ
+	HWND							m_hWnd;		   // ì¶œë ¥ ìœˆë„ìš°
+	Vec2							m_RenderResol; // ë Œë”íƒ€ê²Ÿ í•´ìƒë„
 
-	Ptr<ConstBuffer>				m_CB[(UINT)CB_TYPE::END];	// »ó¼ö¹öÆÛ ¹è¿­
+	Ptr<ConstBuffer>				m_CB[(UINT)CB_TYPE::END];	// ìƒìˆ˜ë²„í¼ ë°°ì—´
 public:
 	int Init(HWND _hwnd, Vec2 _Resolution);
 	void ClearTarget();

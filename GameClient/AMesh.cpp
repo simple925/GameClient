@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "AMesh.h"
 #include "Device.h"
 
@@ -13,37 +13,37 @@ AMesh::~AMesh()
 
 int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCount)
 {
-	// ¹öÆÛÅ©±â
+	// ë²„í¼í¬ê¸°
 	m_VtxCount = _VtxCount;
 	m_IdxCount = _IdxCount;
 
-	// cpu¸¦ ÅëÇØ¼­ ¹öÆÛÀÇ ³»¿ëÀ» ¾²°Å³ª, ÀÐÀ» ¼ö ÀÖ´ÂÁö
-	// D3D11_USAGE_DYNAMIC + D3D11_CPU_ACCESS_WRITE ==> ¹öÆÛ¸¦ »ý¼ºÇÑ ÀÌÈÄ¿¡µµ, cpu¸¦ ÅëÇØ¼­ ¹öÆÛÀÇ ³»¿ëÀ» ¼öÁ¤ÇÒ ¼ö ÀÖ´Ù.
-	m_VBDesc.ByteWidth = sizeof(Vtx) * m_VtxCount;	// ¹öÆÛÀÇ Å©±â	
+	// cpuë¥¼ í†µí•´ì„œ ë²„í¼ì˜ ë‚´ìš©ì„ ì“°ê±°ë‚˜, ì½ì„ ìˆ˜ ìžˆëŠ”ì§€
+	// D3D11_USAGE_DYNAMIC + D3D11_CPU_ACCESS_WRITE ==> ë²„í¼ë¥¼ ìƒì„±í•œ ì´í›„ì—ë„, cpuë¥¼ í†µí•´ì„œ ë²„í¼ì˜ ë‚´ìš©ì„ ìˆ˜ì •í•  ìˆ˜ ìžˆë‹¤.
+	m_VBDesc.ByteWidth = sizeof(Vtx) * m_VtxCount;	// ë²„í¼ì˜ í¬ê¸°	
 	m_VBDesc.Usage = D3D11_USAGE_DEFAULT;
 	m_VBDesc.CPUAccessFlags = 0;
-	m_VBDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;	// ¹öÆÛ¿ëµµ
+	m_VBDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;	// ë²„í¼ìš©ë„
 
 
-	// Ã³À½ ¹öÆÛ »ý¼ºÇÒ¶§ Àü´Þ½ÃÅ³ µ¥ÀÌÅÍÀÇ ½ÃÀÛÁÖ¼Ò¸¦ Sub ±¸Á¶Ã¼¿¡ ´ã¾Æ¼­ CreateBuffer ÇÔ¼ö¿¡ ³Ö¾îÁØ´Ù.
+	// ì²˜ìŒ ë²„í¼ ìƒì„±í• ë•Œ ì „ë‹¬ì‹œí‚¬ ë°ì´í„°ì˜ ì‹œìž‘ì£¼ì†Œë¥¼ Sub êµ¬ì¡°ì²´ì— ë‹´ì•„ì„œ CreateBuffer í•¨ìˆ˜ì— ë„£ì–´ì¤€ë‹¤.
 	D3D11_SUBRESOURCE_DATA tSub = {};
 	tSub.pSysMem = _VtxSysMem;
 	if (FAILED(DEVICE->CreateBuffer(&m_VBDesc, &tSub, m_VB.GetAddressOf()))) {
 		return E_FAIL;
 	}
 
-	// cpu¸¦ ÅëÇØ¼­ ¹öÆÛÀÇ ³»¿ëÀ» ¾²°Å³ª, ÀÐÀ» ¼ö ÀÖ´ÂÁö
+	// cpuë¥¼ í†µí•´ì„œ ë²„í¼ì˜ ë‚´ìš©ì„ ì“°ê±°ë‚˜, ì½ì„ ìˆ˜ ìžˆëŠ”ì§€
 	// D3D11_USAGE_DEFAULT + 0
-	// ¹öÆÛ¸¦ »ý¼ºÇÑ ÀÌÈÄ¿¡ ¼öÁ¤ÇÒ ¼ö ¾ø´Ù.
+	// ë²„í¼ë¥¼ ìƒì„±í•œ ì´í›„ì— ìˆ˜ì •í•  ìˆ˜ ì—†ë‹¤.
 	m_IBDesc.ByteWidth = sizeof(UINT) * m_IdxCount;
 	m_IBDesc.Usage = D3D11_USAGE_DEFAULT;
 	m_IBDesc.CPUAccessFlags = 0;
-	// ¹öÆÛ¿ëµµ
+	// ë²„í¼ìš©ë„
 	m_IBDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 
-	// Ã³À½ ¹öÆÛ »ý¼ºÇÒ¶§ Àü´Þ½ÃÅ³ µ¥ÀÌÅÍÀÇ ½ÃÀÛÁÖ¼Ò¸¦ Sub ±¸Á¶Ã¼¿¡ ´ã¾Æ¼­ CreateBuffer ÇÔ¼ö¿¡ ³Ö¾îÁØ´Ù.
-	tSub = {}; // ÃÊ±âÈ­
-	tSub.pSysMem = _IdxSysMem; // ¸í½ÃÀûÀ¸·Î ÁÖ¼Ò ´ëÀÔ
+	// ì²˜ìŒ ë²„í¼ ìƒì„±í• ë•Œ ì „ë‹¬ì‹œí‚¬ ë°ì´í„°ì˜ ì‹œìž‘ì£¼ì†Œë¥¼ Sub êµ¬ì¡°ì²´ì— ë‹´ì•„ì„œ CreateBuffer í•¨ìˆ˜ì— ë„£ì–´ì¤€ë‹¤.
+	tSub = {}; // ì´ˆê¸°í™”
+	tSub.pSysMem = _IdxSysMem; // ëª…ì‹œì ìœ¼ë¡œ ì£¼ì†Œ ëŒ€ìž…
 	if (FAILED(DEVICE->CreateBuffer(&m_IBDesc, &tSub, m_IB.GetAddressOf()))) {
 		return E_FAIL;
 	}
@@ -53,21 +53,21 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 void AMesh::Binding()
 {
 	UINT Stride = sizeof(Vtx);
-	UINT Offset = 0; // ¾î¶² ±âÁØÀ§Ä¡ ½ÃÀÛÀ» ÇÒÁö ½ÃÀÛÁ¡ º¯°æ°ª
+	UINT Offset = 0; // ì–´ë–¤ ê¸°ì¤€ìœ„ì¹˜ ì‹œìž‘ì„ í• ì§€ ì‹œìž‘ì  ë³€ê²½ê°’
 	CONTEXT->IASetVertexBuffers(0, 1, m_VB.GetAddressOf(), &Stride, &Offset);
 
-	// Index buffer setting, Á¤Á¡ ¹öÆÛ¾È¿¡ ÀÖ´Â Á¤Á¡À» °¡¸®Å°´Â ÀÎµ¦½º Á¤º¸,
-	// ÀÎµ¦½º ¼ýÀÚ 
+	// Index buffer setting, ì •ì  ë²„í¼ì•ˆì— ìžˆëŠ” ì •ì ì„ ê°€ë¦¬í‚¤ëŠ” ì¸ë±ìŠ¤ ì •ë³´,
+	// ì¸ë±ìŠ¤ ìˆ«ìž 
 	CONTEXT->IASetIndexBuffer(m_IB.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
 void AMesh::Render()
 {
 	Binding();
-	// ·£´õ¸µ ÆÄÀÌÇÁ¶óÀÎ ½ÃÀÛ
-	// Draw °¡ È£ÃâµÇ±â Àü±îÁö ¼³Á¤ÇØ³õÀº ¼¼ÆÃÀ» ±â¹ÝÀ¸·Î ½ÇÁ¦ ·»´õ¸µ ÆÄÀÌÇÁ¶óÀÎÀÌ ½ÇÇàµÊ
-	// ±× ÀÌÀü±îÁö´Â °¢ ´Ü°èº°·Î ½ÇÇàÇÒ ¿É¼ÇÀ» ¼³Á¤
-	//CONTEXT->Draw(6, 0); // vertex buffer ÀÇ Á¤Á¡À» ±×·ÁÁÜ
+	// ëžœë”ë§ íŒŒì´í”„ë¼ì¸ ì‹œìž‘
+	// Draw ê°€ í˜¸ì¶œë˜ê¸° ì „ê¹Œì§€ ì„¤ì •í•´ë†“ì€ ì„¸íŒ…ì„ ê¸°ë°˜ìœ¼ë¡œ ì‹¤ì œ ë Œë”ë§ íŒŒì´í”„ë¼ì¸ì´ ì‹¤í–‰ë¨
+	// ê·¸ ì´ì „ê¹Œì§€ëŠ” ê° ë‹¨ê³„ë³„ë¡œ ì‹¤í–‰í•  ì˜µì…˜ì„ ì„¤ì •
+	//CONTEXT->Draw(6, 0); // vertex buffer ì˜ ì •ì ì„ ê·¸ë ¤ì¤Œ
 
 	//CONTEXT->DrawIndexed(IDXCOUNT, 0, 0);
 	//CONTEXT->DrawIndexed(1500, 0, 0);

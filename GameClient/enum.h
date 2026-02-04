@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 enum class CB_TYPE
 {
 	TRANSFORM,	// b0
@@ -8,10 +8,10 @@ enum class CB_TYPE
 
 enum class RS_TYPE
 {
-	CULL_BACK,	// µÞ¸é(Á¤Á¡ ¹Ý½Ã°è¹æÇâÀ¸·Î..)
-	CULL_FRONT,	// ¾Õ¸é
+	CULL_BACK,	// ë’·ë©´(ì •ì  ë°˜ì‹œê³„ë°©í–¥ìœ¼ë¡œ..)
+	CULL_FRONT,	// ì•žë©´
 	CULL_NONE,	// Culling X
-	WIRE_FRAME,	// Á¤Á¡°ú Á¤Á¡ »çÀÌ¸¦ ÀÕ´Â ºÎºÐÀ» Á¦¿Ü
+	WIRE_FRAME,	// ì •ì ê³¼ ì •ì  ì‚¬ì´ë¥¼ ìž‡ëŠ” ë¶€ë¶„ì„ ì œì™¸
 	END,
 };
 
@@ -25,10 +25,10 @@ enum class BS_TYPE
 
 enum class DS_TYPE
 {
-	LESS,				// ±âº»¿É¼Ç ±íÀÌ°¡ ´õ °¡±î¿ö¾ß Åë°úµÊ, ¼º°ø - ±íÀÌ¾²±â 0
-	LESS_EQUL,			// ÀÛ°Å³ª °°À¸¸é Åë°ú, ±íÀÌÆÇÁ¤ LESS_EQUAL
-	NO_TEST,			// ±íÀÌÆÇÁ¤ X(¹«Á¶°Ç ¼º°ø)			¼º°ø - ±íÀÌ¾²±â O
-	NO_TEST_NO_WRITE,	// ±íÀÌÆÇÁ¤ X(¹«Á¶°Ç ¼º°ø)			¼º°ø - ±íÀÌ¾²±â X
+	LESS,				// ê¸°ë³¸ì˜µì…˜ ê¹Šì´ê°€ ë” ê°€ê¹Œì›Œì•¼ í†µê³¼ë¨, ì„±ê³µ - ê¹Šì´ì“°ê¸° 0
+	LESS_EQUL,			// ìž‘ê±°ë‚˜ ê°™ìœ¼ë©´ í†µê³¼, ê¹Šì´íŒì • LESS_EQUAL
+	NO_TEST,			// ê¹Šì´íŒì • X(ë¬´ì¡°ê±´ ì„±ê³µ)			ì„±ê³µ - ê¹Šì´ì“°ê¸° O
+	NO_TEST_NO_WRITE,	// ê¹Šì´íŒì • X(ë¬´ì¡°ê±´ ì„±ê³µ)			ì„±ê³µ - ê¹Šì´ì“°ê¸° X
 	END,
 };
 
@@ -61,7 +61,7 @@ enum class COMPONENT_TYPE
 
 	END,
 
-	SCRIPT, // ¿©·¯°¡Áö ½ºÅ©¸³Æ®¸¦ °¡Áö°Ô ÇÏ±â À§ÇØ¼­ END µÚ¿¡ ¼±¾ð
+	SCRIPT, // ì—¬ëŸ¬ê°€ì§€ ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì§€ê²Œ í•˜ê¸° ìœ„í•´ì„œ END ë’¤ì— ì„ ì–¸
 };
 
 enum class DIR

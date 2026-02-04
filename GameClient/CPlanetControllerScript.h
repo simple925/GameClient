@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "CScript.h"
 class CPlanetControllerScript :
     public CScript
@@ -6,8 +6,8 @@ class CPlanetControllerScript :
 private:
     float m_distanceFromSun;
     float m_offsetFromParent;
-    float m_fOrbitAngle;   // ÇöÀç °øÀü °¢µµ (´©Àû)
-    float m_fOrbitSpeed;   // °øÀü ¼Óµµ (ÀÔ·Â°ª)
+    float m_fOrbitAngle;   // í˜„ì¬ ê³µì „ ê°ë„ (ëˆ„ì )
+    float m_fOrbitSpeed;   // ê³µì „ ì†ë„ (ì…ë ¥ê°’)
     float m_fRotationSpeed;
     float m_fSelfRotationAngle;
     bool m_bInitialized;

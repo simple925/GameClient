@@ -1,7 +1,7 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Entity.h"
 
-// id ¼øÂ÷ÀûÀ¸·Î Áõ°¡ÇÏµµ·Ï ½ÃÄı¼Èid »ı¼º
+// id ìˆœì°¨ì ìœ¼ë¡œ ì¦ê°€í•˜ë„ë¡ ì‹œí€¸ì…œid ìƒì„±
 UINT Entity::g_NextID = 0;
 
 Entity::Entity()

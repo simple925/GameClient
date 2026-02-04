@@ -1,25 +1,25 @@
-#pragma once
+ï»¿#pragma once
 
 
 
 
 
-// Windows Çì´õ ÆÄÀÏ
+// Windows í—¤ë” íŒŒì¼
 #include <windows.h>
 
-// C ·±Å¸ÀÓ Çì´õ ÆÄÀÏÀÔ´Ï´Ù.
+// C ëŸ°íƒ€ì„ í—¤ë” íŒŒì¼ì…ë‹ˆë‹¤.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
 
 
-// Directx11 °´Ã¼µéÀ» °¡¸®Å³ ¼ö ÀÖ´Â ½º¸¶Æ®Æ÷ÀÎÅÍ
+// Directx11 ê°ì²´ë“¤ì„ ê°€ë¦¬í‚¬ ìˆ˜ ìˆëŠ” ìŠ¤ë§ˆíŠ¸í¬ì¸í„°
 #include "wrl.h"
 using namespace Microsoft::WRL;
 
 
-// Directx11 ¶óÀÌºê·¯¸® (Á¤Àû, µ¿Àû)
+// Directx11 ë¼ì´ë¸ŒëŸ¬ë¦¬ (ì •ì , ë™ì )
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
@@ -34,7 +34,7 @@ typedef SimpleMath::Vector3		Vec3;
 typedef SimpleMath::Vector4		Vec4;
 typedef SimpleMath::Matrix		Matrix;
 
-// DLL(µ¿Àû ¶óÀÌºê·¯¸®)
+// DLL(ë™ì  ë¼ì´ë¸ŒëŸ¬ë¦¬)
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
@@ -46,17 +46,17 @@ typedef SimpleMath::Matrix		Matrix;
 #else
 #pragma comment(lib, "DirectxTex\\DirectXTex.lib")
 #endif
-// C++ Å¸ÀÔ Á¤º¸±â´É
+// C++ íƒ€ì… ì •ë³´ê¸°ëŠ¥
 #include <typeinfo>
 
-// STL ÀÚ·á±¸Á¶
+// STL ìë£Œêµ¬ì¡°
 #include <vector>
 #include <list>
 #include <map>
 #include <string>
 using namespace std;
 
-// »ó´ë°æ·Î
+// ìƒëŒ€ê²½ë¡œ
 #include "resource.h"
 #include "global.h"
 #include "Ptr.h"

@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 #include "Entity.h"
-// ½¦ÀÌ´õ »ç¿îµå ¾Ö´Ï¸ŞÀÌ¼Ç ¸Å½¬ ÅØ½ºÃÄÀÌ¹ÌÁö
+// ì‰ì´ë” ì‚¬ìš´ë“œ ì• ë‹ˆë©”ì´ì…˜ ë§¤ì‰¬ í…ìŠ¤ì³ì´ë¯¸ì§€
 class Asset :
     public Entity
 {
 private:
-    wstring             m_Key;          // ¿¡¼ÂÀ» Ã£À»¶§ »ç¿ëÇÒ ÀÌ¸§
-    wstring             m_RelativePath; // »ó´ë°æ·Î(½ÇÁ¦ Content Æú´õ¿¡ ÀúÀå µÇ¾îÀÖ´Â À§Ä¡)
+    wstring             m_Key;          // ì—ì…‹ì„ ì°¾ì„ë•Œ ì‚¬ìš©í•  ì´ë¦„
+    wstring             m_RelativePath; // ìƒëŒ€ê²½ë¡œ(ì‹¤ì œ Content í´ë”ì— ì €ì¥ ë˜ì–´ìˆëŠ” ìœ„ì¹˜)
 
     // RTTI     : RunTime Type Identification
-    // ·±Å¸ÀÓ µµÁß¿¡, °´Ã¼ÀÇ ½ÇÁ¦ Å¸ÀÔÀ» ¾Ë¾Æ³»´Â ±â¼ú
-    const ASSET_TYPE    m_Type;         // ¿¡¼ÂÅ¸ÀÔ
+    // ëŸ°íƒ€ì„ ë„ì¤‘ì—, ê°ì²´ì˜ ì‹¤ì œ íƒ€ì…ì„ ì•Œì•„ë‚´ëŠ” ê¸°ìˆ 
+    const ASSET_TYPE    m_Type;         // ì—ì…‹íƒ€ì…
 public:
     ASSET_TYPE getType() { return m_Type; }
 public:
@@ -18,8 +18,8 @@ public:
     const wstring& getRelativePath() { return m_RelativePath; }
 
 public:
-    // ±âº»»ı¼ºÀÚ Á¦°Å, ÀÚ½ÅÀÌ ¾î¶² Å¸ÀÔÀÇ Asset ÀÎÁö ÀÔ·ÂÀ¸·Î ¹Ş´Â ¹öÀüÀÇ »ı¼ºÀÚ¸¸ ³²°ÜµÒ
-    // »ı¼ºÀÚ°¡ ÇÏ³ª¶óµµ ÀÖÀ¸¸é ÄÄÆÄÀÏ·¯´Â ÀÚµ¿À¸·Î »ı¼ºÀÚ¸¦ ¾È¸¸µç´Ù!!
+    // ê¸°ë³¸ìƒì„±ì ì œê±°, ìì‹ ì´ ì–´ë–¤ íƒ€ì…ì˜ Asset ì¸ì§€ ì…ë ¥ìœ¼ë¡œ ë°›ëŠ” ë²„ì „ì˜ ìƒì„±ìë§Œ ë‚¨ê²¨ë‘ 
+    // ìƒì„±ìê°€ í•˜ë‚˜ë¼ë„ ìˆìœ¼ë©´ ì»´íŒŒì¼ëŸ¬ëŠ” ìë™ìœ¼ë¡œ ìƒì„±ìë¥¼ ì•ˆë§Œë“ ë‹¤!!
     Asset(ASSET_TYPE _Type);
     virtual ~Asset();
 };

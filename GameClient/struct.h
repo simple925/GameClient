@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
 struct Vertex
 {
-	Vec3	vPos;	// 3D °ø°£»ó¿¡¼­ Á¤Á¡ÀÇ À§Ä¡
-	Vec2	vUV;	// Á¤Á¡À§¿¡ ÀÌ¹ÌÁö¸¦ ¶ç¿ï °æ¿ì, ÀÌ¹ÌÁöÀÇ ¾î´ÀÁöÁ¡À» Âü°íÇÏ´ÂÁö ÁÂÇ¥ Texture Coordinate UV
-	Vec4	vColor;	// Á¤Á¡ ÀÚÃ¼ÀÇ »ö»ó
+	Vec3	vPos;	// 3D ê³µê°„ìƒì—ì„œ ì •ì ì˜ ìœ„ì¹˜
+	Vec2	vUV;	// ì •ì ìœ„ì— ì´ë¯¸ì§€ë¥¼ ë„ìš¸ ê²½ìš°, ì´ë¯¸ì§€ì˜ ì–´ëŠì§€ì ì„ ì°¸ê³ í•˜ëŠ”ì§€ ì¢Œí‘œ Texture Coordinate UV
+	Vec4	vColor;	// ì •ì  ìì²´ì˜ ìƒ‰ìƒ
 }; typedef Vertex Vtx;
 
-// DebugInfo : µğ¹ö±× ·»´õ¸µ ¿äÃ»»çÇ× Á¤º¸
+// DebugInfo : ë””ë²„ê·¸ ë Œë”ë§ ìš”ì²­ì‚¬í•­ ì •ë³´
 struct DbgInfo
 {
 	DBG_SHAPE	Shape;
@@ -19,16 +19,16 @@ struct DbgInfo
 
 	Vec4		Color;
 
-	float		Age;		// ÇöÀç ¼ö¸í 0
-	float		Life;		// ÃÖ´ë ¼ö¸í 3
+	float		Age;		// í˜„ì¬ ìˆ˜ëª… 0
+	float		Life;		// ìµœëŒ€ ìˆ˜ëª… 3
 
 	bool		DepthTest;
 };
 
-// TaskMgr °¡ Ã³¸®ÇÒ ÀÛ¾÷ ´ÜÀ§
+// TaskMgr ê°€ ì²˜ë¦¬í•  ì‘ì—… ë‹¨ìœ„
 struct TaskInfo
 {	
-	// DWORD_PTR 64 32 ¿¡µû¶ó 8 4 ¹ÙÀÌÆ® ±×´ö¿¡ ÁÖ¼Ò°ªµµ ÀúÀåÀÌ °¡´ÉÇÔ 
+	// DWORD_PTR 64 32 ì—ë”°ë¼ 8 4 ë°”ì´íŠ¸ ê·¸ë•ì— ì£¼ì†Œê°’ë„ ì €ì¥ì´ ê°€ëŠ¥í•¨ 
 	TASK_TYPE	Type;
 	DWORD_PTR	Param_0;
 	DWORD_PTR	Param_1;
@@ -37,11 +37,11 @@ struct TaskInfo
 
 struct TransformMatrix
 {
-	Matrix matWorld;		// ¹°Ã¼°¡ Ã¤¿ò
-	Matrix matView;			// ºäÇà·Ä
-	Matrix matProj;			// NDC ÁÂÇ¥°è·Î Åõ¿µ(¾ĞÃà)½ÃÅ´
+	Matrix matWorld;		// ë¬¼ì²´ê°€ ì±„ì›€
+	Matrix matView;			// ë·°í–‰ë ¬
+	Matrix matProj;			// NDC ì¢Œí‘œê³„ë¡œ íˆ¬ì˜(ì••ì¶•)ì‹œí‚´
 };
-// extern, Àü¹æ¼±¾ğ, À¯ÀÏÇÑ Àü¿ªº¯¼ö, ¸ğµçÆÄÀÏ(cpp) ¿¡¼­ Á¢±Ù °¡´É
+// extern, ì „ë°©ì„ ì–¸, ìœ ì¼í•œ ì „ì—­ë³€ìˆ˜, ëª¨ë“ íŒŒì¼(cpp) ì—ì„œ ì ‘ê·¼ ê°€ëŠ¥
 extern TransformMatrix g_Trans;
 
 struct MtrlConst

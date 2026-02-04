@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "single.h"
 #include "Asset.h"
 #include "PathMgr.h"

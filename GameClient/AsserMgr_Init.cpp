@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "AssetMgr.h"
 
 void AssetMgr::Init()
@@ -13,7 +13,7 @@ void AssetMgr::CreateEngineMesh()
 {
 	Ptr<AMesh> pMesh = nullptr;
 
-	// ³×¸ğ
+	// ë„¤ëª¨
 	Vtx arrVtx[4] = {};
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	arrVtx[0].vUV = Vec2(0.f, 0.f);
@@ -31,7 +31,7 @@ void AssetMgr::CreateEngineMesh()
 	arrVtx[3].vUV = Vec2(0.f, 1.f);
 	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 0.f);
 	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
-	// »ç°¢Çü ¸Ş½¬ »ı¼º
+	// ì‚¬ê°í˜• ë©”ì‰¬ ìƒì„±
 	pMesh = new AMesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"q", pMesh.Get());
@@ -46,14 +46,14 @@ void AssetMgr::CreateEngineMesh()
 	pMesh->Create(arrVtx, 4, arrIdx, 5);
 	AddAsset(L"q_debug", pMesh.Get());
 
-	// µ¿±¸¶÷À§
+	// ë™êµ¬ëŒìœ„
 	const int TRICOUNT = 40;
 	const int VTXCOUNT = TRICOUNT + 1;
 	const int IDXCOUNT = TRICOUNT * 3;
 	Vtx oVtx[VTXCOUNT] = {};
 	UINT oIdx[IDXCOUNT] = {};
 
-	float fRadius = 0.5f; // Scale·Î Á¶ÀıÇÒ °ÍÀÌ¹Ç·Î ±âº» Å©±â´Â 1·Î ¼³Á¤
+	float fRadius = 0.5f; // Scaleë¡œ ì¡°ì ˆí•  ê²ƒì´ë¯€ë¡œ ê¸°ë³¸ í¬ê¸°ëŠ” 1ë¡œ ì„¤ì •
 	oVtx[0].vPos = Vec3(0.f, 0.f, 0.f);
 	oVtx[0].vColor = Vec4(1.f, 1.f, 1.f, 1.f);
 
@@ -76,7 +76,7 @@ void AssetMgr::CreateEngineMesh()
 	pMesh->Create(oVtx, VTXCOUNT, oIdx, IDXCOUNT);
 	AddAsset(L"c", pMesh.Get());
 
-	// ¼À¿À
+	// ì…ˆì˜¤
 	Vtx arr[3] = {};
 	arr[0].vPos = Vec3(0.f, 1.f, 0.f);
 	arr[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
@@ -97,37 +97,37 @@ void AssetMgr::CreateEngineMesh()
 	AddAsset(L"t", pMesh.Get());
 
 	// ===================
-	// Cube (3D Á¤À°¸éÃ¼)
+	// Cube (3D ì •ìœ¡ë©´ì²´)
 	// ===================
 	Vtx cubeVtx[8] = {};
 
-	// ¾Õ¸é (Z = -0.5f)
+	// ì•ë©´ (Z = -0.5f)
 	cubeVtx[0].vPos = Vec3(-0.5f, 0.5f, -0.5f); cubeVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f); cubeVtx[0].vUV = Vec2(0.f, 0.f);
 	cubeVtx[1].vPos = Vec3(0.5f, 0.5f, -0.5f); cubeVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f); cubeVtx[1].vUV = Vec2(1.f, 0.f);
 	cubeVtx[2].vPos = Vec3(0.5f, -0.5f, -0.5f); cubeVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f); cubeVtx[2].vUV = Vec2(1.f, 1.f);
 	cubeVtx[3].vPos = Vec3(-0.5f, -0.5f, -0.5f); cubeVtx[3].vColor = Vec4(1.f, 1.f, 1.f, 1.f); cubeVtx[3].vUV = Vec2(0.f, 1.f);
 
-	// µŞ¸é (Z = 0.5f)
+	// ë’·ë©´ (Z = 0.5f)
 	cubeVtx[4].vPos = Vec3(-0.5f, 0.5f, 0.5f); cubeVtx[4].vColor = Vec4(1.f, 0.f, 1.f, 1.f); cubeVtx[4].vUV = Vec2(0.f, 0.f);
 	cubeVtx[5].vPos = Vec3(0.5f, 0.5f, 0.5f); cubeVtx[5].vColor = Vec4(1.f, 1.f, 0.f, 1.f); cubeVtx[5].vUV = Vec2(1.f, 0.f);
 	cubeVtx[6].vPos = Vec3(0.5f, -0.5f, 0.5f); cubeVtx[6].vColor = Vec4(0.f, 1.f, 1.f, 1.f); cubeVtx[6].vUV = Vec2(1.f, 1.f);
 	cubeVtx[7].vPos = Vec3(-0.5f, -0.5f, 0.5f); cubeVtx[7].vColor = Vec4(0.f, 0.f, 0.f, 1.f); cubeVtx[7].vUV = Vec2(0.f, 1.f);
 
-	// ÀÎµ¦½º (»ï°¢Çü 12°³, ½Ã°è ¹æÇâ)
+	// ì¸ë±ìŠ¤ (ì‚¼ê°í˜• 12ê°œ, ì‹œê³„ ë°©í–¥)
 	UINT cubeIdx[36] = {
-		0, 1, 2, 0, 2, 3, // ¾Õ
-		4, 6, 5, 4, 7, 6, // µÚ
-		4, 5, 1, 4, 1, 0, // À§
-		3, 2, 6, 3, 6, 7, // ¾Æ·¡
-		4, 0, 3, 4, 3, 7, // ¿ŞÂÊ
-		1, 5, 6, 1, 6, 2  // ¿À¸¥ÂÊ
+		0, 1, 2, 0, 2, 3, // ì•
+		4, 6, 5, 4, 7, 6, // ë’¤
+		4, 5, 1, 4, 1, 0, // ìœ„
+		3, 2, 6, 3, 6, 7, // ì•„ë˜
+		4, 0, 3, 4, 3, 7, // ì™¼ìª½
+		1, 5, 6, 1, 6, 2  // ì˜¤ë¥¸ìª½
 	};
 
 	pMesh = new AMesh;
 	pMesh->Create(cubeVtx, 8, cubeIdx, 36);
 	AddAsset(L"CubeMesh", pMesh.Get());
 
-	// ¿ø
+	// ì›
 	vector<Vtx> vecVtx;
 	vector<UINT> vecIdx;
 
@@ -141,7 +141,7 @@ void AssetMgr::CreateEngineMesh()
 	float Radius = 0.5f;
 	float Slice = 40.f;
 
-	// ¿øÀÇ Å×µÎ¸® Á¤Á¡ Ãß°¡
+	// ì›ì˜ í…Œë‘ë¦¬ ì •ì  ì¶”ê°€
 	for (int i = 0; i < (int)Slice + 1; ++i)
 	{
 		v.vPos = Vec3(Radius * cosf(Theta), Radius * sinf(Theta), 0.f);
@@ -149,11 +149,11 @@ void AssetMgr::CreateEngineMesh()
 		v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
 		vecVtx.push_back(v);
 
-		// XM_2PI 360µµ
+		// XM_2PI 360ë„
 		Theta += XM_2PI / Slice;
 	}
 
-	// ÀÎµ¦½º
+	// ì¸ë±ìŠ¤
 	for (int i = 0; i < (int)Slice; ++i)
 	{
 		vecIdx.push_back(0);
@@ -162,7 +162,7 @@ void AssetMgr::CreateEngineMesh()
 	}
 
 	pMesh = new AMesh;
-	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), vecIdx.size());
+	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh.Get());
 
 	vecIdx.clear();
@@ -171,7 +171,7 @@ void AssetMgr::CreateEngineMesh()
 	}
 
 	pMesh = new AMesh;
-	pMesh->Create(vecVtx.data(), vecVtx.size(), vecIdx.data(), vecIdx.size());
+	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh_LineStrip", pMesh.Get());
 }
 
@@ -234,7 +234,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"ÅÂ¾ç");
+	pTex->SetName(L"íƒœì–‘");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\sola.png";
 	pTex->Load(FilePath);
@@ -242,7 +242,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"Áö±¸");
+	pTex->SetName(L"ì§€êµ¬");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\earth.png";
 	pTex->Load(FilePath);
@@ -250,7 +250,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"¼ö¼º");
+	pTex->SetName(L"ìˆ˜ì„±");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\mercury.png";
 	pTex->Load(FilePath);
@@ -258,7 +258,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"±İ¼º");
+	pTex->SetName(L"ê¸ˆì„±");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\venus.png";
 	pTex->Load(FilePath);
@@ -266,7 +266,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"¿ìÁÖ");
+	pTex->SetName(L"ìš°ì£¼");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\univers.jpeg";
 	pTex->Load(FilePath);
@@ -274,7 +274,7 @@ void AssetMgr::CreateEngineTexture()
 
 	pTex = nullptr;
 	pTex = new ATexture;
-	pTex->SetName(L"½½¶óÀÓ");
+	pTex->SetName(L"ìŠ¬ë¼ì„");
 	FilePath = CONTENT_PATH;
 	FilePath += L"Texture\\slime_run.png";
 	pTex->Load(FilePath);
@@ -283,7 +283,7 @@ void AssetMgr::CreateEngineTexture()
 
 void AssetMgr::CreateEngineMaterial()
 {
-	// ÀçÁú ¸¸µé±â
+	// ì¬ì§ˆ ë§Œë“¤ê¸°
 	Ptr<AMaterial> pMtrl = nullptr;
 
 	pMtrl = new AMaterial;

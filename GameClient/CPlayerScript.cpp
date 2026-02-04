@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CPlayerScript.h"
 
 #include "KeyMgr.h"
@@ -15,7 +15,7 @@
 
 bool CPlayerScript::IsMouseOver()
 {
-	// 1. ¸¶¿ì½º NDC ÁÂÇ¥ °¡Á®¿À±â
+	// 1. ë§ˆìš°ìŠ¤ NDC ì¢Œí‘œ ê°€ì ¸ì˜¤ê¸°
 	POINT pt;
 	GetCursorPos(&pt);
 	//ScreenToClient(, &pt);
@@ -27,13 +27,13 @@ bool CPlayerScript::IsMouseOver()
 	float y = 1.f - (pt.y / height) * 2.f;
 	Vec2 mouseNDC = Vec2(x, y);
 
-	// 2. ÀÚ½ÅÀÇ Transform Á¤º¸ °¡Á®¿À±â
+	// 2. ìì‹ ì˜ Transform ì •ë³´ ê°€ì ¸ì˜¤ê¸°
 	Ptr<CTransform> trans = GetOwner()->Transform();
 	Vec3 vPos = trans->GetRelativePos();
 	Vec3 vScale = trans->GetRelativeScale();
 
-	// 3. Ãæµ¹ ÆÇÁ¤ (AABB ±âÁØ)
-	// Á» ´õ Á¤¹ĞÇÏ°Ô ÇÏ°í ½Í´Ù¸é ¿©±â¼­ m_pMesh Á¤º¸¸¦ ¹Ş¾Æ¿Í ¸Ş½¬ Å¸ÀÔº°·Î °è»ê °¡´É
+	// 3. ì¶©ëŒ íŒì • (AABB ê¸°ì¤€)
+	// ì¢€ ë” ì •ë°€í•˜ê²Œ í•˜ê³  ì‹¶ë‹¤ë©´ ì—¬ê¸°ì„œ m_pMesh ì •ë³´ë¥¼ ë°›ì•„ì™€ ë©”ì‰¬ íƒ€ì…ë³„ë¡œ ê³„ì‚° ê°€ëŠ¥
 	if (mouseNDC.x >= vPos.x - vScale.x / 2.f && mouseNDC.x <= vPos.x + vScale.x / 2.f &&
 		mouseNDC.y >= vPos.y - vScale.y / 2.f && mouseNDC.y <= vPos.y + vScale.y / 2.f)
 	{
@@ -60,9 +60,9 @@ void CPlayerScript::Move()
 		//pTrans = (CTransform*) m_Com[(UINT)COMPONENT_TYPE::TRANSFORM].Get();
 	//}
 
-	// ½ÇÆĞÇÏ¸é return nullptr;
-	// »ó¼Ó °ü°è¿¡¼­ ºÎ¸ğ Å¬·¡½º¿¡ °¡ÀåÇÔ¼ö°¡ 1°³¶óµµ ÀÖÀ¸¸é, C++ ¿¡¼­´Â Å¸ÀÔ Á¤º¸¸¦ ÀÚ·áÇü º°·Î »ı¼ºÇÑ´Ù.
-	// ÀÌ°ÍÀ» ±â¹İÀ¸·Î ´Ù¿îÄ³½ºÆÃ ¼º°ø ¿©ºÎ¸¦ ÆÇ´ÜÇÒ ¼ö ÀÖ´Ù.
+	// ì‹¤íŒ¨í•˜ë©´ return nullptr;
+	// ìƒì† ê´€ê³„ì—ì„œ ë¶€ëª¨ í´ë˜ìŠ¤ì— ê°€ì¥í•¨ìˆ˜ê°€ 1ê°œë¼ë„ ìˆìœ¼ë©´, C++ ì—ì„œëŠ” íƒ€ì… ì •ë³´ë¥¼ ìë£Œí˜• ë³„ë¡œ ìƒì„±í•œë‹¤.
+	// ì´ê²ƒì„ ê¸°ë°˜ìœ¼ë¡œ ë‹¤ìš´ìºìŠ¤íŒ… ì„±ê³µ ì—¬ë¶€ë¥¼ íŒë‹¨í•  ìˆ˜ ìˆë‹¤.
 	//pTrans = dynamic_cast<CTransform*>(m_Com[(UINT)COMPONENT_TYPE::TRANSFORM].Get());
 
 	//CTransform* trans = pTrans.Get();
@@ -92,7 +92,7 @@ void CPlayerScript::Shoot()
 {
 	if (KEY_TAP(KEY::SPACE))
 	{
-		// ¹Ì»çÀÏ ¿ªÇÒÀÇ ¿ÀºêÁ§Æ® »ı¼º
+		// ë¯¸ì‚¬ì¼ ì—­í• ì˜ ì˜¤ë¸Œì íŠ¸ ìƒì„±
 		GameObject* pObject = new GameObject;
 		pObject->SetName(L"Missile");
 

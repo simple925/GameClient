@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ConstBuffer.h"
 
 #include "Device.h"
@@ -17,20 +17,20 @@ int ConstBuffer::Create(CB_TYPE _Type, UINT _Size)
 {
 	m_Type = _Type;
 
-	// »ó¼ö ¹öÆÛ »ı¼º
-	// ¹öÆÛÀÇ Å©±â, 16 ÀÇ ¹è¼ö
+	// ìƒìˆ˜ ë²„í¼ ìƒì„±
+	// ë²„í¼ì˜ í¬ê¸°, 16 ì˜ ë°°ìˆ˜
 	m_Desc.ByteWidth = _Size;
 
-	// CPU ¸¦ ÅëÇØ¼­ ¹öÆÛÀÇ ³»¿ëÀ» ¾²°Å³ª, ÀĞÀ» ¼ö ÀÖ´ÂÁö 
+	// CPU ë¥¼ í†µí•´ì„œ ë²„í¼ì˜ ë‚´ìš©ì„ ì“°ê±°ë‚˜, ì½ì„ ìˆ˜ ìˆëŠ”ì§€ 
 	// D3D11_USAGE_DYNAMIC + D3D11_CPU_ACCESS_WRITE
-	// ¹öÆÛ¸¦ »ı¼ºÇÑ ÀÌÈÄ¿¡µµ, CPU ¸¦ ÅëÇØ¼­ ¹öÆÛÀÇ ³»¿ëÀ» ¼öÁ¤ÇÒ ¼ö ÀÖ´Ù.
+	// ë²„í¼ë¥¼ ìƒì„±í•œ ì´í›„ì—ë„, CPU ë¥¼ í†µí•´ì„œ ë²„í¼ì˜ ë‚´ìš©ì„ ìˆ˜ì •í•  ìˆ˜ ìˆë‹¤.
 	m_Desc.Usage = D3D11_USAGE_DYNAMIC;
 	m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 
-	// ¹öÆÛ ¿ëµµ
+	// ë²„í¼ ìš©ë„
 	m_Desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 
-	// Ã³À½ ¹öÆÛ »ı¼ºÇÒ¶§ Àü´Ş½ÃÅ³ µ¥ÀÌÅÍÀÇ ½ÃÀÛÁÖ¼Ò¸¦ Sub ±¸Á¶Ã¼¿¡ ´ã¾Æ¼­ CreateBuffer ÇÔ¼ö¿¡ ³Ö¾îÁØ´Ù.
+	// ì²˜ìŒ ë²„í¼ ìƒì„±í• ë•Œ ì „ë‹¬ì‹œí‚¬ ë°ì´í„°ì˜ ì‹œì‘ì£¼ì†Œë¥¼ Sub êµ¬ì¡°ì²´ì— ë‹´ì•„ì„œ CreateBuffer í•¨ìˆ˜ì— ë„£ì–´ì¤€ë‹¤.
 	if (FAILED(DEVICE->CreateBuffer(&m_Desc, nullptr, m_CB.GetAddressOf())))
 	{
 		return E_FAIL;
@@ -54,10 +54,10 @@ void ConstBuffer::SetData(void* _SysMem, UINT _Size)
 
 void ConstBuffer::Binding()
 {
-	CONTEXT->VSSetConstantBuffers((UINT)m_Type/*»ó¼ö¹öÆÛ¸¦ ¹ÙÀÎµùÇÒ ·¹Áö½ºÅÍ ¹øÈ£*/, 1, m_CB.GetAddressOf());
-	CONTEXT->HSSetConstantBuffers((UINT)m_Type/*»ó¼ö¹öÆÛ¸¦ ¹ÙÀÎµùÇÒ ·¹Áö½ºÅÍ ¹øÈ£*/, 1, m_CB.GetAddressOf());
-	CONTEXT->DSSetConstantBuffers((UINT)m_Type/*»ó¼ö¹öÆÛ¸¦ ¹ÙÀÎµùÇÒ ·¹Áö½ºÅÍ ¹øÈ£*/, 1, m_CB.GetAddressOf());
-	CONTEXT->GSSetConstantBuffers((UINT)m_Type/*»ó¼ö¹öÆÛ¸¦ ¹ÙÀÎµùÇÒ ·¹Áö½ºÅÍ ¹øÈ£*/, 1, m_CB.GetAddressOf());
-	CONTEXT->PSSetConstantBuffers((UINT)m_Type/*»ó¼ö¹öÆÛ¸¦ ¹ÙÀÎµùÇÒ ·¹Áö½ºÅÍ ¹øÈ£*/, 1, m_CB.GetAddressOf());
+	CONTEXT->VSSetConstantBuffers((UINT)m_Type/*ìƒìˆ˜ë²„í¼ë¥¼ ë°”ì¸ë”©í•  ë ˆì§€ìŠ¤í„° ë²ˆí˜¸*/, 1, m_CB.GetAddressOf());
+	CONTEXT->HSSetConstantBuffers((UINT)m_Type/*ìƒìˆ˜ë²„í¼ë¥¼ ë°”ì¸ë”©í•  ë ˆì§€ìŠ¤í„° ë²ˆí˜¸*/, 1, m_CB.GetAddressOf());
+	CONTEXT->DSSetConstantBuffers((UINT)m_Type/*ìƒìˆ˜ë²„í¼ë¥¼ ë°”ì¸ë”©í•  ë ˆì§€ìŠ¤í„° ë²ˆí˜¸*/, 1, m_CB.GetAddressOf());
+	CONTEXT->GSSetConstantBuffers((UINT)m_Type/*ìƒìˆ˜ë²„í¼ë¥¼ ë°”ì¸ë”©í•  ë ˆì§€ìŠ¤í„° ë²ˆí˜¸*/, 1, m_CB.GetAddressOf());
+	CONTEXT->PSSetConstantBuffers((UINT)m_Type/*ìƒìˆ˜ë²„í¼ë¥¼ ë°”ì¸ë”©í•  ë ˆì§€ìŠ¤í„° ë²ˆí˜¸*/, 1, m_CB.GetAddressOf());
 }
 

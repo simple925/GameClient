@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "single.h"
 enum class KEY
 {
@@ -29,9 +29,9 @@ enum class KEY
 	END, //21
 	M_LBUTTON,
 	M_RBUTTON,
-	M_MBUTTON,  // ÈÙ Å¬¸¯
-	M_XBUTTON1, // ÈÙ ¾÷
-	M_XBUTTON2, // ÈÙ ´Ù¿î
+	M_MBUTTON,  // íœ  í´ë¦­
+	M_XBUTTON1, // íœ  ì—…
+	M_XBUTTON2, // íœ  ë‹¤ìš´
 	KEY_END,
 };
 
@@ -47,9 +47,9 @@ enum KEY_STATE
 
 struct KeyInfo
 {
-	// key index ÇÊ¿ä¾øÀ½ ¾îÂ÷ÇÇ enumÀ¸·Î ¹è¿­ÀÇ ÀÚ¸® °ª°ú µ¿ÀÏÇÔ
-	KEY_STATE	State;		// Å°ÀÇ ÇöÀç »óÅÂ
-	bool		Pressed;	// ÀÌÀü¿¡ ´­¸°ÀûÀÌ ÀÖ´ÂÁö ¾Æ´ÑÁö
+	// key index í•„ìš”ì—†ìŒ ì–´ì°¨í”¼ enumìœ¼ë¡œ ë°°ì—´ì˜ ìë¦¬ ê°’ê³¼ ë™ì¼í•¨
+	KEY_STATE	State;		// í‚¤ì˜ í˜„ì¬ ìƒíƒœ
+	bool		Pressed;	// ì´ì „ì— ëˆŒë¦°ì ì´ ìˆëŠ”ì§€ ì•„ë‹Œì§€
 };
 
 class KeyMgr
@@ -59,8 +59,8 @@ class KeyMgr
 private:
 	vector<KeyInfo>		m_vecKeys;
 
-	Vec2				m_MousePos;		// ÀÌ¹ø ÇÁ·¹ÀÓ ¸¶¿ì½º ÁÂÇ¥
-	Vec2				m_MousePrevPos;		// ÀÌÀü ÇÁ·¹ÀÓ ¸¶¿ì½º ÁÂÇ¥
+	Vec2				m_MousePos;		// ì´ë²ˆ í”„ë ˆì„ ë§ˆìš°ìŠ¤ ì¢Œí‘œ
+	Vec2				m_MousePrevPos;		// ì´ì „ í”„ë ˆì„ ë§ˆìš°ìŠ¤ ì¢Œí‘œ
 	Vec2				m_MouseDir;
 
 	bool				m_WheelChanged;
@@ -72,15 +72,15 @@ public:
 	GET(Vec2, MousePrevPos)
 	GET(Vec2, MouseDir)
 	/*
-		¸¶¿ì½º ÀÌº¥Æ® °ü¸® À©µµ¿ì ÇÁ·Î±×·¥°ú
+		ë§ˆìš°ìŠ¤ ì´ë²¤íŠ¸ ê´€ë¦¬ ìœˆë„ìš° í”„ë¡œê·¸ë¨ê³¼
 	*/
 	GET(int, Wheel)
 	void SetWheel(int _Wheel) {
 		m_WheelChanged = true;
 		/*
-		* 1 ÀÎÁö -1 ÀÎÁö 
+		* 1 ì¸ì§€ -1 ì¸ì§€ 
 		*/
-		// abs ¾Û¼Ö·çÆ® Àı´ë°ªÀ¸·Î º¯È¯
+		// abs ì•±ì†”ë£¨íŠ¸ ì ˆëŒ€ê°’ìœ¼ë¡œ ë³€í™˜
 		m_Wheel = _Wheel / abs(_Wheel);
 	}
 

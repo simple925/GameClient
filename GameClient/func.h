@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 // Task
 void CreateObject(class GameObject* _Object, int LayerIdx);
@@ -11,5 +11,5 @@ void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration, boo
 
 
 
-// 0 ~ 1 ·Î Á¦ÇÑ
+// 0 ~ 1 ë¡œ ì œí•œ
 float Saturate(float _Data);

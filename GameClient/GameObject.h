@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Entity.h"
 #include "components.h"
 
@@ -12,23 +12,25 @@ private:
     Ptr<CRenderComponent>       m_RenderCom;
     vector<Ptr<CScript>>        m_vecScripts;
 
-    // Á¾¼Ó°ü°è¿¡¼­´Â ½º¸¶Æ® Æ÷ÀÎÅÍ¸¦ ¾²¸é »èÁ¦ µÇÁö ¾Ê´Â´Ù!!!!! ¿µ¿øÈ÷
-    GameObject*                 m_Parent; // ÀÌ°Ç ºÎ¸ğ °´Ã¼¸¦ °¡¸®Å°±â ¶§¹®¿¡ ½º¸¶Æ® Æ÷ÀÎÅÍ ÀÎ¾¸
+    // ì¢…ì†ê´€ê³„ì—ì„œëŠ” ìŠ¤ë§ˆíŠ¸ í¬ì¸í„°ë¥¼ ì“°ë©´ ì‚­ì œ ë˜ì§€ ì•ŠëŠ”ë‹¤!!!!! ì˜ì›íˆ
+    GameObject*                 m_Parent; // ì´ê±´ ë¶€ëª¨ ê°ì²´ë¥¼ ê°€ë¦¬í‚¤ê¸° ë•Œë¬¸ì— ìŠ¤ë§ˆíŠ¸ í¬ì¸í„° ì¸ì”€
     vector<Ptr<GameObject>>     m_vecChild;
-
+    // GameObject ë³¸ì¸ì´ ì†í•œ Layer, Index,
+    // -1 ì¸ ê²½ìš°, ì–´ë–¤ ë ˆì´ì–´ì—ë„ ì†í•˜ì§€ ì•ŠëŠ”ë‹¤ == ë ˆë²¨ì•ˆì— ìˆì§€ ì•Šì€ ì˜¤ë¸Œì íŠ¸
+    int                         m_LayerIdx;
     bool                        m_Dead;
 
 public:
-    // ·¹º§ÀÌ Ã³À½ ½ÃÀÛµÉ¶§ È£ÃâµÇ´Â ÇÔ¼ö
+    // ë ˆë²¨ì´ ì²˜ìŒ ì‹œì‘ë ë•Œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     void Begin();
 
-    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù ÇÒ ÀÏ
+    // ë§¤ í”„ë ˆì„ë§ˆë‹¤ í•  ì¼
     void Tick();
 
-    // ¸Å ÇÁ·¹ÀÓ¸¶´Ù Tick ÀÌÈÄ¿¡ µŞ ¼ö½ÀÀÛ¾÷ ¼öÇà
+    // ë§¤ í”„ë ˆì„ë§ˆë‹¤ Tick ì´í›„ì— ë’· ìˆ˜ìŠµì‘ì—… ìˆ˜í–‰
     void FinalTick();
 
-    // ÀÚ½ÅÀ» Å¸°Ù¿¡ ±×¸²
+    // ìì‹ ì„ íƒ€ê²Ÿì— ê·¸ë¦¼
     void Render();
 
     void Destroy();
@@ -42,17 +44,23 @@ public:
     Ptr<GameObject> GetChild(int _idx) { return m_vecChild[_idx]; }
 
     bool IsDead() { return m_Dead; }
+
 public:
+    // íŠ¹ì • ì»´í¬ë„ŒíŠ¸ë¥¼ ë‹¤ìš´ìºìŠ¤íŒ…í•´ì„œ ë°”ë¡œ ë¦¬í„´
+    GET_COMPONENT(SpriteRender, SPRITE_RENDER);
     GET_COMPONENT(Transform, TRANSFORM);
     GET_COMPONENT(MeshRender, MESHRENDER);
     GET_COMPONENT(BillboardRender, BILLBOARD_RENDER);
     GET_COMPONENT(Camera, CAMERA);
     GET_COMPONENT(Collider2D, COLLIDER2D);
     Ptr<CRenderComponent> GetRenderCom() { return m_RenderCom; }
+private:
+    void RegisterLayer();
 public:
     GameObject();
     virtual ~GameObject();
 
+    friend class Layer;
     friend class TaskMgr;
 };
 bool IsValid(Ptr<GameObject>& _Object);

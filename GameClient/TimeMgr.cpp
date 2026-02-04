@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "TimeMgr.h"
 #include "Engine.h"
 TimeMgr::TimeMgr()
@@ -17,28 +17,28 @@ TimeMgr::~TimeMgr() {
 
 void TimeMgr::Init()
 {
-	// 1ÃÊµ¿¾È °¡´ÉÇÑ Ä«¿îÆÃ È½¼ö
-	QueryPerformanceFrequency(&m_Frequency); // cpu°¡ ½ÇÇàÇÏÁö ¾ÊÀ½
+	// 1ì´ˆë™ì•ˆ ê°€ëŠ¥í•œ ì¹´ìš´íŒ… íšŸìˆ˜
+	QueryPerformanceFrequency(&m_Frequency); // cpuê°€ ì‹¤í–‰í•˜ì§€ ì•ŠìŒ
 
-	// ÇöÀç±îÁö ¸î±îÁö ¼Â´ÂÁö
+	// í˜„ì¬ê¹Œì§€ ëª‡ê¹Œì§€ ì…‹ëŠ”ì§€
 	QueryPerformanceCounter(&m_Prev);
 }
 
 void TimeMgr::Tick()
 {
-	// ÇöÀç Ä«¿îÆÃ °¡Á®¿À±â
+	// í˜„ì¬ ì¹´ìš´íŒ… ê°€ì ¸ì˜¤ê¸°
 	QueryPerformanceCounter(&m_Current);
 
-	// ÀÌÀü°ú ÇöÀç Ä«¿îÆÃ Â÷ÀÌ¸¦ Frequency ·Î ³ª´²¼­ 1 ÇÁ·¹ÀÓµ¿¾È ÁøÇàÇÑ ½Ã°£°ªÀ» ±¸ÇÏ±â
+	// ì´ì „ê³¼ í˜„ì¬ ì¹´ìš´íŒ… ì°¨ì´ë¥¼ Frequency ë¡œ ë‚˜ëˆ ì„œ 1 í”„ë ˆì„ë™ì•ˆ ì§„í–‰í•œ ì‹œê°„ê°’ì„ êµ¬í•˜ê¸°
 	m_DeltaTime = (float)(m_Current.QuadPart - m_Prev.QuadPart) / (float)m_Frequency.QuadPart;
 
-	// Prev Ä«¿îÆÃÀ» ´Ù½Ã ÇöÀçÄ«¿îÆÃÀ¸·Î ¸ÂÃß±â
+	// Prev ì¹´ìš´íŒ…ì„ ë‹¤ì‹œ í˜„ì¬ì¹´ìš´íŒ…ìœ¼ë¡œ ë§ì¶”ê¸°
 	m_Prev = m_Current;
 
-	// ´©Àû ½Ã°£ °è»ê
+	// ëˆ„ì  ì‹œê°„ ê³„ì‚°
 	m_Time += m_DeltaTime;
 
-	// 1ÃÊ¸¶´Ù if ¼öÇà
+	// 1ì´ˆë§ˆë‹¤ if ìˆ˜í–‰
 	if (1.f < m_Time) {
 		wchar_t buff[255] = {};
 		swprintf_s(buff, 255, L"DeltaTime : %f", m_DeltaTime);

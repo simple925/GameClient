@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CBillboardRender.h"
 #include "AssetMgr.h"
 
@@ -29,7 +29,7 @@ void CBillboardRender::Render()
 
 void CBillboardRender::CreateMaterial()
 {
-	// RectMesh ¼³Á¤
+	// RectMesh ì„¤ì •
 	SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 
 	Ptr<AMaterial> pMtrl = AssetMgr::GetInst()->Find<AMaterial>(L"BillboardMtrl");
@@ -37,7 +37,7 @@ void CBillboardRender::CreateMaterial()
 		pMtrl = new AMaterial;
 		pMtrl->SetName(L"BillboardMtrl");
 
-		// ½¦ÀÌ´õ »ı¼º
+		// ì‰ì´ë” ìƒì„±
 		Ptr<AGraphicShader> pShader = AssetMgr::GetInst()->Find<AGraphicShader>(L"BillboardShader");
 		if (nullptr == pShader) {
 			pShader = new AGraphicShader;
@@ -49,7 +49,7 @@ void CBillboardRender::CreateMaterial()
 			AssetMgr::GetInst()->AddAsset(pShader->GetName(), pShader.Get());
 
 		}
-		// Ã£Àº or »ı¼ºÇÑ ½¦ÀÌ´õ¸¦ ÀçÁú¿¡ ¼³Á¤ÇØÁÖ°í, ÀçÁúµµ ¿¡¼Â¸Å´ÏÀú¿¡ µî·ÏÇÑ´Ù.
+		// ì°¾ì€ or ìƒì„±í•œ ì‰ì´ë”ë¥¼ ì¬ì§ˆì— ì„¤ì •í•´ì£¼ê³ , ì¬ì§ˆë„ ì—ì…‹ë§¤ë‹ˆì €ì— ë“±ë¡í•œë‹¤.
 		pMtrl->SetShader(pShader);
 		pMtrl->SetTexture(TEX_0, m_Texture);
 		AssetMgr::GetInst()->AddAsset(pMtrl->GetName(), pMtrl.Get());

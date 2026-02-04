@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "ALevel.h"
 
@@ -12,7 +12,7 @@ private:
 public:
     Ptr<ALevel> GetLevel() { return m_CurLevel; }
 
-public: // ½ÃÁ¡ ÇÔ¼ö ¸ñ·Ï
+public: // ì‹œì  í•¨ìˆ˜ ëª©ë¡
     void Init();
     void Progress();
 };

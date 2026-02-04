@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// ¿ÜºÎ¿¡¼­ »ı¼ºÀÚ¸¦ È£ÃâÇÏÁö ¸øÇÏµµ·Ï ÇÔ
+// ì™¸ë¶€ì—ì„œ ìƒì„±ìë¥¼ í˜¸ì¶œí•˜ì§€ ëª»í•˜ë„ë¡ í•¨
 class Engine
 	: public singleton<Engine>
 {
@@ -16,7 +16,7 @@ public:
 		return m_hInst;
 	}
 
-	// main ÇÚµé ¸®ÅÏ
+	// main í•¸ë“¤ ë¦¬í„´
 	HWND GetMainWinHandle() {
 		return m_hWnd;
 	}

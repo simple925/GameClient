@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Layer.h"
 Layer::Layer()
 {
@@ -7,27 +7,50 @@ Layer::Layer()
 Layer::~Layer()
 {
 }
-void Layer::Begin()
+
+void Layer::AddObject(Ptr<GameObject> _Object)
 {
-	for (int i = 0; i < m_vecObject.size(); ++i) {
-		m_vecObject[i]->Begin();
+	m_vecParents.push_back(_Object);
+
+	list<GameObject*> queue;
+
+	queue.push_back(_Object.Get());
+
+	while (!queue.empty())
+	{
+		GameObject* pObject = queue.front();
+		queue.pop_front();
+		pObject->m_LayerIdx = m_LayerIdx;
+
+		for (size_t i = 0; i < pObject->m_vecChild.size(); ++i)
+		{
+			queue.push_back(pObject->m_vecChild[i].Get());
+		}
 	}
 }
+
+void Layer::Begin()
+{
+	for (int i = 0; i < m_vecParents.size(); ++i) {
+		m_vecParents[i]->Begin();
+	}
+}
+
 void Layer::Tick()
 {
-	for (size_t i = 0; i < m_vecObject.size(); ++i) {
-		m_vecObject[i]->Tick();
+	for (size_t i = 0; i < m_vecParents.size(); ++i) {
+		m_vecParents[i]->Tick();
 	}
 }
 
 void Layer::FinalTick()
 {
-	vector<Ptr<GameObject>>::iterator iter = m_vecObject.begin();
+	vector<Ptr<GameObject>>::iterator iter = m_vecParents.begin();
 
-	while (iter != m_vecObject.end()) {
+	while (iter != m_vecParents.end()) {
 		(*iter)->FinalTick();
 		if ((*iter)->IsDead()) {
-			iter = m_vecObject.erase(iter);
+			iter = m_vecParents.erase(iter);
 		}
 		else
 		{
@@ -38,7 +61,7 @@ void Layer::FinalTick()
 
 void Layer::Render()
 {
-	for (int i = 0; i < m_vecObject.size(); ++i) {
-		m_vecObject[i]->Render();
+	for (int i = 0; i < m_vecParents.size(); ++i) {
+		m_vecParents[i]->Render();
 	}
 }

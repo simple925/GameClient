@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Component.h"
 class CScript :
     public Component
@@ -7,7 +7,7 @@ private:
 
 public:
     virtual void Tick() = 0;
-    virtual void FinalTick() final {}; // final ¿À¹ö¶óÀÌµù ºÒ°¡
+    virtual void FinalTick() final {}; // final ì˜¤ë²„ë¼ì´ë”© ë¶ˆê°€
 protected:
     void Destroy();
 public:

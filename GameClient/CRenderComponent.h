@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Component.h"
 
 #include "AMesh.h"
@@ -17,7 +17,7 @@ public:
     virtual void Begin() override;
     virtual void Render() = 0;
 
-    // ÀÚ½ÅÀÌ »ç¿ëÇÒ ÀçÁú ·Îµù ¹× »ı¼º
+    // ìì‹ ì´ ì‚¬ìš©í•  ì¬ì§ˆ ë¡œë”© ë° ìƒì„±
     virtual void CreateMaterial() = 0;
 
 public:

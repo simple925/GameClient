@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "PathMgr.h"
 #include "Engine.h"
 PathMgr::PathMgr()
@@ -13,14 +13,14 @@ PathMgr::~PathMgr()
 
 void PathMgr::Init()
 {
-	// ContentPath °æ·Î Ã£±â
-	// ½ÇÇàÆÄÀÏÀÌ ÀÖ´Â Bin Æú´õ °æ·Î¸¦ Ã£¾Æ³½´Ù.
-	// µð¹ö±ë ¸ðµå¿¡¼­µµ ¶È°°ÀÌ µ¿ÀÛÇÏ°Ô ÇÏ±â À§ÇØ¼­,
-	// ÇÁ·ÎÁ§Æ® ±¸¼º¼³Á¤, µð¹ö±ë Å¾¿¡ ÀÛ¾÷ µð·ºÅÍ¸®¸¦ ½ÇÇàÆÄÀÏ °æ·Î·Î ¼³Á¤ÇØÁØ´Ù.
+	// ContentPath ê²½ë¡œ ì°¾ê¸°
+	// ì‹¤í–‰íŒŒì¼ì´ ìžˆëŠ” Bin í´ë” ê²½ë¡œë¥¼ ì°¾ì•„ë‚¸ë‹¤.
+	// ë””ë²„ê¹… ëª¨ë“œì—ì„œë„ ë˜‘ê°™ì´ ë™ìž‘í•˜ê²Œ í•˜ê¸° ìœ„í•´ì„œ,
+	// í”„ë¡œì íŠ¸ êµ¬ì„±ì„¤ì •, ë””ë²„ê¹… íƒ‘ì— ìž‘ì—… ë””ë ‰í„°ë¦¬ë¥¼ ì‹¤í–‰íŒŒì¼ ê²½ë¡œë¡œ ì„¤ì •í•´ì¤€ë‹¤.
 	GetCurrentDirectory(255, m_ContentPath);
 	//SetWindowText(Engine::GetInst()->GetMainWinHandle(), m_ContentPath);
 
-	int Len = wcslen(m_ContentPath);
+	int Len = (UINT)wcslen(m_ContentPath);
 
 
 	for (int i = Len - 1; 0 <= i; --i)

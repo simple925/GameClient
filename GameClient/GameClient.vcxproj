@@ -128,7 +128,8 @@
     </Link>
     <PreBuildEvent>
       <Command>cd $(SolutionDir)
-call CopyShader.bat</Command>
+call CopyShader.bat
+call ComponentAuto.exe</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

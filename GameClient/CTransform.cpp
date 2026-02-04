@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CTransform.h"
 #include "Device.h"
 
@@ -40,8 +40,8 @@ void CTransform::FinalTick()
 {
 	
 
-	// Çà¿­ÀÇ 4ÇàÀº ÀÌµ¿Á¤º¸¸¦ °®µµ·Ï ¾à¼ÓµÊ
-	// ´ÜÀ§ Çà¿­ == Ç×µîÇà¿­
+	// í–‰ì—´ì˜ 4í–‰ì€ ì´ë™ì •ë³´ë¥¼ ê°–ë„ë¡ ì•½ì†ë¨
+	// ë‹¨ìœ„ í–‰ì—´ == í•­ë“±í–‰ì—´
 	/*
 		1 0 0 0
 		0 1 0 0
@@ -49,17 +49,17 @@ void CTransform::FinalTick()
 		0 0 0 1
 	*/
 
-	// º¯È¯ Àû¿ë ¼ø¼­
-	// Å©(Å©±â, ¹èÀ²) -> ÀÚ(È¸Àü, ÀÚÀü) -> ÀÌ(ÀÌµ¿) -> °ø(È¸Àü, °øÀü)
-	// Å©±â > ÀÚÀü > ÀÌµ¿ > °øÀü
+	// ë³€í™˜ ì ìš© ìˆœì„œ
+	// í¬(í¬ê¸°, ë°°ìœ¨) -> ìž(íšŒì „, ìžì „) -> ì´(ì´ë™) -> ê³µ(íšŒì „, ê³µì „)
+	// í¬ê¸° > ìžì „ > ì´ë™ > ê³µì „
 
 
-	Matrix matTrans = XMMatrixIdentity(); // ´ÜÀ§Çà¿­·Î ÃÊ±âÈ­
+	Matrix matTrans = XMMatrixIdentity(); // ë‹¨ìœ„í–‰ì—´ë¡œ ì´ˆê¸°í™”
 	matTrans._41 = m_RelativePos.x;
 	matTrans._42 = m_RelativePos.y;
 	matTrans._43 = m_RelativePos.z;
 
-	Matrix matScale = XMMatrixIdentity(); // ´ÜÀ§Çà¿­·Î ÃÊ±âÈ­
+	Matrix matScale = XMMatrixIdentity(); // ë‹¨ìœ„í–‰ì—´ë¡œ ì´ˆê¸°í™”
 	matScale._11 = m_RelativeScale.x;
 	matScale._22 = m_RelativeScale.y;
 	matScale._33 = m_RelativeScale.z;
@@ -69,40 +69,40 @@ void CTransform::FinalTick()
 				  * XMMatrixRotationZ(m_RelativeRot.z);
 
 
-	// ¹æÇâº¤ÅÍ °è»ê ÃÊ±â°ªÀ¸·Î
+	// ë°©í–¥ë²¡í„° ê³„ì‚° ì´ˆê¸°ê°’ìœ¼ë¡œ
 	m_Dir[(UINT)DIR::RIGHT] = Vec3(1.f, 0.f, 0.f);
 	m_Dir[(UINT)DIR::UP]	= Vec3(0.f, 1.f, 0.f);
 	m_Dir[(UINT)DIR::FRONT] = Vec3(0.f, 0.f, 1.f);
 	/*
-		// coord Çà·Ä
-		// º¯È¯Çà·ÄÀ» Àû¿ëÇÒ Vec3 º¤ÅÍ¸¦ ÁÂÇ¥¼º µ¥ÀÌÅÍ·Î º»´Ù(µ¿Â÷ÁÂÇ¥ 1·Î È®Àå -> 4Çà ÀÌµ¿Á¤º¸ Àû¿ë)
-		//XMVector3TransformCoord(m_Dir[(UINT)DIR::RIGHT], matRot); // ÀÌµ¿Á¤º¸¸¦ °öÇÔ µ¿Â÷ÁÂÇ¥°¡ 1.f ÀÓ
+		// coord í–‰ë ¬
+		// ë³€í™˜í–‰ë ¬ì„ ì ìš©í•  Vec3 ë²¡í„°ë¥¼ ì¢Œí‘œì„± ë°ì´í„°ë¡œ ë³¸ë‹¤(ë™ì°¨ì¢Œí‘œ 1ë¡œ í™•ìž¥ -> 4í–‰ ì´ë™ì •ë³´ ì ìš©)
+		//XMVector3TransformCoord(m_Dir[(UINT)DIR::RIGHT], matRot); // ì´ë™ì •ë³´ë¥¼ ê³±í•¨ ë™ì°¨ì¢Œí‘œê°€ 1.f ìž„
 
-		// º¯È¯Çà·ÄÀ» Àû¿ëÇÒ Vec3 º¤ÅÍ¸¦ ¹æÇâ¼º µ¥ÀÌÅÍ·Î º»´Ù(µ¿Â÷ÁÂÇ¥ 0·Î È®Àå -> 4Çà ÀÌµ¿Á¤º¸ ¹«½Ã)
+		// ë³€í™˜í–‰ë ¬ì„ ì ìš©í•  Vec3 ë²¡í„°ë¥¼ ë°©í–¥ì„± ë°ì´í„°ë¡œ ë³¸ë‹¤(ë™ì°¨ì¢Œí‘œ 0ë¡œ í™•ìž¥ -> 4í–‰ ì´ë™ì •ë³´ ë¬´ì‹œ)
 		//m_Dir[(UINT)DIR::RIGHT] = XMVector3TransformNormal(m_Dir[(UINT)DIR::RIGHT], matRot);
 	*/
 	
-	m_Dir[(UINT)DIR::RIGHT] = XMVector3TransformNormal(m_Dir[(UINT)DIR::RIGHT], matRot); // µ¿Â÷ÁÂÇ¥¸¦ 0À¸·Î Àû¿ëÇØ¼­ °öÇÔ
-	m_Dir[(UINT)DIR::UP]	= XMVector3TransformNormal(m_Dir[(UINT)DIR::UP], matRot); // µ¿Â÷ÁÂÇ¥¸¦ 0À¸·Î Àû¿ëÇØ¼­ °öÇÔ
-	m_Dir[(UINT)DIR::FRONT] = XMVector3TransformNormal(m_Dir[(UINT)DIR::FRONT], matRot); // µ¿Â÷ÁÂÇ¥¸¦ 0À¸·Î Àû¿ëÇØ¼­ °öÇÔ
+	m_Dir[(UINT)DIR::RIGHT] = XMVector3TransformNormal(m_Dir[(UINT)DIR::RIGHT], matRot); // ë™ì°¨ì¢Œí‘œë¥¼ 0ìœ¼ë¡œ ì ìš©í•´ì„œ ê³±í•¨
+	m_Dir[(UINT)DIR::UP]	= XMVector3TransformNormal(m_Dir[(UINT)DIR::UP], matRot); // ë™ì°¨ì¢Œí‘œë¥¼ 0ìœ¼ë¡œ ì ìš©í•´ì„œ ê³±í•¨
+	m_Dir[(UINT)DIR::FRONT] = XMVector3TransformNormal(m_Dir[(UINT)DIR::FRONT], matRot); // ë™ì°¨ì¢Œí‘œë¥¼ 0ìœ¼ë¡œ ì ìš©í•´ì„œ ê³±í•¨
 
-	// ¿ùµåÇà·Ä °è»ê ( Å©±â x È¸Àü x ÀÌµ¿ )
+	// ì›”ë“œí–‰ë ¬ ê³„ì‚° ( í¬ê¸° x íšŒì „ x ì´ë™ )
 	m_matWorld = matScale * matRot * matTrans;
 
-	// ºÎ¸ð ¿ÀºêÁ§Æ®°¡ ÀÖ¾ú´Ù¸é
+	// ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ê°€ ìžˆì—ˆë‹¤ë©´
 	if (nullptr != GetOwner()->GetParent())
 	{
-		// ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ Å©±â¿¡ ¿µÇâÀ» ¹ÞÁö ¾Ê´Â´Ù.
+		// ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ì— ì˜í–¥ì„ ë°›ì§€ ì•ŠëŠ”ë‹¤.
 		if (m_IndependentScale)
 		{
 			Vec3 ParentScale = GetOwner()->GetParent()->Transform()->GetWorldScale();
 			Matrix matParentScale = XMMatrixScaling(ParentScale.x, ParentScale.y, ParentScale.z);
-			// ¿ªÇà¿­ ±¸ÇÏ´Â¹ý
+			// ì—­í–‰ì—´ êµ¬í•˜ëŠ”ë²•
 			Matrix matParentScaleInv = XMMatrixInverse(nullptr, matParentScale);
 
 			m_matWorld = m_matWorld * matParentScaleInv * GetOwner()->GetParent()->Transform()->GetWorldMat();
 		}
-		// ºÎ¸ð ¿ÀºêÁ§Æ®ÀÇ Å©±â¿¡ ¿µÇâÀ» ¹ÞÁö ¾Ê´Â´Ù.
+		// ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ì— ì˜í–¥ì„ ë°›ì§€ ì•ŠëŠ”ë‹¤.
 		else
 			m_matWorld *= GetOwner()->GetParent()->Transform()->GetWorldMat();
 	}
@@ -112,7 +112,7 @@ void CTransform::Binding()
 {
 	g_Trans.matWorld = m_matWorld;
 
-	// Àü¿ªº¯¼ö¿¡ µé¾îÀÖ´Â ¿ÀºêÁ§Æ® À§Ä¡ Á¤º¸¸¦ »ó¼ö¹öÆÛ·Î º¹»ç
+	// ì „ì—­ë³€ìˆ˜ì— ë“¤ì–´ìžˆëŠ” ì˜¤ë¸Œì íŠ¸ ìœ„ì¹˜ ì •ë³´ë¥¼ ìƒìˆ˜ë²„í¼ë¡œ ë³µì‚¬
 	Device::GetInst()->GetCB(CB_TYPE::TRANSFORM)->SetData(&g_Trans);
 	Device::GetInst()->GetCB(CB_TYPE::TRANSFORM)->Binding();
 }

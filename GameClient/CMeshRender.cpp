@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CMeshRender.h"
 
 CMeshRender::CMeshRender()
@@ -14,7 +14,7 @@ void CMeshRender::FinalTick()
 }
 void CMeshRender::Render()
 {
-	// Mesh or Shader °¡ ¹Ì¼³Á¤ »óÅÂ
+	// Mesh or Shader ê°€ ë¯¸ì„¤ì • ìƒíƒœ
 	if (nullptr == GetMesh() || GetMtrl() == nullptr)
 		return;
 

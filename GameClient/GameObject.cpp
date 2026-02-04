@@ -1,17 +1,26 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GameObject.h"
 
 #include "KeyMgr.h"
 #include "TimeMgr.h"
 #include "TaskMgr.h"
-
+#include "LevelMgr.h"
 #include "CTransform.h"
 
+
+void GameObject::RegisterLayer()
+{
+	Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
+	Layer* pLayer = pCurLevel->GetLayer(m_LayerIdx);
+	pLayer->RegisterLayer(this);
+
+}
 
 GameObject::GameObject()
 	: m_Com{}
 	, m_Parent(nullptr)
 	, m_Dead(false)
+	, m_LayerIdx(-1)
 {
 }
 
@@ -21,20 +30,20 @@ GameObject::~GameObject()
 
 void GameObject::AddComponent(Ptr<Component> _Com)
 {
-	// ·»´õ¸µ ±â´É ÄÄÆ÷³ÍÆ®´Â ÇÏ³ª¸¸ °¡Áú ¼ö ÀÖÀ½
+	// ë Œë”ë§ ê¸°ëŠ¥ ì»´í¬ë„ŒíŠ¸ëŠ” í•˜ë‚˜ë§Œ ê°€ì§ˆ ìˆ˜ ìˆìŒ
 
 	if (dynamic_cast<CRenderComponent*>(_Com.Get())) {
 		assert(!m_RenderCom.Get());
 		m_RenderCom = (CRenderComponent*)_Com.Get();
 	}
 
-	// ÀÔ·ÂÀ¸·Î µé¾î¿Â ÄÄÆÛ³ÍÆ®°¡ ½ºÆ®¸³Æ®¸é, vector ·Î °ü¸®
+	// ì…ë ¥ìœ¼ë¡œ ë“¤ì–´ì˜¨ ì»´í¼ë„ŒíŠ¸ê°€ ìŠ¤íŠ¸ë¦½íŠ¸ë©´, vector ë¡œ ê´€ë¦¬
 	if (_Com->GetType() == COMPONENT_TYPE::SCRIPT) {
 		m_vecScripts.push_back((CScript*)_Com.Get());
 	}
-	// ÀÔ·ÂÀ¸·Î µé¾î¿Â ÄÄÆ÷³ÍÆ®°¡ ½ºÅ©¸³Æ®°¡ ¾Æ´Ï¸é, ¾Ë¸ÂÀº ¹è¿­ Æ÷ÀÎÅÍ·Î °¡¸®Å´
+	// ì…ë ¥ìœ¼ë¡œ ë“¤ì–´ì˜¨ ì»´í¬ë„ŒíŠ¸ê°€ ìŠ¤í¬ë¦½íŠ¸ê°€ ì•„ë‹ˆë©´, ì•Œë§ì€ ë°°ì—´ í¬ì¸í„°ë¡œ ê°€ë¦¬í‚´
 	else {
-		// ÇØ´ç ÄÄÆ÷³ÍÆ®¸¦ ÀÌ¹Ì °¡Áö°í ÀÖÁö ¾Ê¾Æ¾ß ÇÑ´Ù.
+		// í•´ë‹¹ ì»´í¬ë„ŒíŠ¸ë¥¼ ì´ë¯¸ ê°€ì§€ê³  ìˆì§€ ì•Šì•„ì•¼ í•œë‹¤.
 		assert(nullptr == m_Com[(UINT)_Com->GetType()]);
 		m_Com[(UINT)_Com->GetType()] = _Com;
 	}
@@ -77,15 +86,28 @@ void GameObject::FinalTick()
 			m_Com[i]->FinalTick();
 		}
 	}
-	for (size_t i = 0; i < m_vecChild.size(); ++i)
-	{
-		m_vecChild[i]->FinalTick();
+
+	// ìì‹ ì´ ì†Œì†ëœ Layerì— ìê¸°ìì‹ ì„ ì•Œë¦¼(ë“±ë¡)
+	RegisterLayer();
+
+	// ìì‹ ì˜¤ë¸Œì íŠ¸ FinalTick í˜¸ì¶œ
+	// ë§Œì•½ Dead ìƒíƒœì¸ ìì‹ ì˜¤ë¸Œì íŠ¸ê°€ ìˆìœ¼ë©´, Vector ì—ì„œ ì œê±°í•œë‹¤.
+	vector<Ptr<GameObject>>::iterator iter = m_vecChild.begin();
+	while (iter != m_vecChild.end()) {
+		(*iter)->FinalTick();
+		if ((*iter)->IsDead()) {
+			iter = m_vecChild.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
 	}
 }
 
 void GameObject::Render()
 {
-	// ·»´õ¸µ °ü·Ã ±â´ÉÀ» º¸À¯ÇÑ ÄÄÆ÷³ÍÆ®°¡ ¾øÀ¸¸é GameObject´Â Rendering µÉ ¼ö ¾ø´Ù.
+	// ë Œë”ë§ ê´€ë ¨ ê¸°ëŠ¥ì„ ë³´ìœ í•œ ì»´í¬ë„ŒíŠ¸ê°€ ì—†ìœ¼ë©´ GameObjectëŠ” Rendering ë  ìˆ˜ ì—†ë‹¤.
 	if (nullptr != m_RenderCom)
 	{
 		Transform()->Binding();

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CCollider2D.h"
 
 #include "RenderMgr.h"
@@ -16,9 +16,9 @@ CCollider2D::~CCollider2D()
 
 void CCollider2D::FinalTick()
 {
-	// XMMatrixTranslation ÀÌµ¿Çà·Ä
+	// XMMatrixTranslation ì´ë™í–‰ë ¬
 	Matrix matTran = XMMatrixTranslation(m_Offset.x, m_Offset.y, 0.f);
-	// XMMatrixScaling Å©±âÇà·Ä
+	// XMMatrixScaling í¬ê¸°í–‰ë ¬
 	Matrix matScale = XMMatrixScaling(m_Scale.x, m_Scale.y, 0.f);
 
 	m_matWorld = matScale * matTran;

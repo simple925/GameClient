@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Engine.h"
 #include "Device.h"
 #include "TimeMgr.h"
@@ -23,16 +23,16 @@ int Engine::Progress()
 	TimeMgr::GetInst()->Tick();
 	KeyMgr::GetInst()->Tick();
 
-	// LevelMgr ¾÷µ¥ÀÌÆ®
+	// LevelMgr ì—…ë°ì´íŠ¸
 	LevelMgr::GetInst()->Progress();
 
-	// RenderMgr ·»´õ¸µ
+	// RenderMgr ë Œë”ë§
 	RenderMgr::GetInst()->Progress();
 
-	// ·£´õÅ¸°Ù¿¡ ±×·ÁÁø ±×¸²À», À©µµ¿ì ºñÆ®¸ÊÀ¸·Î º¹»ç
+	// ëžœë”íƒ€ê²Ÿì— ê·¸ë ¤ì§„ ê·¸ë¦¼ì„, ìœˆë„ìš° ë¹„íŠ¸ë§µìœ¼ë¡œ ë³µì‚¬
 	Device::GetInst()->Present();
 
-	// ´ÙÀ½ ÇÁ·¹ÀÓ¿¡ Àû¿ëµÉ ÀÛ¾÷ Ã³¸®
+	// ë‹¤ìŒ í”„ë ˆìž„ì— ì ìš©ë  ìž‘ì—… ì²˜ë¦¬
 	TaskMgr::GetInst()->Progress();
 	return S_OK;
 }

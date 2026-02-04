@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Component.h"
 class CTransform :
     public Component
@@ -8,16 +8,16 @@ private:
     Vec3    m_RelativeScale;
     Vec3    m_RelativeRot;
 
-    // ´ÜÀ§º¤ÅÍ(±æÀÌ°¡ 1)
-    Vec3    m_Dir[(UINT)DIR::END]; // ¹æÇâ º¤ÅÍ
+    // ë‹¨ìœ„ë²¡í„°(ê¸¸ì´ê°€ 1)
+    Vec3    m_Dir[(UINT)DIR::END]; // ë°©í–¥ ë²¡í„°
 
     Matrix  m_matWorld;
 
-    bool    m_IndependentScale; // ºÎ¸ğ ¿ÀºêÁ§Æ®ÀÇ Å©±â´Â ¹«½Ã
+    bool    m_IndependentScale; // ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸ì˜ í¬ê¸°ëŠ” ë¬´ì‹œ
 public:
-    // ¼¼ÆÃµÈ ¹­¾îÁÖ´Â ¿ªÇÒ
+    // ì„¸íŒ…ëœ ë¬¶ì–´ì£¼ëŠ” ì—­í• 
     virtual void FinalTick() override;
-    // µ¥ÀÌÅÍ¸¦ GPU ¸Ş¸ğ¸®·Î Àü¼Û
+    // ë°ì´í„°ë¥¼ GPU ë©”ëª¨ë¦¬ë¡œ ì „ì†¡
     void Binding();
 
     void SetRelativePos(Vec3 _Pos){ m_RelativePos = _Pos ;}
@@ -28,7 +28,7 @@ public:
     Vec3 GetRelativeScale() { return m_RelativeScale;}
     Vec3 GetRelativeRot() { return m_RelativeRot; }
 
-    // Translation() ÀÌµ¿Á¤º¸¸¦ »Ì¾Æ¿È _41 _42 _43
+    // Translation() ì´ë™ì •ë³´ë¥¼ ë½‘ì•„ì˜´ _41 _42 _43
     Vec3 GetWorldPos() { return m_matWorld.Translation(); }
     void SetIndependentScale(bool _On) { m_IndependentScale = !m_IndependentScale; }
 

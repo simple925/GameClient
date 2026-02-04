@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "RenderMgr.h"
 #include "Device.h"
 #include "AssetMgr.h"
@@ -25,10 +25,10 @@ void RenderMgr::Progress()
 	if (nullptr == m_MainCam) {
 		return;
 	}
-	// Ä«¸Þ¶ó¸¦ ÀÌ¿ëÇØ¼­ ±×¸²
+	// ì¹´ë©”ë¼ë¥¼ ì´ìš©í•´ì„œ ê·¸ë¦¼
 	m_MainCam->Render();
 
-	// µð¹ö±× ·»´õ¸µ ¿äÃ» Ã³¸®
+	// ë””ë²„ê·¸ ë Œë”ë§ ìš”ì²­ ì²˜ë¦¬
 	Render_Debug();
 }
 
@@ -68,19 +68,19 @@ void RenderMgr::Render_Debug()
 		if ((*iter).DepthTest) m_DbgObj->MeshRender()->GetMtrl()->GetShader()->SetDSType(DS_TYPE::LESS);
 		else m_DbgObj->MeshRender()->GetMtrl()->GetShader()->SetDSType(DS_TYPE::NO_TEST_NO_WRITE);
 
-		// Material ¼³Á¤
+		// Material ì„¤ì •
 		m_DbgObj->MeshRender()->GetMtrl()->SetScalar(VEC4_0, (*iter).Color);
 
-		// Render ¿äÃ»
+		// Render ìš”ì²­
 		m_DbgObj->Render();
 
-		// ·»´õ¸µ ½Ã°£ ´©Àû
+		// ë Œë”ë§ ì‹œê°„ ëˆ„ì 
 		(*iter).Age += DT;
 
-		// ÃÖ´ë ¼ö¸í¿¡ µµ´ÞÇÏ¸é Á¤º¸ »èÁ¦
+		// ìµœëŒ€ ìˆ˜ëª…ì— ë„ë‹¬í•˜ë©´ ì •ë³´ ì‚­ì œ
 		if ((*iter).Life < (*iter).Age)
 		{
-			// ´ÙÀ½ ÀÌÅÍ·¹ÀÌÅÍ¸¦ ÁÜ »èÁ¦ÇÏ¸é ±×·¡¼­ ¹Ýº¹¹® ¾È¿¡¼­ iter ¸¦ »èÁ¦ÇÏ¸é else ·Î ±¸ºÐÇØ¼­ Áõ°¡ ½ÃÄÑ¾ßÇÔ
+			// ë‹¤ìŒ ì´í„°ë ˆì´í„°ë¥¼ ì¤Œ ì‚­ì œí•˜ë©´ ê·¸ëž˜ì„œ ë°˜ë³µë¬¸ ì•ˆì—ì„œ iter ë¥¼ ì‚­ì œí•˜ë©´ else ë¡œ êµ¬ë¶„í•´ì„œ ì¦ê°€ ì‹œì¼œì•¼í•¨
 			iter = m_DbgInfoList.erase(iter);
 		}
 		else

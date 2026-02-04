@@ -1,11 +1,11 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CPlanetControllerScript.h"
 #include "TimeMgr.h"
 #include "LevelMgr.h"
 CPlanetControllerScript::CPlanetControllerScript()
-    : m_distanceFromSun(300.f) // °Å¸®¸¦ Á» ´õ Å©°Ô (´«¿¡ ¶ç°Ô)
-    , m_fOrbitSpeed(1.f)       // °øÀü ¼Óµµ 1.0f
-    , m_fRotationSpeed(2.f)    // ÀÚÀü ¼Óµµ 2.0f
+    : m_distanceFromSun(300.f) // ê±°ë¦¬ë¥¼ ì¢€ ë” í¬ê²Œ (ëˆˆì— ë„ê²Œ)
+    , m_fOrbitSpeed(1.f)       // ê³µì „ ì†ë„ 1.0f
+    , m_fRotationSpeed(2.f)    // ìì „ ì†ë„ 2.0f
     , m_fOrbitAngle(0.f)
     , m_fSelfRotationAngle(0.f)
 {
@@ -17,9 +17,9 @@ CPlanetControllerScript::~CPlanetControllerScript()
 
 void CPlanetControllerScript::Tick()
 {
-    // 1. ÅÂ¾ç(ºÎ¸ğ) À§Ä¡ °¡Á®¿À±â
-    // ÀÎµ¦½º 1¹øÀÌ ÅÂ¾çÀÌ¶ó°í °¡Á¤ÇÏ½Å ·ÎÁ÷ À¯Áö
-    Ptr<GameObject> sola = LevelMgr::GetInst()->GetLevel()->GetLayer(0)->GetVecObject()[1];
+    // 1. íƒœì–‘(ë¶€ëª¨) ìœ„ì¹˜ ê°€ì ¸ì˜¤ê¸°
+    // ì¸ë±ìŠ¤ 1ë²ˆì´ íƒœì–‘ì´ë¼ê³  ê°€ì •í•˜ì‹  ë¡œì§ ìœ ì§€
+    Ptr<GameObject> sola = LevelMgr::GetInst()->GetLevel()->GetLayer(0)->GetParentObjects()[1];
     Vec3 solaPos = sola->Transform()->GetRelativePos();
 
     if (!m_bInitialized)
@@ -27,40 +27,40 @@ void CPlanetControllerScript::Tick()
         Vec3 myPos = Transform()->GetRelativePos();
         Vec3 diff = myPos - solaPos;
 
-        // ÇöÀç ¹èÄ¡µÈ °÷±îÁöÀÇ °Å¸®¸¦ ±Ëµµ ¹İÁö¸§À¸·Î ¼³Á¤
+        // í˜„ì¬ ë°°ì¹˜ëœ ê³³ê¹Œì§€ì˜ ê±°ë¦¬ë¥¼ ê¶¤ë„ ë°˜ì§€ë¦„ìœ¼ë¡œ ì„¤ì •
         m_distanceFromSun = sqrtf(diff.x * diff.x + diff.z * diff.z);
 
-        // ÇöÀç ¹èÄ¡µÈ ¹æÇâÀ» ½ÃÀÛ °¢µµ·Î ¼³Á¤ (atan2f »ç¿ë)
+        // í˜„ì¬ ë°°ì¹˜ëœ ë°©í–¥ì„ ì‹œì‘ ê°ë„ë¡œ ì„¤ì • (atan2f ì‚¬ìš©)
         m_fOrbitAngle = atan2f(diff.z, diff.x);
 
-        m_bInitialized = true; // ´ÙÀ½ Æ½ºÎÅÍ´Â ½ÇÇà ¾È µÊ
+        m_bInitialized = true; // ë‹¤ìŒ í‹±ë¶€í„°ëŠ” ì‹¤í–‰ ì•ˆ ë¨
     }
 
-    // 2. ½Ã°£(DT)¿¡ µû¶ó ¸â¹ö º¯¼öÀÎ °¢µµ¸¦ ¾÷µ¥ÀÌÆ®
-    // fAngleÀÌ ¸â¹ö º¯¼ö¿©¾ß ¸Å ÇÁ·¹ÀÓ ÀÌ¾î¼­ °è»êµË´Ï´Ù.
+    // 2. ì‹œê°„(DT)ì— ë”°ë¼ ë©¤ë²„ ë³€ìˆ˜ì¸ ê°ë„ë¥¼ ì—…ë°ì´íŠ¸
+    // fAngleì´ ë©¤ë²„ ë³€ìˆ˜ì—¬ì•¼ ë§¤ í”„ë ˆì„ ì´ì–´ì„œ ê³„ì‚°ë©ë‹ˆë‹¤.
     m_fOrbitAngle += DT * m_fOrbitSpeed;
 
-    float fSemiMajor = m_distanceFromSun;        // °¡·Î ¹İÁö¸§
-    float fSemiMinor = m_distanceFromSun * 0.8f; // ¼¼·Î ¹İÁö¸§ (¾à°£ Âî±×·¯Áø Å¸¿ø)
+    float fSemiMajor = m_distanceFromSun;        // ê°€ë¡œ ë°˜ì§€ë¦„
+    float fSemiMinor = m_distanceFromSun * 0.8f; // ì„¸ë¡œ ë°˜ì§€ë¦„ (ì•½ê°„ ì°Œê·¸ëŸ¬ì§„ íƒ€ì›)
 
-    // 3. »ï°¢ÇÔ¼ö·Î ±Ëµµ À§Ä¡ °è»ê (X, Z Æò¸é °øÀü)
+    // 3. ì‚¼ê°í•¨ìˆ˜ë¡œ ê¶¤ë„ ìœ„ì¹˜ ê³„ì‚° (X, Z í‰ë©´ ê³µì „)
     Vec3 vNewPos;
     vNewPos.x = solaPos.x + cosf(m_fOrbitAngle) * fSemiMajor;
     vNewPos.z = solaPos.z + sinf(m_fOrbitAngle) * fSemiMinor;
-    vNewPos.y = solaPos.y; // ÅÂ¾çÀÇ ³ôÀÌ¿¡ ¸ÂÃã
+    vNewPos.y = solaPos.y; // íƒœì–‘ì˜ ë†’ì´ì— ë§ì¶¤
 
-    // 1. ÀÚÀü °¢µµ ¾÷µ¥ÀÌÆ® (¸â¹ö º¯¼ö m_fSelfRotationAngle Ãß°¡ ÃßÃµ)
+    // 1. ìì „ ê°ë„ ì—…ë°ì´íŠ¸ (ë©¤ë²„ ë³€ìˆ˜ m_fSelfRotationAngle ì¶”ê°€ ì¶”ì²œ)
     m_fSelfRotationAngle += DT * m_fRotationSpeed;
 
-    // 2. À§Ä¡ ¼³Á¤
+    // 2. ìœ„ì¹˜ ì„¤ì •
     Transform()->SetRelativePos(vNewPos);
 
-    // 3. È¸Àü ¼³Á¤ (YÃà Áß½ÉÀ¸·Î ÀÚÀü)
-    // ±âÁ¸ÀÇ È¸Àü°ª¿¡ ÀÚÀü °¢µµ¸¦ Àû¿ëÇÕ´Ï´Ù.
+    // 3. íšŒì „ ì„¤ì • (Yì¶• ì¤‘ì‹¬ìœ¼ë¡œ ìì „)
+    // ê¸°ì¡´ì˜ íšŒì „ê°’ì— ìì „ ê°ë„ë¥¼ ì ìš©í•©ë‹ˆë‹¤.
     Vec3 vRot = Transform()->GetRelativeRot();
     vRot.y = m_fSelfRotationAngle;
 
-    // 4. ÃÖÁ¾ À§Ä¡ ¼³Á¤
+    // 4. ìµœì¢… ìœ„ì¹˜ ì„¤ì •
     Transform()->SetRelativeRot(vRot);
     Transform()->SetRelativePos(vNewPos);
 }

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "KeyMgr.h"
 #include "Engine.h"
 
@@ -46,7 +46,7 @@ KeyMgr::~KeyMgr()
 }
 void KeyMgr::Init()
 {
-	// Å° µî·Ï
+	// í‚¤ ë“±ë¡
 	m_vecKeys.resize((UINT)KEY::KEY_END);
 }
 
@@ -58,12 +58,12 @@ void KeyMgr::Tick()
 		bool bDown = (sKey & 0x8000) != 0;
 		if (bDown)
 		{
-			// ÀÌÀü¿¡µµ ´­·ÁÀÖ¾ú´Ù.
+			// ì´ì „ì—ë„ ëˆŒë ¤ìˆì—ˆë‹¤.
 			if (m_vecKeys[i].Pressed)
 			{
 				m_vecKeys[i].State = PRESSED;
 			}
-			// ÀÌÀü±îÁö´Â ´­¸°ÀûÀÌ ¾ø¾ú´Ù.
+			// ì´ì „ê¹Œì§€ëŠ” ëˆŒë¦°ì ì´ ì—†ì—ˆë‹¤.
 			else
 			{
 				m_vecKeys[i].State = TAP;
@@ -71,10 +71,10 @@ void KeyMgr::Tick()
 
 			m_vecKeys[i].Pressed = true;
 		}
-		// Áö±İ ¾È´­·Á ÀÖÀ½
+		// ì§€ê¸ˆ ì•ˆëˆŒë ¤ ìˆìŒ
 		else
 		{
-			// ÀÌÀü¿¡µµ ´­·ÁÀÖ¾ú´Ù.
+			// ì´ì „ì—ë„ ëˆŒë ¤ìˆì—ˆë‹¤.
 			if (m_vecKeys[i].Pressed)
 			{
 				m_vecKeys[i].State = RELEASED;
@@ -87,19 +87,19 @@ void KeyMgr::Tick()
 		}
 	}
 
-	// ¸¶¿ì½º ÁÂÇ¥ °è»ê
+	// ë§ˆìš°ìŠ¤ ì¢Œí‘œ ê³„ì‚°
 	POINT pt = {};
-	GetCursorPos(&pt); // window ±âÁØ ¸¶¿ì½º ÁÂÇ¥
+	GetCursorPos(&pt); // window ê¸°ì¤€ ë§ˆìš°ìŠ¤ ì¢Œí‘œ
 
-	ScreenToClient(Engine::GetInst()->GetMainWinHandle(), &pt); // À©µµ¿ì ±âÁØÀ¸·Î ¸¶¿ì½ºÁÂÇ¥ º¯°æ
+	ScreenToClient(Engine::GetInst()->GetMainWinHandle(), &pt); // ìœˆë„ìš° ê¸°ì¤€ìœ¼ë¡œ ë§ˆìš°ìŠ¤ì¢Œí‘œ ë³€ê²½
 
-	m_MousePrevPos = m_MousePos;	// ÀÌÀü ÇÁ·¹ÀÓ Á¤º¸¸¦ ÀúÀå
-	m_MousePos = Vec2((float)pt.x, (float)pt.y);	// ÇöÀç ÇÁ·¹ÀÓ Á¤º¸¸¦ ÀúÀå
+	m_MousePrevPos = m_MousePos;	// ì´ì „ í”„ë ˆì„ ì •ë³´ë¥¼ ì €ì¥
+	m_MousePos = Vec2((float)pt.x, (float)pt.y);	// í˜„ì¬ í”„ë ˆì„ ì •ë³´ë¥¼ ì €ì¥
 
-	// ¸¶¿ì½º ÁøÇà ¹æÇâ
+	// ë§ˆìš°ìŠ¤ ì§„í–‰ ë°©í–¥
 	m_MouseDir = m_MousePos - m_MousePrevPos;
 
-	// ÈÙ ÀÌº¥Æ® Ã³¸®
+	// íœ  ì´ë²¤íŠ¸ ì²˜ë¦¬
 	if (m_WheelChanged)
 	{
 		m_WheelChanged = false;

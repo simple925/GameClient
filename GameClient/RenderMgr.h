@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "GameObject.h"
 #include "CCamera.h"
@@ -9,8 +9,8 @@ class RenderMgr
 	SINGLE(RenderMgr);
 private:
 	Ptr<CCamera>	m_MainCam;
-	Ptr<GameObject>	m_DbgObj;		// debug rendering À» À§ÇÑ Dummy GameObject
-	list<DbgInfo>	m_DbgInfoList;	// debug ¿äÃ» Á¤º¸
+	Ptr<GameObject>	m_DbgObj;		// debug rendering ì„ ìœ„í•œ Dummy GameObject
+	list<DbgInfo>	m_DbgInfoList;	// debug ìš”ì²­ ì •ë³´
 public:
 	void RegisterCamera(Ptr<CCamera> _Cam) { m_MainCam = _Cam; }
 	Ptr<CCamera> GetPOVCamera() { return m_MainCam; }

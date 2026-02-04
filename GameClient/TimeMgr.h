@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "single.h"
 class TimeMgr
 	: public singleton<TimeMgr>
@@ -8,8 +8,8 @@ private:
 	LARGE_INTEGER	m_Frequency;
 	LARGE_INTEGER	m_Prev;
 	LARGE_INTEGER	m_Current;
-	float			m_DeltaTime;		// 1 ÇÁ·¹ÀÓ °£°İ ½Ã°£
-	float			m_Time;				// °ÔÀÓÀÌ ÄÑÁø ÀÌÈÄ·Î Èå¸¥ ½Ã°£(´©Àû½Ã°£)
+	float			m_DeltaTime;		// 1 í”„ë ˆì„ ê°„ê²© ì‹œê°„
+	float			m_Time;				// ê²Œì„ì´ ì¼œì§„ ì´í›„ë¡œ íë¥¸ ì‹œê°„(ëˆ„ì ì‹œê°„)
 public:
 	void Init();
 	void Tick();

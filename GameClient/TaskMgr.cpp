@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "TaskMgr.h"
 #include "LevelMgr.h"
 #include "GameObject.h"
@@ -12,11 +12,11 @@ TaskMgr::~TaskMgr()
 
 void TaskMgr::Progress()
 {
-	// ¾²·¹±âÅë ¼ö°Å
+	// ì“°ë ˆê¸°í†µ ìˆ˜ê±°
 	m_Garbage.clear();
 
-	// Task Ã³¸®
-	for (size_t i = 0; i < m_vecTask.size(); ++i)
+	// Task ì²˜ë¦¬
+	for (int i = 0; i < (UINT)m_vecTask.size(); ++i)
 	{
 		switch (m_vecTask[i].Type)
 		{
@@ -38,6 +38,6 @@ void TaskMgr::Progress()
 			break;
 		}
 	}
-	// Å×½ºÅ©¸¦ Ã³¸®ÇÏ°í ºñ¿ò
+	// í…ŒìŠ¤í¬ë¥¼ ì²˜ë¦¬í•˜ê³  ë¹„ì›€
 	m_vecTask.clear();
 }

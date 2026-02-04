@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "TempMesh.h"
 
 AMesh* TempMesh::CreateCircle()
@@ -9,7 +9,7 @@ AMesh* TempMesh::CreateCircle()
 	Vtx oVtx[VTXCOUNT] = {};
 	UINT oIdx[IDXCOUNT] = {};
 
-	float fRadius = 1.0f; // Scale·Î Á¶ÀıÇÒ °ÍÀÌ¹Ç·Î ±âº» Å©±â´Â 1·Î ¼³Á¤
+	float fRadius = 1.0f; // Scaleë¡œ ì¡°ì ˆí•  ê²ƒì´ë¯€ë¡œ ê¸°ë³¸ í¬ê¸°ëŠ” 1ë¡œ ì„¤ì •
 	oVtx[0].vPos = Vec3(0.f, 0.f, 0.f);
 	oVtx[0].vColor = Vec4(1.f, 1.f, 1.f, 1.f);
 
@@ -55,7 +55,7 @@ AMesh* TempMesh::CreateRectangle()
 
 	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
 
-	// »ç°¢Çü ¸Ş½¬ »ı¼º
+	// ì‚¬ê°í˜• ë©”ì‰¬ ìƒì„±
 	AMesh* g_QuadMesh = new AMesh;
 	g_QuadMesh->Create(arrVtx, 4, arrIdx, 6);
 	return g_QuadMesh;
@@ -63,7 +63,7 @@ AMesh* TempMesh::CreateRectangle()
 
 AMesh* TempMesh::CreateTriangle()
 {
-	// »ï°¢Çü ¸Ş½¬
+	// ì‚¼ê°í˜• ë©”ì‰¬
 	Vtx arr[3] = {};
 	arr[0].vPos = Vec3(0.f, 1.f, 0.f);
 	arr[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);

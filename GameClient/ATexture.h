@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "Asset.h"
 class ATexture :
     public Asset
 {
 private:
-    ScratchImage                        m_Image; // Content Æú´õ¿¡ ÀÖ´Â ÀÌ¹ÌÁö ÆÄÀÏÀ» ¸Ş¸ğ¸®(SysMem) ·Î ºÒ·¯µå¸²
+    ScratchImage                        m_Image; // Content í´ë”ì— ìˆëŠ” ì´ë¯¸ì§€ íŒŒì¼ì„ ë©”ëª¨ë¦¬(SysMem) ë¡œ ë¶ˆëŸ¬ë“œë¦¼
     ComPtr<ID3D11Texture2D>             m_Tex2D; // Sysmem
     D3D11_TEXTURE2D_DESC                m_Desc;
     ComPtr<ID3D11RenderTargetView>      m_RTV;

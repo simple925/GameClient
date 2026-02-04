@@ -1,24 +1,24 @@
-#pragma once
+ï»¿#pragma once
 #include "Component.h"
 enum class PROJ_TYPE
 {
-	ORTHOGRAPHIC, // Á÷±³Åõ¿µ
-	PERSPECTIVE,  // ¿ø±ÙÅõ¿µ
+	ORTHOGRAPHIC, // ì§êµíˆ¬ì˜
+	PERSPECTIVE,  // ì›ê·¼íˆ¬ì˜
 };
 class CCamera :
 	public Component
 {
 
 private:
-	UINT        m_LayerCheck;   // ¾î¶² ·¹ÀÌ¾î¸¸ È­¸é¿¡ ·»´õ¸µ ÇÒ °ÍÀÎÁö ºñÆ®Ã¼Å©
-	PROJ_TYPE   m_ProjType;     // Åõ¿µ ¹æ½Ä
-	float       m_Far;          // Ä«¸Ş¶ó ½Ã¾ß ÃÖ´ë°Å¸®
-	float       m_Width;        // Åõ¿µ °¡·Î±æÀÌ
-	float       m_AspectRatio;  // Á¾È¾ºñ(°¡·Î / ¼¼·Î), ¼¼·Î´ëºñ °¡·ÎÀÇ ±æÀÌ ºñÀ²
-	float       m_FOV;          // ¿ø±ÙÅõ¿µ ½Ã¾ß°¢
-	float       m_OrthoScale;   // Á÷±³Åõ¿µ ¹èÀ²
-	Matrix      m_matView;      // View Çà·Ä;
-	Matrix      m_matProj;      // Proj Çà·Ä;
+	UINT        m_LayerCheck;   // ì–´ë–¤ ë ˆì´ì–´ë§Œ í™”ë©´ì— ë Œë”ë§ í•  ê²ƒì¸ì§€ ë¹„íŠ¸ì²´í¬
+	PROJ_TYPE   m_ProjType;     // íˆ¬ì˜ ë°©ì‹
+	float       m_Far;          // ì¹´ë©”ë¼ ì‹œì•¼ ìµœëŒ€ê±°ë¦¬
+	float       m_Width;        // íˆ¬ì˜ ê°€ë¡œê¸¸ì´
+	float       m_AspectRatio;  // ì¢…íš¡ë¹„(ê°€ë¡œ / ì„¸ë¡œ), ì„¸ë¡œëŒ€ë¹„ ê°€ë¡œì˜ ê¸¸ì´ ë¹„ìœ¨
+	float       m_FOV;          // ì›ê·¼íˆ¬ì˜ ì‹œì•¼ê°
+	float       m_OrthoScale;   // ì§êµíˆ¬ì˜ ë°°ìœ¨
+	Matrix      m_matView;      // View í–‰ë ¬;
+	Matrix      m_matProj;      // Proj í–‰ë ¬;
 public:
 
 	GET_SET(PROJ_TYPE, ProjType);
@@ -29,15 +29,15 @@ public:
 	GET_SET(float, OrthoScale);
 
 	float GetFOV() { return m_FOV * (180 / XM_PI); }
-	// _Degree 60ºĞ¹ı
-	// ¶óµğ¾ÈÀ¸·Î º¸Á¤
+	// _Degree 60ë¶„ë²•
+	// ë¼ë””ì•ˆìœ¼ë¡œ ë³´ì •
 	void SetFOV(float _Degree) { m_FOV = _Degree* (XM_PI / 180.f); }
 
 public:
 	virtual void Begin() override;
 	virtual void FinalTick() override;
 public:
-	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 32ºñÆ® ÀüºÎ°¡ 1·Î ²Ë Ã¤¿öÁø »óÅÂ
+	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 32ë¹„íŠ¸ ì „ë¶€ê°€ 1ë¡œ ê½‰ ì±„ì›Œì§„ ìƒíƒœ
 	void LayerCheckClear() { m_LayerCheck = 0; }
 	void LayerCheck(int _Idx);
 public:

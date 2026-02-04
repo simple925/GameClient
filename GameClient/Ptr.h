@@ -1,6 +1,6 @@
-#pragma once
-// & ÁÖ¼Ò ³»³ö
-// * ÁÖ¼Ò·Î Á¢±ÙÇÑ´Ù
+ï»¿#pragma once
+// & ì£¼ì†Œ ë‚´ë†”
+// * ì£¼ì†Œë¡œ ì ‘ê·¼í•œë‹¤
 template<typename T>
 class Ptr
 {
@@ -24,7 +24,7 @@ public:
 
 		return *this;
 	}
-	Ptr& operator =(const Ptr<T>& _Ptr) // ½º¸¶Æ® Æ÷ÀÎÅÍ ÀÚÃ¼·Î ´ëÀÔ ÇÏ´Â °æ¿ì
+	Ptr& operator =(const Ptr<T>& _Ptr) // ìŠ¤ë§ˆíŠ¸ í¬ì¸í„° ìì²´ë¡œ ëŒ€ì… í•˜ëŠ” ê²½ìš°
 	{
 		if (nullptr != m_Ptr)
 			m_Ptr->Release();
@@ -48,13 +48,13 @@ public:
 	Ptr()
 		: m_Ptr(nullptr)
 	{}
-	Ptr(T* _Ptr) // º¹»ç »ı¼ºÀÚ¸¦ ÀÌ¿ëÇØ¼­ Ä«ÇÇ¸¦ ÁøÇàÇÔ ÄÄÆÄÀÏ·¯°¡
+	Ptr(T* _Ptr) // ë³µì‚¬ ìƒì„±ìë¥¼ ì´ìš©í•´ì„œ ì¹´í”¼ë¥¼ ì§„í–‰í•¨ ì»´íŒŒì¼ëŸ¬ê°€
 		: m_Ptr(_Ptr)
 	{
 		if (nullptr != m_Ptr)
 			m_Ptr->AddRef();
 	}
-	Ptr(const Ptr<T>& _Ptr) // ½º¸¶Æ® Æ÷ÀÎÅÍ ÀÚÃ¼·Î »ı¼ºÇÏ´Â °æ¿ì
+	Ptr(const Ptr<T>& _Ptr) // ìŠ¤ë§ˆíŠ¸ í¬ì¸í„° ìì²´ë¡œ ìƒì„±í•˜ëŠ” ê²½ìš°
 		: m_Ptr(_Ptr.m_Ptr)
 	{
 		if (nullptr != m_Ptr)
@@ -68,7 +68,7 @@ public:
 };
 
 
-// p == ptr°´Ã¼ ¸¦ ºñ±³ÇÏ±â À§ÇØ »ı¼º
+// p == ptrê°ì²´ ë¥¼ ë¹„êµí•˜ê¸° ìœ„í•´ ìƒì„±
 template<typename T>
 bool operator == (void* _Pointer, const Ptr<T>& _Ptr)
 {

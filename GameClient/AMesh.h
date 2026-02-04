@@ -1,21 +1,21 @@
-#pragma once
+ï»¿#pragma once
 #include "Asset.h"
 
-// vertex(Á¤Á¡), index(ÀÎµ¦½º) Á¤º¸·Î ±¸¼ºµÈ ¸ğµ¨ µ¥ÀÌÅÍ
+// vertex(ì •ì ), index(ì¸ë±ìŠ¤) ì •ë³´ë¡œ êµ¬ì„±ëœ ëª¨ë¸ ë°ì´í„°
 
 class AMesh :
 	public Asset
 {
 private:
-	// Á¤Á¡(vertex) ¹öÆÛ Á¡ ¼¼°³·Î ÇÏ³ªÀÇ ¸é
-	// Á¤Á¡À» ÀúÀåÇÏ´Â ¹öÆÛ(3°³ÀÇ Á¤Á¡À» ÀúÀå½ÃÅ³ ¿¹Á¤, »ï°¢ÇüÀ» Ç¥ÇöÇÏ±â À§ÇØ¼­)
-	ComPtr<ID3D11Buffer>		m_VB;       // Á¤Á¡(Vertex) ¹öÆÛ
-	D3D11_BUFFER_DESC           m_VBDesc;     // Á¤Á¡ ¹öÅÍ »ı¼º
-	UINT                        m_VtxCount; // Á¤Á¡ °³¼ö
+	// ì •ì (vertex) ë²„í¼ ì  ì„¸ê°œë¡œ í•˜ë‚˜ì˜ ë©´
+	// ì •ì ì„ ì €ì¥í•˜ëŠ” ë²„í¼(3ê°œì˜ ì •ì ì„ ì €ì¥ì‹œí‚¬ ì˜ˆì •, ì‚¼ê°í˜•ì„ í‘œí˜„í•˜ê¸° ìœ„í•´ì„œ)
+	ComPtr<ID3D11Buffer>		m_VB;       // ì •ì (Vertex) ë²„í¼
+	D3D11_BUFFER_DESC           m_VBDesc;     // ì •ì  ë²„í„° ìƒì„±
+	UINT                        m_VtxCount; // ì •ì  ê°œìˆ˜
 	// IndexBuffer
-	ComPtr<ID3D11Buffer>		m_IB;       // ÀÎµ¦½º ¹öÆÛ
-	D3D11_BUFFER_DESC           m_IBDesc;     // ÀÎµ¦½º ¹öÆÛ »ı¼º ¿É¼Ç
-	UINT                        m_IdxCount; // ÀÎµ¦½º °³¼ö
+	ComPtr<ID3D11Buffer>		m_IB;       // ì¸ë±ìŠ¤ ë²„í¼
+	D3D11_BUFFER_DESC           m_IBDesc;     // ì¸ë±ìŠ¤ ë²„í¼ ìƒì„± ì˜µì…˜
+	UINT                        m_IdxCount; // ì¸ë±ìŠ¤ ê°œìˆ˜
 public:
 	int Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCount);
 	void Binding();

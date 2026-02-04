@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Component.h"
 #include "GameObject.h"
 #define GET_OTHER_COMPONENT_BODY(COM_NAME) C##COM_NAME* Component::COM_NAME() { return GetOwner()->COM_NAME().Get(); }
@@ -18,3 +18,5 @@ GET_OTHER_COMPONENT_BODY(Camera);
 GET_OTHER_COMPONENT_BODY(MeshRender);
 GET_OTHER_COMPONENT_BODY(BillboardRender);
 GET_OTHER_COMPONENT_BODY(Collider2D);
+
+GET_OTHER_COMPONENT_BODY(SpriteRender);

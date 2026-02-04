@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 class Entity
 {
 private:
 	static UINT g_NextID;
 private:
-	const UINT	m_InstID;		// °´Ã¼¸¶´Ù °¡Áö´Â °íÀ¯ ID °ª
-	wstring		m_Name;			// °´Ã¼¸¶´Ù ÀÌ¸§À» ÁöÁ¤ÇÒ ¼ö ÀÖ´Ù.
-	int			m_RefCount;		// ÂüÁ¶ Ä«¿îÆÃ
+	const UINT	m_InstID;		// ê°ì²´ë§ˆë‹¤ ê°€ì§€ëŠ” ê³ ìœ  ID ê°’
+	wstring		m_Name;			// ê°ì²´ë§ˆë‹¤ ì´ë¦„ì„ ì§€ì •í•  ìˆ˜ ìˆë‹¤.
+	int			m_RefCount;		// ì°¸ì¡° ì¹´ìš´íŒ…
 private:
 	void AddRef() { ++m_RefCount; }
 	void Release() { --m_RefCount; if (m_RefCount <= 0) delete this; }
@@ -22,8 +22,8 @@ public:
 	virtual ~Entity();
 
 	/*
-		¾î¶² Å¸ÀÔÀÌ´ø »ó°ü¾øÀÌ ¼±¾ğ
-		Ptr<T> ¸ğµç Å¸ÀÔ friend ¼±¾ğ
+		ì–´ë–¤ íƒ€ì…ì´ë˜ ìƒê´€ì—†ì´ ì„ ì–¸
+		Ptr<T> ëª¨ë“  íƒ€ì… friend ì„ ì–¸
 	*/
 	template<typename T>
 	friend class Ptr;

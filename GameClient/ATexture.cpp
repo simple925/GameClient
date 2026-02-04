@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "ATexture.h"
 #include "Device.h"
 ATexture::ATexture()
@@ -47,29 +47,29 @@ int ATexture::Load(const wstring& _strFilePath)
 		hr = LoadFromWICFile(_strFilePath.c_str(), WIC_FLAGS_NONE, nullptr, m_Image);
 	}
 	if (FAILED(hr)) {
-		MessageBox(nullptr, L"ÅØ½ºÃÄ ½Ã½ºÅÛ¸Þ¸ð¸® ·Îµù ½ÇÆÐ", L"ÅØ½ºÃÄ ·Îµù ½ÇÆÐ", MB_OK);
+		MessageBox(nullptr, L"í…ìŠ¤ì³ ì‹œìŠ¤í…œë©”ëª¨ë¦¬ ë¡œë”© ì‹¤íŒ¨", L"í…ìŠ¤ì³ ë¡œë”© ì‹¤íŒ¨", MB_OK);
 		return E_FAIL;
 	}
 
 	// SysMem			->		GPU
 	// ScratchImage		->		Texture2D
-	// Texture2D »ý¼º
+	// Texture2D ìƒì„±
 
 	// Texture2D	-> RTV ->
 	//				-> DSV ->
 	//				-> SRV ->
-	// View »ý¼º
+	// View ìƒì„±
 
-	// ScratcgImage¿¡ ·ÎµùµÈ ÀÌ¹ÌÁö µ¥ÀÌÅÍ¸¦ ±â¹ÝÀ¸·Î Texture2D ¸¦ »ý¼ºÇÏ°í,
-	// ´Ù½Ã ÀÌ°É·Î ShaderResourceView ±îÁö ¸¸µé¾î¼­ ShaderResourceView ÁÖ¼Ò¸¦ ¾Ë·ÁÁÜ
+	// ScratcgImageì— ë¡œë”©ëœ ì´ë¯¸ì§€ ë°ì´í„°ë¥¼ ê¸°ë°˜ìœ¼ë¡œ Texture2D ë¥¼ ìƒì„±í•˜ê³ ,
+	// ë‹¤ì‹œ ì´ê±¸ë¡œ ShaderResourceView ê¹Œì§€ ë§Œë“¤ì–´ì„œ ShaderResourceView ì£¼ì†Œë¥¼ ì•Œë ¤ì¤Œ
 	if (FAILED(CreateShaderResourceView(DEVICE, m_Image.GetImages(), m_Image.GetImageCount(), m_Image.GetMetadata(), m_SRV.GetAddressOf()))) {
-		MessageBox(nullptr, L"ShaderResource »ý¼º ½ÇÆÐ", L"ÅØ½ºÃÄ ·Îµù ½ÇÆÐ", MB_OK);
+		MessageBox(nullptr, L"ShaderResource ìƒì„± ì‹¤íŒ¨", L"í…ìŠ¤ì³ ë¡œë”© ì‹¤íŒ¨", MB_OK);
 		return E_FAIL;
 	}
 
-	// »ý¼ºµÈ SRV ¸¦ ÀÌ¿ëÇØ¼­, ¸ÕÀú ¸¸µé¾îÁø Texture2D ÀÇ ÁÖ¼Ò¸¦ ¾Ë¾Æ³¿
+	// ìƒì„±ëœ SRV ë¥¼ ì´ìš©í•´ì„œ, ë¨¼ì € ë§Œë“¤ì–´ì§„ Texture2D ì˜ ì£¼ì†Œë¥¼ ì•Œì•„ëƒ„
 	m_SRV->GetResource((ID3D11Resource**)m_Tex2D.GetAddressOf());
-	// Texture2D ¸¦ »ý¼ºÇÒ¶§ ¼¼ÆÃÇÑ Desc ¿É¼ÇÁ¤º¸¸¦ ¾Ë¾Æ³¿
+	// Texture2D ë¥¼ ìƒì„±í• ë•Œ ì„¸íŒ…í•œ Desc ì˜µì…˜ì •ë³´ë¥¼ ì•Œì•„ëƒ„
 	m_Tex2D->GetDesc(&m_Desc);
 
 	return S_OK;

@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CPlayerProjectile.h"
 #include "CTransform.h"
 
@@ -8,15 +8,15 @@
 
 void CPlayerProjectile::Tick()
 {
-	// ÀÌµ¿ 
+	// ì´ë™ 
 	Vec3 vPos = Transform()->GetRelativePos();
 	vPos += Transform()->GetDir(DIR::UP) 
 		  * m_fSpeed 
 		  * DT;
 	Transform()->SetRelativePos(vPos);
-	// Ç®¿¡ ¹Ý³³ (¿¹: zÃà ±âÁØ)
+	// í’€ì— ë°˜ë‚© (ì˜ˆ: zì¶• ê¸°ì¤€)
 	if (vPos.y > 800.f || vPos.y < -800.f || vPos.x > 800.f || vPos.x < -800.f) {
-		GetOwner()->Hide(); // À§Ä¡´Â ¹ß»ç ½ÃÁ¡¿¡ ´Ù½Ã ¼¼ÆÃ 
+		GetOwner()->Hide(); // ìœ„ì¹˜ëŠ” ë°œì‚¬ ì‹œì ì— ë‹¤ì‹œ ì„¸íŒ… 
 	}
 }
 

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "RenderMgr.h"
 #include "TaskMgr.h"
 
@@ -10,7 +10,7 @@ void CreateObject(GameObject* _Object, int LayerIdx)
 	info.Param_1 = LayerIdx;
 	TaskMgr::GetInst()->AddTask(info);
 }
-void DrawDebugRect(Vec3 _Pos, Vec3 _Scale, Vec3 _Rot, Vec4 _Color, float _Duration, bool _DepthTest = false)
+void DrawDebugRect(Vec3 _Pos, Vec3 _Scale, Vec3 _Rot, Vec4 _Color, float _Duration, bool _DepthTest)
 {
 	DbgInfo info = {};
 	info.Shape = DBG_SHAPE::RECT;
@@ -24,7 +24,7 @@ void DrawDebugRect(Vec3 _Pos, Vec3 _Scale, Vec3 _Rot, Vec4 _Color, float _Durati
 	RenderMgr::GetInst()->AddDebugInfo(info);
 }
 
-void DrawDebugRect(const Matrix& _matWorld, Vec4 _Color, float _Duration, bool _DepthTest = false)
+void DrawDebugRect(const Matrix& _matWorld, Vec4 _Color, float _Duration, bool _DepthTest)
 {
 	DbgInfo info = {};
 	info.Shape = DBG_SHAPE::RECT;
@@ -36,7 +36,7 @@ void DrawDebugRect(const Matrix& _matWorld, Vec4 _Color, float _Duration, bool _
 	RenderMgr::GetInst()->AddDebugInfo(info);
 }
 
-void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration, bool _DepthTest = false)
+void DrawDebugCircle(Vec3 _Pos, float _Radius, Vec4 _Color, float _Duration, bool _DepthTest)
 {
 	DbgInfo info = {};
 	info.Shape = DBG_SHAPE::RECT;

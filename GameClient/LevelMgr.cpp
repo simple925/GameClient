@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "LevelMgr.h"
 #include "GameObject.h"
 #include "AssetMgr.h"
@@ -21,18 +21,18 @@ void LevelMgr::Init()
 
 	Ptr<GameObject> pObject = nullptr;
 
-	// Ä«¸Þ¶ó ¿ªÇÒ Ojbect
+	// ì¹´ë©”ë¼ ì—­í•  Ojbect
 	pObject = new GameObject;
 	//pObject->SetName(L"Main Camera");
-	pObject->SetName(L"¸ÞÀÎÄ«¸Þ¶ó");
+	pObject->SetName(L"ë©”ì¸ì¹´ë©”ë¼");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CCamera);
 	pObject->AddComponent(new CCamMoveScript);
 
 
-	//pObject->Camera()->LayerCheck(0); // 0¹øÀ» ±×·Á¶ó
+	//pObject->Camera()->LayerCheck(0); // 0ë²ˆì„ ê·¸ë ¤ë¼
 	pObject->Camera()->LayerCheckAll(); 
-	//pObject->Camera()->LayerCheck(31); // 31 -> UI ·¹ÀÌ¾î
+	//pObject->Camera()->LayerCheck(31); // 31 -> UI ë ˆì´ì–´
 
 	pObject->Camera()->SetProjType(PROJ_TYPE::PERSPECTIVE);
 	pObject->Camera()->SetFar(10000.f);
@@ -40,21 +40,21 @@ void LevelMgr::Init()
 	pObject->Camera()->SetOrthoScale(1.f);
 
 	Vec2 vResolution = Device::GetInst()->GetRenderResol();
-	pObject->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // Á¾È¾ºñ(AspectRatio)
+	pObject->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // ì¢…íš¡ë¹„(AspectRatio)
 	pObject->Camera()->SetWidth(vResolution.x);
 
 	m_CurLevel->AddObject(0, pObject);
 	/*
 	pObject = new GameObject;
 	//pObject->SetName(L"Monster");
-	pObject->SetName(L"¸ó½ºÅÍ");
+	pObject->SetName(L"ëª¬ìŠ¤í„°");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	//pObject->AddComponent(new CPlayerScript);
-	// 1. À§Ä¡ Á¶Á¤: Ä«¸Þ¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâ(Z+)À¸·Î ÃæºÐÈ÷ ¹Ð¾îÁÝ´Ï´Ù.
+	// 1. ìœ„ì¹˜ ì¡°ì •: ì¹´ë©”ë¼ê°€ ë°”ë¼ë³´ëŠ” ë°©í–¥(Z+)ìœ¼ë¡œ ì¶©ë¶„ížˆ ë°€ì–´ì¤ë‹ˆë‹¤.
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
 
-	// 2. Å©±â Á¶Á¤: 2D »ç°¢Çü(100, 100)°ú ºñ½ÁÇÏ°Ô º¸ÀÌ·Á¸é ZÃàµµ °ªÀ» ÁÝ´Ï´Ù.
+	// 2. í¬ê¸° ì¡°ì •: 2D ì‚¬ê°í˜•(100, 100)ê³¼ ë¹„ìŠ·í•˜ê²Œ ë³´ì´ë ¤ë©´ Zì¶•ë„ ê°’ì„ ì¤ë‹ˆë‹¤.
 	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 80.f));
 
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"CubeMesh").Get());
@@ -105,13 +105,13 @@ void LevelMgr::Init()
 
 	pChild->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 	pChild->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
-	// Player ¿Í Child ºÎ¸ðÀÚ½Ä ¿¬°á
+	// Player ì™€ Child ë¶€ëª¨ìžì‹ ì—°ê²°
 	pObject->AddChild(pChild);
 	m_CurLevel->AddObject(0, pObject);
 
 
 	/*
-	// ¿ÀºêÁ§Æ® »ý¼º
+	// ì˜¤ë¸Œì íŠ¸ ìƒì„±
 	pObject = new GameObject;
 	//pObject->SetName(L"Player");
 	pObject->SetName(L"sola");
@@ -155,7 +155,7 @@ void LevelMgr::Init()
 
 
 	pObject = new GameObject;
-	pObject->SetName(L"¹è°æ");
+	pObject->SetName(L"ë°°ê²½");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 1000.f));
@@ -167,14 +167,14 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(2, pObject);
 	
 	/*
-	// 3. GameObject »ý¼º (3°³)
+	// 3. GameObject ìƒì„± (3ê°œ)
 	g_Object3 = new GameObject;
 	g_Object3->AddComponent(new CTransform);
 	g_Object3->AddComponent(new CMeshRender);
 	//g_Object3->AddComponent(new CPlayerScript);
 
 	g_Object3->Transform()->SetRelativePos(Vec3(-0.5f, 0.f, 0.f));
-	g_Object3->Transform()->SetRelativeScale(Vec3(0.2f, 0.2f, 1.f)); // ¹ÝÁö¸§ ¿ªÇÒ
+	g_Object3->Transform()->SetRelativeScale(Vec3(0.2f, 0.2f, 1.f)); // ë°˜ì§€ë¦„ ì—­í• 
 
 	g_Object3->MeshRender()->SetMesh((AMesh*)AssetMgr::GetInst()->Find<AMesh>(L"c").Get());
 	g_Object3->MeshRender()->SetShader((AGraphicShader*)AssetMgr::GetInst()->Find<AGraphicShader>(L"shader2").Get());
@@ -188,9 +188,10 @@ void LevelMgr::Init()
 
 void LevelMgr::Progress()
 {
-	// Tick Çàµ¿ ÇàÀ§ °¡ ³¡³­ ÈÄ 
+	m_CurLevel->Deregister();
+	// Tick í–‰ë™ í–‰ìœ„ ê°€ ëë‚œ í›„ 
 	m_CurLevel->Tick();
-	// FinalTick ¿¡¼­ Çàµ¿ ÇàÀ§¸¦ Á¤»ê ÇÏ´Â °³³äÀÓ
+	// FinalTick ì—ì„œ í–‰ë™ í–‰ìœ„ë¥¼ ì •ì‚° í•˜ëŠ” ê°œë…ìž„
 	m_CurLevel->FinalTick();
 	
 	

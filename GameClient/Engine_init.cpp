@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Engine.h"
 
 #include "Device.h"
@@ -15,83 +15,83 @@ int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
     m_hInst = _hInst;
     m_Resolution = Vec2(_Width, _Height);
 
-    // »ı¼º½ÃÅ³ À©µµ¿ì(Ã¢) ¿É¼Ç ¼³Á¤
+    // ìƒì„±ì‹œí‚¬ ìœˆë„ìš°(ì°½) ì˜µì…˜ ì„¤ì •
     WNDCLASSEXW wcex = {};
 
     wcex.lpszClassName = L"MyGame";
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc; // ÇÔ¼ö Æ÷ÀÎÅÍ µî·Ï
+    wcex.lpfnWndProc = WndProc; // í•¨ìˆ˜ í¬ì¸í„° ë“±ë¡
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = m_hInst;
     wcex.hIcon = LoadIcon(m_hInst, MAKEINTRESOURCE(IDI_GAMECLIENT));
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    wcex.lpszMenuName = nullptr;// MAKEINTRESOURCEW(IDC_GAMECLIENT); // ¸Ş´ºÃ¢ Á¦°Å
+    wcex.lpszMenuName = nullptr;// MAKEINTRESOURCEW(IDC_GAMECLIENT); // ë©”ë‰´ì°½ ì œê±°
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     RegisterClassExW(&wcex);
 
-    // µî·ÏÇÑ À©µµ¿ì ¼³Á¤ µ¥ÀÌÅÍ¸¦ ±â¹İÀ¸·Î, À©µµ¿ì(Ã¢) ÇÏ³ª »ı¼º
-    // Ä¿³Î ¿ÀºêÁ§Æ® - OS °¡ °ü¸®ÇÏ´Â °´Ã¼    
-    // ÇÚµé         - Ä¿³Î ¿ÀºêÁ§Æ®ÀÇ ID °³³ä     
+    // ë“±ë¡í•œ ìœˆë„ìš° ì„¤ì • ë°ì´í„°ë¥¼ ê¸°ë°˜ìœ¼ë¡œ, ìœˆë„ìš°(ì°½) í•˜ë‚˜ ìƒì„±
+    // ì»¤ë„ ì˜¤ë¸Œì íŠ¸ - OS ê°€ ê´€ë¦¬í•˜ëŠ” ê°ì²´    
+    // í•¸ë“¤         - ì»¤ë„ ì˜¤ë¸Œì íŠ¸ì˜ ID ê°œë…     
 
-    // PopUp ¸ğµå·Î Å¸ÀÌÆ² Ã¢ Á¦°Å
+    // PopUp ëª¨ë“œë¡œ íƒ€ì´í‹€ ì°½ ì œê±°
     //HWND hWnd = CreateWindowW(L"MyGame", L"MyGame", WS_POPUP/*WS_OVERLAPPEDWINDOW*/, CW_USEDEFAULT, 0, CW_USEDEFAULT
     //                         , 0, nullptr, nullptr, hInstance, nullptr);
     m_hWnd = CreateWindowW(L"MyGame", L"MyGame", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, CW_USEDEFAULT
         , 0, nullptr, nullptr, m_hInst, nullptr);
 
 
-    // À©µµ¿ì »ı¼º ½ÇÆĞ½Ã ÇÁ·Î±×·¥ Á¾·á
+    // ìœˆë„ìš° ìƒì„± ì‹¤íŒ¨ì‹œ í”„ë¡œê·¸ë¨ ì¢…ë£Œ
     if (!m_hWnd)
     {
         return E_FAIL;
     }
 
-    // »ı¼ºÇÑ À©µµ¿ì¸¦ È­¸é¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+    // ìƒì„±í•œ ìœˆë„ìš°ë¥¼ í™”ë©´ì— ë³´ì´ë„ë¡ ì„¤ì •
     ShowWindow(m_hWnd, true);
     UpdateWindow(m_hWnd);
 
-    // °ÔÀÓÀ» Ç¥½ÃÇÒ ¿µ¿ªÀÇ ÇØ»óµµ°¡ ¿øÇÏ´Â Å©±â°¡ µÇ±â À§ÇØ¼­
-    // ½ÇÁ¦ À©µµ¿ì Å©±â´Â ¸îÀÌ¿©¾ß ÇÏ´ÂÁö °è»ê
+    // ê²Œì„ì„ í‘œì‹œí•  ì˜ì—­ì˜ í•´ìƒë„ê°€ ì›í•˜ëŠ” í¬ê¸°ê°€ ë˜ê¸° ìœ„í•´ì„œ
+    // ì‹¤ì œ ìœˆë„ìš° í¬ê¸°ëŠ” ëª‡ì´ì—¬ì•¼ í•˜ëŠ”ì§€ ê³„ì‚°
     RECT rt = { 0 , 0, (LONG)m_Resolution.x , (LONG)m_Resolution.y };
     AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, !!GetMenu(m_hWnd));
 
-    // À©µµ¿ì Å©±â ¹× À§Ä¡ º¯°æ
+    // ìœˆë„ìš° í¬ê¸° ë° ìœ„ì¹˜ ë³€ê²½
     SetWindowPos(m_hWnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);
 
 
-    // °ËÀº»ö Ä¥ÇÏ±â
-    //HDC dc = GetDC(m_hWnd); // ÀÔ·ÂÀ¸·Î ³Ö¾îÁØ À©µµ¿ì¿¡ ±×¸²À» ±×¸±¼ö ÀÖ°Ô ÇØÁÖ´Â µµ±¸
-    //HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0)); // °ËÀº»ö ºê·¯½¬ »ı¼º
-    //SelectObject(dc, hBrush); // dc ¿¡ °ËÀº»ö Brush ¸¦ Àü´Ş
-    //Rectangle(dc, 0, 0, m_Resolution.x, m_Resolution.y); // dc ¸¦ ÀÌ¿ëÇØ¼­ À©µµ¿ì¿¡ °ËÀº»ö »ç°¢Çü ±×¸®±â
+    // ê²€ì€ìƒ‰ ì¹ í•˜ê¸°
+    //HDC dc = GetDC(m_hWnd); // ì…ë ¥ìœ¼ë¡œ ë„£ì–´ì¤€ ìœˆë„ìš°ì— ê·¸ë¦¼ì„ ê·¸ë¦´ìˆ˜ ìˆê²Œ í•´ì£¼ëŠ” ë„êµ¬
+    //HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 0)); // ê²€ì€ìƒ‰ ë¸ŒëŸ¬ì‰¬ ìƒì„±
+    //SelectObject(dc, hBrush); // dc ì— ê²€ì€ìƒ‰ Brush ë¥¼ ì „ë‹¬
+    //Rectangle(dc, 0, 0, m_Resolution.x, m_Resolution.y); // dc ë¥¼ ì´ìš©í•´ì„œ ìœˆë„ìš°ì— ê²€ì€ìƒ‰ ì‚¬ê°í˜• ê·¸ë¦¬ê¸°
 
-    // GPU¸¦ Á¦ÇãÇÒ ¼ö ÀÖ´Â Directx11 ÇÔ¼ö¸¦ »ç¿ëÇÏ±â À§ÇÑ ¸Å´ÏÀú
+    // GPUë¥¼ ì œí—ˆí•  ìˆ˜ ìˆëŠ” Directx11 í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•œ ë§¤ë‹ˆì €
     // ID3D11DDevice, ID3D11DeviceContext
     if (FAILED(Device::GetInst()->Init(m_hWnd, m_Resolution)))
     {
         return E_FAIL;
     }
 
-    // ½ÇÇàÆÄÀÏ°ú °°ÀÌ ÀÖ´Â Context Æú´õÀÇ °æ·Î¸¦ Ã£¾Æ³»±â À§ÇÔ
+    // ì‹¤í–‰íŒŒì¼ê³¼ ê°™ì´ ìˆëŠ” Context í´ë”ì˜ ê²½ë¡œë¥¼ ì°¾ì•„ë‚´ê¸° ìœ„í•¨
     PathMgr::GetInst()->Init();
 
-    // 1ÇÁ·¹ÀÓ µ¿ÀÛÇÏ´Âµ¥ °É¸®´Â ½Ã°£(DT) °è»ê
+    // 1í”„ë ˆì„ ë™ì‘í•˜ëŠ”ë° ê±¸ë¦¬ëŠ” ì‹œê°„(DT) ê³„ì‚°
     TimeMgr::GetInst()->Init();
 
-    // °¢°¢ÀÇ Å°ÀÇ »óÅÂ¸¦ °è»ê
+    // ê°ê°ì˜ í‚¤ì˜ ìƒíƒœë¥¼ ê³„ì‚°
     KeyMgr::GetInst()->Init();
 
-    // ¿£Áø ±âº» ¿¡¼Âµé »ı¼º
+    // ì—”ì§„ ê¸°ë³¸ ì—ì…‹ë“¤ ìƒì„±
     AssetMgr::GetInst()->Init();
 
-    // ·¹º§ ¸Å´ÏÀú ÃÊ±âÈ­
+    // ë ˆë²¨ ë§¤ë‹ˆì € ì´ˆê¸°í™”
     LevelMgr::GetInst()->Init();
 
-    // RenderMgr ·£´õ¸µ
+    // RenderMgr ëœë”ë§
     RenderMgr::GetInst()->Init();
     return S_OK;
 }
