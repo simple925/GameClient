@@ -21,7 +21,7 @@ void CStateScript::TakeDamage(int _Damage)
 		// 여기서 사망 이벤트 등을 발생시킬 수 있음
 		Destroy();
 	}
-}
+} 
 void CStateScript::Begin()
 {
 	Collider2D()->AddDynamicBeginOverlap(this, (COLLISION_EVENT)&CStateScript::BeginOverlap);
