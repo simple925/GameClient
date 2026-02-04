@@ -199,6 +199,7 @@ void LevelMgr::Init()
 
 	m_CurLevel->CheckCollisionLayer(3,5);
 	m_CurLevel->CheckCollisionLayer(4,5);
+	m_CurLevel->CheckCollisionLayer(3,4);
 	m_CurLevel->CheckCollisionLayer(3,6);
 	m_CurLevel->Begin();
 }
