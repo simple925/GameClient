@@ -172,6 +172,7 @@ call ComponentAuto.exe</Command>
     <ClInclude Include="CRenderComponent.h" />
     <ClInclude Include="CScript.h" />
     <ClInclude Include="CSpriteRender.h" />
+    <ClInclude Include="CStateScript.h" />
     <ClInclude Include="CTransform.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Device.h" />
@@ -223,6 +224,7 @@ call ComponentAuto.exe</Command>
     <ClCompile Include="CRenderComponent.cpp" />
     <ClCompile Include="CScript.cpp" />
     <ClCompile Include="CSpriteRender.cpp" />
+    <ClCompile Include="CStateScript.cpp" />
     <ClCompile Include="CTransform.cpp" />
     <ClCompile Include="Device.cpp" />
     <ClCompile Include="Engine.cpp" />

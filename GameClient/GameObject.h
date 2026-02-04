@@ -33,6 +33,8 @@ public:
     // 자신을 타겟에 그림
     void Render();
 
+    int GetLayerIdx() { return m_LayerIdx; }
+
     void Destroy();
 public:
     void AddComponent(Ptr<Component> _Com);

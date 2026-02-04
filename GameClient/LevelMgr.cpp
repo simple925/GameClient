@@ -8,6 +8,7 @@
 #include "CPlayerScript.h"
 #include "CCamMoveScript.h"
 #include "CMonsterScript.h"
+#include "CStateScript.h"
 
 LevelMgr::LevelMgr() {
 }
@@ -83,6 +84,8 @@ void LevelMgr::Init()
 	Ptr<CMonsterScript> monsterScript = new CMonsterScript;
 	monsterScript->SetTarget(pObject);
 	pMonster->AddComponent(monsterScript.Get());
+
+	pMonster->AddComponent(new CStateScript);
 
 	pMonster->Transform()->SetRelativePos(Vec3(0.f, 100.f, 100.f));
 	pMonster->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 0.f));
@@ -179,7 +182,7 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
 	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"m_univers"));
 
-	m_CurLevel->AddObject(6, pObject);
+	m_CurLevel->AddObject(1, pObject);
 	
 	/*
 	// 3. GameObject 생성 (3개)
@@ -197,10 +200,19 @@ void LevelMgr::Init()
 	*/
 	//m_CurLevel->Init();
 
-	m_CurLevel->CheckCollisionLayer(3,5);
-	m_CurLevel->CheckCollisionLayer(4,5);
-	m_CurLevel->CheckCollisionLayer(3,4);
-	m_CurLevel->CheckCollisionLayer(3,6);
+	/*
+	0 Default
+	1 Background
+	2 Tile
+	3 Player
+	4 PlayerProjectile
+	5 Enermy
+	6 EnermyProjectile
+	*/
+	m_CurLevel->CheckCollisionLayer(3,5); // 나 == 적
+	m_CurLevel->CheckCollisionLayer(3,6); // 나 == m탄
+	m_CurLevel->CheckCollisionLayer(4,5); // p탄 == 적
+	m_CurLevel->CheckCollisionLayer(5,6); // 적 == m탄
 	m_CurLevel->Begin();
 }
 

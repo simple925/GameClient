@@ -52,7 +52,7 @@ void CMonsterScript::Tick()
 			pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 			pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
-			CreateObject(pObject, 4);
+			CreateObject(pObject, 6);
 		}
 		accumulator = 0.f;
 	}

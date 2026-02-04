@@ -149,6 +149,9 @@
     <ClInclude Include="CMonsterProtile.h">
       <Filter>GameEngine\06. Component\Script\MonsterScript\MonsterProtile</Filter>
     </ClInclude>
+    <ClInclude Include="CStateScript.h">
+      <Filter>GameEngine\06. Component\Script\StateScript</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -278,6 +281,9 @@
     <ClCompile Include="CMonsterProtile.cpp">
       <Filter>GameEngine\06. Component\Script\MonsterScript\MonsterProtile</Filter>
     </ClCompile>
+    <ClCompile Include="CStateScript.cpp">
+      <Filter>GameEngine\06. Component\Script\StateScript</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -333,9 +339,6 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\01. Transform">
       <UniqueIdentifier>{8486a2f8-5243-4769-9928-9400c76796fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\06. Component\05. Collider">
-      <UniqueIdentifier>{612b3bb4-69ce-4921-bae1-8be5f7c38076}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\03. Manager\04. AssetMgr">
       <UniqueIdentifier>{98637d0e-a71b-446e-aac8-d2b773eef69f}</UniqueIdentifier>
@@ -411,6 +414,9 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\Script\MonsterScript\MonsterProtile">
       <UniqueIdentifier>{d29e41f9-7bb7-4ae2-90a0-3ccf612a253d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\StateScript">
+      <UniqueIdentifier>{5225fd99-e28e-465c-96b9-ad59fe3f3d90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
