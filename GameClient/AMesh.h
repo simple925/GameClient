@@ -12,14 +12,17 @@ private:
 	ComPtr<ID3D11Buffer>		m_VB;       // 정점(Vertex) 버퍼
 	D3D11_BUFFER_DESC           m_VBDesc;     // 정점 버터 생성
 	UINT                        m_VtxCount; // 정점 개수
+	Vtx*						m_VtxSysMem;
 	// IndexBuffer
 	ComPtr<ID3D11Buffer>		m_IB;       // 인덱스 버퍼
 	D3D11_BUFFER_DESC           m_IBDesc;     // 인덱스 버퍼 생성 옵션
 	UINT                        m_IdxCount; // 인덱스 개수
+	UINT*						m_IdxSysMem;
 public:
 	int Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCount);
 	void Binding();
 	void Render();
+	Vtx* GetVtxSysMem() { return m_VtxSysMem; }
 public:
 	AMesh();
 	virtual ~AMesh();

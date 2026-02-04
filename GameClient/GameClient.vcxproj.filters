@@ -140,6 +140,15 @@
     <ClInclude Include="CSpriteRender.h">
       <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>GameEngine\03. Manager\08. CollisionMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterScript.h">
+      <Filter>GameEngine\06. Component\Script\MonsterScript</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonsterProtile.h">
+      <Filter>GameEngine\06. Component\Script\MonsterScript\MonsterProtile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -259,6 +268,15 @@
     </ClCompile>
     <ClCompile Include="CSpriteRender.cpp">
       <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>GameEngine\03. Manager\08. CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterScript.cpp">
+      <Filter>GameEngine\06. Component\Script\MonsterScript</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonsterProtile.cpp">
+      <Filter>GameEngine\06. Component\Script\MonsterScript\MonsterProtile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +402,15 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\03. Collider2D">
       <UniqueIdentifier>{d7a76193-af22-43f3-92b0-bd95362e5fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\08. CollisionMgr">
+      <UniqueIdentifier>{58b9dfe4-4036-4e4c-8b94-ac72edde7c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\MonsterScript">
+      <UniqueIdentifier>{1c2bdcac-e3a4-4404-850b-4169296eb17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\Script\MonsterScript\MonsterProtile">
+      <UniqueIdentifier>{d29e41f9-7bb7-4ae2-90a0-3ccf612a253d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

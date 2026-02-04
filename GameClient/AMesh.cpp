@@ -4,11 +4,17 @@
 
 AMesh::AMesh()
 	: Asset(ASSET_TYPE::MESH)
+	, m_VBDesc{}
+	, m_IBDesc{}
+	, m_VtxSysMem(nullptr)
+	, m_IdxSysMem(nullptr)
 {
 }
 
 AMesh::~AMesh()
 {
+	delete[] m_VtxSysMem;
+	delete[] m_IdxSysMem;
 }
 
 int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCount)
@@ -31,6 +37,11 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 	if (FAILED(DEVICE->CreateBuffer(&m_VBDesc, &tSub, m_VB.GetAddressOf()))) {
 		return E_FAIL;
 	}
+	m_VtxSysMem = new Vtx[_VtxCount];
+	for (int i = 0; i < _VtxCount; ++i)
+	{
+		m_VtxSysMem[i] = _VtxSysMem[i];
+	}
 
 	// cpu를 통해서 버퍼의 내용을 쓰거나, 읽을 수 있는지
 	// D3D11_USAGE_DEFAULT + 0
@@ -47,6 +58,13 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 	if (FAILED(DEVICE->CreateBuffer(&m_IBDesc, &tSub, m_IB.GetAddressOf()))) {
 		return E_FAIL;
 	}
+
+	m_IdxSysMem = new UINT[_IdxCount];
+	for (int i = 0; i < _IdxCount; ++i)
+	{
+		m_IdxSysMem[i] = _IdxSysMem[i];
+	}
+
 	return S_OK;
 }
 

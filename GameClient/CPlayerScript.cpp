@@ -98,7 +98,7 @@ void CPlayerScript::Shoot()
 
 		pObject->AddComponent(new CTransform);
 		pObject->AddComponent(new CMeshRender);
-		//pObject->AddComponent(new CMissileScript);
+		pObject->AddComponent(new CCollider2D);
 
 		Ptr<CMissileScript> pMissileScript = new CMissileScript;
 		pMissileScript->SetTarget(m_Target.Get());
@@ -116,7 +116,7 @@ void CPlayerScript::Shoot()
 		pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 		pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
-		CreateObject(pObject, 2);
+		CreateObject(pObject, 4);
 	}
 	if (KEY_TAP(KEY::Z)) {
 		DrawDebugCircle(Transform()->GetRelativePos(), 100.f, Vec4(1.f, 0.f, 0.f, 1.f), 2.f);

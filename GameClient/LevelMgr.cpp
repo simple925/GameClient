@@ -3,11 +3,11 @@
 #include "GameObject.h"
 #include "AssetMgr.h"
 #include "Device.h"
-
+#include "CollisionMgr.h"
 
 #include "CPlayerScript.h"
 #include "CCamMoveScript.h"
-
+#include "CMonsterScript.h"
 
 LevelMgr::LevelMgr() {
 }
@@ -18,6 +18,14 @@ void LevelMgr::Init()
 	// Level Create
 	m_CurLevel = new ALevel;
 	m_CurLevel->SetName(L"Current Level");
+
+	m_CurLevel->GetLayer(0)->SetName(L"Default");
+	m_CurLevel->GetLayer(1)->SetName(L"Background");
+	m_CurLevel->GetLayer(2)->SetName(L"Tile");
+	m_CurLevel->GetLayer(3)->SetName(L"Player");
+	m_CurLevel->GetLayer(4)->SetName(L"PlayerProjectile");
+	m_CurLevel->GetLayer(5)->SetName(L"Enermy");
+	m_CurLevel->GetLayer(6)->SetName(L"EnermyProjectile");
 
 	Ptr<GameObject> pObject = nullptr;
 
@@ -64,17 +72,24 @@ void LevelMgr::Init()
 
 
 	Ptr<GameObject> pMonster = new GameObject;
+	pObject = new GameObject;
+
 	pMonster->SetName(L"Monster");
 
 	pMonster->AddComponent(new CTransform);
 	pMonster->AddComponent(new CBillboardRender);
+	pMonster->AddComponent(new CCollider2D);
 
-	pMonster->Transform()->SetRelativePos(Vec3(300.f, 0.f, 100.f));
-	pMonster->BillboardRender()->SetBillboardScale(Vec2(200.f, 50.f));
+	Ptr<CMonsterScript> monsterScript = new CMonsterScript;
+	monsterScript->SetTarget(pObject);
+	pMonster->AddComponent(monsterScript.Get());
 
-	m_CurLevel->AddObject(1, pMonster);
+	pMonster->Transform()->SetRelativePos(Vec3(0.f, 100.f, 100.f));
+	pMonster->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 0.f));
+	pMonster->BillboardRender()->SetBillboardScale(Vec2(50.f, 50.f));
 
-	pObject = new GameObject;
+	m_CurLevel->AddObject(5, pMonster);
+
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CMeshRender);
@@ -107,7 +122,7 @@ void LevelMgr::Init()
 	pChild->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 	// Player 와 Child 부모자식 연결
 	pObject->AddChild(pChild);
-	m_CurLevel->AddObject(0, pObject);
+	m_CurLevel->AddObject(3, pObject);
 
 
 	/*
@@ -164,7 +179,7 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q").Get());
 	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"m_univers"));
 
-	m_CurLevel->AddObject(2, pObject);
+	m_CurLevel->AddObject(6, pObject);
 	
 	/*
 	// 3. GameObject 생성 (3개)
@@ -182,17 +197,22 @@ void LevelMgr::Init()
 	*/
 	//m_CurLevel->Init();
 
-
+	m_CurLevel->CheckCollisionLayer(3,5);
+	m_CurLevel->CheckCollisionLayer(4,5);
+	m_CurLevel->CheckCollisionLayer(3,6);
 	m_CurLevel->Begin();
 }
 
 void LevelMgr::Progress()
 {
+	// 이전에 등록된 모든 오브젝트들 제거
 	m_CurLevel->Deregister();
-	// Tick 행동 행위 가 끝난 후 
+
+	// 레벨안에 있는 오브젝트들이 이번 DT 동안 할 일 수행
 	m_CurLevel->Tick();
 	// FinalTick 에서 행동 행위를 정산 하는 개념임
 	m_CurLevel->FinalTick();
-	
-	
+
+	// 충돌 검사 진행
+	CollisionMgr::GetInst()->Progress(m_CurLevel);
 }

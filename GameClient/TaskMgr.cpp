@@ -25,6 +25,10 @@ void TaskMgr::Progress()
 			Ptr<GameObject> pNewObj = (GameObject*)m_vecTask[i].Param_0;
 			Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
 			pCurLevel->AddObject(m_vecTask[i].Param_1, pNewObj);
+
+			// 레벨에 추가된 오브젝트는, 레벨 시작시점때 Begin 을 호출받지 못하기 때문에,
+			// 레벨에 스폰될 때 Begin 을 호출받는다.
+			pNewObj->Begin();
 		}
 			break;
 		case TASK_TYPE::DESTROY_OBJECT:
