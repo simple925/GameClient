@@ -18,7 +18,7 @@ public:
 public:
 	Entity();
 	Entity(const Entity& _Other);
-
+	//Entity(const Entity& _Other) = delete;
 	virtual ~Entity();
 
 	/*

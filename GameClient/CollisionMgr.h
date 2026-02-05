@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ALevel.h"
 #include "Layer.h"
 #include "CCollider2D.h"

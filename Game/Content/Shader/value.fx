@@ -1,15 +1,15 @@
-#ifndef _VALUE
+ï»¿#ifndef _VALUE
 #define _VALUE
 /*
-cbuffer TRANSFORM : register(b1) // ¹ÙÀÎµù µÉ »ó¼ö ·¹Áö½ºÅÍ ¹øÈ£ (b0)
+cbuffer TRANSFORM : register(b1) // ë°”ì¸ë”© ë  ìƒìˆ˜ ë ˆì§€ìŠ¤í„° ë²ˆí˜¸ (b0)
 {
 	float4 g_ObjectPos;
 }
 */
-// ²À ¹öÆÛ°¡ °°¾Æ¾ßÇÔ
-cbuffer MATERIAL : register(b1) // 16byteÀÇ ¹è¼ö·Î ±¸¼º µÇ¾î¾ßÇÔ ²À!!!
+// ê¼­ ë²„í¼ê°€ ê°™ì•„ì•¼í•¨
+cbuffer MATERIAL : register(b1) // 16byteì˜ ë°°ìˆ˜ë¡œ êµ¬ì„± ë˜ì–´ì•¼í•¨ ê¼­!!!
 {
-	//int iArr[4]; // 16À¸·Î ºÁ¼­ 16 * 4 ¸Ş¸ğ¸® °ø°£ÀÓ
+	//int iArr[4]; // 16ìœ¼ë¡œ ë´ì„œ 16 * 4 ë©”ëª¨ë¦¬ ê³µê°„ì„
 	int g_int_0;
 	int g_int_1;
 	int g_int_2;
@@ -39,13 +39,13 @@ cbuffer TRANSFORM : register(b0)
 	//float4 g_ObjectScale;
 	//float4 g_ObjectRot;
 	
-	// row_major Çà¿­ ÀĞ´Â ¹æ½ÄÀÌ cpu gpu ´Ş¶ó¼­ ¸ÂÃçÁÜ
-	// matrix == float4x4 °°Àº ÀÚ·áÇü
+	// row_major í–‰ì—´ ì½ëŠ” ë°©ì‹ì´ cpu gpu ë‹¬ë¼ì„œ ë§ì¶°ì¤Œ
+	// matrix == float4x4 ê°™ì€ ìë£Œí˜•
 	row_major matrix g_matWorld; // Local(Model) -> World Space
 	row_major matrix g_matView; // World -> Camea(View) Space
 	row_major matrix g_matProj; // Camera(View) -> Projection Space
 }
 Texture2D g_tex_0 : register(t0);
-SamplerState g_sam_0 : register(s0); // texture ÃßÃâ µµ±¸
-SamplerState g_sam_1 : register(s1); // texture ÃßÃâ µµ±¸
+SamplerState g_sam_0 : register(s0); // texture ì¶”ì¶œ ë„êµ¬
+SamplerState g_sam_1 : register(s1); // texture ì¶”ì¶œ ë„êµ¬
 #endif

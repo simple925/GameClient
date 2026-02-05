@@ -7,11 +7,10 @@ private:
     int m_iHP;
     int m_iMaxHP;
 public:
-    // °øÅë ·ÎÁ÷: µ¥¹ÌÁö ÀÔ±â
+    // ê³µí†µ ë¡œì§: ë°ë¯¸ì§€ ì…ê¸°
     void TakeDamage(int _Damage);
     // Getter / Setter
     GET_SET(int, iHP);
-
     
     virtual void Begin() override;
     virtual void Tick() override;

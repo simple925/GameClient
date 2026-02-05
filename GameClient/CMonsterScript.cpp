@@ -4,8 +4,9 @@
 #include "GameObject.h"
 #include "AssetMgr.h"
 #include "TimeMgr.h"
+#include "LevelMgr.h"
 CMonsterScript::CMonsterScript()
-	: accumulator(0)
+	: accumulator(0.f)
 	, m_Target(nullptr)
 {
 }
@@ -20,6 +21,7 @@ void CMonsterScript::Tick()
 	Vec3 vMyPos = Transform()->GetRelativePos();
 	Vec3 vMyScale = Transform()->GetRelativeScale();
 	Vec3 vRotation = Transform()->GetRelativeRot();
+	/*
 	vector<Vec3> directions = { 
 		Vec3(1, 0, 0), // 오른쪽
 		Vec3(-1, 0, 0), // 왼쪽
@@ -31,8 +33,9 @@ void CMonsterScript::Tick()
 		Vec3(-0.707f, -0.707f, 0) // 왼쪽 아래
 	};
 	accumulator += DT;
-
-	if (accumulator > 1.f) {
+	*/
+	/*
+	if (accumulator >= 1.f) {
 		for (auto& dir : directions) {
 			GameObject* pObject = new GameObject;
 			pObject->SetName(L"EnermyMissile");
@@ -40,10 +43,11 @@ void CMonsterScript::Tick()
 			pObject->AddComponent(new CMeshRender);
 			pObject->AddComponent(new CCollider2D);
 
-			Ptr<CMonsterProtile> pMissileScript = new CMonsterProtile;
+			//Ptr<CMonsterProtile> pMissileScript = new CMonsterProtile;
 			//pMissileScript->SetTarget(m_Target.Get());
-			pMissileScript->SetTarget(GetOwner());
-			pObject->AddComponent(pMissileScript.Get());
+			//pMissileScript->SetTarget(GetOwner());
+			//pMissileScript->SetOwner(GetOwner());
+			//pObject->AddComponent(pMissileScript.Get());
 
 			pObject->Transform()->SetRelativePos(vMyPos + vMyScale * 10.f * dir);
 			pObject->Transform()->SetRelativeScale(Vec3(10.f, 30.f, 1.f));
@@ -56,5 +60,6 @@ void CMonsterScript::Tick()
 		}
 		accumulator = 0.f;
 	}
+	*/
 
 }

@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CMissileScript.h"
 
 #include "GameObject.h"
@@ -37,6 +37,9 @@ void CMissileScript::Tick()
 
 void CMissileScript::BeginOverlap(CCollider2D* _OwnCollider, CCollider2D* _OtherCollider)
 {
+	int OwnerLayerIdx = _OwnCollider->GetOwner()->GetLayerIdx();
+	int OtherLayerIdx = _OtherCollider->GetOwner()->GetLayerIdx();
+	if (OwnerLayerIdx == 4 && OtherLayerIdx == 5) Destroy();
 }
 
 void CMissileScript::Overlap(CCollider2D* _OwnCollider, CCollider2D* _OtherCollider)

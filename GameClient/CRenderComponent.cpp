@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CRenderComponent.h"
 
 CRenderComponent::CRenderComponent(COMPONENT_TYPE _Type)
@@ -10,7 +10,7 @@ CRenderComponent::~CRenderComponent()
 {
 }
 
-void CRenderComponent::Begin()
+void CRenderComponent::Init()
 {
 	CreateMaterial();
 }

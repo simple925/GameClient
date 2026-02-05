@@ -1,43 +1,43 @@
-#ifndef _TEST // n = not ifndef [test] test ¸¸¾à test Á¤ÀÇ µÇ¾îÀÖÁö ¾Ê´Ù¸é
+ï»¿#ifndef _TEST // n = not ifndef [test] test ë§Œì•½ test ì •ì˜ ë˜ì–´ìžˆì§€ ì•Šë‹¤ë©´
 #define _TEST
 #include "value.fx"
-// layout Á¤º¸
+// layout ì •ë³´
 struct VS_IN
 {
-	// Semantic Àº ²À ¸ÂÀ» ÇÊ¿ä ¾øÀ½ ÇÊ¿äÇÑ °Í¸¸ °¡Á®¿Ã ¼ö ÀÖÀ½
-	// Semantic ÀÌ¸§¿¡´Â 0ÀÌ »ý·« µÇ¾î ÀÖÀ½ POSITION
-	float3 vPos		: POSITION; // Semantic Layout¿¡¼­ ¼³¸íÇÑ ÀÌ¸§
-	float2 vUV		: TEXCOORD;
-	float4 vColor	: COLOR;
+	// Semantic ì€ ê¼­ ë§žì„ í•„ìš” ì—†ìŒ í•„ìš”í•œ ê²ƒë§Œ ê°€ì ¸ì˜¬ ìˆ˜ ìžˆìŒ
+	// Semantic ì´ë¦„ì—ëŠ” 0ì´ ìƒëžµ ë˜ì–´ ìžˆìŒ POSITION
+	float3 vPos : POSITION; // Semantic Layoutì—ì„œ ì„¤ëª…í•œ ì´ë¦„
+	float2 vUV : TEXCOORD;
+	float4 vColor : COLOR;
 };
 
 struct VS_OUT
 {
-	// SV_xxx ´Â ¾à¼ÓµÈ °ª
-	float4 vPosition	: SV_Position; // Rasterizer ·Î º¸³¾¶§, NDC ÁÂÇ¥
-	float2 vUV			: TEXCOORD;
-	float4 vColor		: COLOR;
+	// SV_xxx ëŠ” ì•½ì†ëœ ê°’
+	float4 vPosition : SV_Position; // Rasterizer ë¡œ ë³´ë‚¼ë•Œ, NDC ì¢Œí‘œ
+	float2 vUV : TEXCOORD;
+	float4 vColor : COLOR;
 };
 
 
 VS_OUT VS_Std2D(VS_IN _input)
 {
 	/*
-	// z È¸Àü
+	// z íšŒì „
 	float3x3 rotMat =
 	{
 		cos(g_ObjectRot.z), sin(g_ObjectRot.z), 0.f,
 		-sin(g_ObjectRot.z), cos(g_ObjectRot.z), 0.f,
 		0.f, 0.f, 1.f,
 	};
-	// y È¸Àü
+	// y íšŒì „
 	float3x3 rotMat =
 	{
 		cos(g_ObjectRot.z), 0.f, sin(g_ObjectRot.z),
 		0.f, 1.f, 0.f,
 		-sin(g_ObjectRot.z), 0.f, cos(g_ObjectRot.z),
 	};
-	// x È¸Àü
+	// x íšŒì „
 	float3x3 rotMat =
 	{
 		1.f, 0.f, 0.f,
@@ -47,7 +47,7 @@ VS_OUT VS_Std2D(VS_IN _input)
 	*/
 
 	/* 
-		(x, y, z, µ¿Â÷ÁÂÇ¥)  X   ( scale.x		0		 0		 0	 )
+		(x, y, z, ë™ì°¨ì¢Œí‘œ)  X   ( scale.x		0		 0		 0	 )
 								(	0		  scale.y	 0		 0	 )
 								(	0			0	   scale.z	 0	 )
 								(  pos.x	   pos.y    pos.z	 0	 )
@@ -55,26 +55,26 @@ VS_OUT VS_Std2D(VS_IN _input)
 	VS_OUT output = (VS_OUT) 0.f;
 	
 	// Local -> World
-	float4 vWorld = mul(float4(_input.vPos, 1.f /*µ¿Â÷ÁÂÇ¥*/), g_matWorld);
+	float4 vWorld = mul(float4(_input.vPos, 1.f /*ë™ì°¨ì¢Œí‘œ*/), g_matWorld);
 	// World -> View
 	float4 vView = mul(vWorld, g_matView);
 	// View -> Proj
 	float4 vProj = mul(vView, g_matProj);
 	
-	// Viewz °ªÀ¸·Î ³ª´«´Ù.
-	// Åõ¿µÇà·Ä Æ¯¼º»ó, Á¤È®ÇÑ NDC ÁÂÇ¥¸¦ ¾ò±â À§ÇØ¼­
-	// Åõ¿µÇà·ÄÀ» °öÇÒ View ÁÂÇ¥ÀÇ z °ªÀ¸·Î ³ª´©´Â ÀÛ¾÷ÀÌ Çà·Ä¾È¿¡ ÀÖ¾î¾ßÇÏ´Âµ¥ ÀÌ°ÍÀÌ ºÒ°¡´ÉÇÏ±â ¶§¹®¿¡
-	// ¿¬»ê °á°úÀÇ w(4¿­) ÀÚ¸®¿¡ View ÁÂÇ¥ÀÇ z°¡ Ãâ·Â µÇµµ·Ï ÇÑ´Ù.
+	// Viewz ê°’ìœ¼ë¡œ ë‚˜ëˆˆë‹¤.
+	// íˆ¬ì˜í–‰ë ¬ íŠ¹ì„±ìƒ, ì •í™•í•œ NDC ì¢Œí‘œë¥¼ ì–»ê¸° ìœ„í•´ì„œ
+	// íˆ¬ì˜í–‰ë ¬ì„ ê³±í•  View ì¢Œí‘œì˜ z ê°’ìœ¼ë¡œ ë‚˜ëˆ„ëŠ” ìž‘ì—…ì´ í–‰ë ¬ì•ˆì— ìžˆì–´ì•¼í•˜ëŠ”ë° ì´ê²ƒì´ ë¶ˆê°€ëŠ¥í•˜ê¸° ë•Œë¬¸ì—
+	// ì—°ì‚° ê²°ê³¼ì˜ w(4ì—´) ìžë¦¬ì— View ì¢Œí‘œì˜ zê°€ ì¶œë ¥ ë˜ë„ë¡ í•œë‹¤.
 	
-	// Åõ¿µÇà·ÄÀ» °öÇÏ°í ¾òÀº °á°ú°ªÀÇ x,y,z ¸¦ w ·Î ³ª´²¾ß ÃÖÁ¾ NDC ÁÂÇ¥¸¦ ¾òÀ» ¼ö ÀÖ´Ù.
-	// (VX, VY, VZ, 1.f) * ProjMat == (PX*VZ, PY*VZ, PZ*VZ, VZ:³ª´­°ª) ·¹½ºÅÍ¶óÀÌÁ®°¡ ÇØÁÜ
-	// vProj.xyz /= vProj.w; ÀÌ ÀÛ¾÷À» ÇØ¾ß NDC ÁÂÇ¥°è·Î °ªÀÌ ¿Å°ÜÁü
+	// íˆ¬ì˜í–‰ë ¬ì„ ê³±í•˜ê³  ì–»ì€ ê²°ê³¼ê°’ì˜ x,y,z ë¥¼ w ë¡œ ë‚˜ëˆ ì•¼ ìµœì¢… NDC ì¢Œí‘œë¥¼ ì–»ì„ ìˆ˜ ìžˆë‹¤.
+	// (VX, VY, VZ, 1.f) * ProjMat == (PX*VZ, PY*VZ, PZ*VZ, VZ:ë‚˜ëˆŒê°’) ë ˆìŠ¤í„°ë¼ì´ì ¸ê°€ í•´ì¤Œ
+	// vProj.xyz /= vProj.w; ì´ ìž‘ì—…ì„ í•´ì•¼ NDC ì¢Œí‘œê³„ë¡œ ê°’ì´ ì˜®ê²¨ì§
 	
 	
-	// µ¿Â÷ÁÂÇ¥ 0À¸·Î ¼³Á¤ÇÏ¸é ÀÌµ¿ Á¤º¸¸¦ ¹«½ÃÇÔ
-	// x,y,z, ¸¦ w ·Î ³ª´©´Â ÀÛ¾÷À» Rasterizer ¿¡¼­ ÁøÇàÇÏ±â ¶§¹®¿¡,
-	// ¼öµ¿À¸·Î ³ª´©´Â ÄÚµå¸¦ ÀÛ¼ºÇÒ ÇÊ¿ä´Â ¾ø´Ù.
-	output.vPosition = vProj; // ¿ùµåÇà·ÄÀ» ¹æÇâº¤ÅÍ¿¡ °öÇÒ¶© ÀÌµ¿Á¤º¸¸¦ ¹«½ÃÇØ¾ßµÇ±â ¶§¹®¿¡ µ¿Â÷ÁÂÇ¥°¡ 0.f µé¾î°¡¾ßÇÔ
+	// ë™ì°¨ì¢Œí‘œ 0ìœ¼ë¡œ ì„¤ì •í•˜ë©´ ì´ë™ ì •ë³´ë¥¼ ë¬´ì‹œí•¨
+	// x,y,z, ë¥¼ w ë¡œ ë‚˜ëˆ„ëŠ” ìž‘ì—…ì„ Rasterizer ì—ì„œ ì§„í–‰í•˜ê¸° ë•Œë¬¸ì—,
+	// ìˆ˜ë™ìœ¼ë¡œ ë‚˜ëˆ„ëŠ” ì½”ë“œë¥¼ ìž‘ì„±í•  í•„ìš”ëŠ” ì—†ë‹¤.
+	output.vPosition = vProj; // ì›”ë“œí–‰ë ¬ì„ ë°©í–¥ë²¡í„°ì— ê³±í• ë• ì´ë™ì •ë³´ë¥¼ ë¬´ì‹œí•´ì•¼ë˜ê¸° ë•Œë¬¸ì— ë™ì°¨ì¢Œí‘œê°€ 0.f ë“¤ì–´ê°€ì•¼í•¨
 	output.vUV = _input.vUV;
 	output.vColor = _input.vColor;
     
@@ -82,26 +82,26 @@ VS_OUT VS_Std2D(VS_IN _input)
 }
 
 
-// ÀÔ·ÂµÈ ÅØ½ºÃÄ¸¦ »ç¿ëÇØ¼­ ÇÈ¼¿½¦ÀÌ´õÀÇ Ãâ·Â »ö»óÀ¸·Î ÁöÁ¤ÇÑ´Ù.
-// ÅØ½ºÃÄ ÄÚµð³×ÀÌ¼Ç, UV ÁÂÇ¥°è
+// ìž…ë ¥ëœ í…ìŠ¤ì³ë¥¼ ì‚¬ìš©í•´ì„œ í”½ì…€ì‰ì´ë”ì˜ ì¶œë ¥ ìƒ‰ìƒìœ¼ë¡œ ì§€ì •í•œë‹¤.
+// í…ìŠ¤ì³ ì½”ë””ë„¤ì´ì…˜, UV ì¢Œí‘œê³„
 float4 PS_Std2D(VS_OUT _input) : SV_Target
 {
-	// ÀÔ·Â UV ´Â Á¤Á¡¿¡»ç ¹ÝÈ¯ÇÑ °ªÀ» º¸°£¹Þ¾Æ¼­ ÇÈ¼¿½¦ÀÌ´õ¿¡ ÀÔ·ÂµÊ    
+	// ìž…ë ¥ UV ëŠ” ì •ì ì—ì‚¬ ë°˜í™˜í•œ ê°’ì„ ë³´ê°„ë°›ì•„ì„œ í”½ì…€ì‰ì´ë”ì— ìž…ë ¥ë¨    
 	float4 vColor = g_tex_0.Sample(g_sam_1, _input.vUV);
 	if (vColor.a == 0.f || (vColor.r > 0.99f && vColor.b > 0.99f && vColor.g == 0.f))
 	{
-		discard; // ÇÈ¼¿½¦ÀÌ´õ´Â Å°¿öµå¸¦ ¸¸³ª¸é ÇÈ¼¿½¦ÀÌ´õ°¡ Á¾·áµÊ
+		discard; // í”½ì…€ì‰ì´ë”ëŠ” í‚¤ì›Œë“œë¥¼ ë§Œë‚˜ë©´ í”½ì…€ì‰ì´ë”ê°€ ì¢…ë£Œë¨
 	}
 	if (g_int_0 == 1)
 	{
 		vColor.r *= 2.f;
 	}
 	
-	// ¾ËÆÄºí·»µùÀÇ ÇÙ½É ±âº» ¹è°æÀ» Ãâ·ÂÇÔ!!!!!! ºí·»µå ½¦ÀÌÇÁ
-	// ±íÀÌ ÅØ½ºÃÄ¿¡ ÈçÀûÀÌ ³²´Â´Ù
+	// ì•ŒíŒŒë¸”ë Œë”©ì˜ í•µì‹¬ ê¸°ë³¸ ë°°ê²½ì„ ì¶œë ¥í•¨!!!!!! ë¸”ë Œë“œ ì‰ì´í”„
+	// ê¹Šì´ í…ìŠ¤ì³ì— í”ì ì´ ë‚¨ëŠ”ë‹¤
 	
-	// texture ÃßÃâ µµ±¸ ÇÊ¿ä
-	// ÀÔ·Â UV´Â Á¤Á¡¿¡¼­ ¹ÝÈ¯ÇÑ °ªÀ» º¸°£ ¹Þ¾Æ¼­ ÇÈ¼¿½¦ÀÌ´õ¿¡ ÀÔ·ÂµÊ
+	// texture ì¶”ì¶œ ë„êµ¬ í•„ìš”
+	// ìž…ë ¥ UVëŠ” ì •ì ì—ì„œ ë°˜í™˜í•œ ê°’ì„ ë³´ê°„ ë°›ì•„ì„œ í”½ì…€ì‰ì´ë”ì— ìž…ë ¥ë¨
 	return vColor;
 }
 #endif

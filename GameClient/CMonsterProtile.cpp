@@ -50,6 +50,7 @@ void CMonsterProtile::Tick()
 		*/
 		// 각도 증가 (곡선 회전 속도)
 		//m_Angle += m_RotateSpd * DT;
+		/*
 		Vec3 vTargetPos = m_Target->Transform()->GetWorldPos();
 		Vec3 vPos = Transform()->GetRelativePos(); // 기본 타겟 방향
 		Vec3 vDirToTarget = vTargetPos - vPos;
@@ -65,7 +66,9 @@ void CMonsterProtile::Tick()
 		vCurveDir.Normalize();
 		vPos += vCurveDir * m_Speed * DT;
 		Transform()->SetRelativePos(vPos);
+		*/
 	}
+	if (m_Owner->IsDead()) Destroy();
 }
 
 void CMonsterProtile::BeginOverlap(CCollider2D* _OwnCollider, CCollider2D* _OtherCollider)

@@ -1,3 +1,3 @@
-﻿#include "pch.h"
+#include "pch.h"
 
 TransformMatrix g_Trans = {};

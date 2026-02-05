@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ConstBuffer.h"
 
 // Directx11 라이브러리 함수를 이용해서 

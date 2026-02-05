@@ -7,12 +7,12 @@ void AssetMgr::Init()
 	CreateEngineShader();
 	CreateEngineTexture();
 	CreateEngineMaterial();
+	CreateEngineSprite();
 }
 
 void AssetMgr::CreateEngineMesh()
 {
 	Ptr<AMesh> pMesh = nullptr;
-
 	// 네모
 	Vtx arrVtx[4] = {};
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
@@ -33,6 +33,7 @@ void AssetMgr::CreateEngineMesh()
 	UINT arrIdx[6] = { 0, 2, 3, 0, 1, 2 };
 	// 사각형 메쉬 생성
 	pMesh = new AMesh;
+	pMesh->SetName(L"1_네모");
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddAsset(L"q", pMesh.Get());
 
@@ -43,6 +44,7 @@ void AssetMgr::CreateEngineMesh()
 	arrIdx[3] = 3;
 	arrIdx[4] = 0;
 	pMesh = new AMesh;
+	pMesh->SetName(L"2_네모_debug");
 	pMesh->Create(arrVtx, 4, arrIdx, 5);
 	AddAsset(L"q_debug", pMesh.Get());
 
@@ -73,6 +75,7 @@ void AssetMgr::CreateEngineMesh()
 		oIdx[i * 3 + 2] = (i == TRICOUNT - 1) ? 1 : i + 2;
 	}
 	pMesh = new AMesh;
+	pMesh->SetName(L"3_동구람위");
 	pMesh->Create(oVtx, VTXCOUNT, oIdx, IDXCOUNT);
 	AddAsset(L"c", pMesh.Get());
 
@@ -94,6 +97,7 @@ void AssetMgr::CreateEngineMesh()
 
 	pMesh = new AMesh;
 	pMesh->Create(arr, 3, idx, 3);
+	pMesh->SetName(L"4_셈오1");
 	AddAsset(L"t", pMesh.Get());
 
 	// ===================
@@ -124,6 +128,7 @@ void AssetMgr::CreateEngineMesh()
 	};
 
 	pMesh = new AMesh;
+	pMesh->SetName(L"5_큐브");
 	pMesh->Create(cubeVtx, 8, cubeIdx, 36);
 	AddAsset(L"CubeMesh", pMesh.Get());
 
@@ -162,6 +167,7 @@ void AssetMgr::CreateEngineMesh()
 	}
 
 	pMesh = new AMesh;
+	pMesh->SetName(L"6_원");
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh", pMesh.Get());
 
@@ -171,6 +177,7 @@ void AssetMgr::CreateEngineMesh()
 	}
 
 	pMesh = new AMesh;
+	pMesh->SetName(L"7_원_debug");
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddAsset(L"CircleMesh_LineStrip", pMesh.Get());
 }
@@ -232,6 +239,7 @@ void AssetMgr::CreateEngineTexture()
 	pTex->Load(FilePath);
 	AddAsset(L"m", pTex.Get());
 
+	/*
 	pTex = nullptr;
 	pTex = new ATexture;
 	pTex->SetName(L"태양");
@@ -279,6 +287,12 @@ void AssetMgr::CreateEngineTexture()
 	FilePath += L"Texture\\slime_run.png";
 	pTex->Load(FilePath);
 	AddAsset(L"slime", pTex.Get());
+	*/
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\link.png";
+	pTex->Load(FilePath);
+	AddAsset(L"Link", pTex.Get());
 }
 
 void AssetMgr::CreateEngineMaterial()
@@ -319,4 +333,21 @@ void AssetMgr::CreateEngineMaterial()
 	pMtrl->SetName(L"DbgMtrl");
 	pMtrl->SetShader(Find<AGraphicShader>(L"DbgShader"));
 	AddAsset(pMtrl->GetName(), pMtrl.Get());
+}
+
+void AssetMgr::CreateEngineSprite()
+{
+	Ptr<ASprite> pSprite = nullptr;
+	pSprite = new ASprite;
+	pSprite->SetName(L"LinkSprite");
+	pSprite->SetAtlas(FIND(ATexture, L"Link"));
+	pSprite->SetLeftTopUV(Vec2(0.f, 0.25f));
+	pSprite->SetSliceUV(Vec2(0.1f, 0.125f));
+	AddAsset(pSprite->GetName(), pSprite.Get());
+
+	Ptr<AFlipbook> pFlipbook = nullptr;
+	pFlipbook = new AFlipbook;
+	pFlipbook->SetName(L"Link_MoveDown");
+	pFlipbook->AddSprite(pSprite);
+	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
 }

@@ -114,7 +114,7 @@ void CPlayerScript::Shoot()
 		pObject->Transform()->SetRelativeRot(vRotation);
 
 		pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
-		pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+ 		pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
 
 		CreateObject(pObject, 4);
 	}
@@ -133,14 +133,6 @@ void CPlayerScript::Tick()
 	Move();
 
 	Shoot();
-	if (KEY_PRESSED(KEY::X))
-	{
-		MeshRender()->GetMtrl()->SetScalar(INT_0, 1);
-	}
-	else
-	{
-		MeshRender()->GetMtrl()->SetScalar(INT_0, 0);
-	}
 
 	Ptr<GameObject> pChild = GetOwner()->GetChild(0);
 

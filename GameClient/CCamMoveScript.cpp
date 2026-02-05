@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CCamMoveScript.h"
 #include "KeyMgr.h"
 #include "TimeMgr.h"

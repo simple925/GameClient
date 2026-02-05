@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "single.h"
 class TaskMgr :
     public singleton<TaskMgr>

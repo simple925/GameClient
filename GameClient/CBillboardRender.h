@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "CRenderComponent.h"
 class CBillboardRender :
     public CRenderComponent

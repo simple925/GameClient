@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "GameObject.h"
 
 #include "KeyMgr.h"
@@ -48,6 +48,8 @@ void GameObject::AddComponent(Ptr<Component> _Com)
 		m_Com[(UINT)_Com->GetType()] = _Com;
 	}
 	_Com->m_Owner = this;
+
+	_Com->Init();
 }
 
 void GameObject::Begin()

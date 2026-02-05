@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Component.h"
 
 #include "AMesh.h"
@@ -14,7 +14,7 @@ public:
     GET_SET(Ptr<AMesh>, Mesh)
     GET_SET(Ptr<AMaterial>,  Mtrl)
 public:
-    virtual void Begin() override;
+    virtual void Init() override;
     virtual void Render() = 0;
 
     // 자신이 사용할 재질 로딩 및 생성

@@ -152,6 +152,15 @@
     <ClInclude Include="CStateScript.h">
       <Filter>GameEngine\06. Component\Script\StateScript</Filter>
     </ClInclude>
+    <ClInclude Include="ASprite.h">
+      <Filter>GameEngine\04. Asset\06. Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="AFlipbook.h">
+      <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
+    </ClInclude>
+    <ClInclude Include="CFlipBookRender.h">
+      <Filter>GameEngine\06. Component\05. FlipBookRender</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -283,6 +292,15 @@
     </ClCompile>
     <ClCompile Include="CStateScript.cpp">
       <Filter>GameEngine\06. Component\Script\StateScript</Filter>
+    </ClCompile>
+    <ClCompile Include="ASprite.cpp">
+      <Filter>GameEngine\04. Asset\06. Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="AFlipbook.cpp">
+      <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
+    </ClCompile>
+    <ClCompile Include="CFlipBookRender.cpp">
+      <Filter>GameEngine\06. Component\05. FlipBookRender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +436,15 @@
     <Filter Include="GameEngine\06. Component\Script\StateScript">
       <UniqueIdentifier>{5225fd99-e28e-465c-96b9-ad59fe3f3d90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\04. Asset\06. Sprite">
+      <UniqueIdentifier>{7f3dbdb8-d99d-4580-ab6b-d986a0d30ed2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\04. Asset\07. Flipbook">
+      <UniqueIdentifier>{792fff96-bccd-4ac7-8338-7872ade338c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\05. FlipBookRender">
+      <UniqueIdentifier>{a296c449-1171-4936-8c8c-33e7dd931ab2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
@@ -441,6 +468,12 @@
     </FxCompile>
     <FxCompile Include="dbg.fx">
       <Filter>HSL\2. Render</Filter>
+    </FxCompile>
+    <FxCompile Include="sprite.fx">
+      <Filter>HSL\2. Render\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="Flipbook.fx">
+      <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

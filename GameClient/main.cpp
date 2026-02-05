@@ -34,7 +34,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
 	// CRT new, delete 디버깅 모드에서 메모리 누수 추적, 출력창에 알림
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	//_CrtSetBreakAlloc(150); // 누수 발생지점 중단점 걸어주는 기능
+	//_CrtSetBreakAlloc(835); // 누수 발생지점 중단점 걸어주는 기능
 	//int* a = new int;
 
 	hInst = hInstance;

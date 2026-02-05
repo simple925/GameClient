@@ -1,20 +1,14 @@
 ﻿  .\GameClient\billboard.fx
   .\GameClient\dbg.fx
+  .\GameClient\Flipbook.fx
+  .\GameClient\sprite.fx
   .\GameClient\std2d.fx
   .\GameClient\value.fx
-  4개 파일이 복사되었습니다.
+  6개 파일이 복사되었습니다.
   OK: Updated components.h
-  unity_CT0AU7U80CZXYK29.cpp
-C:\Users\me\Documents\cpp\GameCilent\GameClient\AMesh.cpp(41,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  (compiling source file '/x64/Debug/unity_CT0AU7U80CZXYK29.cpp')
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\billboard.fx(1,1): error X3000: Illegal character in shader file
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\value.fx(51,2-6): error X1510: unexpected #endif
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\billboard.fx(51,2-6): error X1510: unexpected #endif
   
-C:\Users\me\Documents\cpp\GameCilent\GameClient\AMesh.cpp(63,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  (compiling source file '/x64/Debug/unity_CT0AU7U80CZXYK29.cpp')
-  
-C:\Users\me\Documents\cpp\GameCilent\GameClient\TaskMgr.cpp(19,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  (compiling source file '/x64/Debug/unity_CT0AU7U80CZXYK29.cpp')
-  
-C:\Users\me\Documents\cpp\GameCilent\GameClient\TaskMgr.cpp(27,37): warning C4244: '인수': 'DWORD_PTR'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  (compiling source file '/x64/Debug/unity_CT0AU7U80CZXYK29.cpp')
-  
-  GameClient.vcxproj -> C:\Users\me\Documents\cpp\GameCilent\Game\Bin\GameClient.exe
+  compilation failed; no code produced

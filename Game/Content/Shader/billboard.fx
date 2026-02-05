@@ -1,23 +1,23 @@
-#ifndef _BILLBOARD
+ï»¿#ifndef _BILLBOARD
 #define _BILLBOARD
 #include "value.fx"
 
 #define BILLBOARD_SCALE g_vec2_0
 
-// layout Á¤º¸
+// layout ì •ë³´
 struct VS_IN
 {
-	// Semantic Àº ²À ¸ÂÀ» ÇÊ¿ä ¾øÀ½ ÇÊ¿äÇÑ °Í¸¸ °¡Á®¿Ã ¼ö ÀÖÀ½
-	// Semantic ÀÌ¸§¿¡´Â 0ÀÌ »ı·« µÇ¾î ÀÖÀ½ POSITION
-	float3 vPos : POSITION; // Semantic Layout¿¡¼­ ¼³¸íÇÑ ÀÌ¸§
+	// Semantic ì€ ê¼­ ë§ì„ í•„ìš” ì—†ìŒ í•„ìš”í•œ ê²ƒë§Œ ê°€ì ¸ì˜¬ ìˆ˜ ìˆìŒ
+	// Semantic ì´ë¦„ì—ëŠ” 0ì´ ìƒëµ ë˜ì–´ ìˆìŒ POSITION
+	float3 vPos : POSITION; // Semantic Layoutì—ì„œ ì„¤ëª…í•œ ì´ë¦„
 	float2 vUV : TEXCOORD;
 	float4 vColor : COLOR;
 };
 
 struct VS_OUT
 {
-	// SV_xxx ´Â ¾à¼ÓµÈ °ª
-	float4 vPosition : SV_Position; // Rasterizer ·Î º¸³¾¶§, NDC ÁÂÇ¥
+	// SV_xxx ëŠ” ì•½ì†ëœ ê°’
+	float4 vPosition : SV_Position; // Rasterizer ë¡œ ë³´ë‚¼ë•Œ, NDC ì¢Œí‘œ
 	float2 vUV : TEXCOORD;
 	float4 vColor : COLOR;
 };
@@ -29,19 +29,19 @@ VS_OUT VS_Billboard(VS_IN _input)
 	
 	VS_OUT output = (VS_OUT) 0.f;
 	
-	float4 vWorld = mul(float4(0.f, 0.f, 0.f, 1.f /*µ¿Â÷ÁÂÇ¥*/), g_matWorld);
+	float4 vWorld = mul(float4(0.f, 0.f, 0.f, 1.f /*ë™ì°¨ì¢Œí‘œ*/), g_matWorld);
 	float4 vView = mul(vWorld, g_matView);
 	vView.xy += _input.vPos.xy * BILLBOARD_SCALE;
 	
 	float4 vProj = mul(vView, g_matProj);
-	output.vPosition = vProj; // ¿ùµåÇà·ÄÀ» ¹æÇâº¤ÅÍ¿¡ °öÇÒ¶© ÀÌµ¿Á¤º¸¸¦ ¹«½ÃÇØ¾ßµÇ±â ¶§¹®¿¡ µ¿Â÷ÁÂÇ¥°¡ 0.f µé¾î°¡¾ßÇÔ
+	output.vPosition = vProj; // ì›”ë“œí–‰ë ¬ì„ ë°©í–¥ë²¡í„°ì— ê³±í• ë• ì´ë™ì •ë³´ë¥¼ ë¬´ì‹œí•´ì•¼ë˜ê¸° ë•Œë¬¸ì— ë™ì°¨ì¢Œí‘œê°€ 0.f ë“¤ì–´ê°€ì•¼í•¨
 	output.vUV = _input.vUV;
 	output.vColor = _input.vColor;
     
 	return output;
 }
 
-// Á¤Á¡¿¡¼­ ¹İÈ¯ÇÑ °ªÀÌ º¸°£(Interpolation) µÇ¾î ÇÈ¼¿ÀÌ ½¦ÀÌ´õÀÇ ÀÔ·ÂÀ¸·Î µ¹¾Æ¿Â´Ù.
+// ì •ì ì—ì„œ ë°˜í™˜í•œ ê°’ì´ ë³´ê°„(Interpolation) ë˜ì–´ í”½ì…€ì´ ì‰ì´ë”ì˜ ì…ë ¥ìœ¼ë¡œ ëŒì•„ì˜¨ë‹¤.
 float4 PS_Billboard(VS_OUT _input) : SV_Target
 {
 	//return float4(1.f, 0.f, 0.f, 1.f);

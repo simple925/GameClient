@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 // & 주소 내놔
 // * 주소로 접근한다
 template<typename T>

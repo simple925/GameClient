@@ -10,6 +10,7 @@
 #include "CMonsterScript.h"
 #include "CStateScript.h"
 
+
 LevelMgr::LevelMgr() {
 }
 LevelMgr::~LevelMgr() {
@@ -82,7 +83,8 @@ void LevelMgr::Init()
 	pMonster->AddComponent(new CCollider2D);
 
 	Ptr<CMonsterScript> monsterScript = new CMonsterScript;
-	monsterScript->SetTarget(pObject);
+	monsterScript->SetName(L"mScript");
+	//monsterScript->SetTarget(pObject);
 	pMonster->AddComponent(monsterScript.Get());
 
 	pMonster->AddComponent(new CStateScript);
@@ -95,7 +97,7 @@ void LevelMgr::Init()
 
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
-	pObject->AddComponent(new CMeshRender);
+	pObject->AddComponent(new CFlipbookRender);
 	pObject->AddComponent(new CCollider2D);
 
 	Ptr<CPlayerScript> playerScript = new CPlayerScript;
@@ -105,11 +107,10 @@ void LevelMgr::Init()
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 
-	pObject->Collider2D()->SetOffset(Vec2(0.f, 0.25f));
-	pObject->Collider2D()->SetScale(Vec2(0.2f, 0.2f));
+	pObject->Collider2D()->SetOffset(Vec2(0.f, -0.1f));
+	pObject->Collider2D()->SetScale(Vec2(0.25f, 0.5f));
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
-	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+	pObject->FlipbookRender()->SetFlipbook(FIND(AFlipbook, L"Link_MoveDown"));
 
 	Ptr<GameObject> pChild = new GameObject;
 	pChild->SetName(L"Child");

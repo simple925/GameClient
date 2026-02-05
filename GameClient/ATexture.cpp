@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "ATexture.h"
 #include "Device.h"
 ATexture::ATexture()

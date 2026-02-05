@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 // Task
 void CreateObject(class GameObject* _Object, int LayerIdx);

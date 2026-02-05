@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CPlanetControllerScript.h"
 #include "TimeMgr.h"
 #include "LevelMgr.h"

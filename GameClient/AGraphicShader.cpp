@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "AGraphicShader.h"
 #include "Device.h"
 #include "PathMgr.h"

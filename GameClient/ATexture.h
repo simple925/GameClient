@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Asset.h"
 class ATexture :
     public Asset

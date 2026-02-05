@@ -3,10 +3,7 @@
 #include "Asset.h"
 #include "PathMgr.h"
 
-#include "AMesh.h"
-#include "AGraphicShader.h"
-#include "ATexture.h"
-#include "AMaterial.h"
+#include "asserts.h"
 
 class AssetMgr
     : public singleton<AssetMgr>
@@ -21,6 +18,7 @@ public:
     void CreateEngineShader();
     void CreateEngineTexture();
     void CreateEngineMaterial();
+    void CreateEngineSprite();
 public:
     Ptr<Asset> Find(ASSET_TYPE _Type, const wstring& _Key);
     void AddAsset(const wstring& _Key, Ptr<Asset> _Asset);
@@ -38,6 +36,8 @@ ASSET_TYPE GetAssetType()
     else if constexpr (std::is_same_v<T, AGraphicShader>) return ASSET_TYPE::GRAPHICSHADER;
     else if constexpr (std::is_same_v<T, ATexture>) return ASSET_TYPE::TEXTURE;
     else if constexpr (std::is_same_v<T, AMaterial>) return ASSET_TYPE::MATERIAL;
+    else if constexpr (std::is_same_v<T, ASprite>) return ASSET_TYPE::SPRITE;
+    else if constexpr (std::is_same_v<T, AFlipbook>) return ASSET_TYPE::FLIPBOOK;
     return ASSET_TYPE::END;
 }
 
