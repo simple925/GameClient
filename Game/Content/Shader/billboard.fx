@@ -1,4 +1,4 @@
-﻿#ifndef _BILLBOARD
+#ifndef _BILLBOARD
 #define _BILLBOARD
 #include "value.fx"
 

@@ -24,3 +24,31 @@
 z축을 기준으로 뷰화면을 생성한다
 
 크기 * 회전 * 이동 = 월드행렬
+
+
+
+
+윈도우 파워쉘에서 실행
+
+# 인코딩 설정 정의
+$Utf8WithBom = New-Object System.Text.UTF8Encoding($true)   # BOM 포함
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)   # BOM 미포함
+
+Get-ChildItem -Recurse -Include *.cpp, *.h, *.fx | ForEach-Object {
+    $filePath = $_.FullName
+    $extension = $_.Extension.ToLower()
+    
+    # 한글 깨짐 방지를 위해 인코딩 자동 감지로 읽기
+    $content = [System.IO.File]::ReadAllText($filePath)
+    
+    if ($extension -eq ".fx") {
+        # .fx 파일은 BOM 없이 저장
+        [System.IO.File]::WriteAllText($filePath, $content, $Utf8NoBom)
+        Write-Host "BOM Removed (Safe): $($_.Name)" -ForegroundColor Cyan
+    }
+    else {
+        # .cpp, .h 파일은 BOM 포함 저장
+        [System.IO.File]::WriteAllText($filePath, $content, $Utf8WithBom)
+        Write-Host "BOM Added (Safe): $($_.Name)" -ForegroundColor Magenta
+    }
+}

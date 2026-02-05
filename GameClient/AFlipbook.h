@@ -18,7 +18,7 @@ public:
     }
     Ptr<ASprite> GetSprite(int _Idx) { return m_vecSprite[_Idx]; }
 
-    UINT GetSpriteCount() { return m_vecSprite.size(); }
+    UINT GetSpriteCount() { return (UINT)m_vecSprite.size(); }
 public:
     AFlipbook();
     virtual ~AFlipbook();

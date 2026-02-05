@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "TaskMgr.h"
 #include "LevelMgr.h"
 #include "GameObject.h"
@@ -16,7 +16,7 @@ void TaskMgr::Progress()
 	m_Garbage.clear();
 
 	// Task 처리
-	for (int i = 0; i < (UINT)m_vecTask.size(); ++i)
+	for (UINT i = 0; i < (UINT)m_vecTask.size(); ++i)
 	{
 		switch (m_vecTask[i].Type)
 		{
@@ -24,7 +24,7 @@ void TaskMgr::Progress()
 		{
 			Ptr<GameObject> pNewObj = (GameObject*)m_vecTask[i].Param_0;
 			Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
-			pCurLevel->AddObject(m_vecTask[i].Param_1, pNewObj);
+			pCurLevel->AddObject((DWORD_PTR)m_vecTask[i].Param_1, pNewObj);
 
 			// 레벨에 추가된 오브젝트는, 레벨 시작시점때 Begin 을 호출받지 못하기 때문에,
 			// 레벨에 스폰될 때 Begin 을 호출받는다.

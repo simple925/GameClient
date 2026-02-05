@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Asset.h"
 
 // vertex(정점), index(인덱스) 정보로 구성된 모델 데이터

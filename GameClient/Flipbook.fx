@@ -1,4 +1,4 @@
-﻿#ifndef _FLIPBOOK
+#ifndef _FLIPBOOK
 #define _FLIPBOOK
 
 #include "value.fx"

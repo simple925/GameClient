@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "CTransform.h"
 #include "CCamera.h"
@@ -11,7 +11,7 @@
 
 
 // #include "CCollider3D.h"
-// #include "CFlipbookRender.h"
+#include "CFlipbookRender.h"
 // #include "CLight2D.h"
 // #include "CLight3D.h"
 // #include "CParticleRender.h"

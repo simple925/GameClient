@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Entity.h"
 // 쉐이더 사운드 애니메이션 매쉬 텍스쳐이미지
 class Asset :

@@ -1,4 +1,4 @@
-﻿#ifndef _TEST // n = not ifndef [test] test 만약 test 정의 되어있지 않다면
+#ifndef _TEST // n = not ifndef [test] test 만약 test 정의 되어있지 않다면
 #define _TEST
 #include "value.fx"
 // layout 정보

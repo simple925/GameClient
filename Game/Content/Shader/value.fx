@@ -1,4 +1,4 @@
-﻿#ifndef _VALUE
+#ifndef _VALUE
 #define _VALUE
 /*
 cbuffer TRANSFORM : register(b1) // 바인딩 될 상수 레지스터 번호 (b0)

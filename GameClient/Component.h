@@ -17,6 +17,7 @@ private:
 public:
 	COMPONENT_TYPE GetType() { return m_Type; }
 	GameObject* GetOwner() { return m_Owner; }
+    GET_OTHER_COMPONENT(FlipbookRender);
 
 	//class CTransform* Transform(); // 전방 선언을함
     GET_OTHER_COMPONENT(SpriteRender);

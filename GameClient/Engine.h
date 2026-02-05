@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // 외부에서 생성자를 호출하지 못하도록 함
 class Engine

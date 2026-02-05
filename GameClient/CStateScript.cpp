@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CStateScript.h"
 #include "GameObject.h"
 #include "TimeMgr.h"

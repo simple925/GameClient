@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "CRenderComponent.h"
 #include "AFlipbook.h"
-class CFlipBookRender :
+class CFlipbookRender :
     public CRenderComponent
 {
 private:
@@ -15,7 +15,7 @@ public:
     virtual void Render() override;
     virtual void CreateMaterial() override;
 public:
-    CFlipBookRender();
-    virtual ~CFlipBookRender();
+    CFlipbookRender();
+    virtual ~CFlipbookRender();
 };
 

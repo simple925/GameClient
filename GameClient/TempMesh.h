@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "AMesh.h"
 class TempMesh
 	: public Asset

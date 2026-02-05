@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "AMesh.h"
 #include "Device.h"
 
@@ -38,7 +38,7 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 		return E_FAIL;
 	}
 	m_VtxSysMem = new Vtx[_VtxCount];
-	for (int i = 0; i < _VtxCount; ++i)
+	for (UINT i = 0; i < _VtxCount; ++i)
 	{
 		m_VtxSysMem[i] = _VtxSysMem[i];
 	}
@@ -60,7 +60,7 @@ int AMesh::Create(Vtx* _VtxSysMem, UINT _VtxCount, UINT* _IdxSysMem, UINT _IdxCo
 	}
 
 	m_IdxSysMem = new UINT[_IdxCount];
-	for (int i = 0; i < _IdxCount; ++i)
+	for (UINT i = 0; i < _IdxCount; ++i)
 	{
 		m_IdxSysMem[i] = _IdxSysMem[i];
 	}

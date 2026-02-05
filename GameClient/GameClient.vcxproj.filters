@@ -158,8 +158,8 @@
     <ClInclude Include="AFlipbook.h">
       <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
     </ClInclude>
-    <ClInclude Include="CFlipBookRender.h">
-      <Filter>GameEngine\06. Component\05. FlipBookRender</Filter>
+    <ClInclude Include="CFlipbookRender.h">
+      <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,8 +299,8 @@
     <ClCompile Include="AFlipbook.cpp">
       <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
     </ClCompile>
-    <ClCompile Include="CFlipBookRender.cpp">
-      <Filter>GameEngine\06. Component\05. FlipBookRender</Filter>
+    <ClCompile Include="CFlipbookRender.cpp">
+      <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -442,7 +442,7 @@
     <Filter Include="GameEngine\04. Asset\07. Flipbook">
       <UniqueIdentifier>{792fff96-bccd-4ac7-8338-7872ade338c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\05. FlipBookRender">
+    <Filter Include="GameEngine\06. Component\05. FlipbookRender">
       <UniqueIdentifier>{a296c449-1171-4936-8c8c-33e7dd931ab2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

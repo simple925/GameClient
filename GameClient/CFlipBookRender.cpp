@@ -1,21 +1,21 @@
 ﻿#include "pch.h"
-#include "CFlipBookRender.h"
+#include "CFlipbookRender.h"
 #include "AssetMgr.h"
-CFlipBookRender::CFlipBookRender()
+CFlipbookRender::CFlipbookRender()
 	: CRenderComponent(COMPONENT_TYPE::FLIPBOOK_RENDER)
 {
 }
 
-CFlipBookRender::~CFlipBookRender()
+CFlipbookRender::~CFlipbookRender()
 {
 }
 
 
-void CFlipBookRender::FinalTick()
+void CFlipbookRender::FinalTick()
 {
 }
 
-void CFlipBookRender::Render()
+void CFlipbookRender::Render()
 {
 	Ptr<ASprite> pCurSprite = m_Flipbook->GetSprite(0);
 
@@ -28,7 +28,7 @@ void CFlipBookRender::Render()
 	GetMesh()->Render();
 }
 
-void CFlipBookRender::CreateMaterial()
+void CFlipbookRender::CreateMaterial()
 {
 	wstring MeshName = L"q";
 	wstring MtrlName = L"FlipbookMtrl";

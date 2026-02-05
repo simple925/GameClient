@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "TimeMgr.h"
 #include "Engine.h"
 TimeMgr::TimeMgr()

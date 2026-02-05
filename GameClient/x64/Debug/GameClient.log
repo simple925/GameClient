@@ -6,9 +6,8 @@
   .\GameClient\value.fx
   6개 파일이 복사되었습니다.
   OK: Updated components.h
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\billboard.fx(1,1): error X3000: Illegal character in shader file
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\value.fx(51,2-6): error X1510: unexpected #endif
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\billboard.fx(51,2-6): error X1510: unexpected #endif
+  unity_BMYPR4AXYXV8G9LA.cpp
+C:\Users\141245124\Documents\cpp\GameCilent\GameClient\TaskMgr.cpp(27,48): warning C4244: '인수': 'DWORD_PTR'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (compiling source file '/x64/Debug/unity_BMYPR4AXYXV8G9LA.cpp')
   
-  compilation failed; no code produced
+  GameClient.vcxproj -> C:\Users\141245124\Documents\cpp\GameCilent\Game\Bin\GameClient.exe

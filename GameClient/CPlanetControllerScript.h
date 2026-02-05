@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CScript.h"
 class CPlanetControllerScript :
     public CScript

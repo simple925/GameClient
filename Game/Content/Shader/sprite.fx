@@ -1,4 +1,4 @@
-﻿#ifndef _SPRITE
+#ifndef _SPRITE
 #define _SPRITE
 
 #include "value.fx"
