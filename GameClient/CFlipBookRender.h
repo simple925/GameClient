@@ -2,20 +2,33 @@
 #include "CRenderComponent.h"
 #include "AFlipbook.h"
 class CFlipbookRender :
-    public CRenderComponent
+	public CRenderComponent
 {
 private:
-    Ptr<AFlipbook>        m_Flipbook;
+	vector<Ptr<AFlipbook>>		m_vecFlipbook;
+	int							m_CurFlipbook;
+	int							m_CurSprite;
+	int							m_RepeatCount;
+	bool						m_Finish;
+	float						m_FPS;
+	float						m_AccTime;
+public:
+	//void SetFlipbook(Ptr<AFlipbook> _Flipbook) { m_vecFlipbook = _Flipbook; }
+	void AddFlipbook(Ptr<AFlipbook> _Flipbook) { m_vecFlipbook.push_back(_Flipbook); }
+	void Play(int FlibookIdx, float _FPS, int _RepeatCount)
+	{
+		m_CurFlipbook = FlibookIdx;
+		m_RepeatCount = _RepeatCount;
+		m_FPS = _FPS;
+	}
+	bool CheckFinish();
 
 public:
-    void SetFlipbook(Ptr<AFlipbook> _Flipbook) { m_Flipbook = _Flipbook; }
-
+	virtual void FinalTick() override;
+	virtual void Render() override;
+	virtual void CreateMaterial() override;
 public:
-    virtual void FinalTick() override;
-    virtual void Render() override;
-    virtual void CreateMaterial() override;
-public:
-    CFlipbookRender();
-    virtual ~CFlipbookRender();
+	CFlipbookRender();
+	virtual ~CFlipbookRender();
 };
 

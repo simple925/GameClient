@@ -337,17 +337,113 @@ void AssetMgr::CreateEngineMaterial()
 
 void AssetMgr::CreateEngineSprite()
 {
+	Ptr<ATexture> pAtlas = FIND(ATexture, L"Link");
+	float Width = pAtlas->GetWidth();
+	float Height = pAtlas->GetHeight();
+	Vec2 SlicePixel = Vec2(120.f, 130.f);
+
+
 	Ptr<ASprite> pSprite = nullptr;
-	pSprite = new ASprite;
-	pSprite->SetName(L"LinkSprite");
-	pSprite->SetAtlas(FIND(ATexture, L"Link"));
-	pSprite->SetLeftTopUV(Vec2(0.f, 0.25f));
-	pSprite->SetSliceUV(Vec2(0.1f, 0.125f));
-	AddAsset(pSprite->GetName(), pSprite.Get());
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMD_%d", i);
+
+		//(SlicePixel.y / Height * 4.f) ex) 130.f / 1040.f 
+		//(SlicePixel.x / Width)* i ex) i = 0 0.f, i = 1 0.1f  
+		pSprite = new ASprite;
+		pSprite->SetName(Buff);
+		pSprite->SetAtlas(pAtlas);
+		pSprite->SetLeftTopUV(Vec2((SlicePixel.x / Width) * (float)i, (SlicePixel.y / Height) * 4.f));
+		pSprite->SetSliceUV(SlicePixel / Vec2(Width, Height));
+		AddAsset(pSprite->GetName(), pSprite.Get());
+	}
+
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkML_%d", i);
+
+		//(SlicePixel.y / Height * 4.f) ex) 130.f / 1040.f 
+		//(SlicePixel.x / Width)* i ex) i = 0 0.f, i = 1 0.1f  
+		pSprite = new ASprite;
+		pSprite->SetName(Buff);
+		pSprite->SetAtlas(pAtlas);
+		pSprite->SetLeftTopUV(Vec2((SlicePixel.x / Width) * (float)i, (SlicePixel.y / Height) * 5.f));
+		pSprite->SetSliceUV(SlicePixel / Vec2(Width, Height));
+		AddAsset(pSprite->GetName(), pSprite.Get());
+	}
+
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMU_%d", i);
+
+		//(SlicePixel.y / Height * 4.f) ex) 130.f / 1040.f 
+		//(SlicePixel.x / Width)* i ex) i = 0 0.f, i = 1 0.1f  
+		pSprite = new ASprite;
+		pSprite->SetName(Buff);
+		pSprite->SetAtlas(pAtlas);
+		pSprite->SetLeftTopUV(Vec2((SlicePixel.x / Width) * (float)i, (SlicePixel.y / Height) * 6.f));
+		pSprite->SetSliceUV(SlicePixel / Vec2(Width, Height));
+		AddAsset(pSprite->GetName(), pSprite.Get());
+	}
+
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMR_%d", i);
+
+		//(SlicePixel.y / Height * 4.f) ex) 130.f / 1040.f 
+		//(SlicePixel.x / Width)* i ex) i = 0 0.f, i = 1 0.1f  
+		pSprite = new ASprite;
+		pSprite->SetName(Buff);
+		pSprite->SetAtlas(pAtlas);
+		pSprite->SetLeftTopUV(Vec2((SlicePixel.x / Width) * (float)i, (SlicePixel.y / Height) * 7.f));
+		pSprite->SetSliceUV(SlicePixel / Vec2(Width, Height));
+		AddAsset(pSprite->GetName(), pSprite.Get());
+	}
+
 
 	Ptr<AFlipbook> pFlipbook = nullptr;
+
 	pFlipbook = new AFlipbook;
 	pFlipbook->SetName(L"Link_MoveDown");
-	pFlipbook->AddSprite(pSprite);
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMD_%d", i);
+		pFlipbook->AddSprite(FIND(ASprite, Buff));
+	}
+	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
+
+	pFlipbook = new AFlipbook;
+	pFlipbook->SetName(L"Link_MoveLeft");
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkML_%d", i);
+		pFlipbook->AddSprite(FIND(ASprite, Buff));
+	}
+	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
+
+	pFlipbook = new AFlipbook;
+	pFlipbook->SetName(L"Link_MoveUp");
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMU_%d", i);
+		pFlipbook->AddSprite(FIND(ASprite, Buff));
+	}
+	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
+
+	pFlipbook = new AFlipbook;
+	pFlipbook->SetName(L"Link_MoveRight");
+	for (int i = 0; i < 10; ++i)
+	{
+		wchar_t Buff[50] = {};
+		swprintf_s(Buff, L"LinkMR_%d", i);
+		pFlipbook->AddSprite(FIND(ASprite, Buff));
+	}
 	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
 }

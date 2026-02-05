@@ -44,6 +44,7 @@ bool CPlayerScript::IsMouseOver()
 }
 
 CPlayerScript::CPlayerScript()
+	:m_iPrevDir(-1)
 {
 }
 
@@ -72,16 +73,53 @@ void CPlayerScript::Move()
 
 	Vec3 vUp = Transform()->GetDir(DIR::UP);
 	Vec3 vDown = -vUp;
+	Vec3 vRight = Transform()->GetDir(DIR::RIGHT);
+	Vec3 vLeft = -vRight;
 
+	float fSpeed = 20.f;
+	int iNextDir = -1;   // 현재 프레임의 입력 방향 체크
 	if (KEY_PRESSED(KEY::UP))
+	{
 		vPos += vUp * 400.5f * DT;
+		iNextDir = 2;
+	}
 	if (KEY_PRESSED(KEY::DOWN))
+	{
 		vPos += vDown * 400.5f * DT;
-
+		iNextDir = 0;
+	}
 	if (KEY_PRESSED(KEY::RIGHT))
-		vRotation.z -= XM_PI * DT;
+	{
+		vPos += vRight * 400.5f * DT;
+		iNextDir = 3;
+	}
 	if (KEY_PRESSED(KEY::LEFT))
-		vRotation.z += XM_PI * DT;
+	{
+		vPos += vLeft * 400.5f * DT;
+		iNextDir = 1;
+	}
+	// 2. 애니메이션 제어
+	if (iNextDir != -1) // 키가 눌려 있는 경우
+	{
+		// 방향이 바뀌었을 때만 Play 호출 (인덱스는 iNextDir 사용)
+		if (iNextDir != m_iPrevDir)
+		{
+			// 세 번째 인자가 -1이면 무한 반복, 1이면 한 번 재생이라고 하셨죠?
+			GetOwner()->FlipbookRender()->Play(iNextDir, fSpeed, -1);
+			m_iPrevDir = iNextDir;
+		}
+	}
+	else // 키를 뗀 경우
+	{
+		// 이전에 어딘가로 움직이고 있었다면 (m_iPrevDir가 0~3 사이라면)
+		if (m_iPrevDir != -1)
+		{
+			// 마지막으로 바라보던 방향(m_iPrevDir)으로 멈춤(1) 처리
+			GetOwner()->FlipbookRender()->Play(m_iPrevDir, fSpeed, 0);
+			m_iPrevDir = -1; // 이후엔 다시 키를 누르기 전까지 이 블록 안 들어옴
+		}
+	}
+
 
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeScale(vScale);

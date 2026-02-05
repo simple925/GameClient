@@ -110,7 +110,11 @@ void LevelMgr::Init()
 	pObject->Collider2D()->SetOffset(Vec2(0.f, -0.1f));
 	pObject->Collider2D()->SetScale(Vec2(0.25f, 0.5f));
 
-	pObject->FlipbookRender()->SetFlipbook(FIND(AFlipbook, L"Link_MoveDown"));
+	pObject->FlipbookRender()->AddFlipbook(FIND(AFlipbook, L"Link_MoveDown"));
+	pObject->FlipbookRender()->AddFlipbook(FIND(AFlipbook, L"Link_MoveLeft"));
+	pObject->FlipbookRender()->AddFlipbook(FIND(AFlipbook, L"Link_MoveUp"));
+	pObject->FlipbookRender()->AddFlipbook(FIND(AFlipbook, L"Link_MoveRight"));
+	pObject->FlipbookRender()->Play(1,15.f,-1);
 
 	Ptr<GameObject> pChild = new GameObject;
 	pChild->SetName(L"Child");

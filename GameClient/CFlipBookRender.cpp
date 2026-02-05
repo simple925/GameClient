@@ -1,8 +1,12 @@
 ﻿#include "pch.h"
 #include "CFlipbookRender.h"
 #include "AssetMgr.h"
+#include "TimeMgr.h"
 CFlipbookRender::CFlipbookRender()
 	: CRenderComponent(COMPONENT_TYPE::FLIPBOOK_RENDER)
+	, m_FPS(0.f)
+	, m_AccTime(0.f)
+	, m_CurSprite(0)
 {
 }
 
@@ -11,13 +15,54 @@ CFlipbookRender::~CFlipbookRender()
 }
 
 
+bool CFlipbookRender::CheckFinish()
+{
+	// 마지막에 들어옴
+	if (m_Finish)
+	{
+		if (0 < m_RepeatCount)
+		{
+			m_CurSprite = 0;
+			m_Finish = false;
+			--m_RepeatCount;
+			return false;
+		}
+		else if (-1 == m_RepeatCount)
+		{
+			m_CurSprite = 0;
+			m_Finish = false;
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
 void CFlipbookRender::FinalTick()
 {
+	if (CheckFinish()) return;
+
+	float fLmit = 1.f / m_FPS; // 한장면당 1/10 초를 만들어줌
+	m_AccTime += DT;
+
+	if (fLmit < m_AccTime) {
+		m_AccTime -= fLmit;
+		++m_CurSprite;
+
+		if (m_vecFlipbook[m_CurFlipbook]->GetSpriteCount() <= m_CurSprite)
+		{
+			m_Finish = true;
+			--m_CurSprite;
+		}
+	}
 }
 
 void CFlipbookRender::Render()
 {
-	Ptr<ASprite> pCurSprite = m_Flipbook->GetSprite(0);
+	Ptr<AFlipbook> pCurFlipbook = m_vecFlipbook[m_CurFlipbook];
+	Ptr<ASprite> pCurSprite = pCurFlipbook->GetSprite(m_CurSprite);
 
 	// 쉐이더로 보냄 .fx ~
 	GetMtrl()->SetTexture(TEX_0, pCurSprite->GetAtlas());
