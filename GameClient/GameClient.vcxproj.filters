@@ -161,6 +161,13 @@
     <ClInclude Include="CFlipbookRender.h">
       <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
     </ClInclude>
+    <ClInclude Include="ATileMap.h">
+      <Filter>GameEngine\04. Asset\08. Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CTileRender.h">
+      <Filter>GameEngine\06. Component\06. TileRender</Filter>
+    </ClInclude>
+    <ClInclude Include="StructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -302,6 +309,13 @@
     <ClCompile Include="CFlipbookRender.cpp">
       <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
     </ClCompile>
+    <ClCompile Include="ATileMap.cpp">
+      <Filter>GameEngine\04. Asset\08. Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CTileRender.cpp">
+      <Filter>GameEngine\06. Component\06. TileRender</Filter>
+    </ClCompile>
+    <ClCompile Include="StructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -445,6 +459,12 @@
     <Filter Include="GameEngine\06. Component\05. FlipbookRender">
       <UniqueIdentifier>{a296c449-1171-4936-8c8c-33e7dd931ab2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\04. Asset\08. Tile">
+      <UniqueIdentifier>{16701b84-71f2-4302-ae17-fc49ca575210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\06. TileRender">
+      <UniqueIdentifier>{fa4fba74-5551-459b-866c-61c59520d445}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
@@ -473,6 +493,9 @@
       <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
     <FxCompile Include="Flipbook.fx">
+      <Filter>HSL\2. Render\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="tile.fx">
       <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
   </ItemGroup>

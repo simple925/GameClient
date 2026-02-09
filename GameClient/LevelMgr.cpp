@@ -79,7 +79,7 @@ void LevelMgr::Init()
 	pMonster->SetName(L"Monster");
 
 	pMonster->AddComponent(new CTransform);
-	pMonster->AddComponent(new CBillboardRender);
+	pMonster->AddComponent(new CSpriteRender);
 	pMonster->AddComponent(new CCollider2D);
 
 	Ptr<CMonsterScript> monsterScript = new CMonsterScript;
@@ -89,9 +89,9 @@ void LevelMgr::Init()
 
 	pMonster->AddComponent(new CStateScript);
 
-	pMonster->Transform()->SetRelativePos(Vec3(0.f, 100.f, 100.f));
-	pMonster->Transform()->SetRelativeScale(Vec3(50.f, 50.f, 0.f));
-	pMonster->BillboardRender()->SetBillboardScale(Vec2(50.f, 50.f));
+	pMonster->Transform()->SetRelativePos(Vec3(300.f, 0.f, 100.f));
+	pMonster->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 0.f));
+	pMonster->SpriteRender()->SetSprite(FIND(ASprite, L"TileSprite_47"));
 
 	m_CurLevel->AddObject(5, pMonster);
 
@@ -173,7 +173,17 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(0, pObject);
 	*/
 
-	
+	// Tile Object
+	Ptr<GameObject> pTileObj = new GameObject;
+
+	pTileObj->AddComponent(new CTransform);
+	pTileObj->AddComponent(new CCollider2D);
+	pTileObj->AddComponent(new CTileRender);
+
+	pTileObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+	pTileObj->TileRender()->SetTileMap(FIND(ATileMap, L"TestTileMap"));
+
+	m_CurLevel->AddObject(2, pTileObj);
 
 
 

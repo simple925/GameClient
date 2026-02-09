@@ -49,6 +49,7 @@ public:
 
 public:
     // 특정 컴포넌트를 다운캐스팅해서 바로 리턴
+    GET_COMPONENT(TileRender, TILE_RENDER);
     GET_COMPONENT(FlipbookRender, FLIPBOOK_RENDER);
     GET_COMPONENT(SpriteRender, SPRITE_RENDER);
     GET_COMPONENT(Transform, TRANSFORM);

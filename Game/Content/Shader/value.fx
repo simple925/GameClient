@@ -1,11 +1,15 @@
-#ifndef _VALUE
+﻿#ifndef _VALUE
 #define _VALUE
+
+SamplerState g_sam_0 : register(s0); // texture 추출 도구
+SamplerState g_sam_1 : register(s1); // texture 추출 도구
 /*
 cbuffer TRANSFORM : register(b1) // 바인딩 될 상수 레지스터 번호 (b0)
 {
 	float4 g_ObjectPos;
 }
 */
+// HLSL 5.0 : 4096
 // 꼭 버퍼가 같아야함
 cbuffer MATERIAL : register(b1) // 16byte의 배수로 구성 되어야함 꼭!!!
 {
@@ -46,6 +50,10 @@ cbuffer TRANSFORM : register(b0)
 	row_major matrix g_matProj; // Camera(View) -> Projection Space
 }
 Texture2D g_tex_0 : register(t0);
-SamplerState g_sam_0 : register(s0); // texture 추출 도구
-SamplerState g_sam_1 : register(s1); // texture 추출 도구
+Texture2D g_tex_1 : register(t1);
+Texture2D g_tex_2 : register(t2);
+Texture2D g_tex_3 : register(t3);
+Texture2D g_tex_4 : register(t4);
+Texture2D g_tex_5 : register(t5);
+
 #endif

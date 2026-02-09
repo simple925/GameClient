@@ -38,6 +38,7 @@ ASSET_TYPE GetAssetType()
     else if constexpr (std::is_same_v<T, AMaterial>) return ASSET_TYPE::MATERIAL;
     else if constexpr (std::is_same_v<T, ASprite>) return ASSET_TYPE::SPRITE;
     else if constexpr (std::is_same_v<T, AFlipbook>) return ASSET_TYPE::FLIPBOOK;
+    else if constexpr (std::is_same_v<T, ATileMap>) return ASSET_TYPE::TILEMAP;
     return ASSET_TYPE::END;
 }
 

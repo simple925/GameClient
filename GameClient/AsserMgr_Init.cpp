@@ -293,6 +293,12 @@ void AssetMgr::CreateEngineTexture()
 	FilePath += L"Texture\\link.png";
 	pTex->Load(FilePath);
 	AddAsset(L"Link", pTex.Get());
+
+	pTex = new ATexture;
+	FilePath = CONTENT_PATH;
+	FilePath += L"Texture\\TILE.bmp";
+	pTex->Load(FilePath);
+	AddAsset(L"TileAtlas", pTex.Get());
 }
 
 void AssetMgr::CreateEngineMaterial()
@@ -446,4 +452,55 @@ void AssetMgr::CreateEngineSprite()
 		pFlipbook->AddSprite(FIND(ASprite, Buff));
 	}
 	AddAsset(pFlipbook->GetName(), pFlipbook.Get());
+
+	// ===========
+	// Tile Sprite
+	// ===========
+	pAtlas = FIND(ATexture, L"TileAtlas");
+
+	Width = pAtlas->GetWidth();
+	Height = pAtlas->GetHeight();
+	SlicePixel = Vec2(64.f, 64.f);
+
+	int Count = 0;
+	for (int i = 0; i < 6; ++i)
+	{
+		for (int j = 0; j < 8; ++j, ++Count)
+		{
+			wchar_t Buff[50] = {};
+			swprintf_s(Buff, L"TileSprite_%d", Count);
+
+			pSprite = new ASprite;
+			pSprite->SetName(Buff);
+			pSprite->SetAtlas(pAtlas);
+			pSprite->SetLeftTopUV(Vec2((SlicePixel.x / Width) * (float)j, (SlicePixel.y / Height) * i));
+			pSprite->SetSliceUV(SlicePixel / Vec2(Width, Height));
+			AddAsset(pSprite->GetName(), pSprite.Get());
+		}
+	}
+
+	// =======
+	// TileMap
+	// =======
+	Ptr<ATileMap> pTileMap = nullptr;
+
+	pTileMap = new ATileMap;
+	pTileMap->SetName(L"TestTileMap");
+	pTileMap->SetRowCol(10, 10);
+	pTileMap->SetTileSize(Vec2(64.f, 64.f));
+	pTileMap->SetAtlas(FIND(ATexture, L"TileAtlas"));
+
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(0, i, FIND(ASprite, L"TileSprite_1"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(1, i, FIND(ASprite, L"TileSprite_2"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(2, i, FIND(ASprite, L"TileSprite_3"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(3, i, FIND(ASprite, L"TileSprite_4"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(4, i, FIND(ASprite, L"TileSprite_5"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(5, i, FIND(ASprite, L"TileSprite_6"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(6, i, FIND(ASprite, L"TileSprite_7"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(7, i, FIND(ASprite, L"TileSprite_8"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(8, i, FIND(ASprite, L"TileSprite_9"));
+	for (int i = 0; i < 10; ++i) pTileMap->SetSprite(9, i, FIND(ASprite, L"TileSprite_10"));
+
+	AddAsset(pTileMap->GetName(), pTileMap.Get());
+
 }

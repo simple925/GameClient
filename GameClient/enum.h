@@ -42,6 +42,7 @@ enum class ASSET_TYPE
 	MATERIAL,
 	SPRITE,
 	FLIPBOOK,
+	TILEMAP,
 	END,
 };
 
