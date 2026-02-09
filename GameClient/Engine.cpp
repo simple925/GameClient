@@ -20,20 +20,23 @@ Engine::~Engine()
 
 int Engine::Progress()
 {
-	TimeMgr::GetInst()->Tick();
-	KeyMgr::GetInst()->Tick();
+    // DeltaTime 계산
+    TimeMgr::GetInst()->Tick();
 
-	// LevelMgr 업데이트
-	LevelMgr::GetInst()->Progress();
+    // Key 상태 계산
+    KeyMgr::GetInst()->Tick();
 
-	// RenderMgr 렌더링
-	RenderMgr::GetInst()->Progress();
+    // LevelMgr 업데이트
+    LevelMgr::GetInst()->Progress();
 
-	// 랜더타겟에 그려진 그림을, 윈도우 비트맵으로 복사
-	Device::GetInst()->Present();
+    // RenderMgr 렌더링
+    RenderMgr::GetInst()->Progress();
 
-	// 다음 프레임에 적용될 작업 처리
-	TaskMgr::GetInst()->Progress();
+    // 렌더타겟에 그려진 그림을, 윈도우 비트맵으로 복사
+    Device::GetInst()->Present();
+
+    // 다음 프레임에 적용될 작업 처리
+    TaskMgr::GetInst()->Progress();
 	return S_OK;
 }
 

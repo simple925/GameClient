@@ -1,10 +1,12 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "RenderMgr.h"
 #include "Device.h"
 #include "AssetMgr.h"
 #include "TimeMgr.h"
-
-RenderMgr::RenderMgr() {}
+#include "KeyMgr.h"
+RenderMgr::RenderMgr() 
+	:m_bDebugRender(true)
+{}
 RenderMgr::~RenderMgr() {}
 
 void RenderMgr::Init()
@@ -13,15 +15,22 @@ void RenderMgr::Init()
 	m_DbgObj->AddComponent(new CTransform);
 	m_DbgObj->AddComponent(new CMeshRender);
 
-
-
 	m_DbgObj->MeshRender()->SetMtrl(FIND(AMaterial, L"DbgMtrl"));
+
+	m_Light2DBuffer = new StructuredBuffer;
 }
 void RenderMgr::Progress()
 {
-	//
+	if (KEY_TAP(KEY::F9))
+		m_bDebugRender ? m_bDebugRender = false : m_bDebugRender = true;
+
+	// 렌더타겟 클리어
 	Device::GetInst()->ClearTarget();
-	//m_CurLevel->Render();
+
+	//렌더링 시적전에 할 일
+	Render_Start();
+
+	// 카메라 기반 렌더링
 	if (nullptr == m_MainCam) {
 		return;
 	}
@@ -29,7 +38,11 @@ void RenderMgr::Progress()
 	m_MainCam->Render();
 
 	// 디버그 렌더링 요청 처리
-	Render_Debug();
+	if (m_bDebugRender) {
+		Render_Debug();
+	}
+
+	Render_End();
 }
 
 void RenderMgr::Render_Debug()
@@ -88,4 +101,42 @@ void RenderMgr::Render_Debug()
 			++iter;
 		}
 	}
+}
+
+void RenderMgr::Render_Start()
+{
+	// 등록받은 Light2D 의 광원 정보를 구조화버퍼에 담는다.
+	// 구조화버퍼를 특정 t 레지스터에 바인딩 한다.
+	vector<Light2DInfo>	vecInfo;
+	for (size_t i = 0; i < m_vecLight2D.size(); ++i)
+	{
+		vecInfo.push_back(m_vecLight2D[i]->GetInfo());
+	}
+	if (!vecInfo.empty())
+	{
+		// 구조화버퍼 공간이 모자라면 재확장
+		if (vecInfo.size() > m_Light2DBuffer->GetElementCount())
+			m_Light2DBuffer->Create(sizeof(Light2DInfo), vecInfo.size(), SB_TYPE::SRV_ONLY, true, vecInfo.data());
+		// 공간이 여우가 있으면 바로 광원데이터 전달
+		else
+			m_Light2DBuffer->SetData(vecInfo.data(), sizeof(Light2DInfo) * vecInfo.size());
+
+		// t12 레지스터로 바인딩
+		m_Light2DBuffer->Binding(12);
+	}
+
+	g_Global.Light2DCount = m_vecLight2D.size();
+
+	// Global 데이터를 상수버퍼를 통해서 b2 레지스터에 바인딩
+	Device::GetInst()->GetCB(CB_TYPE::GLOBAL)->SetData(&g_Global);
+	Device::GetInst()->GetCB(CB_TYPE::GLOBAL)->Binding();
+
+}
+
+void RenderMgr::Render_End()
+{
+	// 구조화버퍼 클리어
+	// 등록 받았던 광원들 해제
+	m_Light2DBuffer->Clear();
+	m_vecLight2D.clear();
 }

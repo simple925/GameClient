@@ -57,6 +57,7 @@ public:
     GET_COMPONENT(BillboardRender, BILLBOARD_RENDER);
     GET_COMPONENT(Camera, CAMERA);
     GET_COMPONENT(Collider2D, COLLIDER2D);
+    GET_COMPONENT(Light2D, LIGHT2D);
     Ptr<CRenderComponent> GetRenderCom() { return m_RenderCom; }
 private:
     void RegisterLayer();

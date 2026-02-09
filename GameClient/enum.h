@@ -1,8 +1,9 @@
-﻿#pragma once
+#pragma once
 enum class CB_TYPE
 {
 	TRANSFORM,	// b0
 	MATERIAL,	// b1
+	GLOBAL,		// b2
 	END,
 };
 
@@ -125,4 +126,11 @@ enum class	TASK_TYPE
 {
 	CREATE_OBJECT,
 	DESTROY_OBJECT,
+};
+
+enum class LIGHT_TYPE
+{
+	DIRECTIONAL,	// 방향성 광원	-	멀리서 부터 오는 광원에게 설정(빛이 월드로 오는 방향이 모두 같다고 본다)
+	POINT,			// 점 광원		-	기본적인 광원, 한 점으로부터 주변으로 빛이 뻗어나감
+	SPOT,			// 스포트라이트	-	특수한 광원, 빛을 특정 방향으로 모아서 보내는 것으로 봄
 };

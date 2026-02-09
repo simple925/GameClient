@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "TimeMgr.h"
 #include "Engine.h"
 TimeMgr::TimeMgr()
@@ -46,4 +46,8 @@ void TimeMgr::Tick()
 		m_Time -= 1.f;
 	}
 
+	g_Global.DeltaTime = m_DeltaTime;
+	g_Global.Time += m_DeltaTime;
+	g_Global.EngineDT = m_DeltaTime;
+	g_Global.EngineTime += m_DeltaTime;
 }

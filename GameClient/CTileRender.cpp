@@ -81,7 +81,7 @@ void CTileRender::SetTileMap(Ptr<ATileMap> _TileMap)
 
 void CTileRender::CreateMaterial()
 {
-	wstring MeshName = L"RectMesh";
+	wstring MeshName = L"q";
 	wstring MtrlName = L"TileMtrl";
 	wstring ShaderName = L"TileShader";
 	wstring FilePath = L"Shader\\tile.fx";

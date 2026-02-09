@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "LevelMgr.h"
 #include "GameObject.h"
 #include "AssetMgr.h"
@@ -17,6 +17,20 @@ LevelMgr::~LevelMgr() {
 }
 void LevelMgr::Init()
 {
+	// 카메라 역할 Ojbect
+	Ptr<GameObject> pCameraObj = new GameObject;
+
+	
+
+	// Monster Object
+	Ptr<GameObject> pMonster = new GameObject;
+
+	// Player Object
+	Ptr<GameObject> pObject = new GameObject;
+
+	// Tile Object
+	Ptr<GameObject> pTileObj = new GameObject;
+
 	// Level Create
 	m_CurLevel = new ALevel;
 	m_CurLevel->SetName(L"Current Level");
@@ -29,72 +43,86 @@ void LevelMgr::Init()
 	m_CurLevel->GetLayer(5)->SetName(L"Enermy");
 	m_CurLevel->GetLayer(6)->SetName(L"EnermyProjectile");
 
-	Ptr<GameObject> pObject = nullptr;
+	/*
+	* Camera Start ======================================
+	*/
+	//pCameraObj->SetName(L"Main Camera");
+	pCameraObj->SetName(L"Main Camera");
+	pCameraObj->AddComponent(new CTransform);
+	pCameraObj->AddComponent(new CCamera);
 
-	// 카메라 역할 Ojbect
-	pObject = new GameObject;
-	//pObject->SetName(L"Main Camera");
-	pObject->SetName(L"메인카메라");
-	pObject->AddComponent(new CTransform);
-	pObject->AddComponent(new CCamera);
-	pObject->AddComponent(new CCamMoveScript);
-
-
-	//pObject->Camera()->LayerCheck(0); // 0번을 그려라
-	pObject->Camera()->LayerCheckAll(); 
-	//pObject->Camera()->LayerCheck(31); // 31 -> UI 레이어
-
-	pObject->Camera()->SetProjType(PROJ_TYPE::PERSPECTIVE);
-	pObject->Camera()->SetFar(10000.f);
-	pObject->Camera()->SetFOV(90.f);
-	pObject->Camera()->SetOrthoScale(1.f);
+	Ptr<CCamMoveScript> pCCamMoveScript = new CCamMoveScript;
+	pCCamMoveScript->SetTarget(pObject);
+	pCameraObj->AddComponent(pCCamMoveScript.Get());
+	//pCameraObj->Camera()->LayerCheck(0); // 0번을 그려라
+	pCameraObj->Camera()->LayerCheckAll(); 
+	//pCameraObj->Camera()->LayerCheck(31); // 31 -> UI 레이어
+	//pCameraObj->Camera()->SetProjType(PROJ_TYPE::PERSPECTIVE);
+	pCameraObj->Camera()->SetProjType(PROJ_TYPE::ORTHOGRAPHIC);
+	pCameraObj->Camera()->SetFar(10000.f);
+	pCameraObj->Camera()->SetFOV(90.f);
+	pCameraObj->Camera()->SetOrthoScale(1.f);
 
 	Vec2 vResolution = Device::GetInst()->GetRenderResol();
-	pObject->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // 종횡비(AspectRatio)
-	pObject->Camera()->SetWidth(vResolution.x);
+	pCameraObj->Camera()->SetAspectRatio(vResolution.x / vResolution.y); // 종횡비(AspectRatio)
+	pCameraObj->Camera()->SetWidth(vResolution.x);
 
-	m_CurLevel->AddObject(0, pObject);
+	m_CurLevel->AddObject(0, pCameraObj);
 	/*
-	pObject = new GameObject;
-	//pObject->SetName(L"Monster");
-	pObject->SetName(L"몬스터");
-	pObject->AddComponent(new CTransform);
-	pObject->AddComponent(new CMeshRender);
-	//pObject->AddComponent(new CPlayerScript);
-	// 1. 위치 조정: 카메라가 바라보는 방향(Z+)으로 충분히 밀어줍니다.
-	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+	* Camera End ======================================
+	*/
+	
+	/*
+	* Light Start ======================================
+	*/
+	// 광원 오브젝트
+	Ptr<GameObject> pLightObj = nullptr;
 
-	// 2. 크기 조정: 2D 사각형(100, 100)과 비슷하게 보이려면 Z축도 값을 줍니다.
-	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 80.f));
+	pLightObj = new GameObject;
+	pLightObj->SetName(L"Light_1");
+	pLightObj->AddComponent(new CTransform);
+	pLightObj->AddComponent(new CLight2D);
+	//pLightObj->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLightObj->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObj->Light2D()->SetLightColor(Vec3(1.0f, 0.3f, 0.3f));
+	//pLightObj->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
+	pLightObj->Light2D()->SetRadius(300.f);
+	pLightObj->Transform()->SetRelativePos(Vec3(-150.f, 0.f, 0.f));
+	m_CurLevel->AddObject(0, pLightObj);
 
-	pObject->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"CubeMesh").Get());
-	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
-	m_CurLevel->AddObject(0, pObject);
+	pLightObj = new GameObject;
+	pLightObj->SetName(L"Light_2");
+	pLightObj->AddComponent(new CTransform);
+	pLightObj->AddComponent(new CLight2D);
+	//pLightObj->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	pLightObj->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObj->Light2D()->SetLightColor(Vec3(0.3f, 0.3f, 1.f));
+	//pLightObj->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
+	pLightObj->Light2D()->SetRadius(300.f);
+	pLightObj->Transform()->SetRelativePos(Vec3(150.f, 0.f, 0.f));
+	m_CurLevel->AddObject(0, pLightObj);
+	/*
+	* Light End ======================================
 	*/
 
-
-	Ptr<GameObject> pMonster = new GameObject;
-	pObject = new GameObject;
-
+	/*
+	* Monster Start ===============================================
+	*/
 	pMonster->SetName(L"Monster");
-
 	pMonster->AddComponent(new CTransform);
 	pMonster->AddComponent(new CSpriteRender);
 	pMonster->AddComponent(new CCollider2D);
-
-	Ptr<CMonsterScript> monsterScript = new CMonsterScript;
-	monsterScript->SetName(L"mScript");
-	//monsterScript->SetTarget(pObject);
-	pMonster->AddComponent(monsterScript.Get());
-
-	pMonster->AddComponent(new CStateScript);
-
 	pMonster->Transform()->SetRelativePos(Vec3(300.f, 0.f, 100.f));
 	pMonster->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 0.f));
-	pMonster->SpriteRender()->SetSprite(FIND(ASprite, L"TileSprite_47"));
-
+	pMonster->SpriteRender()->SetSprite(FIND(ASprite, L"TileSprite_46"));
 	m_CurLevel->AddObject(5, pMonster);
+	/*
+	* Monster End ===============================================
+	*/
 
+	/*
+	* Player Start ===============================================
+	*/
 	pObject->SetName(L"Player");
 	pObject->AddComponent(new CTransform);
 	pObject->AddComponent(new CFlipbookRender);
@@ -131,6 +159,9 @@ void LevelMgr::Init()
 	// Player 와 Child 부모자식 연결
 	pObject->AddChild(pChild);
 	m_CurLevel->AddObject(3, pObject);
+	/*
+	* Player End ===============================================
+	*/
 
 
 	/*
@@ -173,20 +204,23 @@ void LevelMgr::Init()
 	m_CurLevel->AddObject(0, pObject);
 	*/
 
-	// Tile Object
-	Ptr<GameObject> pTileObj = new GameObject;
-
+	
+	/*
+	* Tile Start ===============================================
+	*/
 	pTileObj->AddComponent(new CTransform);
 	pTileObj->AddComponent(new CCollider2D);
 	pTileObj->AddComponent(new CTileRender);
 
-	pTileObj->Transform()->SetRelativePos(Vec3(0.f, 0.f, 500.f));
+	pTileObj->Transform()->SetRelativePos(Vec3(-640.f, 640.f, 500.f));
 	pTileObj->TileRender()->SetTileMap(FIND(ATileMap, L"TestTileMap"));
 
 	m_CurLevel->AddObject(2, pTileObj);
+	/*
+	* Tile End ===============================================
+	*/
 
-
-
+	/*
 	pObject = new GameObject;
 	pObject->SetName(L"배경");
 	pObject->AddComponent(new CTransform);
@@ -198,6 +232,7 @@ void LevelMgr::Init()
 	pObject->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"m_univers"));
 
 	m_CurLevel->AddObject(1, pObject);
+	*/
 	
 	/*
 	// 3. GameObject 생성 (3개)

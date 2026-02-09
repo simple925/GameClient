@@ -17,6 +17,7 @@ struct VS_OUT
 	float4 vPosition : SV_Position; // Rasterizer 로 보낼때, NDC 좌표
 	float2 vUV : TEXCOORD;
 	float4 vColor : COLOR;
+	float3 vWorldPos : POSITION;
 };
 
 
@@ -76,6 +77,7 @@ VS_OUT VS_Std2D(VS_IN _input)
 	// 수동으로 나누는 코드를 작성할 필요는 없다.
 	output.vPosition = vProj; // 월드행렬을 방향벡터에 곱할땐 이동정보를 무시해야되기 때문에 동차좌표가 0.f 들어가야함
 	output.vUV = _input.vUV;
+	output.vWorldPos = vWorld;
 	output.vColor = _input.vColor;
     
 	return output;
@@ -92,10 +94,18 @@ float4 PS_Std2D(VS_OUT _input) : SV_Target
 	{
 		discard; // 픽셀쉐이더는 키워드를 만나면 픽셀쉐이더가 종료됨
 	}
-	if (g_int_0 == 1)
+	
+	// 물체가 받는 빛의 총량
+	float3 LightColor = float3(0.f, 0.f, 0.f);
+	
+	// 반복문 돌면서, 모든 광원으로부터 어느정도의 빛을 받는지 합산
+	for (int i = 0; i < Light2DCount; ++i)
 	{
-		vColor.r *= 2.f;
+		LightColor += CalcLight2D(i, _input.vWorldPos);
 	}
+	
+	// 물체의 색상에, 자신이 받는 최종빛 총량을 곱한다.
+	vColor.rgb *= LightColor;
 	
 	// 알파블렌딩의 핵심 기본 배경을 출력함!!!!!! 블렌드 쉐이프
 	// 깊이 텍스쳐에 흔적이 남는다

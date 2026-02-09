@@ -82,7 +82,6 @@
     <ClInclude Include="CMeshRender.h">
       <Filter>GameEngine\06. Component\RenderComponent\01. MeshRender</Filter>
     </ClInclude>
-    <ClInclude Include="ConstBuffer.h" />
     <ClInclude Include="CScript.h">
       <Filter>GameEngine\06. Component\Script</Filter>
     </ClInclude>
@@ -167,7 +166,15 @@
     <ClInclude Include="CTileRender.h">
       <Filter>GameEngine\06. Component\06. TileRender</Filter>
     </ClInclude>
-    <ClInclude Include="StructuredBuffer.h" />
+    <ClInclude Include="StructuredBuffer.h">
+      <Filter>GameEngine\02. Device\StructuredBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstBuffer.h">
+      <Filter>GameEngine\02. Device\ConstBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="CLight2D.h">
+      <Filter>GameEngine\06. Component\07. Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -227,7 +234,6 @@
     <ClCompile Include="CMeshRender.cpp">
       <Filter>GameEngine\06. Component\RenderComponent\01. MeshRender</Filter>
     </ClCompile>
-    <ClCompile Include="ConstBuffer.cpp" />
     <ClCompile Include="CScript.cpp">
       <Filter>GameEngine\06. Component\Script</Filter>
     </ClCompile>
@@ -315,7 +321,15 @@
     <ClCompile Include="CTileRender.cpp">
       <Filter>GameEngine\06. Component\06. TileRender</Filter>
     </ClCompile>
-    <ClCompile Include="StructuredBuffer.cpp" />
+    <ClCompile Include="StructuredBuffer.cpp">
+      <Filter>GameEngine\02. Device\StructuredBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstBuffer.cpp">
+      <Filter>GameEngine\02. Device\ConstBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="CLight2D.cpp">
+      <Filter>GameEngine\06. Component\07. Light2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -465,6 +479,15 @@
     <Filter Include="GameEngine\06. Component\06. TileRender">
       <UniqueIdentifier>{fa4fba74-5551-459b-866c-61c59520d445}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\02. Device\StructuredBuffer">
+      <UniqueIdentifier>{45b4b4f6-8938-47ca-8dd6-e699d8b514fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\02. Device\ConstBuffer">
+      <UniqueIdentifier>{a1286506-14cb-40f3-b0de-da1ee8316bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\07. Light2D">
+      <UniqueIdentifier>{e4e2a6b2-b74c-42ae-8bd2-2014c7367806}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc">
@@ -492,11 +515,17 @@
     <FxCompile Include="sprite.fx">
       <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
-    <FxCompile Include="Flipbook.fx">
+    <FxCompile Include="flipbook.fx">
       <Filter>HSL\2. Render\2D</Filter>
     </FxCompile>
     <FxCompile Include="tile.fx">
       <Filter>HSL\2. Render\2D</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
+      <Filter>HSL\1. Header</Filter>
+    </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>HSL\1. Header</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

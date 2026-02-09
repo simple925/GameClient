@@ -4,6 +4,7 @@
 #include "TimeMgr.h"
 #include "CTransform.h"
 CCamMoveScript::CCamMoveScript()
+	: m_Target(nullptr)
 {
 }
 
@@ -13,14 +14,23 @@ CCamMoveScript::~CCamMoveScript()
 
 void CCamMoveScript::Tick()
 {
+	if (PROJ_TYPE::PERSPECTIVE == Camera()->GetProjType())
+		MovePerspective();
+	else
+		MoveOrthographic();
+	
+}
+
+void CCamMoveScript::MovePerspective()
+{
 	Vec3 vPos = Transform()->GetRelativePos();
 	Vec3 vRot = Transform()->GetRelativeRot();
-	
+
 
 	Vec3 vFront = Transform()->GetDir(DIR::FRONT);
 	Vec3 vRight = Transform()->GetDir(DIR::RIGHT);
 
-	
+
 
 	float moveSpeed = 800.f;
 	if (1 == KeyMgr::GetInst()->GetWheel())
@@ -38,7 +48,7 @@ void CCamMoveScript::Tick()
 		vPos += vRight * moveSpeed * DT;
 
 
-	
+
 	if (KEY_PRESSED(KEY::M_RBUTTON))
 	{
 		Vec2 vMouseDir = KeyMgr::GetInst()->GetMouseDir();
@@ -49,9 +59,32 @@ void CCamMoveScript::Tick()
 	{
 
 	}
-	
+
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeRot(vRot);
+}
+
+void CCamMoveScript::MoveOrthographic()
+{
+	Vec3 vPos = Transform()->GetRelativePos();
+
+	if (nullptr != m_Target)
+	{
+		vPos = m_Target->Transform()->GetRelativePos();
+	}
+	else {
+		if (KEY_PRESSED(KEY::W))
+			vPos.y += DT * 500.f;
+		if (KEY_PRESSED(KEY::S))
+			vPos.y -= DT * 500.f;
+		if (KEY_PRESSED(KEY::A))
+			vPos.x -= DT * 500.f;
+		if (KEY_PRESSED(KEY::D))
+			vPos.x += DT * 500.f;
+	}
+
+	Transform()->SetRelativePos(vPos);
+	Transform()->SetRelativeRot(Vec3(0.f, 0.f, 0.f));
 }
 
 // 정점쉐이더 버텍스쉐이더

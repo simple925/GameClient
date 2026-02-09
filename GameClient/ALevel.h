@@ -6,7 +6,7 @@ class ALevel :
     public Asset
 {
 private:
-    Layer       m_arrLayer[MAX_LAYER];  // 하나의 레벨에
+    Layer       m_arrLayer[MAX_LAYER];  // 하나의 레벨안에 총 32개의 레이어가 존재
     UINT        m_Matrix[MAX_LAYER];    // 레이어끼리 충돌검사를 진행할 마킹 데이터
 
 public:

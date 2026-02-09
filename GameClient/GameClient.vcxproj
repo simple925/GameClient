@@ -121,6 +121,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -169,6 +170,7 @@ call ComponentAuto.exe</Command>
     <ClInclude Include="CCamMoveScript.h" />
     <ClInclude Include="CCollider2D.h" />
     <ClInclude Include="CFlipbookRender.h" />
+    <ClInclude Include="CLight2D.h" />
     <ClInclude Include="CMeshRender.h" />
     <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="CMonsterProtile.h" />
@@ -228,6 +230,7 @@ call ComponentAuto.exe</Command>
     <ClCompile Include="CCamMoveScript.cpp" />
     <ClCompile Include="CCollider2D.cpp" />
     <ClCompile Include="CFlipbookRender.cpp" />
+    <ClCompile Include="CLight2D.cpp" />
     <ClCompile Include="CMeshRender.cpp" />
     <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="CMonsterProtile.cpp" />
@@ -283,7 +286,8 @@ call ComponentAuto.exe</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Flipbook.fx" />
+    <FxCompile Include="flipbook.fx" />
+    <FxCompile Include="func.fx" />
     <FxCompile Include="sprite.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
@@ -292,6 +296,7 @@ call ComponentAuto.exe</Command>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="struct.fx" />
     <FxCompile Include="tile.fx" />
     <FxCompile Include="value.fx">
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>

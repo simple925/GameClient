@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "Device.h"
 
 Device::Device()
@@ -14,6 +14,7 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 {
 	m_hWnd = _hwnd;
 	m_RenderResol = _Resolution;
+	g_Global.Resolution = m_RenderResol;
 	// Dx11 라이브러리는 동적 라이브러리 이고
 	// Dx11 관련 객체 생성함수를 통해서 생성된 객체의 주소를 받은 경우,
 	// 메모리 해제도 Dx11 쪽 함수를 이용해서 해제해줘야 한다.
@@ -112,7 +113,7 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 
 void Device::ClearTarget()
 {
-	Vec4 vColor = Vec4(0.2f, 0.2f, 0.2f, 0.f);
+	Vec4 vColor = Vec4(0.f, 0.f, 0.f, 0.f);
 	CONTEXT->ClearRenderTargetView(m_RTV.Get(), vColor);
 	CONTEXT->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	// NDC 좌표계 찾아보기*****************************************************************************
@@ -268,6 +269,9 @@ void Device::CreateConstBuffer()
 
 	m_CB[(UINT)CB_TYPE::MATERIAL] = new ConstBuffer;
 	m_CB[(UINT)CB_TYPE::MATERIAL]->Create(CB_TYPE::MATERIAL, sizeof(MtrlConst));
+
+	m_CB[(UINT)CB_TYPE::GLOBAL] = new ConstBuffer;
+	m_CB[(UINT)CB_TYPE::GLOBAL]->Create(CB_TYPE::GLOBAL, sizeof(GlobalData));
 }
 
 int Device::CreateSampler()
