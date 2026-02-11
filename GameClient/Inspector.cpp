@@ -23,8 +23,8 @@ void Inspector::Tick_UI()
 	if (ImGui::DragFloat3("SCALE", vScale))
 		m_Target->Transform()->SetRelativeScale(vScale);
 	
-	Vec3 vDegree = vRot * 180 / XM_PI; // 라디안 값을 디그리로 변경
-	if (ImGui::DragFloat3("ROTATION", vRot))
+	Vec3 vDegree = vRot * 180 / XM_PI;
+	if (ImGui::DragFloat3("ROTATION", vDegree))
 	{
 		vRot = vDegree * (XM_PI / 180.f);
 		m_Target->Transform()->SetRelativeRot(vRot);
