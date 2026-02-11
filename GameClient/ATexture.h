@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Asset.h"
 class ATexture :
     public Asset
@@ -17,8 +17,8 @@ public:
     void Binding(UINT _RegisterNum);
     void Clear();
 
-    float GetWidth() { return m_Desc.Width; }
-    float GetHeight() { return m_Desc.Height; }
+    float GetWidth() { return (float)m_Desc.Width; }
+    float GetHeight() { return (float)m_Desc.Height; }
 public:
     ATexture();
     virtual ~ATexture();

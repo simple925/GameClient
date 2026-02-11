@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Entity.h"
 #include "components.h"
 
@@ -44,11 +44,13 @@ public:
 
     Ptr<GameObject> GetParent() { return m_Parent; }
     Ptr<GameObject> GetChild(int _idx) { return m_vecChild[_idx]; }
+    const vector<Ptr<GameObject>> GetChild() { return m_vecChild; }
 
     bool IsDead() { return m_Dead; }
 
 public:
     // 특정 컴포넌트를 다운캐스팅해서 바로 리턴
+    GET_COMPONENT(Light2D, LIGHT2D);
     GET_COMPONENT(TileRender, TILE_RENDER);
     GET_COMPONENT(FlipbookRender, FLIPBOOK_RENDER);
     GET_COMPONENT(SpriteRender, SPRITE_RENDER);
@@ -57,7 +59,6 @@ public:
     GET_COMPONENT(BillboardRender, BILLBOARD_RENDER);
     GET_COMPONENT(Camera, CAMERA);
     GET_COMPONENT(Collider2D, COLLIDER2D);
-    GET_COMPONENT(Light2D, LIGHT2D);
     Ptr<CRenderComponent> GetRenderCom() { return m_RenderCom; }
 private:
     void RegisterLayer();

@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CTileRender.h"
 
 #include "AssetMgr.h"
@@ -72,11 +72,11 @@ void CTileRender::SetTileMap(Ptr<ATileMap> _TileMap)
 	// 구조화버퍼의 크기가 모자라거나 한번도 할당할 적이 없으면 메모리 확장 or 재확장
 	if (m_Buffer->GetBufferSize() < sizeof(SpriteInfo) * m_vecSpriteInfo.size())
 	{
-		m_Buffer->Create(sizeof(SpriteInfo), m_vecSpriteInfo.size(), SB_TYPE::SRV_ONLY, true);
+		m_Buffer->Create(sizeof(SpriteInfo), (UINT)m_vecSpriteInfo.size(), SB_TYPE::SRV_ONLY, true);
 	}
 
 	// Sprite 들의 데이터를 구조화버퍼로 보내기
-	m_Buffer->SetData(m_vecSpriteInfo.data(), sizeof(SpriteInfo) * m_vecSpriteInfo.size());
+	m_Buffer->SetData(m_vecSpriteInfo.data(), (UINT)(sizeof(SpriteInfo) * m_vecSpriteInfo.size()));
 }
 
 void CTileRender::CreateMaterial()

@@ -77,10 +77,6 @@ int Device::Init(HWND _hwnd, Vec2 _Resolution)
 	// RenderTarget 을 목적지에 출력시킬 영역 설정
 	m_Context->RSSetViewports(1, &ViewPort);
 
-	// 랜더타겟, 깊이 타겟 출력 설정
-	// 렌더링 파이프라인 과정에서 마지막에 그림을 출력시킬 목적지 설정
-	m_Context->OMSetRenderTargets(1, m_RTV.GetAddressOf(), m_DSV.Get());
-
 	// View - 리소스의 전달자, 매니징 역할. 연결된 리소스의 무결성을 보증, 실제 리소스가 필요한 곳에다가 연결된 
 	//        담당 View 를 전달해서 리소스을 연결해줌
 	// RenderTargetView
@@ -118,6 +114,13 @@ void Device::ClearTarget()
 	CONTEXT->ClearDepthStencilView(m_DSV.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.f, 0);
 	// NDC 좌표계 찾아보기*****************************************************************************
 	//CONTEXT->ClearDepthStencilView(m_DSV, );
+}
+
+void Device::OMSetTarget()
+{
+	// 랜더타겟, 깊이 타겟 출력 설정
+	// 렌더링 파이프라인 과정에서 마지막에 그림을 출력시킬 목적지 설정
+	m_Context->OMSetRenderTargets(1, m_RTV.GetAddressOf(), m_DSV.Get());
 }
 
 int Device::CreateSwapChain()

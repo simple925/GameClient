@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 
 
@@ -60,3 +60,4 @@ using namespace std;
 #include "resource.h"
 #include "global.h"
 #include "Ptr.h"
+#define IMGUI_DEFINE_MATH_OPERATORS

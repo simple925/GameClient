@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "TaskMgr.h"
 #include "LevelMgr.h"
 #include "GameObject.h"

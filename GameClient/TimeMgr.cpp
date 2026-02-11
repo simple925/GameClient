@@ -42,7 +42,7 @@ void TimeMgr::Tick()
 	if (1.f < m_Time) {
 		wchar_t buff[255] = {};
 		swprintf_s(buff, 255, L"DeltaTime : %f", m_DeltaTime);
-		SetWindowText(Engine::GetInst()->GetMainWinHandle(), buff);
+		SetWindowText(Engine::GetInst()->GetMainWndHwnd(), buff);
 		m_Time -= 1.f;
 	}
 

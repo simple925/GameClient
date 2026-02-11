@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 
 #include "Engine.h"
 
@@ -102,10 +102,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 #include "KeyMgr.h"
+LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 // 프로시저 함수
 // 윈도우에 발생한 사건(이벤트, 메세지)를 처리해주는 함수
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, message, wParam, lParam))
+		return true;
 	switch (message)
 	{
 	case WM_MOUSEWHEEL:

@@ -137,7 +137,7 @@
       <Filter>GameEngine\06. Component\03. Collider2D</Filter>
     </ClInclude>
     <ClInclude Include="CSpriteRender.h">
-      <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\03. SpriteRender</Filter>
     </ClInclude>
     <ClInclude Include="CollisionMgr.h">
       <Filter>GameEngine\03. Manager\08. CollisionMgr</Filter>
@@ -158,13 +158,13 @@
       <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
     </ClInclude>
     <ClInclude Include="CFlipbookRender.h">
-      <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\04. FlipbookRender</Filter>
     </ClInclude>
     <ClInclude Include="ATileMap.h">
       <Filter>GameEngine\04. Asset\08. Tile</Filter>
     </ClInclude>
     <ClInclude Include="CTileRender.h">
-      <Filter>GameEngine\06. Component\06. TileRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\05. TileRender</Filter>
     </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
       <Filter>GameEngine\02. Device\StructuredBuffer</Filter>
@@ -173,7 +173,46 @@
       <Filter>GameEngine\02. Device\ConstBuffer</Filter>
     </ClInclude>
     <ClInclude Include="CLight2D.h">
-      <Filter>GameEngine\06. Component\07. Light2D</Filter>
+      <Filter>GameEngine\06. Component\04. Light2D</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_dx11.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_win32.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorMgr.h">
+      <Filter>GameEngine\03. Manager\09. EditorMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorUI.h">
+      <Filter>GameEngine\EditorUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>GameEngine\EditorUI\01. Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="Outliner.h">
+      <Filter>GameEngine\EditorUI\02. Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -292,7 +331,7 @@
       <Filter>GameEngine\06. Component\03. Collider2D</Filter>
     </ClCompile>
     <ClCompile Include="CSpriteRender.cpp">
-      <Filter>GameEngine\06. Component\04. SpriteRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\03. SpriteRender</Filter>
     </ClCompile>
     <ClCompile Include="CollisionMgr.cpp">
       <Filter>GameEngine\03. Manager\08. CollisionMgr</Filter>
@@ -313,13 +352,13 @@
       <Filter>GameEngine\04. Asset\07. Flipbook</Filter>
     </ClCompile>
     <ClCompile Include="CFlipbookRender.cpp">
-      <Filter>GameEngine\06. Component\05. FlipbookRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\04. FlipbookRender</Filter>
     </ClCompile>
     <ClCompile Include="ATileMap.cpp">
       <Filter>GameEngine\04. Asset\08. Tile</Filter>
     </ClCompile>
     <ClCompile Include="CTileRender.cpp">
-      <Filter>GameEngine\06. Component\06. TileRender</Filter>
+      <Filter>GameEngine\06. Component\RenderComponent\05. TileRender</Filter>
     </ClCompile>
     <ClCompile Include="StructuredBuffer.cpp">
       <Filter>GameEngine\02. Device\StructuredBuffer</Filter>
@@ -328,7 +367,43 @@
       <Filter>GameEngine\02. Device\ConstBuffer</Filter>
     </ClCompile>
     <ClCompile Include="CLight2D.cpp">
-      <Filter>GameEngine\06. Component\07. Light2D</Filter>
+      <Filter>GameEngine\06. Component\04. Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_dx11.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_win32.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorMgr.cpp">
+      <Filter>GameEngine\03. Manager\09. EditorMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorUI.cpp">
+      <Filter>GameEngine\EditorUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>GameEngine\EditorUI\01. Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="Outliner.cpp">
+      <Filter>GameEngine\EditorUI\02. Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -446,9 +521,6 @@
     <Filter Include="GameEngine\06. Component\02. Camera">
       <UniqueIdentifier>{7451b0cd-3da8-4865-8a12-2c5633e36498}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\04. SpriteRender">
-      <UniqueIdentifier>{6a26beeb-140e-4931-b8a2-6c4d86571b5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\06. Component\03. Collider2D">
       <UniqueIdentifier>{d7a76193-af22-43f3-92b0-bd95362e5fd7}</UniqueIdentifier>
     </Filter>
@@ -470,14 +542,8 @@
     <Filter Include="GameEngine\04. Asset\07. Flipbook">
       <UniqueIdentifier>{792fff96-bccd-4ac7-8338-7872ade338c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\05. FlipbookRender">
-      <UniqueIdentifier>{a296c449-1171-4936-8c8c-33e7dd931ab2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameEngine\04. Asset\08. Tile">
       <UniqueIdentifier>{16701b84-71f2-4302-ae17-fc49ca575210}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameEngine\06. Component\06. TileRender">
-      <UniqueIdentifier>{fa4fba74-5551-459b-866c-61c59520d445}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameEngine\02. Device\StructuredBuffer">
       <UniqueIdentifier>{45b4b4f6-8938-47ca-8dd6-e699d8b514fd}</UniqueIdentifier>
@@ -485,8 +551,35 @@
     <Filter Include="GameEngine\02. Device\ConstBuffer">
       <UniqueIdentifier>{a1286506-14cb-40f3-b0de-da1ee8316bd8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\06. Component\07. Light2D">
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{fb4c5493-77ce-41ae-9763-065d3e0c6707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\03. Manager\09. EditorMgr">
+      <UniqueIdentifier>{461fd77c-e5fe-4cac-8086-c71320476a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI">
+      <UniqueIdentifier>{74bf5c6d-34e7-4589-8c46-4e3b96944af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\01. Inspector">
+      <UniqueIdentifier>{1911215b-61f2-4aa9-837c-89907b707682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\02. Outliner">
+      <UniqueIdentifier>{10a29012-30fb-42f8-88e8-f98666a33d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\03. Menu">
+      <UniqueIdentifier>{45ee3566-e0c5-4b6c-9c76-f417941b21de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\04. Light2D">
       <UniqueIdentifier>{e4e2a6b2-b74c-42ae-8bd2-2014c7367806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\RenderComponent\03. SpriteRender">
+      <UniqueIdentifier>{6a26beeb-140e-4931-b8a2-6c4d86571b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\RenderComponent\04. FlipbookRender">
+      <UniqueIdentifier>{a296c449-1171-4936-8c8c-33e7dd931ab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\06. Component\RenderComponent\05. TileRender">
+      <UniqueIdentifier>{fa4fba74-5551-459b-866c-61c59520d445}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -24,8 +24,6 @@ void RenderMgr::Progress()
 	if (KEY_TAP(KEY::F9))
 		m_bDebugRender ? m_bDebugRender = false : m_bDebugRender = true;
 
-	// 렌더타겟 클리어
-	Device::GetInst()->ClearTarget();
 
 	//렌더링 시적전에 할 일
 	Render_Start();
@@ -105,6 +103,12 @@ void RenderMgr::Render_Debug()
 
 void RenderMgr::Render_Start()
 {
+
+	Device::GetInst()->OMSetTarget();
+
+	// 렌더타겟 클리어
+	Device::GetInst()->ClearTarget();
+
 	// 등록받은 Light2D 의 광원 정보를 구조화버퍼에 담는다.
 	// 구조화버퍼를 특정 t 레지스터에 바인딩 한다.
 	vector<Light2DInfo>	vecInfo;
@@ -116,16 +120,16 @@ void RenderMgr::Render_Start()
 	{
 		// 구조화버퍼 공간이 모자라면 재확장
 		if (vecInfo.size() > m_Light2DBuffer->GetElementCount())
-			m_Light2DBuffer->Create(sizeof(Light2DInfo), vecInfo.size(), SB_TYPE::SRV_ONLY, true, vecInfo.data());
+			m_Light2DBuffer->Create(sizeof(Light2DInfo), (UINT)vecInfo.size(), SB_TYPE::SRV_ONLY, true, vecInfo.data());
 		// 공간이 여우가 있으면 바로 광원데이터 전달
 		else
-			m_Light2DBuffer->SetData(vecInfo.data(), sizeof(Light2DInfo) * vecInfo.size());
+			m_Light2DBuffer->SetData(vecInfo.data(), (UINT)(sizeof(Light2DInfo) * vecInfo.size()));
 
 		// t12 레지스터로 바인딩
 		m_Light2DBuffer->Binding(12);
 	}
 
-	g_Global.Light2DCount = m_vecLight2D.size();
+	g_Global.Light2DCount = (int)m_vecLight2D.size();
 
 	// Global 데이터를 상수버퍼를 통해서 b2 레지스터에 바인딩
 	Device::GetInst()->GetCB(CB_TYPE::GLOBAL)->SetData(&g_Global);

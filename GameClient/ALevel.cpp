@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "ALevel.h"
 #include "AssetMgr.h"
 
@@ -18,6 +18,7 @@ void ALevel::Begin()
 		m_arrLayer[i].Begin();
 	}
 }
+
 void ALevel::AddObject(int _LayerIdx, Ptr<GameObject> _Object)
 {
 	m_arrLayer[_LayerIdx].AddObject(_Object);
@@ -65,4 +66,35 @@ void ALevel::CheckCollisionLayer(UINT _LayerIdx1, UINT _LayerIdx2)
 
 void ALevel::CheckCollisionLayer(const wstring& _LayerName1, UINT _LayerName2)
 {
+}
+
+Ptr<GameObject> ALevel::FindObjectByName(const wstring& _Name)
+{
+	for (UINT i = 0; i < MAX_LAYER; ++i)
+	{
+		const vector<Ptr<GameObject>>& vecParent =  m_arrLayer[i].GetParentObjects();
+		for (const auto& gObj : vecParent) {
+			list<Ptr<GameObject>> queue;
+			queue.push_back(gObj);
+
+			while (!queue.empty())
+			{
+				Ptr<GameObject> pObj = queue.front();
+				queue.pop_front();
+
+				// 찾음
+				if (pObj->GetName() == _Name)
+				{
+					return pObj;
+				}
+				const vector<Ptr<GameObject>>& vecChild = pObj->GetChild();
+				for (const auto& cgObj : vecChild)
+				{
+					queue.push_back(cgObj);
+				}
+			}
+		}
+	}
+	// 없음
+	return nullptr;
 }

@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "PathMgr.h"
 #include "Engine.h"
 PathMgr::PathMgr()
@@ -18,7 +18,7 @@ void PathMgr::Init()
 	// 디버깅 모드에서도 똑같이 동작하게 하기 위해서,
 	// 프로젝트 구성설정, 디버깅 탑에 작업 디렉터리를 실행파일 경로로 설정해준다.
 	GetCurrentDirectory(255, m_ContentPath);
-	//SetWindowText(Engine::GetInst()->GetMainWinHandle(), m_ContentPath);
+	//SetWindowText(Engine::GetInst()->GetMainWndHwnd(), m_ContentPath);
 
 	int Len = (UINT)wcslen(m_ContentPath);
 

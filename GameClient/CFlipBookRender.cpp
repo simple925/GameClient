@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CFlipbookRender.h"
 #include "AssetMgr.h"
 #include "TimeMgr.h"
@@ -51,7 +51,7 @@ void CFlipbookRender::FinalTick()
 		m_AccTime -= fLmit;
 		++m_CurSprite;
 
-		if (m_vecFlipbook[m_CurFlipbook]->GetSpriteCount() <= m_CurSprite)
+		if ((int)m_vecFlipbook[m_CurFlipbook]->GetSpriteCount() <= m_CurSprite)
 		{
 			m_Finish = true;
 			--m_CurSprite;

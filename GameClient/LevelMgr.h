@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include "ALevel.h"
 
@@ -11,7 +11,7 @@ private:
 
 public:
     Ptr<ALevel> GetLevel() { return m_CurLevel; }
-
+    Ptr<GameObject> FindObjectByName(const wstring& _name);
 public: // 시점 함수 목록
     void Init();
     void Progress();

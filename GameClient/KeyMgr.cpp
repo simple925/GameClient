@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "KeyMgr.h"
 #include "Engine.h"
 
@@ -103,7 +103,7 @@ void KeyMgr::Tick()
 	POINT pt = {};
 	GetCursorPos(&pt); // window 기준 마우스 좌표
 
-	ScreenToClient(Engine::GetInst()->GetMainWinHandle(), &pt); // 윈도우 기준으로 마우스좌표 변경
+	ScreenToClient(Engine::GetInst()->GetMainWndHwnd(), &pt); // 윈도우 기준으로 마우스좌표 변경
 
 	m_MousePrevPos = m_MousePos;	// 이전 프레임 정보를 저장
 	m_MousePos = Vec2((float)pt.x, (float)pt.y);	// 현재 프레임 정보를 저장

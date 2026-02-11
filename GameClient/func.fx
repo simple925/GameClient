@@ -11,7 +11,7 @@ float3 CalcLight2D(int _LightIdx, float3 _PixelPos)
 	float DistRatio = 1.f;
 	
 	// DirectionalLight
-	if(0 == g_Light2D[_LightIdx].Type)
+	if (0 == g_Light2D[_LightIdx].Type)
 	{
 		LightColor = g_Light2D[_LightIdx].Color + g_Light2D[_LightIdx].Ambient;
 
@@ -41,6 +41,52 @@ float3 CalcLight2D(int _LightIdx, float3 _PixelPos)
 	else
 	{
 		
+		// LightColor
+		LightColor = g_Light2D[_LightIdx].Color;
+
+		// 광원 → 픽셀 벡터 (월드공간)
+		float3 LightToPixel = _PixelPos - g_Light2D[_LightIdx].WorldPos;
+		LightToPixel.z = 0.f;
+
+		// 거리 계산
+		float Dist = length(LightToPixel);
+
+		// 기본값
+		DistRatio = 0.f;
+
+		// 반경 체크 먼저 (빠른 컷)
+		if (Dist < g_Light2D[_LightIdx].Radius)
+		{
+			float3 L = normalize(LightToPixel);
+			float3 D = normalize(g_Light2D[_LightIdx].LightDir);
+
+			// cos 값 직접 비교 (acos 제거)
+			float cosTheta = dot(L, D);
+			float cosCutoff = cos(g_Light2D[_LightIdx].Angle * 0.5f);
+			
+			if (cosTheta > cosCutoff)
+			{
+				/* 여기가 진짜 스포트라이트 느낌의 빛
+				// 거리 감쇠
+				float distRatio = saturate(Dist / g_Light2D[_LightIdx].Radius);
+				float distAtt = cos(distRatio * (PI * 0.5f));
+
+				DistRatio = saturate(distAtt);
+				*/
+				 // ⭐ 거리 감쇄 (부드럽게)
+				float distAtt = 1.f - (Dist / g_Light2D[_LightIdx].Radius);
+				distAtt = saturate(distAtt);
+				distAtt *= distAtt; // 제곱으로 부드럽게
+
+				// ⭐ 각도 감쇄 (핵심)
+				float angleAtt = saturate((cosTheta - cosCutoff) / (1.0f - cosCutoff));
+
+				// ⭐ 중심 집중 효과
+				angleAtt = pow(angleAtt, 4.f); // 값 키우면 더 손전등 느낌
+
+				DistRatio = distAtt * angleAtt;
+			}
+		}
 	}
 	return LightColor * DistRatio;
 }

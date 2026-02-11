@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "Engine.h"
 
 #include "Device.h"
@@ -8,6 +8,7 @@
 #include "AssetMgr.h"
 #include "LevelMgr.h"
 #include "RenderMgr.h"
+#include "EditorMgr.h"
 LRESULT CALLBACK  WndProc(HWND, UINT, WPARAM, LPARAM);
 
 int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
@@ -93,5 +94,8 @@ int Engine::Init(HINSTANCE _hInst, UINT _Width, UINT _Height)
 
     // RenderMgr 랜더링
     RenderMgr::GetInst()->Init();
+
+    // Editor 매니저 초기화
+    EditorMgr::GetInst()->Init();
     return S_OK;
 }

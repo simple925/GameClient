@@ -15,6 +15,10 @@ LevelMgr::LevelMgr() {
 }
 LevelMgr::~LevelMgr() {
 }
+Ptr<GameObject> LevelMgr::FindObjectByName(const wstring& _name)
+{
+	return m_CurLevel->FindObjectByName(_name);
+}
 void LevelMgr::Init()
 {
 	// 카메라 역할 Ojbect
@@ -77,7 +81,8 @@ void LevelMgr::Init()
 	*/
 	// 광원 오브젝트
 	Ptr<GameObject> pLightObj = nullptr;
-
+	/*
+	*/
 	pLightObj = new GameObject;
 	pLightObj->SetName(L"Light_1");
 	pLightObj->AddComponent(new CTransform);
@@ -101,6 +106,8 @@ void LevelMgr::Init()
 	pLightObj->Light2D()->SetRadius(300.f);
 	pLightObj->Transform()->SetRelativePos(Vec3(150.f, 0.f, 0.f));
 	m_CurLevel->AddObject(0, pLightObj);
+	// 광원 추가
+	
 	/*
 	* Light End ======================================
 	*/
@@ -128,9 +135,7 @@ void LevelMgr::Init()
 	pObject->AddComponent(new CFlipbookRender);
 	pObject->AddComponent(new CCollider2D);
 
-	Ptr<CPlayerScript> playerScript = new CPlayerScript;
-	playerScript->SetTarget(pMonster);
-	pObject->AddComponent(playerScript.Get());
+	
 
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
@@ -156,8 +161,27 @@ void LevelMgr::Init()
 
 	pChild->MeshRender()->SetMesh(AssetMgr::GetInst()->Find<AMesh>(L"q"));
 	pChild->MeshRender()->SetMtrl(AssetMgr::GetInst()->Find<AMaterial>(L"Std2DMtrl"));
+
+	pLightObj = new GameObject;
+	pLightObj->SetName(L"Light 3");
+	pLightObj->AddComponent(new CTransform);
+	pLightObj->AddComponent(new CLight2D);
+
+	pLightObj->Light2D()->SetLightType(LIGHT_TYPE::SPOT);
+	pLightObj->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
+	pLightObj->Light2D()->SetRadius(400.f);
+	pLightObj->Light2D()->SetAngle(XM_PI / 4.f);
+
+	pLightObj->Transform()->SetRelativePos(pObject->Transform()->GetRelativePos());
+
+	Ptr<CPlayerScript> playerScript = new CPlayerScript;
+	playerScript->SetTarget(pMonster);
+	playerScript->SetLight(pLightObj);
+	pObject->AddComponent(playerScript.Get());
+
 	// Player 와 Child 부모자식 연결
 	pObject->AddChild(pChild);
+	pObject->AddChild(pLightObj);
 	m_CurLevel->AddObject(3, pObject);
 	/*
 	* Player End ===============================================

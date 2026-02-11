@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CPlayerScript.h"
 
 #include "KeyMgr.h"
@@ -45,6 +45,7 @@ bool CPlayerScript::IsMouseOver()
 
 CPlayerScript::CPlayerScript()
 	:m_iPrevDir(-1)
+	, m_fLightAngle(180.f)
 {
 }
 
@@ -78,25 +79,30 @@ void CPlayerScript::Move()
 
 	float fSpeed = 20.f;
 	int iNextDir = -1;   // 현재 프레임의 입력 방향 체크
+
 	if (KEY_PRESSED(KEY::UP))
 	{
 		vPos += vUp * 400.5f * DT;
 		iNextDir = 2;
+		m_fLightAngle = 90.f;
 	}
 	if (KEY_PRESSED(KEY::DOWN))
 	{
 		vPos += vDown * 400.5f * DT;
 		iNextDir = 0;
+		m_fLightAngle = -90.f;
 	}
 	if (KEY_PRESSED(KEY::RIGHT))
 	{
 		vPos += vRight * 400.5f * DT;
 		iNextDir = 3;
+		m_fLightAngle = 0.f;
 	}
 	if (KEY_PRESSED(KEY::LEFT))
 	{
 		vPos += vLeft * 400.5f * DT;
 		iNextDir = 1;
+		m_fLightAngle = 180.f;
 	}
 	// 2. 애니메이션 제어
 	if (iNextDir != -1) // 키가 눌려 있는 경우
@@ -120,6 +126,12 @@ void CPlayerScript::Move()
 		}
 	}
 
+	if (m_Light != nullptr)
+	{
+		Vec3 vRot = m_Light->Transform()->GetRelativeRot();
+		vRot.z = XMConvertToRadians(m_fLightAngle); // 라디안 변환 필수
+		m_Light->Transform()->SetRelativeRot(vRot);
+	}
 
 	Transform()->SetRelativePos(vPos);
 	Transform()->SetRelativeScale(vScale);

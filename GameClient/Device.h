@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ConstBuffer.h"
 
 // Directx11 라이브러리 함수를 이용해서 
@@ -31,6 +31,7 @@ private:
 public:
 	int Init(HWND _hwnd, Vec2 _Resolution);
 	void ClearTarget();
+	void OMSetTarget();
 	void Present() { m_SwapChain->Present(0, 0); }
 
 	Vec2 GetRenderResol() { return m_RenderResol; }

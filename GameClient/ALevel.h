@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Asset.h"
 #include "Layer.h"
 
@@ -17,6 +17,8 @@ public:
     void CheckCollisionLayer(const wstring& _LayerName1, UINT _LayerName2);
 
     UINT* GetCllisionMatrix() { return m_Matrix; }
+
+    Ptr<GameObject> FindObjectByName(const wstring& _name);
 public:
     void AddObject(int _LayerIdx, Ptr<GameObject> _Object);
     Layer* GetLayer(int _Idx) { assert(0 <= _Idx && _Idx < MAX_LAYER); return &m_arrLayer[_Idx]; }
