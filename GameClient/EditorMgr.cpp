@@ -14,6 +14,8 @@
 
 #include "KeyMgr.h"
 
+
+
 EditorMgr::EditorMgr()
     : m_ShowDemo(true)
 {
@@ -87,7 +89,8 @@ void EditorMgr::Tick()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    if (KEY_TAP(KEY::F8)) m_ShowDemo ? m_ShowDemo = false : m_ShowDemo = true;
+    // 모든 imgui 포커싱 제거
+    if (KEY_TAP(KEY::ENTER)) ImGui::SetWindowFocus(nullptr);
 
     // DemoUI
     if (m_ShowDemo) ImGui::ShowDemoWindow();
@@ -99,6 +102,16 @@ void EditorMgr::Tick()
             pair.second->Tick();
         }
     }
+
+    //ImGui::Begin("Test");
+    //ImGui::BeginChild("Child1", Vec2(0.f, 100.f));
+    //ImGui::Button("Test 1");
+    //ImGui::EndChild();
+    //ImGui::BeginChild("Child2");
+    //ImGui::Button("Test 2");
+    //ImGui::EndChild();
+    //ImGui::End();
+
 }
 
 void EditorMgr::Render()

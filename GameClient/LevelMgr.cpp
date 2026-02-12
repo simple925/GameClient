@@ -135,8 +135,6 @@ void LevelMgr::Init()
 	pObject->AddComponent(new CFlipbookRender);
 	pObject->AddComponent(new CCollider2D);
 
-	
-
 	pObject->Transform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	pObject->Transform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "EditorUI.h"
-
+#include "ImGui/imgui.h"
 EditorUI::EditorUI()
 	: m_Active(true)
 {
@@ -12,9 +12,38 @@ EditorUI::~EditorUI()
 
 void EditorUI::Tick()
 {
-	ImGui::Begin(GetUIName().c_str(), &m_Active);
+	if (nullptr == m_Parent)
+	{
+		ImGui::Begin(GetUIName().c_str(), &m_Active);
 
-	Tick_UI();
+		Tick_UI();
+		for (const auto& child : m_ChildUI)
+		{
+			if(child->IsActive()) child->Tick();
+		}
 
-	ImGui::End();
+		ImGui::End();
+	}
+	else
+	{
+		ImGui::BeginChild(GetUIName().c_str());
+
+		Tick_UI();
+		for (const auto& child : m_ChildUI)
+		{
+			if (child->IsActive()) child->Tick();
+		}
+
+		ImGui::EndChild();
+	}
+}
+
+Vec2::operator ImVec2() const
+{
+	return ImVec2(x, y);
+}
+
+Vec4::operator ImVec4() const
+{
+	return ImVec4(x, y, z, w);
 }

@@ -227,6 +227,7 @@ call CopyShader.bat
     <ClInclude Include="TaskMgr.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Ptr.h" />
+    <ClInclude Include="TransformUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AFlipbook.cpp" />
@@ -292,6 +293,7 @@ call CopyShader.bat
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="TaskMgr.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
+    <ClCompile Include="TransformUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GameClient.rc" />

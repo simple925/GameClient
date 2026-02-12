@@ -214,6 +214,7 @@
     <ClInclude Include="Menu.h">
       <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClInclude>
+    <ClInclude Include="TransformUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -405,6 +406,7 @@
     <ClCompile Include="Menu.cpp">
       <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClCompile>
+    <ClCompile Include="TransformUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
