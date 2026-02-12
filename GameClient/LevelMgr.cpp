@@ -51,7 +51,7 @@ void LevelMgr::Init()
 	* Camera Start ======================================
 	*/
 	//pCameraObj->SetName(L"Main Camera");
-	pCameraObj->SetName(L"Main Camera");
+	pCameraObj->SetName(L"MainCamera");
 	pCameraObj->AddComponent(new CTransform);
 	pCameraObj->AddComponent(new CCamera);
 

@@ -131,7 +131,7 @@
     <PreBuildEvent>
       <Command>cd $(SolutionDir)
 call CopyShader.bat
-</Command>
+call ComponentAuto.exe</Command>
     </PreBuildEvent>
     <FxCompile>
       <ShaderType>Effect</ShaderType>
@@ -166,6 +166,7 @@ call CopyShader.bat
     <ClInclude Include="AssetMgr.h" />
     <ClInclude Include="ATexture.h" />
     <ClInclude Include="ATileMap.h" />
+    <ClInclude Include="CameraUI.h" />
     <ClInclude Include="CBillboardRender.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCamMoveScript.h" />
@@ -176,9 +177,11 @@ call CopyShader.bat
     <ClInclude Include="CMissileScript.h" />
     <ClInclude Include="CMonsterProtile.h" />
     <ClInclude Include="CMonsterScript.h" />
+    <ClInclude Include="Collider2DUI.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="components.h" />
+    <ClInclude Include="ComponentUI.h" />
     <ClInclude Include="ConstBuffer.h" />
     <ClInclude Include="CPlanetControllerScript.h" />
     <ClInclude Include="CPlayerScript.h" />
@@ -213,6 +216,7 @@ call CopyShader.bat
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LevelMgr.h" />
     <ClInclude Include="AMaterial.h" />
+    <ClInclude Include="Light2DUI.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Outliner.h" />
     <ClInclude Include="PathMgr.h" />
@@ -240,6 +244,7 @@ call CopyShader.bat
     <ClCompile Include="AssetMgr.cpp" />
     <ClCompile Include="ATexture.cpp" />
     <ClCompile Include="ATileMap.cpp" />
+    <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="CBillboardRender.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCamMoveScript.cpp" />
@@ -250,8 +255,10 @@ call CopyShader.bat
     <ClCompile Include="CMissileScript.cpp" />
     <ClCompile Include="CMonsterProtile.cpp" />
     <ClCompile Include="CMonsterScript.cpp" />
+    <ClCompile Include="Collider2DUI.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentUI.cpp" />
     <ClCompile Include="ConstBuffer.cpp" />
     <ClCompile Include="CPlanetControllerScript.cpp" />
     <ClCompile Include="CPlayerScript.cpp" />
@@ -281,6 +288,7 @@ call CopyShader.bat
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LevelMgr.cpp" />
+    <ClCompile Include="Light2DUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AMaterial.cpp" />
     <ClCompile Include="Menu.cpp" />

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Component.h"
 enum class PROJ_TYPE
 {
@@ -40,6 +40,10 @@ public:
 	void LayerCheckAll() { m_LayerCheck = 0xffffffff; } // 32비트 전부가 1로 꽉 채워진 상태
 	void LayerCheckClear() { m_LayerCheck = 0; }
 	void LayerCheck(int _Idx);
+	// 특정 레이어가 켜져 있는지 확인하는 함수
+	bool IsLayerChecked(int _Idx) { return m_LayerCheck & (1 << _Idx); }
+	// UI에서 직접 접근하기 위해 현재 비트값 전체를 가져오는 함수
+	UINT GetLayerCheck() { return m_LayerCheck; }
 public:
 	void Render();
 

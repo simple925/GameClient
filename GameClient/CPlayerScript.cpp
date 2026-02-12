@@ -178,14 +178,66 @@ void CPlayerScript::Shoot()
 	
 }
 
+
+
 void CPlayerScript::Tick()
 {
-	Move();
+	switch (m_State)
+	{
+	case PLAYER_STATE::IDLE:
+		Move();
+		//CheckDashInput();
+		break;
 
+	case PLAYER_STATE::MOVE:
+		Move();
+		//CheckDashInput();
+		break;
+
+	case PLAYER_STATE::DASH:
+		UpdateDash();
+		break;
+	}
+	//Move();
 	Shoot();
 
 	Ptr<GameObject> pChild = GetOwner()->GetChild(0);
 
 	Vec3 vRelativePos = pChild->Transform()->GetRelativePos();
 	Vec3 vWorldPos = pChild->Transform()->GetWorldPos();
+}
+
+
+void CPlayerScript::StartDash()
+{
+	if (m_Dash.fCoolTime > 0.f)
+		return;
+
+	m_Dash.bDashing = true;
+	m_Dash.fDashTime = m_Dash.fDashDuration;
+	m_Dash.vDir = Transform()->GetDir(DIR::RIGHT); // or 입력 방향
+
+	m_State = PLAYER_STATE::DASH;
+}
+
+void CPlayerScript::EndDash()
+{
+	m_State = PLAYER_STATE::MOVE;
+}
+
+void CPlayerScript::UpdateDash()
+{
+	float dt = DT;
+
+	Transform()->SetRelativePos(m_Dash.vDir * m_Dash.fDashSpeed * dt);
+
+	m_Dash.fDashTime -= dt;
+
+	if (m_Dash.fDashTime <= 0.f)
+	{
+		m_Dash.bDashing = false;
+		m_Dash.fCoolTime = m_Dash.fCoolDuration;
+		m_State = PLAYER_STATE::IDLE;
+	}
+
 }

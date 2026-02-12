@@ -10,8 +10,11 @@ private:
 	string                  m_UIName;
 	bool		            m_Active;
 	EditorUI*				m_Parent;
-	vector<Ptr< EditorUI>>  m_ChildUI;
+	vector<Ptr<EditorUI>>  m_ChildUI;
+
+	Vec2					m_SizeAsChild;	// 자식 UI인 경우, 담당하는 영역 크기
 public:
+	GET_SET(Vec2, SizeAsChild);
 	bool IsActive() { return m_Active; }
 	void SetActive(bool _Active) { m_Active = _Active; }
 	void AddChildUI(Ptr<EditorUI> _Child)
@@ -26,7 +29,7 @@ public:
 	virtual void Tick();
 	virtual void Tick_UI() = 0;
 public:
-	EditorUI();
+	EditorUI(const string& _Name);
 	virtual ~EditorUI();
 };
 

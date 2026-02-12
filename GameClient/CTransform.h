@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Component.h"
 class CTransform :
     public Component
@@ -31,6 +31,7 @@ public:
     // Translation() 이동정보를 뽑아옴 _41 _42 _43
     Vec3 GetWorldPos() { return m_matWorld.Translation(); }
     void SetIndependentScale(bool _On) { m_IndependentScale = !m_IndependentScale; }
+    bool GetIndependentScale() { return m_IndependentScale; }
 
     Vec3 GetDir(DIR _Type) { return m_Dir[(UINT)_Type]; }
 

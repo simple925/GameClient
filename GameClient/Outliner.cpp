@@ -2,6 +2,7 @@
 #include "Outliner.h"
 
 Outliner::Outliner()
+	: EditorUI("Outliner")
 {
 }
 

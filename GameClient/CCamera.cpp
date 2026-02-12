@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CCamera.h"
 
 #include "LevelMgr.h"
@@ -12,6 +12,7 @@
 CCamera::CCamera()
 	:Component(COMPONENT_TYPE::CAMERA)
 	, m_LayerCheck(0)
+	, m_OrthoScale(1.f)
 {
 }
 
@@ -83,7 +84,7 @@ void CCamera::FinalTick()
 	if(PROJ_TYPE::ORTHOGRAPHIC == m_ProjType)
 	{
 		// 직교투영(Orthographic) 행렬 계산  near: 카메라 렌즈길이 far
-		m_matProj = XMMatrixOrthographicLH(m_Width, m_Width / m_AspectRatio, 1.f, m_Far);
+		m_matProj = XMMatrixOrthographicLH(m_Width * m_OrthoScale, (m_Width / m_AspectRatio) * m_OrthoScale, 1.f, m_Far);
 	}
 	else {
 		// near -> Far 가 0 -> 1 로 설정함

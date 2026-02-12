@@ -2,8 +2,8 @@
 #include "TransformUI.h"
 #include "GameObject.h"
 TransformUI::TransformUI()
+	: ComponentUI(COMPONENT_TYPE::TRANSFORM, "TransformUI")
 {
-	SetUIName("TransformUI");
 }
 
 TransformUI::~TransformUI()
@@ -12,21 +12,43 @@ TransformUI::~TransformUI()
 
 void TransformUI::Tick_UI()
 {
-	ImGui::Button("transform");
-	if (nullptr == m_TargetObject) return;
-	Vec3 vPos = m_TargetObject->Transform()->GetRelativePos();
-	Vec3 vScale = m_TargetObject->Transform()->GetRelativeScale();
-	Vec3 vRot = m_TargetObject->Transform()->GetRelativeRot();
+	OutputTitle("Transform");
 
-	if (ImGui::DragFloat3("POSITION", vPos))
-		m_TargetObject->Transform()->SetRelativePos(vPos);
-	if (ImGui::DragFloat3("SCALE", vScale))
-		m_TargetObject->Transform()->SetRelativeScale(vScale);
+	Vec3 vPos = GetTarget()->Transform()->GetRelativePos();
+	Vec3 vScale = GetTarget()->Transform()->GetRelativeScale();
+	Vec3 vRot = GetTarget()->Transform()->GetRelativeRot();
 
+	float fsameLine = 100.f;
+
+	ImGui::Text("POSITION");
+	ImGui::SameLine(fsameLine);
+	if (ImGui::DragFloat3("##POSITION", vPos))
+		GetTarget()->Transform()->SetRelativePos(vPos);
+
+	ImGui::Text("SCALE");
+	ImGui::SameLine(fsameLine);
+	if (ImGui::DragFloat3("##SCALE", vScale))
+		GetTarget()->Transform()->SetRelativeScale(vScale);
+
+	ImGui::Text("ROTATION");
+	ImGui::SameLine(fsameLine);
 	Vec3 vDegree = vRot * 180 / XM_PI;
-	if (ImGui::DragFloat3("ROTATION", vDegree))
+	if (ImGui::DragFloat3("##ROTATION", vDegree))
 	{
 		vRot = vDegree * (XM_PI / 180.f);
-		m_TargetObject->Transform()->SetRelativeRot(vRot);
+		GetTarget()->Transform()->SetRelativeRot(vRot);
 	}
+
+	bool Independent = GetTarget()->Transform()->GetIndependentScale();
+
+	ImGui::Spacing();
+	ImGui::Spacing();
+
+	ImGui::Text("Independent Scale");
+	ImGui::SameLine();
+	if (ImGui::Checkbox("##Independent", &Independent))
+	{
+		GetTarget()->Transform()->SetIndependentScale(Independent);
+	}
+
 }

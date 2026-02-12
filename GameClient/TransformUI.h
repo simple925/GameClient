@@ -1,13 +1,11 @@
 #pragma once
-#include "EditorUI.h"
+#include "ComponentUI.h"
 class TransformUI :
-    public EditorUI
+    public ComponentUI
 {
 private:
-    Ptr<GameObject> m_TargetObject;
 public:
     virtual void Tick_UI();
-    void SetTargetObject(Ptr<GameObject> _TargetObject) { m_TargetObject = _TargetObject; }
 public:
     TransformUI();
     virtual ~TransformUI();

@@ -214,7 +214,21 @@
     <ClInclude Include="Menu.h">
       <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClInclude>
-    <ClInclude Include="TransformUI.h" />
+    <ClInclude Include="TransformUI.h">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\01. TransformUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2DUI.h">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\02. Collider2DUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentUI.h">
+      <Filter>GameEngine\EditorUI\04. ComponentUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\03. CameraUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Light2DUI.h">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\04. Light2DUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GameClient.ico">
@@ -406,7 +420,21 @@
     <ClCompile Include="Menu.cpp">
       <Filter>GameEngine\EditorUI\03. Menu</Filter>
     </ClCompile>
-    <ClCompile Include="TransformUI.cpp" />
+    <ClCompile Include="TransformUI.cpp">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\01. TransformUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2DUI.cpp">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\02. Collider2DUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentUI.cpp">
+      <Filter>GameEngine\EditorUI\04. ComponentUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\03. CameraUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Light2DUI.cpp">
+      <Filter>GameEngine\EditorUI\04. ComponentUI\04. Light2DUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Default">
@@ -582,6 +610,21 @@
     </Filter>
     <Filter Include="GameEngine\06. Component\RenderComponent\05. TileRender">
       <UniqueIdentifier>{fa4fba74-5551-459b-866c-61c59520d445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\04. ComponentUI">
+      <UniqueIdentifier>{45e29c52-d0c2-4690-969d-9136ddac7b3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\04. ComponentUI\01. TransformUI">
+      <UniqueIdentifier>{2ffc98fa-0e73-4e13-85f7-0baabd806b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\04. ComponentUI\02. Collider2DUI">
+      <UniqueIdentifier>{78aed1f7-9e47-4693-9392-0fa33e3aad06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\04. ComponentUI\03. CameraUI">
+      <UniqueIdentifier>{c901f818-ac06-42ce-a738-eadce91ba95b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\EditorUI\04. ComponentUI\04. Light2DUI">
+      <UniqueIdentifier>{2a5ab142-b81c-4c80-829d-6a63d096e217}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

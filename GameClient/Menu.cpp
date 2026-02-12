@@ -50,6 +50,7 @@ void Menu::Tick_UI()
 }
 
 Menu::Menu()
+	: EditorUI("Menu")
 {
 }
 

@@ -36,12 +36,21 @@ private:
 	int					m_iPrevDir;
 	float				m_fLightAngle;
 
-	/* 대시 관련 */
+	/* 대시 관련 맴버 변수*/
 	DashInfo m_Dash;
 	PLAYER_STATE m_State = PLAYER_STATE::IDLE;
 private:
 	void Move();
 	void Shoot();
+private:
+	/* 대시 관련 함수 start*/
+	void StartDash();
+	void EndDash();
+	void UpdateDash();
+	//void CheckDashInput();
+	//void SpawnAfterImage(float dt);
+	//void CreateAfterImage(const Vec3& curPos);
+	/* 대시 관련 함수 end*/
 public:
 	void Tick() override;
 	bool IsMouseOver();

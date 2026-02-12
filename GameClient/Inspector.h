@@ -1,12 +1,13 @@
 #pragma once
 #include "EditorUI.h"
-#include "TransformUI.h"
+#include "ComponentUI.h"
 class Inspector
 	: public EditorUI
 {
 private:
 	Ptr<GameObject> m_TargetObject;
-	Ptr<TransformUI> m_TransformUI;
+	Ptr<ComponentUI> m_arrComUI[(UINT)COMPONENT_TYPE::END];
+
 public:
 	void SetTargetObject(Ptr<GameObject> _Object);
 public:

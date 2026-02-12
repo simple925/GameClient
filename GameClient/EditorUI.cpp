@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "EditorUI.h"
 #include "ImGui/imgui.h"
-EditorUI::EditorUI()
-	: m_Active(true)
+EditorUI::EditorUI(const string& _Name)
+	: m_UIName(_Name)
+	, m_Active(true)
+	, m_Parent(nullptr)
 {
 }
 
@@ -19,19 +21,25 @@ void EditorUI::Tick()
 		Tick_UI();
 		for (const auto& child : m_ChildUI)
 		{
-			if(child->IsActive()) child->Tick();
+			if (child->IsActive()) {
+				child->Tick();
+				ImGui::Separator();
+			}
 		}
 
 		ImGui::End();
 	}
 	else
 	{
-		ImGui::BeginChild(GetUIName().c_str());
+		ImGui::BeginChild(GetUIName().c_str(), m_SizeAsChild);
 
 		Tick_UI();
 		for (const auto& child : m_ChildUI)
 		{
-			if (child->IsActive()) child->Tick();
+			if (child->IsActive()) {
+				child->Tick();
+				ImGui::Separator();
+			}
 		}
 
 		ImGui::EndChild();
