@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "CCamMoveScript.h"
 #include "KeyMgr.h"
 #include "TimeMgr.h"
@@ -28,15 +28,16 @@ void CCamMoveScript::MovePerspective()
 
 
 	Vec3 vFront = Transform()->GetDir(DIR::FRONT);
+	Vec3 vUp = Transform()->GetDir(DIR::UP);
 	Vec3 vRight = Transform()->GetDir(DIR::RIGHT);
 
 
 
 	float moveSpeed = 800.f;
 	if (1 == KeyMgr::GetInst()->GetWheel())
-		vPos += vFront * 10.f;
+		vPos += vFront * 100.f;
 	if (-1 == KeyMgr::GetInst()->GetWheel())
-		vPos -= vFront * 10.f;
+		vPos -= vFront * 100.f;
 
 	if (KEY_PRESSED(KEY::W))
 		vPos += vFront * moveSpeed * DT;
@@ -57,7 +58,12 @@ void CCamMoveScript::MovePerspective()
 	}
 	if (KEY_PRESSED(KEY::M_MBUTTON))
 	{
+		Vec2 vMouseDir = KeyMgr::GetInst()->GetMouseDir();
 
+		// 마우스가 왼쪽으로 가면 카메라는 오른쪽 벡터의 반대방향으로 이동해야 화면이 밀립니다.
+		// 마우스 이동량에 적절한 가중치(여기서는 500.f)를 곱해 속도를 조절하세요.
+		vPos -= vRight * vMouseDir.x * DT * 500.f;
+		vPos += vUp * vMouseDir.y * DT * 500.f;
 	}
 
 	Transform()->SetRelativePos(vPos);

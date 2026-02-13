@@ -13,6 +13,7 @@ CCamera::CCamera()
 	:Component(COMPONENT_TYPE::CAMERA)
 	, m_LayerCheck(0)
 	, m_OrthoScale(1.f)
+	, m_Near(1.f)
 {
 }
 
@@ -84,12 +85,12 @@ void CCamera::FinalTick()
 	if(PROJ_TYPE::ORTHOGRAPHIC == m_ProjType)
 	{
 		// 직교투영(Orthographic) 행렬 계산  near: 카메라 렌즈길이 far
-		m_matProj = XMMatrixOrthographicLH(m_Width * m_OrthoScale, (m_Width / m_AspectRatio) * m_OrthoScale, 1.f, m_Far);
+		m_matProj = XMMatrixOrthographicLH(m_Width * m_OrthoScale, (m_Width / m_AspectRatio) * m_OrthoScale, m_Near, m_Far);
 	}
 	else {
 		// near -> Far 가 0 -> 1 로 설정함
 		// 원근투영(Perspective)
-		m_matProj = XMMatrixPerspectiveFovLH(m_FOV, m_AspectRatio, 1.f, m_Far);
+		m_matProj = XMMatrixPerspectiveFovLH(m_FOV, m_AspectRatio, m_Near, m_Far);
 	}
 
 	// 뷰는 월드로 옮김

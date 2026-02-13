@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "Entity.h"
 // 쉐이더 사운드 애니메이션 매쉬 텍스쳐이미지
 class Asset :
@@ -16,11 +16,18 @@ public:
 public:
     const wstring& getKey() { return m_Key; }
     const wstring& getRelativePath() { return m_RelativePath; }
-
+private:
+    void SetKey(const wstring& _Key) { m_Key = _Key; }
+    void SetRelativePath(const wstring& _Path) { m_RelativePath = _Path; }
+public:
+    virtual int Load(const wstring& _FilePath) { return S_OK; }
+   
 public:
     // 기본생성자 제거, 자신이 어떤 타입의 Asset 인지 입력으로 받는 버전의 생성자만 남겨둠
     // 생성자가 하나라도 있으면 컴파일러는 자동으로 생성자를 안만든다!!
     Asset(ASSET_TYPE _Type);
     virtual ~Asset();
+
+    friend class AssetMgr;
 };
 

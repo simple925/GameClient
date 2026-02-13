@@ -12,6 +12,7 @@ public:
 	void SetTargetObject(Ptr<GameObject> _Object);
 public:
 	virtual void Tick_UI()override;
+	void CreateChildUI();
 public:
 	Inspector();
 	virtual ~Inspector();

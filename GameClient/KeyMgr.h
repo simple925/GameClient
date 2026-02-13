@@ -80,11 +80,15 @@ private:
 
 	HWND				m_hFocus;
 
+	bool				m_Active;
+
 public:
 	KEY_STATE GetKeyState(KEY _Key) { return m_vecKeys[(UINT)_Key].State; }
-	GET(Vec2, MousePos)
-	GET(Vec2, MousePrevPos)
-	GET(Vec2, MouseDir)
+	GET(Vec2, MousePos);
+	GET(Vec2, MousePrevPos);
+	GET(Vec2, MouseDir);
+	GET_SET(bool, Active);
+	
 	/*
 		마우스 이벤트 관리 윈도우 프로그램과
 	*/
@@ -108,4 +112,3 @@ public:
 #define KEY_PRESSED(key)	KEY_CHECK(key, PRESSED)
 #define KEY_RELEASED(key)	KEY_CHECK(key, RELEASED)
 #define KEY_NONE(key)		KEY_CHECK(key, NONE)
-

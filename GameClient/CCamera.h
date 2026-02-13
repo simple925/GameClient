@@ -13,6 +13,7 @@ private:
 	UINT        m_LayerCheck;   // 어떤 레이어만 화면에 렌더링 할 것인지 비트체크
 	PROJ_TYPE   m_ProjType;     // 투영 방식
 	float       m_Far;          // 카메라 시야 최대거리
+	float		m_Near;
 	float       m_Width;        // 투영 가로길이
 	float       m_AspectRatio;  // 종횡비(가로 / 세로), 세로대비 가로의 길이 비율
 	float       m_FOV;          // 원근투영 시야각
@@ -23,10 +24,12 @@ public:
 
 	GET_SET(PROJ_TYPE, ProjType);
 	GET_SET(float, Far);
+	GET_SET(float, Near);
 	GET_SET(float, Width);
 	GET_SET(float, AspectRatio);
 	
 	GET_SET(float, OrthoScale);
+	Matrix GetViewMat() { return m_matView; }
 
 	float GetFOV() { return m_FOV * (180 / XM_PI); }
 	// _Degree 60분법

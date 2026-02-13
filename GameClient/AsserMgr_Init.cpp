@@ -204,101 +204,75 @@ void AssetMgr::CreateEngineShader()
 
 void AssetMgr::CreateEngineTexture()
 {
-	Ptr<ATexture> pTex = nullptr;
-	wstring FilePath = CONTENT_PATH;
+	Load<ATexture>(L"PlayerImage",L"Texture\\Character.png");
+	
+	Load<ATexture>(L"Fighter", L"Texture\\Fighter.bmp");
 
-	pTex = new ATexture;
-	FilePath += L"Texture\\Character.png";
-	pTex->Load(FilePath);
-	AddAsset(L"PlayerImage", pTex.Get());
-
-	pTex = nullptr;
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\Fighter.bmp";
-	pTex->Load(FilePath);
-	AddAsset(L"Fighter", pTex.Get());
-
-	pTex = nullptr;
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\1945\\back1.png";
-	pTex->Load(FilePath);
-	AddAsset(L"back_1", pTex.Get());
-
-	pTex = nullptr;
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\1945\\p.png";
-	pTex->Load(FilePath);
-	AddAsset(L"p", pTex.Get());
-	pTex = nullptr;
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\1945\\m.bmp";
-	pTex->Load(FilePath);
-	AddAsset(L"m", pTex.Get());
-
+	Load<ATexture>(L"back_1", L"Texture\\1945\\back1.png");
+	Load<ATexture>(L"p", L"Texture\\1945\\p.png");
+	Load<ATexture>(L"m", L"Texture\\1945\\m.bmp");
 	/*
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"태양");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\sola.png";
-	pTex->Load(FilePath);
-	AddAsset(L"sola", pTex.Get());
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"태양");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\sola.png";
+		pTex->Load(FilePath);
+		AddAsset(L"sola", pTex.Get());
+	);
 
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"지구");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\earth.png";
-	pTex->Load(FilePath);
-	AddAsset(L"earth", pTex.Get());
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"지구");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\earth.png";
+		pTex->Load(FilePath);
+		AddAsset(L"earth", pTex.Get());
+	);
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"수성");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\mercury.png";
+		pTex->Load(FilePath);
+		AddAsset(L"mercury", pTex.Get());
+	);
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"금성");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\venus.png";
+		pTex->Load(FilePath);
+		AddAsset(L"venus", pTex.Get());
+	);
 
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"수성");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\mercury.png";
-	pTex->Load(FilePath);
-	AddAsset(L"mercury", pTex.Get());
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"우주");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\univers.jpeg";
+		pTex->Load(FilePath);
+		AddAsset(L"univers", pTex.Get());
+	);
 
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"금성");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\venus.png";
-	pTex->Load(FilePath);
-	AddAsset(L"venus", pTex.Get());
-
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"우주");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\univers.jpeg";
-	pTex->Load(FilePath);
-	AddAsset(L"univers", pTex.Get());
-
-	pTex = nullptr;
-	pTex = new ATexture;
-	pTex->SetName(L"슬라임");
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\slime_run.png";
-	pTex->Load(FilePath);
-	AddAsset(L"slime", pTex.Get());
+	Load<ATexture>(
+		pTex = nullptr;
+		pTex = new ATexture;
+		pTex->SetName(L"슬라임");
+		FilePath = CONTENT_PATH;
+		FilePath += L"Texture\\slime_run.png";
+		pTex->Load(FilePath);
+		AddAsset(L"slime", pTex.Get());
+	);
 	*/
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\link.png";
-	pTex->Load(FilePath);
-	AddAsset(L"Link", pTex.Get());
+	Load<ATexture>(L"Link", L"Texture\\link.png");
 
-	pTex = new ATexture;
-	FilePath = CONTENT_PATH;
-	FilePath += L"Texture\\TILE.bmp";
-	pTex->Load(FilePath);
-	AddAsset(L"TileAtlas", pTex.Get());
+	Load<ATexture>(L"TileAtlas", L"Texture\\TILE.bmp");
 }
 
 void AssetMgr::CreateEngineMaterial()

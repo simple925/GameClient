@@ -65,11 +65,12 @@ void KeyMgr::Init()
 void KeyMgr::Tick()
 {
 	m_hFocus = GetFocus();
-	if (m_hFocus == Engine::GetInst()->GetMainWndHwnd())
+	if (m_hFocus == Engine::GetInst()->GetMainWndHwnd() && m_Active)
 	{
 		for (int i = 0; i < (UINT)KEY::KEY_END; ++i)
 		{
 			SHORT sKey = GetAsyncKeyState(g_KeyIndex[i]);
+			// 16bit 0x8000  각 자리수당 1 2 4 8
 			bool bDown = (sKey & 0x8000) != 0;
 			if (bDown)
 			{

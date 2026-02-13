@@ -87,14 +87,14 @@ void LevelMgr::Init()
 	pLightObj->SetName(L"Light_1");
 	pLightObj->AddComponent(new CTransform);
 	pLightObj->AddComponent(new CLight2D);
-	//pLightObj->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
-	pLightObj->Light2D()->SetLightType(LIGHT_TYPE::POINT);
-	pLightObj->Light2D()->SetLightColor(Vec3(1.0f, 0.3f, 0.3f));
+	pLightObj->Light2D()->SetLightType(LIGHT_TYPE::DIRECTIONAL);
+	//pLightObj->Light2D()->SetLightType(LIGHT_TYPE::POINT);
+	pLightObj->Light2D()->SetLightColor(Vec3(1.f, 1.f, 1.f));
 	//pLightObj->Light2D()->SetAmbient(Vec3(0.15f, 0.15f, 0.15f));
 	pLightObj->Light2D()->SetRadius(300.f);
 	pLightObj->Transform()->SetRelativePos(Vec3(-150.f, 0.f, 0.f));
 	m_CurLevel->AddObject(0, pLightObj);
-
+	/*
 	pLightObj = new GameObject;
 	pLightObj->SetName(L"Light_2");
 	pLightObj->AddComponent(new CTransform);
@@ -106,6 +106,7 @@ void LevelMgr::Init()
 	pLightObj->Light2D()->SetRadius(300.f);
 	pLightObj->Transform()->SetRelativePos(Vec3(150.f, 0.f, 0.f));
 	m_CurLevel->AddObject(0, pLightObj);
+	*/
 	// 광원 추가
 	
 	/*
@@ -117,11 +118,14 @@ void LevelMgr::Init()
 	*/
 	pMonster->SetName(L"Monster");
 	pMonster->AddComponent(new CTransform);
-	pMonster->AddComponent(new CSpriteRender);
+	//pMonster->AddComponent(new CSpriteRender);
+	pMonster->AddComponent(new CMeshRender);
 	pMonster->AddComponent(new CCollider2D);
 	pMonster->Transform()->SetRelativePos(Vec3(300.f, 0.f, 100.f));
 	pMonster->Transform()->SetRelativeScale(Vec3(200.f, 200.f, 0.f));
-	pMonster->SpriteRender()->SetSprite(FIND(ASprite, L"TileSprite_46"));
+	//pMonster->SpriteRender()->SetSprite(FIND(ASprite, L"TileSprite_46"));
+	pMonster->MeshRender()->SetMesh(FIND(AMesh, L"q"));
+	pMonster->MeshRender()->SetMtrl(FIND(AMaterial, L"Std2DMtrl"));
 	m_CurLevel->AddObject(5, pMonster);
 	/*
 	* Monster End ===============================================

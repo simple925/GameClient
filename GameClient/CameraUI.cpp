@@ -16,10 +16,21 @@ void CameraUI::Tick_UI()
 {
 	OutputTitle("Camera");
 
+	Ptr<CCamera> pCamera = RenderMgr::GetInst()->GetPOVCamera();
+	if (ImGui::TreeNode("Camera Matrices")) {
+		Matrix matView = pCamera->GetViewMat();
+		// 4x4 테이블로 행렬 값 출력 (InputFloat4 4개 사용)
+		for (int r = 0; r < 4; ++r) {
+			float row[4] = { matView.m[r][0], matView.m[r][1], matView.m[r][2], matView.m[r][3] };
+			ImGui::PushID(r);
+			ImGui::InputFloat4("##row", row, "%.2f", ImGuiInputTextFlags_ReadOnly);
+			ImGui::PopID();
+		}
+		ImGui::TreePop();
+	}
 	if (ImGui::TreeNode("LayerCheck"))
 	{
 		// 1. 카메라 객체를 미리 캐싱 (루프 밖에서 한 번만)
-		Ptr<CCamera> pCamera = RenderMgr::GetInst()->GetPOVCamera();
 		Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
 		if (nullptr == pCamera) {
 			ImGui::TextColored(ImVec4(1, 0, 0, 1), "No POV Camera Active");
@@ -66,13 +77,27 @@ void CameraUI::Tick_UI()
 		ImGui::TreePop();
 	}
 
+	ImGui::SeparatorText("##ProjType");
+
 	PROJ_TYPE ProjType = GetTarget()->Camera()->GetProjType();     // 투영 방식
 	const char* items[] = { "ORTHOGRAPHIC","PERSPECTIVE"};
 	//ImGui::Combo("combo", &item_current, items, 2); // 밑이랑 같은 뜻
-	if (ImGui::Combo("combo", (int*)&ProjType, items, IM_COUNTOF(items)))
+	ImGui::Text("ProjType");
+	ImGui::SameLine(100);
+	if (ImGui::Combo("##ProjType", (int*)&ProjType, items, IM_COUNTOF(items)))
 	{
 		GetTarget()->Camera()->SetProjType(ProjType);
 	}
+
+	// Near / Far Clip 제어 (공통)
+	float fNear = pCamera->GetNear();
+	float fFar = pCamera->GetFar();
+	ImGui::Text("Near");
+	ImGui::SameLine(100);
+	if (ImGui::DragFloat("##Near", &fNear, 0.1f, 0.1f, fFar - 1.f)) pCamera->SetNear(fNear);
+	ImGui::Text("Far");
+	ImGui::SameLine(100);
+	if (ImGui::DragFloat("##Far", &fFar, 1.0f, fNear + 1.f, 10000.0f)) pCamera->SetFar(fFar);
 
 	ImGui::BeginDisabled(ProjType == PROJ_TYPE::ORTHOGRAPHIC);
 	ImGui::Text("FOV");
@@ -84,14 +109,53 @@ void CameraUI::Tick_UI()
 	}
 	ImGui::EndDisabled();
 
+	// Ortho Scale (직교 투영 전용)
+	ImGui::BeginDisabled(ProjType == PROJ_TYPE::PERSPECTIVE);
+	ImGui::Text("Ortho Scale");
+	ImGui::SameLine(100);
+	float fScale = pCamera->GetOrthoScale();
+	if (ImGui::DragFloat("##OrthoScale", &fScale, 0.01f, 0.1f, 10.0f)) pCamera->SetOrthoScale(fScale);
+	ImGui::EndDisabled();
 
 
 	
 	
-	float       m_Far;          // 카메라 시야 최대거리
-	float       m_Width;        // 투영 가로길이
-	float       m_AspectRatio;  // 종횡비(가로 / 세로), 세로대비 가로의 길이 비율
-	float       m_OrthoScale;   // 직교투영 배율
-	Matrix      m_matView;      // View 행렬;
-	Matrix      m_matProj;      // Proj 행렬;
+	ImGui::SeparatorText("Camera Info");
+
+	// 1. 읽기 전용 데이터 (Width, AspectRatio)
+	float fWidth = pCamera->GetWidth();
+	float fAspect = pCamera->GetAspectRatio();
+
+	ImGui::Text("Viewport Width");
+	ImGui::SameLine(120);
+	ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%.1f", fWidth);
+
+	ImGui::Text("Aspect Ratio");
+	ImGui::SameLine(120);
+	ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%.3f", fAspect);
+
+	// 2. 카메라의 전방/상방/우측 벡터 (디버깅 시 매우 유용)
+	if (ImGui::TreeNode("Camera Vectors"))
+	{
+		// View 행렬의 역행렬에서 방향 벡터를 추출하거나 
+		// Transform 컴포넌트에서 직접 가져올 수 있습니다.
+		Vec3 vForward = GetTarget()->Transform()->GetDir(DIR::FRONT);
+		Vec3 vUp = GetTarget()->Transform()->GetDir(DIR::UP);
+		Vec3 vRight = GetTarget()->Transform()->GetDir(DIR::RIGHT);
+
+		ImGui::Text("Forward: "); ImGui::SameLine(); ImGui::Text("(%.2f, %.2f, %.2f)", vForward.x, vForward.y, vForward.z);
+		ImGui::Text("Up:      "); ImGui::SameLine(); ImGui::Text("(%.2f, %.2f, %.2f)", vUp.x, vUp.y, vUp.z);
+		ImGui::Text("Right:   "); ImGui::SameLine(); ImGui::Text("(%.2f, %.2f, %.2f)", vRight.x, vRight.y, vRight.z);
+
+		ImGui::TreePop();
+	}
+
+	// 3. 편의 기능: 카메라 리셋 버튼
+	if (ImGui::Button("Reset Camera Settings"))
+	{
+		pCamera->SetFOV(90.f); // 60도 정도의 기본값
+		pCamera->SetFar(10000.f);
+		pCamera->SetNear(1.f);
+		pCamera->SetOrthoScale(1.f);
+	}
 }

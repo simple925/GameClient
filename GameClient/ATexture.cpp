@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 #include "ATexture.h"
 #include "Device.h"
 ATexture::ATexture()
@@ -12,7 +12,7 @@ ATexture::~ATexture()
 {
 }
 
-int ATexture::Load(const wstring& _strFilePath)
+int ATexture::Load(const wstring& _FilePath)
 {
 	/*
 	wchar_t szDrive[10] = {};
@@ -20,10 +20,10 @@ int ATexture::Load(const wstring& _strFilePath)
 	wchar_t szFileName[50] = {};
 	wchar_t szExt[10] = {};
 	// c style
-	_wsplitpath_s(_strFilePath.c_str(), szDrive, 10, szFolder, 255, szFileName, 50, szExt, 10);
+	_wsplitpath_s(_FilePath.c_str(), szDrive, 10, szFolder, 255, szFileName, 50, szExt, 10);
 	*/
 	wchar_t szExt[10] = {};
-	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 10);
+	_wsplitpath_s(_FilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 10);
 	wstring strExt = szExt;
 
 	HRESULT hr = S_OK;
@@ -31,20 +31,20 @@ int ATexture::Load(const wstring& _strFilePath)
 	{
 		// .dds
 		//LoadFromDDSFile();
-		hr = LoadFromDDSFile(_strFilePath.c_str(), DDS_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromDDSFile(_FilePath.c_str(), DDS_FLAGS_NONE, nullptr, m_Image);
 	}
 	else if (L".tga" == strExt)
 	{
 		// .tga
 		//LoadFromTGAFile();
-		hr = LoadFromTGAFile(_strFilePath.c_str(), nullptr, m_Image);
+		hr = LoadFromTGAFile(_FilePath.c_str(), nullptr, m_Image);
 
 	}
 	else
 	{
 		// WIC(window image component) .png, .jpg, .jpeg, .bmp
 		//LoadFromWICFile();
-		hr = LoadFromWICFile(_strFilePath.c_str(), WIC_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromWICFile(_FilePath.c_str(), WIC_FLAGS_NONE, nullptr, m_Image);
 	}
 	if (FAILED(hr)) {
 		MessageBox(nullptr, L"텍스쳐 시스템메모리 로딩 실패", L"텍스쳐 로딩 실패", MB_OK);

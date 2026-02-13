@@ -7,12 +7,12 @@
 
 #include "Engine.h"
 #include "Device.h"
+#include "KeyMgr.h"
 
 #include "Menu.h"
 #include "Inspector.h"
 #include "Outliner.h"
-
-#include "KeyMgr.h"
+#include "ListUI.h"
 
 
 
@@ -89,6 +89,8 @@ void EditorMgr::Tick()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
+    m_FocusedUI = nullptr;
+
     // 모든 imgui 포커싱 제거
     if (KEY_TAP(KEY::ENTER)) ImGui::SetWindowFocus(nullptr);
 
@@ -102,15 +104,11 @@ void EditorMgr::Tick()
             pair.second->Tick();
         }
     }
-
-    //ImGui::Begin("Test");
-    //ImGui::BeginChild("Child1", Vec2(0.f, 100.f));
-    //ImGui::Button("Test 1");
-    //ImGui::EndChild();
-    //ImGui::BeginChild("Child2");
-    //ImGui::Button("Test 2");
-    //ImGui::EndChild();
-    //ImGui::End();
+    
+    if (nullptr != m_FocusedUI)
+        KeyMgr::GetInst()->SetActive(false);
+    else
+        KeyMgr::GetInst()->SetActive(true);
 
 }
 
@@ -142,6 +140,10 @@ void EditorMgr::CreateEditorUI()
 
     pUI = new Outliner;
     pUI->SetUIName("Outliner");
+    AddUI(pUI->GetUIName(), pUI);
+
+    pUI = new ListUI;
+    pUI->SetActive(false);
     AddUI(pUI->GetUIName(), pUI);
 }
 

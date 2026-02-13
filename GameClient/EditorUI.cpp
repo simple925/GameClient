@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "EditorMgr.h"
 #include "EditorUI.h"
 #include "ImGui/imgui.h"
 EditorUI::EditorUI(const string& _Name)
@@ -12,11 +13,26 @@ EditorUI::~EditorUI()
 {
 }
 
+void EditorUI::CheckFocus()
+{
+	if (ImGui::IsWindowFocused())
+		EditorMgr::GetInst()->RegisterFocusedUI(this);
+}
+
 void EditorUI::Tick()
 {
 	if (nullptr == m_Parent)
 	{
-		ImGui::Begin(GetUIName().c_str(), &m_Active);
+		bool Active = m_Active;
+
+		ImGui::Begin(GetUIName().c_str(), &Active);
+
+		if (m_Active != Active)
+		{
+			SetActive(Active);
+		}
+
+		CheckFocus();
 
 		Tick_UI();
 		for (const auto& child : m_ChildUI)
@@ -32,6 +48,8 @@ void EditorUI::Tick()
 	else
 	{
 		ImGui::BeginChild(GetUIName().c_str(), m_SizeAsChild);
+
+		CheckFocus();
 
 		Tick_UI();
 		for (const auto& child : m_ChildUI)

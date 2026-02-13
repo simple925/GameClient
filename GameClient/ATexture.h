@@ -13,12 +13,13 @@ private:
 
     int                                 m_RecentNum;
 public:
-    int Load(const wstring& _strFilePath);
     void Binding(UINT _RegisterNum);
     void Clear();
 
     float GetWidth() { return (float)m_Desc.Width; }
     float GetHeight() { return (float)m_Desc.Height; }
+public:
+    virtual int Load(const wstring& _FilePath);
 public:
     ATexture();
     virtual ~ATexture();
