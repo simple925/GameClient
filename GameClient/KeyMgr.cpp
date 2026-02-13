@@ -64,60 +64,64 @@ void KeyMgr::Init()
 
 void KeyMgr::Tick()
 {
-	for (int i = 0; i < (UINT)KEY::KEY_END; ++i)
+	m_hFocus = GetFocus();
+	if (m_hFocus == Engine::GetInst()->GetMainWndHwnd())
 	{
-		SHORT sKey = GetAsyncKeyState(g_KeyIndex[i]);
-		bool bDown = (sKey & 0x8000) != 0;
-		if (bDown)
+		for (int i = 0; i < (UINT)KEY::KEY_END; ++i)
 		{
-			// 이전에도 눌려있었다.
-			if (m_vecKeys[i].Pressed)
+			SHORT sKey = GetAsyncKeyState(g_KeyIndex[i]);
+			bool bDown = (sKey & 0x8000) != 0;
+			if (bDown)
 			{
-				m_vecKeys[i].State = PRESSED;
+				// 이전에도 눌려있었다.
+				if (m_vecKeys[i].Pressed)
+				{
+					m_vecKeys[i].State = PRESSED;
+				}
+				// 이전까지는 눌린적이 없었다.
+				else
+				{
+					m_vecKeys[i].State = TAP;
+				}
+
+				m_vecKeys[i].Pressed = true;
 			}
-			// 이전까지는 눌린적이 없었다.
+			// 지금 안눌려 있음
 			else
 			{
-				m_vecKeys[i].State = TAP;
+				// 이전에도 눌려있었다.
+				if (m_vecKeys[i].Pressed)
+				{
+					m_vecKeys[i].State = RELEASED;
+				}
+				else
+				{
+					m_vecKeys[i].State = NONE;
+				}
+				m_vecKeys[i].Pressed = false;
 			}
-
-			m_vecKeys[i].Pressed = true;
 		}
-		// 지금 안눌려 있음
+
+		// 마우스 좌표 계산
+		POINT pt = {};
+		GetCursorPos(&pt); // window 기준 마우스 좌표
+
+		ScreenToClient(Engine::GetInst()->GetMainWndHwnd(), &pt); // 윈도우 기준으로 마우스좌표 변경
+
+		m_MousePrevPos = m_MousePos;	// 이전 프레임 정보를 저장
+		m_MousePos = Vec2((float)pt.x, (float)pt.y);	// 현재 프레임 정보를 저장
+
+		// 마우스 진행 방향
+		m_MouseDir = m_MousePos - m_MousePrevPos;
+
+		// 휠 이벤트 처리
+		if (m_WheelChanged)
+		{
+			m_WheelChanged = false;
+		}
 		else
 		{
-			// 이전에도 눌려있었다.
-			if (m_vecKeys[i].Pressed)
-			{
-				m_vecKeys[i].State = RELEASED;
-			}
-			else
-			{
-				m_vecKeys[i].State = NONE;
-			}
-			m_vecKeys[i].Pressed = false;
+			m_Wheel = 0;
 		}
-	}
-
-	// 마우스 좌표 계산
-	POINT pt = {};
-	GetCursorPos(&pt); // window 기준 마우스 좌표
-
-	ScreenToClient(Engine::GetInst()->GetMainWndHwnd(), &pt); // 윈도우 기준으로 마우스좌표 변경
-
-	m_MousePrevPos = m_MousePos;	// 이전 프레임 정보를 저장
-	m_MousePos = Vec2((float)pt.x, (float)pt.y);	// 현재 프레임 정보를 저장
-
-	// 마우스 진행 방향
-	m_MouseDir = m_MousePos - m_MousePrevPos;
-
-	// 휠 이벤트 처리
-	if (m_WheelChanged)
-	{
-		m_WheelChanged = false;
-	}
-	else
-	{
-		m_Wheel = 0;
 	}
 }

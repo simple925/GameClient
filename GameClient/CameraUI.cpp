@@ -16,53 +16,54 @@ void CameraUI::Tick_UI()
 {
 	OutputTitle("Camera");
 
-	// 레이어 표현 과제
-	//UINT        m_LayerCheck;   // 어떤 레이어만 화면에 렌더링 할 것인지 비트체크
-
-	// 1. 카메라 객체를 미리 캐싱 (루프 밖에서 한 번만)
-	Ptr<CCamera> pCamera = RenderMgr::GetInst()->GetPOVCamera();
-	Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
-	if (nullptr == pCamera) {
-		ImGui::TextColored(ImVec4(1, 0, 0, 1), "No POV Camera Active");
-		return;
-	}
-
-	// 현재 비트 상태를 한 번만 가져옴
-	UINT layerCheck = pCamera->GetLayerCheck();
-
-	// 2. 테이블 스타일 및 레이아웃 개선
-
-	if (ImGui::BeginTable("LayerTable", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+	if (ImGui::TreeNode("LayerCheck"))
 	{
-		for (int i = 0; i < 32; ++i)
-		{
-			ImGui::TableNextColumn();
+		// 1. 카메라 객체를 미리 캐싱 (루프 밖에서 한 번만)
+		Ptr<CCamera> pCamera = RenderMgr::GetInst()->GetPOVCamera();
+		Ptr<ALevel> pCurLevel = LevelMgr::GetInst()->GetLevel();
+		if (nullptr == pCamera) {
+			ImGui::TextColored(ImVec4(1, 0, 0, 1), "No POV Camera Active");
+			return;
+		}
 
-			// 1. Level에서 해당 인덱스의 레이어 이름 가져오기
-			string strName = "Empty";
-			if (pCurLevel != nullptr)
+		// 현재 비트 상태를 한 번만 가져옴
+		UINT layerCheck = pCamera->GetLayerCheck();
+
+		// 2. 테이블 스타일 및 레이아웃 개선
+
+		if (ImGui::BeginTable("LayerTable", 4, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg))
+		{
+			for (int i = 0; i < 32; ++i)
 			{
-				Layer* pLayer = pCurLevel->GetLayer(i);
-				if (pLayer != nullptr && !pLayer->GetName().empty())
+				ImGui::TableNextColumn();
+
+				// 1. Level에서 해당 인덱스의 레이어 이름 가져오기
+				string strName = "Empty";
+				if (pCurLevel != nullptr)
 				{
-					strName.assign(pLayer->GetName().begin(), pLayer->GetName().end()); // 레이어에 설정된 이름
+					Layer* pLayer = pCurLevel->GetLayer(i);
+					if (pLayer != nullptr && !pLayer->GetName().empty())
+					{
+						strName.assign(pLayer->GetName().begin(), pLayer->GetName().end()); // 레이어에 설정된 이름
+					}
+				}
+
+				// 2. 이름 구성 (예: [02] Player)
+				char label[128];
+				sprintf_s(label, "[%02d] %s", i, strName.c_str());
+
+				// 3. 현재 상태 확인 및 체크박스 출력
+				bool bIsOn = (layerCheck & (1 << i));
+
+				// 체크박스 ID가 겹치지 않게 ##i 를 붙여주는 것이 좋습니다.
+				if (ImGui::Checkbox(label, &bIsOn))
+				{
+					pCamera->LayerCheck(i); // 클릭 시 카메라 비트 토글
 				}
 			}
-
-			// 2. 이름 구성 (예: [02] Player)
-			char label[128];
-			sprintf_s(label, "[%02d] %s", i, strName.c_str());
-
-			// 3. 현재 상태 확인 및 체크박스 출력
-			bool bIsOn = (layerCheck & (1 << i));
-
-			// 체크박스 ID가 겹치지 않게 ##i 를 붙여주는 것이 좋습니다.
-			if (ImGui::Checkbox(label, &bIsOn))
-			{
-				pCamera->LayerCheck(i); // 클릭 시 카메라 비트 토글
-			}
+			ImGui::EndTable();
 		}
-		ImGui::EndTable();
+		ImGui::TreePop();
 	}
 
 	PROJ_TYPE ProjType = GetTarget()->Camera()->GetProjType();     // 투영 방식

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "single.h"
 enum class KEY
 {
@@ -72,11 +72,13 @@ private:
 	vector<KeyInfo>		m_vecKeys;
 
 	Vec2				m_MousePos;		// 이번 프레임 마우스 좌표
-	Vec2				m_MousePrevPos;		// 이전 프레임 마우스 좌표
+	Vec2				m_MousePrevPos;	// 이전 프레임 마우스 좌표
 	Vec2				m_MouseDir;
 
 	bool				m_WheelChanged;
-	int					m_Wheel;	// 1, 0, -1
+	int					m_Wheel;		// 1, 0, -1
+
+	HWND				m_hFocus;
 
 public:
 	KEY_STATE GetKeyState(KEY _Key) { return m_vecKeys[(UINT)_Key].State; }

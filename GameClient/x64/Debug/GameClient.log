@@ -10,16 +10,16 @@
   9개 파일이 복사되었습니다.
   OK: Updated components.h
   unity_EB6CYA1TSTZE3S52.cpp
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(94,14): warning C4101: 'm_AspectRatio' :참조되지 않은 지역 변수입니다.
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(93,14): warning C4101: 'm_AspectRatio' :참조되지 않은 지역 변수입니다.
   (소스 파일 '/x64/Debug/unity_EB6CYA1TSTZE3S52.cpp'을(를) 컴파일하는 중)
   
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(92,14): warning C4101: 'm_Far' :참조되지 않은 지역 변수입니다.
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(91,14): warning C4101: 'm_Far' :참조되지 않은 지역 변수입니다.
   (소스 파일 '/x64/Debug/unity_EB6CYA1TSTZE3S52.cpp'을(를) 컴파일하는 중)
   
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(93,14): warning C4101: 'm_Width' :참조되지 않은 지역 변수입니다.
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(92,14): warning C4101: 'm_Width' :참조되지 않은 지역 변수입니다.
   (소스 파일 '/x64/Debug/unity_EB6CYA1TSTZE3S52.cpp'을(를) 컴파일하는 중)
   
-C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(95,14): warning C4101: 'm_OrthoScale' :참조되지 않은 지역 변수입니다.
+C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(94,14): warning C4101: 'm_OrthoScale' :참조되지 않은 지역 변수입니다.
   (소스 파일 '/x64/Debug/unity_EB6CYA1TSTZE3S52.cpp'을(를) 컴파일하는 중)
   
 C:\Users\141245124\Documents\cpp\GameClient\GameClient\TaskMgr.cpp(27,48): warning C4244: '인수': 'DWORD_PTR'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -62,14 +62,14 @@ C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\
   (소스 파일 '/x64/Debug/unity_EB6CYA1TSTZE3S52.cpp'을(를) 컴파일하는 중)
       C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\xutility(4924,18):
       템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
-          C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(49,14):
+          C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(47,15):
           컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign<std::_String_const_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(const _Iter,const _Iter)'에 대한 참조를 확인하세요.
           with
           [
               _Elem=wchar_t,
               _Iter=std::_String_const_iterator<std::_String_val<std::_Simple_types<wchar_t>>>
           ]
-              C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(49,20):
+              C:\Users\141245124\Documents\cpp\GameClient\GameClient\CameraUI.cpp(47,21):
               'CameraUI::Tick_UI'에서 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign'에 대한 첫 번째 참조를 확인하세요.
           C:\Program Files\Microsoft Visual Studio\18\Community\VC\Tools\MSVC\14.50.35717\include\xstring(1685,32):
           컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<const wchar_t*,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
